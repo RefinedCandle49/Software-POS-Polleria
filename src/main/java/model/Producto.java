@@ -2,11 +2,19 @@ package model;
 
 public class Producto {
     int idProducto, idCategoria, estado, stock;
-    String nombre, descripcion;
+    String nombre, descripcion, foto;
     double precio;
 
     public int getIdProducto() {
         return idProducto;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public void setIdProducto(int idProducto) {

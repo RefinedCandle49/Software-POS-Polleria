@@ -14,12 +14,12 @@
                     
                     <div>
                         <label>Correo Electrónico: </label><br>
-                        <input type="email" name="email" required/>
+                        <input type="email" name="email" placeholder="Ingresa tu correo electrónico" required/>
                     </div>
                     
                     <div>
                         <label>Contraseña: </label><br>
-                        <input type="password" name="password" required/>
+                        <input type="password" name="password" placeholder="Ingresa tu contraseña" required/>
                     </div>
                     
                     <br>

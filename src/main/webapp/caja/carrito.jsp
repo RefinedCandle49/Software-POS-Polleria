@@ -87,12 +87,16 @@
                 if (request.getAttribute("totalPagar") != null) {
                     double totalPagar = Double.parseDouble(request.getAttribute("totalPagar").toString());
                     
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    
+                    String totalFormateado = df.format(totalPagar);
+                    
             %>
             
             <div class="col-sm-4">
-                <p>Subtotal: S/ ${totalPagar}</p>
+                <p>Subtotal: S/ <%=totalFormateado%></p>
                 <hr class="my-2">
-                <p style="font-weight:700">Total a pagar: S/ ${totalPagar}</p>
+                <p style="font-weight:700">Total a pagar: S/ <%=totalFormateado%></p>
 <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
             </div>
             
@@ -112,8 +116,8 @@
     </div>
 </div>
 
-
-
+<p id="current-time"></p>
+<p id="current-date"></p>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
@@ -133,6 +137,32 @@
     }
 
     document.getElementById("btnRealizarPago").addEventListener("click", realizarPago);
+</script>
+<script>
+    function getCurrentDateTime() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        // Agrega un cero delante si los segundos son menores que 10
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        var timeString = hours + ':' + minutes + ':' + seconds;
+
+        document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
+
+        var day = now.getDate();
+        var month = now.getMonth() + 1;
+        var year = now.getFullYear();
+
+        var dateString = day + '/' + month + '/' + year;
+
+        document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
+    }
+
+    // Llama a la función getCurrentDateTime cada segundo para actualizar la hora y fecha
+    setInterval(getCurrentDateTime, 1000);
 </script>
 </body>
 </html>

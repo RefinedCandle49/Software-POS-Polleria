@@ -1,0 +1,29 @@
+*{
+    font-family: 'DM Sans';
+}
+.printed{
+    text-align: center;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+input{
+    text-align: center;
+}
+
+@media print {
+    .printed{
+        display: block;
+    }
+
+    input {
+        border: none;
+    }
+
+    .regresar{
+        display: none;
+    }
+}

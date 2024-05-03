@@ -56,6 +56,28 @@
                 </table>
             
             </div>
+            <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post">
+                <label>
+                    <input type="text" name="idCliente">
+                    DNI/RUC:
+                </label>
+                
+                <div>
+                    <label>
+                        <input type="radio" name="metodoPago" id="efectivo" value="1"
+                               required/>
+                        Efectivo
+                    </label>
+                    <label>
+                        <input type="radio" name="metodoPago" id="tarjeta"
+                               value="2"/>
+                        Tarjeta
+                    </label>
+                </div>
+                
+                <button type="submit">Proc</button>
+            </form>
+            
         </c:if>
         <c:if test="${totalPagar > 0}">
             <%@ page import="java.text.DecimalFormat" %>
@@ -69,7 +91,7 @@
                 <p>Subtotal: S/ ${totalPagar}</p>
                 <hr class="my-2">
                 <p style="font-weight:700">Total a pagar: S/ ${totalPagar}</p>
-                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Realizar pago</a>
+<%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
             </div>
             
             <% } else { %>

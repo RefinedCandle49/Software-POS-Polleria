@@ -5,12 +5,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.VentaDao;
 import dao.ProductoDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Carrito;
 import model.Producto;
+import model.Venta;
 
 
 /*import javax.servlet.ServletException;
@@ -50,7 +52,7 @@ public class controlCarrito extends HttpServlet {
         String menu = null;
         int categoria = 0;
 
-        switch(accion){
+        switch (accion) {
             case "Carrito":
                 totalPagar = 0.0;
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
@@ -149,7 +151,42 @@ public class controlCarrito extends HttpServlet {
 
                 break;
 
+            case "ActualizarCantidad":
+                idProducto = Integer.parseInt(request.getParameter("id"));
+                int cant = Integer.parseInt(request.getParameter("cantidad"));
+                for (int j = 0; j < listaCarrito.size(); j++) {
+                    if (listaCarrito.get(j).getIdProducto() == idProducto) {
+                        listaCarrito.get(j).setCantidad(cant);
+                        double subtotal = listaCarrito.get(j).getPrecio() * cant;
+                        String subtotalString = df.format(subtotal);
+                        listaCarrito.get(j).setSubtotal(Double.parseDouble(subtotalString));
+//                        listaCarrito.get(j).setSubtotal(listaCarrito.get(j).getPrecio() * cant);
+                    }
+                }
+                break;
 
+
+            case "RealizarVenta":
+                String idCliente;
+                int estado, metodoPago;
+                listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
+                VentaDao dao = new VentaDao();
+                metodoPago = Integer.parseInt(request.getParameter("metodoPago"));
+                idCliente = request.getParameter("idCliente");
+                Venta venta = new Venta(idCliente, metodoPago, 1, totalPagar, listaCarrito);
+                int res = dao.generarVenta(venta);
+                request.getRequestDispatcher("controlCarrito?accion=ResumenVenta").forward(request, response);
+                break;
+
+            case "ResumenVenta":
+                listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
+                request.getRequestDispatcher("caja/menu.jsp").forward(request, response);
+                listaCarrito.clear();
+                break;
+
+            case "FinalizarCompra":
+                request.getRequestDispatcher("menu.jsp").forward(request, response);
+                break;
         }
 
 

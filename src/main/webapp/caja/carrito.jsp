@@ -57,6 +57,8 @@
             
             </div>
             <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post">
+                
+                
                 <label>
                     <input type="text" name="idCliente">
                     DNI/RUC:

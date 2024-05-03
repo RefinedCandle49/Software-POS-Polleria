@@ -172,7 +172,13 @@ public class controlCarrito extends HttpServlet {
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
                 VentaDao dao = new VentaDao();
                 metodoPago = Integer.parseInt(request.getParameter("metodoPago"));
+
                 idCliente = request.getParameter("idCliente");
+
+                if (idCliente == null || idCliente.trim().isEmpty()) {
+                    idCliente = "00000001";
+                }
+
                 Venta venta = new Venta(idCliente, metodoPago, 1, totalPagar, listaCarrito);
                 int res = dao.generarVenta(venta);
                 request.getRequestDispatcher("controlCarrito?accion=ResumenVenta").forward(request, response);
@@ -180,7 +186,8 @@ public class controlCarrito extends HttpServlet {
 
             case "ResumenVenta":
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
-                request.getRequestDispatcher("caja/menu.jsp").forward(request, response);
+//                request.getRequestDispatcher("caja/menu.jsp").forward(request, response);
+                response.sendRedirect("caja/menu.jsp");
                 listaCarrito.clear();
                 break;
 

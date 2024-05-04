@@ -15,7 +15,7 @@
 <div class="container my-4">
     <ul class="list-unstyled">
         <li>
-            <a href="<%=request.getContextPath()%>/caja/menu.jsp" class="regresar"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a>
+            <a href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a>
         </li>
     </ul>
     
@@ -92,8 +92,9 @@
                     </label>
                 </div>
                 
-                <button onclick="print()" type="submit">Proc</button>
+                <button onclick="print()" type="submit">Procesar venta</button>
             </form>
+            
             
         </c:if>
         <c:if test="${totalPagar > 0}">
@@ -126,7 +127,7 @@
     <div class="icon-carrito">
         <c:if test="${totalPagar <= 0}">
             <i class="fa-duotone fa-cart-xmark fa-10x"></i>
-            <p>EL carrito está vacío.</p>
+            <p>El carrito está vacío.</p>
         </c:if>
     </div>
 </div>
@@ -136,22 +137,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function realizarPago() {
-        var totalPagar = ${totalPagar};
-        if (totalPagar == 0) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se puede realizar el pago',
-            });
-            return;
-        }
-        window.location.href = "<%=request.getContextPath()%>/checkout.jsp";
-    }
 
-    document.getElementById("btnRealizarPago").addEventListener("click", realizarPago);
-</script>
 <script>
     function getCurrentDateTime() {
         var now = new Date();
@@ -161,6 +147,8 @@
 
         // Agrega un cero delante si los segundos son menores que 10
         seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
 
         var timeString = hours + ':' + minutes + ':' + seconds;
 

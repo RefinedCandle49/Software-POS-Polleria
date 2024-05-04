@@ -81,4 +81,24 @@ public class ProductoDao {
         return p;
     }
 
+    public static int registrarProducto(Producto prod) {
+        int estado = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO producto(idCategoria, nombre, descripcion, foto, precio, stock, estado) VALUES (?, ?, ?,?,?,?,?) ");
+            ps.setInt(1, prod.getIdCategoria());
+            ps.setString(2, prod.getNombre());
+            ps.setString(3, prod.getDescripcion());
+            ps.setString(4, prod.getFoto());
+            ps.setDouble(5, prod.getPrecio());
+            ps.setInt(6, prod.getStock());
+            ps.setInt(7, prod.getEstado());
+
+            estado = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return estado;
+    }
+
 }

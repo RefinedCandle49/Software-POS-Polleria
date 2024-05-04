@@ -25,6 +25,7 @@
 %>
 
 <a href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito" class="text-dark w-100">Carrito<i class="fa-light fa-cart-shopping px-1"></i></a>
+<a href="<%=request.getContextPath()%>/almacen/productos/registrar.jsp">Agregar producto</a>
 <h1>Pollos</h1>
 <c:forEach var="prod" items="${listaPollo}">
     <div class="col-lg-4 col-md-6 col-sm-12 mx-auto my-4">

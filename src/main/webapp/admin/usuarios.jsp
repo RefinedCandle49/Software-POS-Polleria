@@ -61,7 +61,7 @@
                 <section>
                     <h1>Panel de Usuarios</h1>
 
-                    <a href="...">Registrar Usuario</a>
+                    <a href="${pageContext.request.contextPath}/admin/registrar.jsp">Registrar Usuario</a>
 
                     <c:if test="${not empty list}">
                         <table border="1">

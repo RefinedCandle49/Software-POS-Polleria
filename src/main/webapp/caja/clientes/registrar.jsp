@@ -10,20 +10,21 @@
 <html>
     <head>
         <title>Registrar Cliente | Pollos Locos</title>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
         <%--En esta sección se hará el registro de clientes que paguen tanto con factura como con boleta--%>
         <%
-                        HttpSession sesion = request.getSession(false);
+            HttpSession sesion = request.getSession(false);
             
-                        if (sesion == null || sesion.getAttribute("usuario") == null) {
-                            response.sendRedirect(request.getContextPath() + "/index.jsp");
-                            return;
-                        }
+            if (sesion == null || sesion.getAttribute("usuario") == null) {
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                return;
+            }
             
-                        String nombreRol = (String) ((Usuario) sesion.getAttribute("usuario")).getRol();
+            String nombreRol = (String) ((Usuario) sesion.getAttribute("usuario")).getRol();
             
-                        if(!"Cajero".equals(nombreRol)){    
+            if(!"Cajero".equals(nombreRol)){    
         %>
         <script>
             alert("Acceso Denegado");
@@ -60,6 +61,12 @@
             <div>
                 <h1>Registro de Usuario</h1>
 
+                <c:if test="${not empty mensajeError}">
+                    <div>
+                        <c:out value="${mensajeError}" />
+                    </div>
+                </c:if>
+                
                 <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post">
 
                     <label for="idCliente" >DNI/RUC:</label>
@@ -67,10 +74,10 @@
 
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
-                    
+
                     <label for="apellido">Apellido:</label>
                     <input type="text" id="apellido" name="apellido" required>
-                    
+
                     <label for="email">Email:</label>
                     <input type="text" id="email" name="email" required>
 

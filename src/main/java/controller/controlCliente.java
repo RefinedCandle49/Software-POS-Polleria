@@ -84,6 +84,25 @@ public class controlCliente extends HttpServlet {
                 String apellidoRegistrar = request.getParameter("apellido");
                 String emailRegistrar = request.getParameter("email");
 
+                // ERRORES //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ClienteDao cliDao = new ClienteDao();
+                String mensajeError = null;
+
+                if (cliDao.validarEmail(emailRegistrar)) {
+                    mensajeError = "¡Oh no! Este correo electrónico ya está en uso. Por favor, ingresa uno diferente.";
+                }
+
+                if (cliDao.validarId(idClienteRegistrar)) {
+                    mensajeError = "¡Oh no! Este DNI/RUC ya está en uso. Por favor, ingresa uno diferente.";
+                }
+
+                if (mensajeError != null) {
+                    request.setAttribute("mensajeError", mensajeError);
+                    request.getRequestDispatcher("/caja/clientes/registrar.jsp").forward(request, response);
+                    return;
+                }
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                 Cliente cliRegistrar = new Cliente();
                 cliRegistrar.setIdCliente(idClienteRegistrar);
                 cliRegistrar.setNombre(nombreRegistrar);

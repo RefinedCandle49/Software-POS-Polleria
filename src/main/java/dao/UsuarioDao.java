@@ -57,24 +57,23 @@ public class UsuarioDao {
         }
         return listaUsuarios;
     }
-    
-    public static int registrarUsuario(Usuario usu){
-	int estado = 0;
-	try {
-	    Connection con = getConnection();
-	    PreparedStatement ps = con.prepareStatement( "INSERT INTO usuario (email,password,rol,estado) VALUES (?,?,?,?)");
-	    //ps.setInt(1, usu.getIdUsuario());
-	    ps.setString(1, usu.getEmail());
-	    ps.setString(2, usu.getPassword());
-	    ps.setString(3, usu.getRol());
-	    ps.setInt(4,usu.getEstado());
-	    estado = ps.executeUpdate(); // change
-            
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	return estado;
-	
+
+    public static int registrarUsuario(Usuario usu) {
+        int estado = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO usuario (email,password,rol,estado) VALUES (?,?,?,?)");
+            ps.setString(1, usu.getEmail());
+            ps.setString(2, usu.getPassword());
+            ps.setString(3, usu.getRol());
+            ps.setInt(4, usu.getEstado());
+            estado = ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return estado;
+
     }
 
 }

@@ -9,8 +9,8 @@
 <%@page import="model.Usuario, dao.UsuarioDao, java.util.*" %>
 <html>
     <head>
-        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <title>Usuarios | Pollos Locos</title>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
         <%
@@ -62,7 +62,11 @@
                     <h1>Panel de Usuarios</h1>
 
                     <a href="${pageContext.request.contextPath}/admin/registrar.jsp">Registrar Usuario</a>
-
+                    
+                    <c:if test="${ empty list}">
+                        <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
+                    </c:if>
+                    
                     <c:if test="${not empty list}">
                         <table border="1">
                             <thead>

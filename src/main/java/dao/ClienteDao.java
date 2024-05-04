@@ -44,7 +44,7 @@ public class ClienteDao {
         int estado = 0;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO cliente (idCLiente,nombre,apellido,email) VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO cliente (idCliente,nombre,apellido,email) VALUES (?,?,?,?)");
             ps.setString(1, cli.getIdCliente());
             ps.setString(2, cli.getNombre());
             ps.setString(3, cli.getApellido());
@@ -55,6 +55,34 @@ public class ClienteDao {
             e.printStackTrace();
         }
         return estado;
+    }
+    
+    public boolean validarId(String idCliente) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM cliente WHERE idCliente=?");
+            ps.setString(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+            
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+    
+    public boolean validarEmail(String email) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM cliente WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+            
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 
 }

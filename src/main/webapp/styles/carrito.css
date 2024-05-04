@@ -14,8 +14,18 @@ input{
     text-align: center;
 }
 
+li {
+    list-style: none;
+}
+
+@media screen {
+    .printed {
+        display: none;
+    }
+}
+
 @media print {
-    .printed{
+    .printed {
         display: block;
     }
 
@@ -23,7 +33,7 @@ input{
         border: none;
     }
 
-    .regresar{
+    a {
         display: none;
     }
 }

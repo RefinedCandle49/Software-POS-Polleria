@@ -37,7 +37,6 @@ public class controlLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Validación para administradores
         UsuarioDao daoUsuario = new UsuarioDao();
         Usuario usuario = new Usuario();
         usuario.setEmail(email);
@@ -56,6 +55,10 @@ public class controlLogin extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp");
             }
             return;
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("mensajeError", "¡Oops! Parece que has ingresado un correo electrónico o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+            request.getRequestDispatcher("/admin/registrar.jsp").forward(request, response);
         }
 
     }

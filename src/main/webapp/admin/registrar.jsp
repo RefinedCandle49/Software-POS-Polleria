@@ -7,6 +7,7 @@
         <!-- Bootstrap v5 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/registrar.css">
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
         <%
@@ -49,36 +50,42 @@
             <a href="${pageContext.request.contextPath}/logout.jsp">Cerrar Sesión</a>
         </header>
 
-            <div class="centered-form">
-                <div class="shadowed-box">
-                    <h1>Registro de Usuario</h1>
+        <div class="centered-form">
+            <div class="shadowed-box">
+                <h1>Registro de Usuario</h1>
 
-                    <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña:</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="rol" class="form-label">Rol:</label>
-                            <select class="form-select" id="rol" name="rol">
-                                <option value="Administrador">Administrador</option>
-                                <option value="Cajero">Cajero</option>
-                                <option value="Almacenero">Almacenero</option>
-                            </select>
-                        </div>
+                <c:if test="${not empty mensajeError}">
+                    <div>
+                        <c:out value="${mensajeError}" />
+                    </div>
+                </c:if>
 
-                        <input type="hidden" name="estado" value="1">
+                <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol" class="form-label">Rol:</label>
+                        <select class="form-select" id="rol" name="rol">
+                            <option value="Administrador">Administrador</option>
+                            <option value="Cajero">Cajero</option>
+                            <option value="Almacenero">Almacenero</option>
+                        </select>
+                    </div>
 
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-dark" >Registrar</button>
-                        </div>
-                    </form>
-                </div>
+                    <input type="hidden" name="estado" value="1">
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-dark" >Registrar</button>
+                    </div>
+                </form>
             </div>
+        </div>
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

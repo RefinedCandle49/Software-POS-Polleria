@@ -5,6 +5,16 @@ public class Producto {
     String nombre, descripcion, foto;
     double precio;
 
+    String nombreCategoria;
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
+
     public int getIdProducto() {
         return idProducto;
     }

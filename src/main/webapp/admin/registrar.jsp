@@ -8,7 +8,6 @@
         <!-- Bootstrap v5 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/registrar.css">
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>

@@ -8,37 +8,40 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Producto;
 
-
-/*import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;*/
-
+@MultipartConfig
 @WebServlet(name = "controlProducto", value = "/controlProducto")
 public class controlProducto extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request  servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
 
         switch (action){
             case "registrar":
                 try{
+
+                    Part filePart = request.getPart("image");
+                    String fileName = filePart.getSubmittedFileName();
+                    String uploadDir = "/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
+                    File file = new File(uploadDir + fileName);
+
+                    try (InputStream fileContent = filePart.getInputStream();
+                         OutputStream out = new FileOutputStream(file)) {
+                        int read;
+                        byte[] bytes = new byte[1024];
+                        while ((read = fileContent.read(bytes)) != -1) {
+                            out.write(bytes, 0, read);
+                        }
+                    }
+
+                    String ruta ="http://localhost:8080/" + request.getContextPath() + "/cloud-images/" + fileName;
+//                    response.getWriter().println("Imagen subida exitosamente.");
+
                     int idCategoriaRegistrar = Integer.parseInt(request.getParameter("idCategoria"));
                     String nombreRegistrar = request.getParameter("nombre");
                     String descripcionRegistrar = request.getParameter("descripcion");
-                    String fotoRegistrar = request.getParameter("foto");
+                    String fotoRegistrar = fileName;
                     double precioRegistrar = Double.parseDouble(request.getParameter("precio"));
                     int stockRegistrar = Integer.parseInt(request.getParameter("stock"));
                     int estadoRegistrar = Integer.parseInt(request.getParameter("estado"));
@@ -51,7 +54,7 @@ public class controlProducto extends HttpServlet {
                     productoRegistrar.setPrecio(precioRegistrar);
                     productoRegistrar.setStock(stockRegistrar);
                     productoRegistrar.setEstado(estadoRegistrar);
-
+                    response.setContentType("text/html;charset=UTF-8");
                     int resultRegistrar = ProductoDao.registrarProducto(productoRegistrar);
 
                     if (resultRegistrar > 0) {

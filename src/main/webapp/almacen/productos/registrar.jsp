@@ -1,12 +1,6 @@
 <%@ page import="dao.CategoriaDao" %>
 <%@ page import="model.Categoria" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: RefinedCandle49
-  Date: 1/05/2024
-  Time: 20:48
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +11,7 @@
     List<Categoria> categorias = CategoriaDao.listarCategorias();
 %>
 <section>
-    <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post">
+    <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data">
         
         <div class="container table-responsive">
             <table class="table">
@@ -72,10 +66,16 @@
                 </tbody>
             </table>
         </div>
-        
+        <input type="file" name="image" accept=".jpg, .jpeg, .png" required>
+        <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
         <input type="submit" class="btn btn-success" value="Registrar Producto">
         <a href="${pageContext.request.contextPath}/admin/inventario.jsp" class="btn btn-primary">Regresar</a>
     </form>
+    
+<%--    <form action="${pageContext.request.contextPath}/UploadServlet" method="post" enctype="multipart/form-data">--%>
+<%--        <input type="file" name="image">--%>
+<%--        <input type="submit" value="Subir Imagen">--%>
+<%--    </form>--%>
 </section>
 </body>
 </html>

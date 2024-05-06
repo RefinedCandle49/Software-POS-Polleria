@@ -8,13 +8,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Producto;
 
-
-
-/*import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;*/
 @MultipartConfig
 @WebServlet(name = "controlProducto", value = "/controlProducto")
 public class controlProducto extends HttpServlet {
@@ -30,15 +23,7 @@ public class controlProducto extends HttpServlet {
 
                     Part filePart = request.getPart("image");
                     String fileName = filePart.getSubmittedFileName();
-
-                    // Obtener la ruta del directorio de despliegue del proyecto en el servidor de aplicaciones
-                    String uploadDir = getServletContext().getRealPath("/") + "uploads/";
-
-                    File uploadDirFile = new File(uploadDir);
-                    if (!uploadDirFile.exists()) {
-                        uploadDirFile.mkdirs(); // Crear el directorio si no existe
-                    }
-
+                    String uploadDir = "/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
                     File file = new File(uploadDir + fileName);
 
                     try (InputStream fileContent = filePart.getInputStream();
@@ -50,13 +35,13 @@ public class controlProducto extends HttpServlet {
                         }
                     }
 
+                    String ruta ="http://localhost:8080/" + request.getContextPath() + "/cloud-images/" + fileName;
 //                    response.getWriter().println("Imagen subida exitosamente.");
 
                     int idCategoriaRegistrar = Integer.parseInt(request.getParameter("idCategoria"));
-                    String nombreRegistrar = new String(request.getParameter("nombre").getBytes("ISO-8859-1"), "UTF-8");
-//                    String nombreRegistrar = request.getParameter("nombre");
+                    String nombreRegistrar = request.getParameter("nombre");
                     String descripcionRegistrar = request.getParameter("descripcion");
-                    String fotoRegistrar = String.valueOf(file);
+                    String fotoRegistrar = fileName;
                     double precioRegistrar = Double.parseDouble(request.getParameter("precio"));
                     int stockRegistrar = Integer.parseInt(request.getParameter("stock"));
                     int estadoRegistrar = Integer.parseInt(request.getParameter("estado"));

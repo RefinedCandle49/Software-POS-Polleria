@@ -50,7 +50,7 @@
                     <td>${prod.getNombreCategoria()}</td>
                     <td>${prod.getNombre()}</td>
                     <td>${prod.getDescripcion()}</td>
-                    <td><img src="${prod.getFoto()}" alt=""></td>
+                    <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""></td>
                     <td>${prod.getPrecio()}</td>
                     <td>${prod.getStock()}</td>
                     <td>

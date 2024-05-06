@@ -64,6 +64,7 @@
                     </td>
                 </tr>
                 </tbody>
+                <img src="http://localhost:8080//${pageContext.request.contextPath}/cloud-images/image_fx_a_painting_of_a_fried_egg_sunny_side_up_in%203.jpg" alt="">
             </table>
         </div>
         <input type="file" name="image" accept=".jpg, .jpeg, .png" required>

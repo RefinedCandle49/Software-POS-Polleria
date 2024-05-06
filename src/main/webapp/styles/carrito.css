@@ -36,4 +36,12 @@ li {
     a {
         display: none;
     }
+
+    #procesar-venta{
+        display: none;
+    }
+}
+
+.comprobante{
+    text-align: center;
 }

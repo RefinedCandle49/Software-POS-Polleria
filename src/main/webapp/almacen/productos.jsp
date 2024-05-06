@@ -35,6 +35,7 @@
                 <th>CATEGORÍA</th>
                 <th>NOMBRE</th>
                 <th>DESCRIPCIÓN</th>
+                <th>FOTO</th>
                 <th>PRECIO</th>
                 <th>STOCK</th>
                 <th>ESTADO</th>
@@ -49,6 +50,7 @@
                     <td>${prod.getNombreCategoria()}</td>
                     <td>${prod.getNombre()}</td>
                     <td>${prod.getDescripcion()}</td>
+                    <td><img src="${prod.getFoto()}" alt=""></td>
                     <td>${prod.getPrecio()}</td>
                     <td>${prod.getStock()}</td>
                     <td>

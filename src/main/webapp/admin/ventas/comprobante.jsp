@@ -62,5 +62,6 @@
         </c:forEach>
     </tbody>
 </table>
+<button id="procesar-venta" onclick="print()" type="submit">Descargar comprobante</button>
 </body>
 </html>

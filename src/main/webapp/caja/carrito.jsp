@@ -92,7 +92,7 @@
                     </label>
                 </div>
                 
-                <button onclick="print()" type="submit">Procesar venta</button>
+                <button id="procesar-venta" onclick="print()" type="submit">Procesar venta</button>
             </form>
             
             

@@ -12,6 +12,35 @@ public class Venta {
         this.detalleVenta = detalleVenta;
     }
 
+    String nombre;
+    String apellido;
+
+    public String getHoraVenta() {
+        return horaVenta;
+    }
+
+    public void setHoraVenta(String horaVenta) {
+        this.horaVenta = horaVenta;
+    }
+
+    String horaVenta;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public Venta() {
     }
 

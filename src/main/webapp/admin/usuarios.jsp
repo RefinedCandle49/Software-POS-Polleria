@@ -20,6 +20,7 @@
     <body>
         <%
             HttpSession sesion = request.getSession(false);
+            String contextPath = request.getContextPath();
             
             if (sesion == null || sesion.getAttribute("usuario") == null) {
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
@@ -51,7 +52,13 @@
         <%
             
             return;
-        }    
+        }
+        %>
+        <script>
+            let contextPath = '<%= contextPath %>';
+            let nombreRol = '<%= nombreRol %>';
+        </script>
+        <%
             
         List<Usuario> usuario = UsuarioDao.listarUsuarios();
         request.setAttribute("list", usuario);
@@ -135,7 +142,7 @@
                                                 <td>${user.getIdUsuario()}</td>
                                                 <td>${user.getEmail()}</td>
                                                 <td>
-                                                    <input type="password" id="password_${user.getIdUsuario()}" name="password" value="${user.getPassword()}" style="background-color: transparent; border: none;">
+                                                    <input type="password" id="password_${user.getIdUsuario()}" name="password" value="${user.getPassword()}" style="background-color: transparent; border: none;" disabled>
                                                     <button onclick="mostrarPassword('password_${user.getIdUsuario()}', 'button_${user.getIdUsuario()}')" id="button_${user.getIdUsuario()}" class="btn btn-dark">Mostrar</button>    
                                                 </td>
                                                 <td>${user.getRol()}</td>
@@ -158,5 +165,14 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="<%=request.getContextPath()%>/js/sweetAlert.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+               alertBienvenida(); 
+            });
+        </script>
     </body>
 </html>

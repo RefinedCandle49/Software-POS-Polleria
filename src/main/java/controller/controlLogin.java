@@ -50,11 +50,11 @@ public class controlLogin extends HttpServlet {
 
             String rol = usuario.getRol();
             if ("Administrador".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp");
+                response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?peru=false");
             } else if ("Cajero".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/caja/menu.jsp");
+                response.sendRedirect(request.getContextPath() + "/caja/menu.jsp?peru=false");
             } else if ("Almacenero".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp");
+                response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?peru=false");
             }
             return;
         } else {

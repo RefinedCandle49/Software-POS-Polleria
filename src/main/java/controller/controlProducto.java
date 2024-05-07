@@ -23,7 +23,7 @@ public class controlProducto extends HttpServlet {
 
                     Part filePart = request.getPart("image");
                     String fileName = filePart.getSubmittedFileName();
-                    String uploadDir = "/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
+                    String uploadDir = "C:/Users/valde/OneDrive - SERVICIO EDUCATIVO EMPRESARIALE S.A.C/IV Ciclo/Laboratorio de Integración IV Desarrollo y Prueba de Software/Tareas/POS/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
                     File file = new File(uploadDir + fileName);
 
                     try (InputStream fileContent = filePart.getInputStream();

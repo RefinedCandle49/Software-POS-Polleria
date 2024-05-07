@@ -5,12 +5,15 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import dao.ClienteDao;
 import dao.VentaDao;
 import dao.ProductoDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Carrito;
+import model.Cliente;
 import model.Producto;
 import model.Venta;
 
@@ -194,22 +197,19 @@ public class controlCarrito extends HttpServlet {
             case "FinalizarCompra":
                 request.getRequestDispatcher("menu.jsp").forward(request, response);
                 break;
+
+            case "BuscarCliente":
+                int idCliente1 = Integer.parseInt(request.getParameter("idCliente"));
+                Cliente cliente = ClienteDao.listarClientePorId(idCliente1);
+                response.setContentType("application/json");
+                PrintWriter out = response.getWriter();
+                out.println(new Gson().toJson(cliente));
+                break;
         }
 
 
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet direcServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet direcServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

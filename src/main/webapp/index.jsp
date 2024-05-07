@@ -23,12 +23,13 @@
 
                     <div>
                         <label>Correo Electrónico: </label><br>
-                        <input type="email" name="email" placeholder="Ingresa tu correo electrónico" required/>
+                        <input maxlength="80" type="email" name="email" value="@polloslocos.com" placeholder="Ingresa tu correo electrónico" required/>
+                        
                     </div>
 
                     <div>
                         <label>Contraseña: </label><br>
-                        <input type="password" name="password" placeholder="Ingresa tu contraseña" required/>
+                        <input maxlength="150" type="password" name="password" placeholder="Ingresa tu contraseña" required/>
                     </div>
 
                     <br>
@@ -38,5 +39,21 @@
                 </form>
             </section>
         </main>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            const form = document.querySelector('form');
+            const emailInput = document.querySelector('input[name="email"]');
+
+            form.addEventListener('submit', function(event) {
+                if (!emailInput.value.includes('@polloslocos.com')) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor ingresa un correo electrónico válido con el dominio @polloslocos.com'
+                    });
+                }
+            });
+        </script>
     </body>
 </html>

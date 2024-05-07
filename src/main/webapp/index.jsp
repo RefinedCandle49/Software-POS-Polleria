@@ -34,7 +34,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Contraseña: </label><br>
-                        <input maxlength="150" class="form-control" type="password" name="password" placeholder="Ingresa tu contraseña" required/>
+                        <input maxlength="50" class="form-control" type="password" name="password" placeholder="Ingresa tu contraseña" required/>
                     </div>
 
                     <br>

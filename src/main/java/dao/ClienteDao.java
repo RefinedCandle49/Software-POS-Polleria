@@ -39,6 +39,25 @@ public class ClienteDao {
         }
         return listaClientes;
     }
+
+    public static Cliente listarClientePorId(int id){
+        Cliente cliente = null;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente, nombre, apellido FROM cliente WHERE idCliente = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getString("idCliente"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+            }
+        } catch (Exception e){
+
+        }
+        return cliente;
+    }
     
     public static int registrarCliente(Cliente cli) {
         int estado = 0;

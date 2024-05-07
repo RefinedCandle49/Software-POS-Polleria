@@ -1,5 +1,28 @@
 $(document).ready(function () {
 
+    $('#buscar').click(function() {
+        var idCliente = $('#idCliente').val();
+        $.ajax({
+            url: 'controlCarrito?accion=BuscarCliente',
+            type: 'GET',
+            data: { idCliente: idCliente },
+            success: function(data) {
+                console.log(data);
+
+                // Parsear el JSON recibido
+                var cliente = JSON.parse(data);
+
+                // Mostrar los datos en el DOM
+                // $('#idClienteDisplay').html('ID Cliente: ' + cliente.idCliente);
+                $('#nombreDisplay').html('Cliente: ' + cliente.nombre + ' ' + cliente.apellido);
+                // $('#apellidoDisplay').html('Apellido: ' + cliente.apellido);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus, errorThrown);
+            }
+        });
+    });
+
     // $("tr #btnDetele").click(function () {
     //     var idp = $(this).parent().find('#id').val();
     //     eliminar(idp);

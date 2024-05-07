@@ -37,8 +37,16 @@ li {
         display: none;
     }
 
+    button {
+        display: none;
+    }
+
     #procesar-venta{
         display: none;
+    }
+
+    #idCliente::placeholder {
+        color: transparent;
     }
 }
 

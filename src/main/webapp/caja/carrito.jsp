@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,7 +14,8 @@
 <div class="container my-4">
     <ul class="list-unstyled">
         <li>
-            <a href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a>
+            <a href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir
+                comprando</a>
         </li>
     </ul>
     
@@ -33,7 +33,7 @@
                         <div class="grid-item"><p id="current-time"></p></div>
                         <div class="grid-item"><p>NoCaja: 4251</p></div>
                     </div>
-                    
+                
                 </div>
                 <table class="table table-bordered text-center">
                     <thead>
@@ -74,10 +74,16 @@
             <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post">
                 
                 
-                <label>
-                    DNI/RUC:
-                    <input type="text" name="idCliente">
-                </label>
+                <label> DNI/RUC: <input type="text" id="idCliente" name="idCliente"
+                                        placeholder="Ingrese ID del Cliente">
+                    <button type="button" id="buscar">Buscar Cliente</button>
+                    <button type="button" id="limpiar">Limpiar</button>
+                    <label id="nombreDisplay"></label> </label>
+                <script> document.getElementById("limpiar").addEventListener("click", function () {
+                    document.getElementById("idCliente").value = "";
+                    document.getElementById("nombreDisplay").innerText = "";
+                }); </script>
+                
                 
                 <div>
                     <label>
@@ -94,8 +100,8 @@
                 
                 <button id="procesar-venta" onclick="print()" type="submit">Procesar venta</button>
             </form>
-            
-            
+        
+        
         </c:if>
         <c:if test="${totalPagar > 0}">
             <%@ page import="java.text.DecimalFormat" %>
@@ -106,14 +112,16 @@
                     DecimalFormat df = new DecimalFormat("#.##");
                     
                     String totalFormateado = df.format(totalPagar);
-                    
+            
             %>
             
             <div class="col-sm-4">
-                <p>Subtotal: S/ <%=totalFormateado%></p>
+                <p>Subtotal: S/ <%=totalFormateado%>
+                </p>
                 <hr class="my-2">
-                <p style="font-weight:700">Total a pagar: S/ <%=totalFormateado%></p>
-<%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
+                <p style="font-weight:700">Total a pagar: S/ <%=totalFormateado%>
+                </p>
+                    <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
             </div>
             
             <% } else { %>
@@ -133,11 +141,9 @@
 </div>
 
 
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     function getCurrentDateTime() {
         var now = new Date();
@@ -169,7 +175,7 @@
 <script>
     const cantidadInput = document.getElementById('Cantidad');
 
-    cantidadInput.addEventListener('input', function() {
+    cantidadInput.addEventListener('input', function () {
         // Eliminar el carácter "-" si se ingresa
         if (cantidadInput.value.includes('-')) {
             cantidadInput.value = cantidadInput.value.replace('-', '');

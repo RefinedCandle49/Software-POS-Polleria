@@ -1,0 +1,17 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+section {
+    width: 300px; 
+}
+.icon {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+form {
+margin-top: 30px;
+}

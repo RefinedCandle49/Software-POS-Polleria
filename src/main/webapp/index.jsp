@@ -20,7 +20,7 @@
                     
                     <div>
                         <label>Contraseña: </label><br>
-                        <input maxlength="150" type="password" name="password" placeholder="Ingresa tu contraseña" required/>
+                        <input maxlength="50" type="password" name="password" placeholder="Ingresa tu contraseña" required/>
                     </div>
                     
                     <br>

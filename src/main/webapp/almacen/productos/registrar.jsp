@@ -78,5 +78,21 @@
 <%--        <input type="submit" value="Subir Imagen">--%>
 <%--    </form>--%>
 </section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.querySelector('input[type="file"]').addEventListener('change', function() {
+        const file = this.files[0];
+        const maxSize = 10 * 1024 * 1024; // 10 MB en bytes
+
+        if (file && file.size > maxSize) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.'
+            });
+            this.value = ''; // Limpiar el campo de entrada
+        }
+    });
+</script>
 </body>
 </html>

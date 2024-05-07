@@ -14,6 +14,4 @@ function DominioPorDefecto() {
             event.target.value = domain;
         }
     });
-   
- 
 };

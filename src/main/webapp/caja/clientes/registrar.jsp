@@ -93,6 +93,7 @@
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-dark" >Registrar</button>
+                        <a href="${pageContext.request.contextPath}/caja/menu.jsp" class="btn btn-primary">Regresar</a>
                     </div> 
                 </form>
             </div>

@@ -4,17 +4,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registrar Producto</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/registrar-producto.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <%
     List<Categoria> categorias = CategoriaDao.listarCategorias();
 %>
+
 <section>
     <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data">
         
         <div class="container table-responsive">
-            <table class="table">
+            <table class="table mb-3">
                 <thead>
                 <tr>
                     <th>Categoría:</th>
@@ -92,5 +95,6 @@
         }
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

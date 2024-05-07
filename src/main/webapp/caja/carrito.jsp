@@ -166,5 +166,15 @@
     // Llama a la función getCurrentDateTime cada segundo para actualizar la hora y fecha
     setInterval(getCurrentDateTime, 1000);
 </script>
+<script>
+    const cantidadInput = document.getElementById('Cantidad');
+
+    cantidadInput.addEventListener('input', function() {
+        // Eliminar el carácter "-" si se ingresa
+        if (cantidadInput.value.includes('-')) {
+            cantidadInput.value = cantidadInput.value.replace('-', '');
+        }
+    });
+</script>
 </body>
 </html>

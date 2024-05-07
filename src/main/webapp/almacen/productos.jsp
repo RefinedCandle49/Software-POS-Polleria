@@ -60,6 +60,7 @@
                     </div>
                 </nav>
             </header>
+
             <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
                 <c:if test="${not empty list}">
     <h3 class="mt-4 mb-2">TABLA GENERAL</h3>
@@ -98,7 +99,7 @@
                     <td>${prod.getNombreCategoria()}</td>
                     <td>${prod.getNombre()}</td>
                     <td>${prod.getDescripcion()}</td>
-                    <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""></td>
+                    <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt="" width="50"</td>
                     <td>${prod.getPrecio()}</td>
                     <td>${prod.getStock()}</td>
                     <td>

@@ -8,6 +8,7 @@
         <!-- Bootstrap v5 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
+        <script src="<%=request.getContextPath()%>/js/validaciones.js"></script>
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
@@ -46,9 +47,6 @@
             return;
         }    
         %>
-
-
-
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -119,7 +117,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="rol" class="form-label">Rol:</label>
-                                    <select class="form-select" id="rol" name="rol">
+                                    <select class="form-select" id="rol" name="rol" required>
+                                        <option value="" disabled selected class="invisible">Seleccionar opción</option>
                                         <option value="Administrador">Administrador</option>
                                         <option value="Cajero">Cajero</option>
                                         <option value="Almacenero">Almacenero</option>
@@ -138,7 +137,11 @@
             </div>
         </div>
 
-
+        <script>
+            DominioPorDefecto();
+        </script>
+                                
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/sweetAlert.js"></script>
     </body>
 </html>

@@ -17,7 +17,7 @@ public class UsuarioDao {
     public boolean validarUsuario(Usuario usu) {
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM usuario WHERE email=? AND password=?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM usuario WHERE email=? AND password=? AND estado=1");
             ps.setString(1, usu.getEmail());
             ps.setString(2, usu.getPassword());
             ResultSet rs = ps.executeQuery();

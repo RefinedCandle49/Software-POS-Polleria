@@ -67,15 +67,15 @@ public class controlUsuario extends HttpServlet {
                 String passwordRegistrar = request.getParameter("password");
                 String rolRegistrar = request.getParameter("rol");
                 int estadoRegistrar = Integer.parseInt(request.getParameter("estado"));
-                
+
                 // ERRORES //////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 UsuarioDao userDao = new UsuarioDao();
                 String mensajeError = null;
-                
+
                 if (userDao.validarEmail(emailRegistrar)) {
                     mensajeError = "¡Oh no! Este correo electrónico ya está en uso. Por favor, ingresa uno diferente.";
                 }
-                
+
                 if (mensajeError != null) {
                     request.setAttribute("mensajeError", mensajeError);
                     request.getRequestDispatcher("/admin/registrar.jsp").forward(request, response);

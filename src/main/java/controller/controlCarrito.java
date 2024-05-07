@@ -41,6 +41,8 @@ public class controlCarrito extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+
         //        Mantener los productos del carrito guardados en el navegador
         HttpSession sessionCart = request.getSession();
         List<Carrito> listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");

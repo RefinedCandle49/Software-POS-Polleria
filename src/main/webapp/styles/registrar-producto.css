@@ -1,0 +1,71 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 5 may. 2024, 19:40:52
+    Author     : miguel
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+*{
+    font-family: "DM Sans", sans-serif;
+}
+
+main{
+    padding: 25px 50px !important;
+}
+
+hr{
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.5); /* RGBA: rojo, verde, azul, alfa */
+    width: 100%;
+}
+
+.link-active{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.link-active:hover{
+    opacity: 0.5;
+}
+
+.link-inactive{
+    color: whitesmoke;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.link-inactive:hover{
+    opacity: 1;
+}
+
+.img-css{
+    width: 100px;
+    height: 130px;
+}
+
+.link-register{
+    text-decoration: none;
+}
+
+.link-register:hover{
+    opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+    main{
+        padding: 25px 30px !important;
+    }
+
+    .img-css{
+        width: 24px;
+        height: 56px;
+    }
+}
+
+.table th{
+    vertical-align: middle;
+}

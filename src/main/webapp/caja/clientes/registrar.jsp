@@ -73,22 +73,22 @@
 
                     <div class="mb-3">
                         <label for="idCliente" class="form-label">DNI/RUC:</label>
-                        <input type="text" id="idCliente" name="idCliente" class="form-control" required>
+                        <input type="text" id="idCliente" name="idCliente" class="form-control" maxlength="11" onkeypress="return soloNumeros(event)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                        <input type="text" id="nombre" name="nombre" class="form-control" maxlength="50" onkeypress="return soloLetras(event)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" required>
+                        <input type="text" id="apellido" name="apellido" class="form-control" maxlength="50" onkeypress="return soloLetras(event)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" id="email" name="email" class="form-control" required>
+                        <input type="text" id="email" name="email" class="form-control" maxlength="80" required>
                     </div>
 
                     <div class="text-center">
@@ -100,5 +100,23 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function soloNumeros(evt){
+                let charCode = (evt.which) ? evt.which : event.keyCode;
+                if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    return false;
+                }
+                return true;
+            }
+            
+            function soloLetras(evt){
+                let regex = /^[a-zA-Z\s]*$/;
+                let key = String.fromCharCode(!evt.charCode ? evt.which : evt.charCode);
+                if(!regex.test(key)){
+                    evt.preventDefault();
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>

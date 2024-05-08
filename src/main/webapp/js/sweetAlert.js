@@ -6,14 +6,14 @@
 
 function alertBienvenida() {
     const url = new URLSearchParams(window.location.search);
-    const peru = url.get('peru');
+    const alert = url.get('alert');
 
-    if (peru === 'false') {
+    if (alert === 'true') {
         Swal.fire({
             title: 'Bienvenido, ' + nombreRol
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = contextPath + "/admin/usuarios.jsp?peru=true";
+                window.location.href = contextPath + "/admin/usuarios.jsp?alert=false";
             }
         });
     }

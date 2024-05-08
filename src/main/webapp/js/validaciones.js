@@ -6,12 +6,13 @@
 function DominioPorDefecto() {
     let emailVar = document.getElementById('email');
     let domain = '@polloslocos.com';
-        
+
     emailVar.value = domain;
-    emailVar.addEventListener('input', function(event) {
+    emailVar.addEventListener('input', function (event) {
         var inputVar = event.target.value;
         if (!inputVar.endsWith(domain)) {
             event.target.value = domain;
         }
     });
-};
+}
+;

@@ -55,6 +55,11 @@ hr{
     opacity: 0.5;
 }
 
+.button-mensaje{
+    border: none;
+    background-color: transparent;
+}
+
 @media (max-width: 600px) {
     main{
         padding: 25px 30px !important;

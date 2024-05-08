@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import dao.UsuarioDao;
+import java.net.URLEncoder;
 import model.Usuario;
 
 /**
@@ -73,12 +74,12 @@ public class controlUsuario extends HttpServlet {
                 String mensajeError = null;
 
                 if (userDao.validarEmail(emailRegistrar)) {
-                    mensajeError = "¡Oh no! Este correo electrónico ya está en uso. Por favor, ingresa uno diferente.";
+                    mensajeError = "Este correo electronico se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
                 if (mensajeError != null) {
                     request.setAttribute("mensajeError", mensajeError);
-                    request.getRequestDispatcher("/admin/registrar.jsp").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/admin/registrar.jsp?mensajeError=" + mensajeError);
                     return;
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +93,8 @@ public class controlUsuario extends HttpServlet {
                 int resultRegistrar = UsuarioDao.registrarUsuario(userRegistrar);
 
                 if (resultRegistrar > 0) {
-                    response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp");
+                    String registroExitoso = "Usuario registrado correctamente";
+                    response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?registroExitoso=" + registroExitoso);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

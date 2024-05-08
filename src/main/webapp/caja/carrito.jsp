@@ -54,7 +54,7 @@
                             <td class="align-middle">S/ ${car.getPrecio()}</td>
                             <td class="align-middle">
                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
-                                <input type="number" min="1" step="1" id="Cantidad" value="${car.getCantidad()}"
+                                <input onkeypress="return soloNumeros(event)" type="number" min="1" step="1" id="Cantidad" value="${car.getCantidad()}"
                                        class="form-control">
                             </td>
                             <td class="align-middle">S/ ${car.getSubtotal()}</td>
@@ -71,18 +71,55 @@
                 </table>
             
             </div>
-            <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post">
+            <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post" id="ventaForm">
                 
                 
-                <label> DNI/RUC: <input type="text" id="idCliente" name="idCliente"
-                                        placeholder="Ingrese ID del Cliente">
+                <label> DNI/RUC: <input maxlength="11" type="text" id="idCliente" name="idCliente"
+                                        placeholder="Ingrese ID del Cliente" onkeypress="return soloNumeros(event)" value="00000001">
                     <button type="button" id="buscar">Buscar Cliente</button>
                     <button type="button" id="limpiar">Limpiar</button>
-                    <label id="nombreDisplay"></label> </label>
-                <script> document.getElementById("limpiar").addEventListener("click", function () {
-                    document.getElementById("idCliente").value = "";
-                    document.getElementById("nombreDisplay").innerText = "";
-                }); </script>
+                    <button type="button" id="generico">Genérico</button>
+                </label>
+                <div>
+                    <label>
+                        Cliente:
+                        <input type="text" id="nombreDisplay" name="nombreDisplay" required>
+                    </label>
+                </div>
+                
+                <script>
+                    document.getElementById("limpiar").addEventListener("click", function () {
+                        // Limpiar el valor del input idCliente
+                        document.getElementById("idCliente").value = "";
+
+                        // Limpiar el valor del campo nombreDisplay
+                        document.getElementById("nombreDisplay").value = "";
+                    });
+
+                    document.getElementById("generico").addEventListener("click", function () {
+                        // Limpiar el valor del input idCliente
+                        document.getElementById("idCliente").value = "00000001";
+
+                        // Limpiar el valor del campo nombreDisplay
+                        document.getElementById("nombreDisplay").value = "CLIENTE VARIOS";
+                    });
+                </script>
+                <script>
+                    // Obtener el elemento del campo nombreDisplay
+                    var nombreDisplay = document.getElementById("nombreDisplay");
+
+                    // Función para bloquear el campo de entrada
+                    function bloquearCampo() {
+                        // Agregar un controlador de eventos para prevenir la entrada
+                        nombreDisplay.addEventListener("keydown", function(event) {
+                            // Prevenir la acción predeterminada (la entrada de texto)
+                            event.preventDefault();
+                        });
+                    }
+
+                    // Llamar a la función bloquearCampo cuando se carga la página
+                    bloquearCampo();
+                </script>
                 
                 
                 <div>
@@ -98,7 +135,7 @@
                     </label>
                 </div>
                 
-                <button id="procesar-venta" onclick="print()" type="submit">Procesar venta</button>
+                <button id="procesar-venta" type="submit">Procesar venta</button>
             </form>
         
         
@@ -173,14 +210,42 @@
     setInterval(getCurrentDateTime, 1000);
 </script>
 <script>
-    const cantidadInput = document.getElementById('Cantidad');
+    function soloNumeros(evt){
+        let charCode = (evt.which) ? evt.which : event.keyCode;
+        if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
 
-    cantidadInput.addEventListener('input', function () {
-        // Eliminar el carácter "-" si se ingresa
-        if (cantidadInput.value.includes('-')) {
-            cantidadInput.value = cantidadInput.value.replace('-', '');
+<script>
+    document.getElementById("procesar-venta").addEventListener("click", function () {
+        var form = document.getElementById("ventaForm");
+        if (form.checkValidity()) {
+            // Mostrar SweetAlert de confirmación
+            // Simular impresión
+            setTimeout(function() {
+                window.print();
+            });
+        } else {
+            // Mostrar SweetAlert de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor complete todos los campos obligatorios.',
+            });
         }
     });
+</script>
+<script>
+    document.addEventListener('invalid', function(e) {
+        e.preventDefault();
+        // Aquí puedes agregar lógica adicional, como enfocar el campo o mostrar un mensaje personalizado
+        document.getElementById("nombreDisplay").focus();
+        document.getElementById("efectivo").focus();
+        document.getElementById("tarjeta").focus();
+    }, true);
 </script>
 </body>
 </html>

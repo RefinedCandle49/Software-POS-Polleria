@@ -14,7 +14,7 @@ $(document).ready(function () {
 
                 // Mostrar los datos en el DOM
                 // $('#idClienteDisplay').html('ID Cliente: ' + cliente.idCliente);
-                $('#nombreDisplay').html('Cliente: ' + cliente.nombre + ' ' + cliente.apellido);
+                $('#nombreDisplay').val(cliente.nombre + ' ' + cliente.apellido);
                 // $('#apellidoDisplay').html('Apellido: ' + cliente.apellido);
             },
             error: function(jqXHR, textStatus, errorThrown) {

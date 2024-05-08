@@ -99,25 +99,27 @@
                     <section class="d-flex align-items-center justify-content-center h-100">
                         <div>
                             <h1 class="fw-bold">REGISTRO DE USUARIO</h1>
-
-                            <c:if test="${not empty mensajeError}">
-                                <div>
-                                    <c:out value="${mensajeError}" />
+                            
+                            <c:if test="${not empty param.mensajeError}">
+                                <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
+                                    ${param.mensajeError}
+                                    <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                                 </div>
                             </c:if>
 
                             <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" maxlength="80" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <input type="password" class="form-control" id="password" name="password" maxlength="50" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="rol" class="form-label">Rol:</label>
                                     <select class="form-select" id="rol" name="rol" required>
+                                        <!-- BUSCAR MAMAMIA -->
                                         <option value="" disabled selected class="invisible">Seleccionar opción</option>
                                         <option value="Administrador">Administrador</option>
                                         <option value="Cajero">Cajero</option>
@@ -139,9 +141,15 @@
 
         <script>
             DominioPorDefecto();
+            
+            function cerrarMensaje() {
+                let mensajeError = document.getElementById("mensajeError");
+                mensajeError.style.display = "none";
+                window.location.href = "${pageContext.request.contextPath}/admin/registrar.jsp"
+            }
         </script>
                                 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="<%=request.getContextPath()%>/js/sweetAlert.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>

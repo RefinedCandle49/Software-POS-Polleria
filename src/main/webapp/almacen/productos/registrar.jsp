@@ -141,7 +141,7 @@
                             </tr>
                             
                             <tr>
-                                <th>Precio:</th>Z
+                                <th>Precio:</th>
                                 <td><input type="text" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)"></td>
                             </tr>
                             

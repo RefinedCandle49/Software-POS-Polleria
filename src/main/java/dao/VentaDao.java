@@ -42,11 +42,12 @@ public class VentaDao {
             rs.close();
 
             for (Carrito detalle : venta.getDetalleVenta()){
-                SQL = "INSERT INTO detalleventa (idVenta, idProducto, cantidad) VALUES (?, ?, ?)";
+                SQL = "INSERT INTO detalleventa (idVenta, idProducto, cantidad, subtotal) VALUES (?, ?, ?, ?)";
                 ps = con.prepareStatement(SQL);
                 ps.setInt(1, idVenta);
                 ps.setInt(2, detalle.getIdProducto());
                 ps.setInt(3, detalle.getCantidad());
+                ps.setDouble(4, detalle.getSubtotal());
 
                 estado = ps.executeUpdate();
                 rs.close();

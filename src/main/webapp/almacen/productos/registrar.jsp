@@ -100,7 +100,7 @@
                             
                             <tr>
                                 <th>Precio:</th>
-                                <td><input type="text" name="precio" class="form-control" required></td>
+                                <td><input type="text" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)"></td>
                             </tr>
                             
                             <tr>
@@ -160,6 +160,23 @@
         if(charCode > 31 && (charCode < 48 || charCode > 57)) {
             return false;
         }
+        return true;
+    }
+</script>
+<script>
+    function soloNumerosDecimales(evt){
+        let charCode = (evt.which) ? evt.which : event.keyCode;
+
+        // Permitir números del 0 al 9 y el punto decimal
+        if(charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+
+        // Permitir solo un punto decimal
+        if(charCode === 46 && evt.target.value.indexOf('.') !== -1) {
+            return false;
+        }
+
         return true;
     }
 </script>

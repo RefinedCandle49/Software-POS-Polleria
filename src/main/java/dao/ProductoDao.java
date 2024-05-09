@@ -128,4 +128,17 @@ public class ProductoDao {
         return listaProductos;
     }
 
+    public boolean validarProducto(String producto) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM producto WHERE nombre = ?");
+            ps.setString(1, producto);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
 }

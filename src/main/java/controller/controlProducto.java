@@ -21,6 +21,7 @@ public class controlProducto extends HttpServlet {
             case "registrar":
                 try{
 
+
                     Part filePart = request.getPart("image");
                     String fileName = filePart.getSubmittedFileName();
                     String uploadDir = "C:/Users/valde/OneDrive - SERVICIO EDUCATIVO EMPRESARIALE S.A.C/IV Ciclo/Laboratorio de Integración IV Desarrollo y Prueba de Software/Tareas/POS/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
@@ -45,6 +46,21 @@ public class controlProducto extends HttpServlet {
                     double precioRegistrar = Double.parseDouble(request.getParameter("precio"));
                     int stockRegistrar = Integer.parseInt(request.getParameter("stock"));
                     int estadoRegistrar = Integer.parseInt(request.getParameter("estado"));
+
+                    // ERRORES //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ProductoDao productoDao = new ProductoDao();
+                    String mensajeError = null;
+
+                    if (productoDao.validarProducto(nombreRegistrar)) {
+                        mensajeError = "Este nombre de producto se encuentra en uso. Por favor, ingresa uno diferente.";
+                    }
+
+                    if (mensajeError != null) {
+                        request.setAttribute("mensajeError", mensajeError);
+                        response.sendRedirect(request.getContextPath() + "/almacen/productos/registrar.jsp?mensajeError=" + mensajeError);
+                        return;
+                    }
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     Producto productoRegistrar = new Producto();
                     productoRegistrar.setIdCategoria(idCategoriaRegistrar);

@@ -83,11 +83,11 @@
                             <tbody>
                             <tr>
                                 <th>Nombre:</th>
-                                <td><input type="text" name="nombre" class="form-control" required></td>
+                                <td><input maxlength="50" type="text" name="nombre" class="form-control" required></td>
                             
                             <tr>
                                 <th>Descripción:</th>
-                                <td><textarea name="descripcion" class="form-control" required></textarea></td>
+                                <td><textarea maxlength="200" name="descripcion" class="form-control" required></textarea></td>
                             </tr>
                             
                             <tr>

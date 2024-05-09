@@ -2,11 +2,28 @@ package model;
 
 public class DetalleVenta {
     int detalleVenta, idVenta, idProducto, cantidad;
-    int totalVenta; String nombreProducto;
+    double totalVenta; String nombreProducto;
+    double subTotal;
 
-    public DetalleVenta(int idProducto, String nombreProducto, int totalVenta) {
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public DetalleVenta(int idProducto, String nombreProducto, double totalVenta) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
+        this.totalVenta = totalVenta;
+    }
+
+    public double getTotalVenta() {
+        return totalVenta;
+    }
+
+    public void setTotalVenta(double totalVenta) {
         this.totalVenta = totalVenta;
     }
 
@@ -68,14 +85,6 @@ public class DetalleVenta {
 
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
-    }
-
-    public int getTotalVenta() {
-        return totalVenta;
-    }
-
-    public void setTotalVenta(int totalVenta) {
-        this.totalVenta = totalVenta;
     }
 
 }

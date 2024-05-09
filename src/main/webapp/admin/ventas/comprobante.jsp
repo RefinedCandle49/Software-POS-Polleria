@@ -34,7 +34,6 @@
     <div class="d-flex justify-content-between align-items-center">
 <p class="me-3">Hora y fecha de venta: <%= vent.getHoraVenta()%></p>
 <p class="me-3">Nombre cliente: <%= vent.getNombre()%>, <%= vent.getApellido()%></p>
-
 <p class="me-3">Método de pago:
     <%
         int metodoPago = vent.getMetodoPago();
@@ -66,6 +65,7 @@
             <td class="align-middle">${det.getIdVenta()}</td>
             <td class="align-middle">${det.getNombre()}</td>
             <td class="align-middle">${det.getCantidad()}</td>
+            <td>${det.getSubTotal()}</td>
         </tr>
         </c:forEach>
     </tbody>

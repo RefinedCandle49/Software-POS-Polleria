@@ -17,7 +17,7 @@ public class DetalleVentaDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT det.idDetalleVenta, det.idVenta, prod.nombre, det.cantidad FROM detalleventa det INNER JOIN producto prod ON det.idProducto = prod.idProducto WHERE idVenta=?");
+                    "SELECT det.idDetalleVenta, det.idVenta, prod.nombre, det.cantidad, det.subtotal FROM detalleventa det INNER JOIN producto prod ON det.idProducto = prod.idProducto WHERE idVenta=?");
             ps.setInt(1, idVenta);
             ResultSet rs = ps.executeQuery();
 
@@ -27,6 +27,7 @@ public class DetalleVentaDao {
                 det.setIdVenta(rs.getInt("idVenta"));
                 det.setNombre(rs.getString("nombre"));
                 det.setCantidad(rs.getInt("cantidad"));
+                det.setSubTotal(rs.getDouble("subTotal"));
                 listaDetalles.add(det);
             }
         } catch (Exception e) {

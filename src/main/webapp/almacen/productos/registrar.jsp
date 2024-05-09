@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Registrar Producto</title>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/registrar-producto.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -190,7 +191,7 @@
     function cerrarMensaje() {
         let mensajeError = document.getElementById("mensajeError");
         mensajeError.style.display = "none";
-        window.location.href = "${pageContext.request.contextPath}/caja/clientes/registrar.jsp"
+        window.location.href = "${pageContext.request.contextPath}/almacen/productos/registrar.jsp"
     }
 </script>
 </body>

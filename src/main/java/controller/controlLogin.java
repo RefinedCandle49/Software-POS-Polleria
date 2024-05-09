@@ -38,6 +38,7 @@ public class controlLogin extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String mensajeError = null;
 
         UsuarioDao daoUsuario = new UsuarioDao();
         Usuario usuario = new Usuario();
@@ -57,12 +58,17 @@ public class controlLogin extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?alert=true");
             }
             return;
+            
+        } else if (daoUsuario.validarUsuarioInactivo(usuario)) {
+            mensajeError = "Esta cuenta no tiene acceso al sistema.";
+            request.setAttribute("mensajeError", mensajeError);
+            response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);
+            return;
         } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("mensajeError", "¡Oops! Parece que has ingresado un correo electrónico o contraseña incorrectos. Por favor, inténtalo de nuevo.");
-            request.getRequestDispatcher("/admin/registrar.jsp").forward(request, response);
+            mensajeError = "Parece que has ingresado credenciales incorrectas. Por favor, intenta de nuevo.";
+            request.setAttribute("mensajeError", mensajeError);
+            response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

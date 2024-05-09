@@ -13,18 +13,21 @@
         <main class="container">
             <section class="row">
                 <h1 class="text-center">Inicia Sesión</h1>
-
-                <c:if test="${not empty mensajeError}">
-                    <div>
-                        <c:out value="${mensajeError}" />
+                
+                <div class="icon my-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </div>
+                
+                <c:if test="${not empty param.mensajeError}">
+                    <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
+                        ${param.mensajeError}
+                        <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                     </div>
                 </c:if>
-                <div class="icon">
-			<svg xmlns="http://www.w3.org/2000/svg" width="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-			  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-			  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-			</svg>
-		    </div>
+                
                 <form action="${pageContext.request.contextPath}/controlLogin" method="POST">
 
                     <div class="mb-3">
@@ -59,7 +62,13 @@
                     });
                 }
             });
+            
+            function cerrarMensaje() {
+                let mensajeError = document.getElementById("mensajeError");
+                mensajeError.style.display = "none";
+                window.location.href = "${pageContext.request.contextPath}/index.jsp"
+            }
         </script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

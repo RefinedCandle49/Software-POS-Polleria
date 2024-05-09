@@ -91,16 +91,16 @@ public class controlCliente extends HttpServlet {
                 String mensajeError = null;
 
                 if (cliDao.validarEmail(emailRegistrar)) {
-                    mensajeError = "¡Oh no! Este correo electrónico ya está en uso. Por favor, ingresa uno diferente.";
+                    mensajeError = "Este correo electronico se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
                 if (cliDao.validarId(idClienteRegistrar)) {
-                    mensajeError = "¡Oh no! Este DNI/RUC ya está en uso. Por favor, ingresa uno diferente.";
+                    mensajeError = "Este DNI/RUC se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
                 if (mensajeError != null) {
                     request.setAttribute("mensajeError", mensajeError);
-                    request.getRequestDispatcher("/caja/clientes/registrar.jsp").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/caja/clientes/registrar.jsp?mensajeError=" + mensajeError);
                     return;
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +114,8 @@ public class controlCliente extends HttpServlet {
                 int resultRegistrar = ClienteDao.registrarCliente(cliRegistrar);
 
                 if (resultRegistrar > 0) {
-                    response.sendRedirect(request.getContextPath() + "/caja/clientes/cartera.jsp");
+                    String registroExitoso = "Cliente registrado correctamente";
+                    response.sendRedirect(request.getContextPath() + "/caja/clientes/cartera.jsp?registroExitoso=" + registroExitoso);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

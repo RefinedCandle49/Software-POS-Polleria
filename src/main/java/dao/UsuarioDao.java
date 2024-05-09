@@ -88,4 +88,25 @@ public class UsuarioDao {
         }
         return false;
     }
+    
+    public boolean validarUsuarioInactivo(Usuario usu) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM usuario WHERE email=? AND password=? AND estado=0");
+            ps.setString(1, usu.getEmail());
+            ps.setString(2, usu.getPassword());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                usu.setIdUsuario(rs.getInt("idUsuario"));
+                usu.setRol(rs.getString("rol"));
+                usu.setEstado(rs.getInt("estado"));
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

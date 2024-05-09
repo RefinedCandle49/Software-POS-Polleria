@@ -74,7 +74,8 @@ public class controlProducto extends HttpServlet {
                     int resultRegistrar = ProductoDao.registrarProducto(productoRegistrar);
 
                     if (resultRegistrar > 0) {
-                        response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp");
+                        String registroExitoso = "Producto registrado correctamente";
+                        response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?registroExitoso=" + registroExitoso);
                     } else {
 //                        request.setAttribute("errorRegistrarProd", "Error al registrar el producto.");
 //                        request.getRequestDispatcher("/admin/register/producto.jsp").forward(request, response);

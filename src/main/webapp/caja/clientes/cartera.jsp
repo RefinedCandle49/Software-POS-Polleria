@@ -66,6 +66,13 @@
                     <c:if test="${ empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
                     </c:if>
+                        
+                        <c:if test="${not empty param.registroExitoso}">
+                            <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                                ${param.registroExitoso}
+                                <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+                            </div> 
+                        </c:if>
                     
                     <c:if test="${not empty list}">
                         <table border="1">
@@ -88,10 +95,17 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-
                     </c:if>
                 </section>
             </article>
         </main>
+
+        <script>
+            function cerrarMensaje() {
+                let registroExitoso = document.getElementById("registroExitoso");
+                registroExitoso.style.display = "none";
+                window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp"
+            }
+        </script>
     </body>
 </html>

@@ -186,5 +186,12 @@
         return true;
     }
 </script>
+<script>
+    function cerrarMensaje() {
+        let mensajeError = document.getElementById("mensajeError");
+        mensajeError.style.display = "none";
+        window.location.href = "${pageContext.request.contextPath}/caja/clientes/registrar.jsp"
+    }
+</script>
 </body>
 </html>

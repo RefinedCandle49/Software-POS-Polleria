@@ -103,7 +103,7 @@
                             <c:if test="${not empty param.mensajeError}">
                                 <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
                                     ${param.mensajeError}
-                                    <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+                                    <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                                 </div>
                             </c:if>
 
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" maxlength="50" required>
+                                    <input type="password" class="form-control" id="password" name="password" minlegth="5" maxlength="50" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="rol" class="form-label">Rol:</label>

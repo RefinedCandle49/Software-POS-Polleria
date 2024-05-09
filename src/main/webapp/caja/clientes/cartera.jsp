@@ -9,6 +9,9 @@
 <%@page import="model.Usuario, dao.UsuarioDao, model.Cliente, dao.ClienteDao,java.util.*" %>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <title>Clientes | Pollos Locos</title>
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
@@ -52,49 +55,53 @@
         %>
         
         <header>
-            Bienvenido, <%= nombreRol %>
-            <a href="${pageContext.request.contextPath}/logout.jsp">Cerrar Sesión</a>
+            <div class="container mt-5">
+            <ul class="bg-dark nav justify-content-end d-flex container"> 
+                <li class=" nav-item">
+                    <span class="text-white nav-link">Bienvenido, <%= nombreRol %></span>
+                </li>
+                <li class="nav-item">
+                    <a class="text-white nav-link" href="${pageContext.request.contextPath}/logout.jsp">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
         </header>
 
         <main>
             <article>
                 <section>
-                    <h1>Panel de Clientes</h1>
+                    <h1 class="text-center mt-5">Panel de Clientes</h1>
 
-                    <a href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp">Registrar Cliente</a>
+                    <button style="margin-left: 92rem" class="btn btn-success"><a style="text-decoration: none;" class="text-white" href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp">Registrar Cliente</a></button>
                     
                     <c:if test="${ empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
                     </c:if>
-                        
-                        <c:if test="${not empty param.registroExitoso}">
-                            <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
-                                ${param.registroExitoso}
-                                <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
-                            </div> 
-                        </c:if>
                     
                     <c:if test="${not empty list}">
-                        <table border="1">
-                            <thead>
+                        <div clas="table-responsive-md">
+                            <table class="mt-2 table table-bordered container">
+                            <thead class="table-dark">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Correo Electrónico</th>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Nombres</th>
+                                    <th class="text-center">Apellidos</th>
+                                    <th class="text-center">Correo Electrónico</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${list}" var="cli">
                                     <tr>
-                                        <td>${cli.getIdCliente()}</td>
-                                        <td>${cli.getNombre()}</td>
-                                        <td>${cli.getApellido()}</td>
-                                        <td>${cli.getEmail()}</td>
+                                        <td class="text-center">${cli.getIdCliente()}</td>
+                                        <td class="text-center">${cli.getNombre()}</td>
+                                        <td class="text-center">${cli.getApellido()}</td>
+                                        <td class="text-center">${cli.getEmail()}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
+                        </div>
+
                     </c:if>
                 </section>
             </article>

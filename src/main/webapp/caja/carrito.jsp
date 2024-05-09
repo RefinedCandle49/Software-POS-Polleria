@@ -2,23 +2,17 @@
 <html>
 <head>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <title>Title</title>
+    <title>Carrito</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
           crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.5.1/css/pro.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/carrito.css">
 </head>
 <body>
-<div class="container my-4">
-    <ul class="list-unstyled">
-        <li>
-            <a href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir
-                comprando</a>
-        </li>
-    </ul>
-    
     <div class="row pt-5 pb-5">
         <c:if test="${totalPagar > 0}">
             <div class="col-lg-8 table-responsive">
@@ -35,8 +29,10 @@
                     </div>
                 
                 </div>
-                <table class="table table-bordered text-center">
-                    <thead>
+                <div class="container mt-5">
+                    <div  class="table-responsive ms-auto" style="max-width: 700px;">
+                        <table class="table table-bordered text-center">
+                    <thead class="table-dark">
                     <tr>
                         <th>SKU</th>
                         <th>Producto</th>
@@ -69,19 +65,22 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                    </div>
+                </div>
             
             </div>
             <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post" id="ventaForm">
                 
                 
-                <label> DNI/RUC: <input maxlength="11" type="text" id="idCliente" name="idCliente"
+                <label style="margin-left: 650px" class="text-center"> 
+                    DNI/RUC: <input maxlength="11" type="text" id="idCliente" name="idCliente"
                                         placeholder="Ingrese ID del Cliente" onkeypress="return soloNumeros(event)" value="00000001">
                     <button type="button" id="buscar">Buscar Cliente</button>
                     <button type="button" id="limpiar">Limpiar</button>
                     <button type="button" id="generico">Genérico</button>
                 </label>
                 <div>
-                    <label>
+                    <label class="mt-4" style="margin-left:800px">
                         Cliente:
                         <input type="text" id="nombreDisplay" name="nombreDisplay" required>
                     </label>
@@ -122,7 +121,7 @@
                 </script>
                 
                 
-                <div>
+                <div class="mt-4" style="margin-left: 890px">
                     <label>
                         <input type="radio" name="metodoPago" id="efectivo" value="1"
                                required/>
@@ -135,7 +134,7 @@
                     </label>
                 </div>
                 
-                <button id="procesar-venta" type="submit">Procesar venta</button>
+                <button style="margin-left: 900px" class="btn btn-dark mt-4" id="procesar-venta" type="submit">Procesar venta</button>
             </form>
         
         
@@ -152,11 +151,11 @@
             
             %>
             
-            <div class="col-sm-4">
-                <p>Subtotal: S/ <%=totalFormateado%>
+            <div style="margin-left: 650px" class="col-sm-4">
+                <p class="text-center">Subtotal: S/ <%=totalFormateado%>
                 </p>
                 <hr class="my-2">
-                <p style="font-weight:700">Total a pagar: S/ <%=totalFormateado%>
+                <p class="text-center" style="font-weight:700">Total a pagar: S/ <%=totalFormateado%>
                 </p>
                     <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
             </div>
@@ -169,13 +168,19 @@
         </c:if>
     </div>
     
-    <div class="icon-carrito">
+        <div class="mt-5 p-5 container icon-carrito">
         <c:if test="${totalPagar <= 0}">
-            <i class="fa-duotone fa-cart-xmark fa-10x"></i>
-            <p>El carrito está vacío.</p>
+            <i class="fa-duotone fa-cart-xmark fa-10x d-flex justify-content-center align-items-center"></i>
+            <p class="text-center mt-5">UPS! El carrito no tiene productos en el sistema:(.</p>
         </c:if>
+            <ul class="list-unstyled">
+        <li class="text-center mt-5">
+            <button class="btn btn-dark"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
+        </li>
+    </ul>
     </div>
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

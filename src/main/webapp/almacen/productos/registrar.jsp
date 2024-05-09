@@ -105,7 +105,7 @@
                             
                             <tr>
                                 <th>Stock:</th>
-                                <td><input type="text" name="stock" class="form-control" required></td>
+                                <td><input type="text" name="stock" class="form-control" required onkeypress="return soloNumeros(event)"></td>
                             </tr>
                             
                             <tr>
@@ -154,5 +154,14 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function soloNumeros(evt){
+        let charCode = (evt.which) ? evt.which : event.keyCode;
+        if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>

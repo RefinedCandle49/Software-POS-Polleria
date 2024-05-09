@@ -10,7 +10,10 @@ function alertBienvenida() {
 
     if (alert === 'true') {
         Swal.fire({
-            title: 'Bienvenido, ' + nombreRol
+            icon: "info",
+            title: 'Bienvenido, ' + nombreRol,
+            confirmButtonColor: "#212529",
+            allowOutsideClick: false
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = contextPath + "/admin/usuarios.jsp?alert=false";

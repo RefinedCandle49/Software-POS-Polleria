@@ -22,96 +22,10 @@
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/menu.css">
         <title>Menú | Pollos Locos</title>
-        <style>
-            /* CATEGORIAS */
-            
-            body {
-                position: relative;
-                overflow-x: hidden;
-                overflow-y: hidden;
-            }
-            
-            .categoria {
-                text-align: center;
-                box-sizing: border-box;
-                border-radius: 5px;
-                margin-top: 4px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-            }
-
-            .category-container {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
-
-            .categoria img {
-                width: 69px;
-                height: 72px;
-            }
-
-            /* PRODUCTOS */
-
-            .product-container {
-                display: flex;
-                flex-wrap: wrap;
-                overflow-y: auto;
-                max-height: calc(100vh - 150px);
-            }
-
-            .product-card {
-                width: 215px;
-                height: 260px;
-                margin: 4px;
-                display: inline-block;
-                vertical-align: top;
-                border: 1px solid black;
-                border-radius: 2px;
-                box-sizing: border-box;
-            }
-
-            .product-card .horizontal {
-                display: inline-block;
-            }
-
-            .product-card a {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .product-card img {
-                padding: 3px;
-                width: 200px;
-                height: 200px;
-            }
-
-            .card-body {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 0;
-            }
-
-            .card-body h5 {
-                color: gray;
-                max-width: 100%;
-                margin: 0;
-                text-align: center;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                padding: 0;
-            }
-        </style>
     </head>
-    <body class="container-fluid">
+    <body class="container-fluid p-0">
         <%
             HttpSession sesion = request.getSession(false);
             String contextPath = request.getContextPath();
@@ -166,19 +80,46 @@
             request.setAttribute("listaPostre", listaPostre);
         %>
 
-        <header class="p-3">
-            <nav>
-                <div class="d-flex align-items-center justify-content-between">
-                    <span class="fs-5 fw-bold">Bienvenido, <%= nombreRol %></span>
-
-                    <a href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito" class="text-dark">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
-                    </a>
+        <header>
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">POLLOS LOCOS</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/menu.jsp">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
+                                    <span>Menú de Productos</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                                    <span>Gestionar Clientes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                                    <span>Ir a Carrito</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <a href="${pageContext.request.contextPath}/logout.jsp" class="d-flex link-active align-items-center justify-content-end w-100">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" /><path d="M15 12h-12l3 -3" /><path d="M6 15l-3 -3" /></svg>
+                            <span class="mx-1">Cerrar Sesión</span>
+                        </a>
+                    </div>
                 </div>
-            </nav>
+            </nav>    
         </header>
 
-        <div class="row">
+        <div class="row p-2"> <!-- cambio -->
             <div class="col-md-2 pe-0">
                 <div class="">
                     <!-- CATEGORIA POLLOS -->
@@ -282,48 +223,48 @@
             </div>
 
         </div>    
-        
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function alertBienvenida() {
-            const url = new URLSearchParams(window.location.search);
-            const alert = url.get('alert');
+                            function alertBienvenida() {
+                                const url = new URLSearchParams(window.location.search);
+                                const alert = url.get('alert');
 
-            if (alert === 'true') {
-                Swal.fire({
-                    icon: "info",
-                    title: 'Bienvenido, ' + nombreRol,
-                    confirmButtonColor: "#212529",
-                    allowOutsideClick: false
-            }).then((result) => {
-                    if (result.isConfirmed) {
-                    window.location.href = contextPath + "/caja/menu.jsp?alert=false";
-                    }
-                });
-            }
-        }
-        alertBienvenida();
-            
-            function mostrarCategoria(categoriaId) {
-                var contenedores = document.querySelectorAll('.category-container');
-                for (var i = 0; i < contenedores.length; i++) {
-                    if (contenedores[i].id === categoriaId) {
-                        contenedores[i].style.display = 'block';
-                    } else {
-                        contenedores[i].style.display = 'none';
-                    }
-                }
-            }
+                                if (alert === 'true') {
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: 'Bienvenido, ' + nombreRol,
+                                        confirmButtonColor: "#212529",
+                                        allowOutsideClick: false
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = contextPath + "/caja/menu.jsp?alert=false";
+                                        }
+                                    });
+                                }
+                            }
+                            alertBienvenida();
 
-            document.addEventListener("DOMContentLoaded", function () {
-                var contenedores = document.querySelectorAll('.category-container');
-                for (var i = 0; i < contenedores.length; i++) {
-                    if (contenedores[i].id !== 'polloContainer') {
-                        contenedores[i].style.display = 'none';
-                    }
-                }
-            });
+                            function mostrarCategoria(categoriaId) {
+                                var contenedores = document.querySelectorAll('.category-container');
+                                for (var i = 0; i < contenedores.length; i++) {
+                                    if (contenedores[i].id === categoriaId) {
+                                        contenedores[i].style.display = 'block';
+                                    } else {
+                                        contenedores[i].style.display = 'none';
+                                    }
+                                }
+                            }
+
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var contenedores = document.querySelectorAll('.category-container');
+                                for (var i = 0; i < contenedores.length; i++) {
+                                    if (contenedores[i].id !== 'polloContainer') {
+                                        contenedores[i].style.display = 'none';
+                                    }
+                                }
+                            });
         </script>
     </body>
 </html>

@@ -25,7 +25,7 @@ input{
 
 @media print {
 
-    #buscar, #limpiar, #generico{
+    #buscar, #limpiar, #generico, #regresar{
         display: none;
     }
     .printed {

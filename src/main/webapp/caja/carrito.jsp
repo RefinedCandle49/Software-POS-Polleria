@@ -17,12 +17,6 @@
 </head>
 <body>
 <div class="container my-4">
-    <ul class="list-unstyled">
-        <li>
-            <a href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir
-                comprando</a>
-        </li>
-    </ul>
     
     <div class="row pb-5">
         <c:if test="${totalPagar > 0}">
@@ -156,7 +150,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button id="procesar-venta" class="btn btn-dark" type="submit">Procesar venta</button>
+                    <button id="procesar-venta" class="btn btn-success" type="submit">Procesar venta</button>
                 </div>
                 
             </form>
@@ -192,11 +186,16 @@
         </c:if>
     </div>
     
-    <div class="icon-carrito">
+    <div class="container icon-carrito">
         <c:if test="${totalPagar <= 0}">
-            <i class="fa-duotone fa-cart-xmark fa-10x"></i>
-            <p>El carrito está vacío.</p>
+            <i class="fa-duotone fa-cart-xmark fa-10x d-flex justify-content-center align-items-center"></i>
+            <p class="text-center mt-5">UPS! El carrito está vacío :(</p>
         </c:if>
+        <ul class="list-unstyled">
+            <li class="text-center mt-5">
+                <button id="regresar" class="btn btn-dark"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
+            </li>
+        </ul>
     </div>
 </div>
 

@@ -82,7 +82,7 @@
                     
                     <c:if test="${not empty list}">
                         <div clas="table-responsive-md">
-                            <table class="mt-2 table table-bordered container">
+                            <table class="mt-2 table container">
                             <thead class="table-dark">
                                 <tr>
                                     <th class="text-center">ID</th>

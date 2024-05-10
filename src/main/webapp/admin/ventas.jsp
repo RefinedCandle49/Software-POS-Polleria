@@ -55,8 +55,8 @@
                         <td class="text-center">${venta.getNombre()} ${venta.getApellido()}</td>
                         <td class="text-center">
                             <c:choose>
-                                <c:when test="${venta.getMetodoPago() == 0}">Efectivo</c:when>
-                                <c:when test="${venta.getMetodoPago() == 1}">Tarjeta</c:when>
+                                <c:when test="${venta.getMetodoPago() == 1}">Efectivo</c:when>
+                                <c:when test="${venta.getMetodoPago() == 2}">Tarjeta</c:when>
                                 <c:otherwise>Método Desconocido</c:otherwise>
                             </c:choose>
                         </td>

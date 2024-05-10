@@ -9,13 +9,14 @@
 <%@page import="model.Usuario, model.Cliente, dao.ClienteDao, java.util.*" %>
 <html>
     <head>
-        <title>Registrar Cliente | Pollos Locos</title>
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/registrar-cliente.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
+        <title>Registrar Cliente | Pollos Locos</title>
     </head>
-    <body>
-        <%--En esta sección se hará el registro de clientes que paguen tanto con factura como con boleta--%>
+    <body class="container-fluid p-0">
         <%
             HttpSession sesion = request.getSession(false);
             
@@ -48,20 +49,56 @@
         <%
             
             return;
-        }    
-            
+        }
+        %>
+        <%
         List<Cliente> cliente = ClienteDao.listarClientes();
         request.setAttribute("list", cliente);
         %>
-
+        
         <header>
-            Bienvenido, <%= nombreRol %>
-            <a href="${pageContext.request.contextPath}/logout.jsp">Cerrar Sesión</a>
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">POLLOS LOCOS</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/menu.jsp">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
+                                    <span>Menú de Productos</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                                    <span>Gestionar Clientes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                                    <span>Ir a Carrito</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <a href="${pageContext.request.contextPath}/logout.jsp" class="d-flex link-active align-items-center justify-content-end w-100">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" /><path d="M15 12h-12l3 -3" /><path d="M6 15l-3 -3" /></svg>
+                            <span class="mx-1">Cerrar Sesión</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>    
         </header>
 
-        <div class="centered-form">
-            <div class="shadowed-box">
-                <h1>Registro de Usuario</h1>
+        <div class="row d-flex align-items-center justify-content-center m-0" style="padding-top: 200px">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 px-5">
+                <h1 class="text-center">REGISTRO DE CLIENTE</h1>
 
                 <c:if test="${not empty param.mensajeError}">
                     <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
@@ -74,17 +111,17 @@
 
                     <div class="mb-3">
                         <label for="idCliente" class="form-label">DNI/RUC:</label>
-                        <input type="text" id="idCliente" name="idCliente" class="form-control" maxlength="11" onkeypress="return soloNumeros(event)" required>
+                        <input type="text" id="idCliente" name="idCliente" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" maxlength="50" onkeypress="return soloLetras(event)" required>
+                        <input type="text" id="nombre" name="nombre" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" maxlength="50" onkeypress="return soloLetras(event)" required>
+                        <input type="text" id="apellido" name="apellido" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event)" required>
                     </div>
 
                     <div class="mb-3">
@@ -94,10 +131,11 @@
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-dark" >Registrar</button>
-                        <a href="${pageContext.request.contextPath}/caja/menu.jsp" class="btn btn-primary">Regresar</a>
+                        <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp" class="btn btn-primary">Regresar</a>
                     </div> 
                 </form>
             </div>
+            <div class="col-md-4"></div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

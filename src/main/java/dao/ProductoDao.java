@@ -16,7 +16,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 1);
             ResultSet rs = ps.executeQuery();
 
@@ -39,7 +39,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 2);
             ResultSet rs = ps.executeQuery();
 
@@ -62,7 +62,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 3);
             ResultSet rs = ps.executeQuery();
 
@@ -85,7 +85,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 4);
             ResultSet rs = ps.executeQuery();
 

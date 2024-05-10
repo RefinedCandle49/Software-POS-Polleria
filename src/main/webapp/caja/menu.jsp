@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="java.util.List" %>
+<%@page import="model.Usuario, dao.UsuarioDao, java.util.*" %>
 <%@ page import="dao.ProductoDao" %>
 <%@ page import="model.Producto" %>
 <%@page import="controller.controlCarrito" %>
@@ -22,13 +22,19 @@
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
-        <title>JSP Page</title>
+        <title>Menú | Pollos Locos</title>
         <style>
             /* CATEGORIAS */
+            
+            body {
+                position: relative;
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+            
             .categoria {
                 text-align: center;
                 box-sizing: border-box;
-                /*border: 0px solid #ddd;*/
                 border-radius: 5px;
                 margin-top: 4px;
                 display: flex;
@@ -37,13 +43,13 @@
                 align-items: center;
                 cursor: pointer;
             }
-            
-            .category-container { /* PA QUE SE USA : */
+
+            .category-container {
                 display: flex;
                 align-items: center;
                 width: 100%;
-            } 
-            
+            }
+
             .categoria img {
                 width: 69px;
                 height: 72px;
@@ -81,8 +87,8 @@
 
             .product-card img {
                 padding: 3px;
-                width: 200px; /*250*/
-                height: 200px; /*250*/
+                width: 200px;
+                height: 200px;
             }
 
             .card-body {
@@ -107,6 +113,46 @@
     </head>
     <body class="container-fluid">
         <%
+            HttpSession sesion = request.getSession(false);
+            String contextPath = request.getContextPath();
+            
+            if (sesion == null || sesion.getAttribute("usuario") == null) {
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                return;
+            }
+            
+            String emailRol = (String) ((Usuario) sesion.getAttribute("usuario")).getEmail();
+            String nombreRol = (String) ((Usuario) sesion.getAttribute("usuario")).getRol();
+            
+            if(!"Cajero".equals(nombreRol)){    
+        %>
+        <script>
+            alert("Acceso Denegado");
+            <%
+            switch(nombreRol){
+                case "Administrador":
+            %>window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp";<%
+                    break;
+                    
+                case "Almacenero":
+            %>window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp";<%
+                    break;
+                    
+                    default:
+            %>window.location.href = "<%= request.getContextPath() %>/index.jsp";<%
+            }
+            %>
+        </script>
+        <%
+            
+            return;
+        }
+        %>
+        <script>
+            let contextPath = '<%= contextPath %>';
+            let nombreRol = '<%= nombreRol %>';
+        </script>
+        <%
             List<Producto> listaPollo = ProductoDao.listarPollos();
             request.setAttribute("listaPollo", listaPollo);
     
@@ -122,9 +168,13 @@
 
         <header class="p-3">
             <nav>
-                <a href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito" class="d-flex align-items-center justify-content-end text-dark">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-share"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12.5 17h-6.5v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /><path d="M16 22l5 -5" /><path d="M21 21.5v-4.5h-4.5" /></svg>
-                </a>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="fs-5 fw-bold">Bienvenido, <%= nombreRol %></span>
+
+                    <a href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito" class="text-dark">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                    </a>
+                </div>
             </nav>
         </header>
 
@@ -157,11 +207,9 @@
                         <h2>Postres</h2>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-md-10 ps-1">
-
                 <div class='contenedor-productos'>   
                     <!-- PRODUCTOS POLLOS -->
                     <div class="category-container" id="polloContainer">
@@ -234,8 +282,29 @@
             </div>
 
         </div>    
-
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            function alertBienvenida() {
+            const url = new URLSearchParams(window.location.search);
+            const alert = url.get('alert');
+
+            if (alert === 'true') {
+                Swal.fire({
+                    icon: "info",
+                    title: 'Bienvenido, ' + nombreRol,
+                    confirmButtonColor: "#212529",
+                    allowOutsideClick: false
+            }).then((result) => {
+                    if (result.isConfirmed) {
+                    window.location.href = contextPath + "/caja/menu.jsp?alert=false";
+                    }
+                });
+            }
+        }
+        alertBienvenida();
+            
             function mostrarCategoria(categoriaId) {
                 var contenedores = document.querySelectorAll('.category-container');
                 for (var i = 0; i < contenedores.length; i++) {
@@ -256,6 +325,5 @@
                 }
             });
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

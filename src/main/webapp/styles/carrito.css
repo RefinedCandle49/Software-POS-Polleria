@@ -1,22 +1,21 @@
-*{
-    font-family: 'DM Sans';
-}
-.printed{
-    text-align: center;
-}
+/**{*/
+/*    font-family: 'DM Sans';*/
+/*}*/
+/*.printed{*/
+/*    text-align: center;*/
+/*}*/
 
-.grid{
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
+/*.grid{*/
+/*    display: grid;*/
+/*    grid-template-columns: auto auto auto;*/
+/*}*/
 
 input{
-    text-align: center;
+    border: none;
 }
-
-li {
-    list-style: none;
-}
+/*li {*/
+/*    list-style: none;*/
+/*}*/
 
 @media screen {
     .printed {
@@ -25,6 +24,10 @@ li {
 }
 
 @media print {
+
+    #buscar, #limpiar, #generico{
+        display: none;
+    }
     .printed {
         display: block;
     }
@@ -48,8 +51,12 @@ li {
     #idCliente::placeholder {
         color: transparent;
     }
+
+    .form-control{
+        border: none;
+    }
 }
 
-.comprobante{
-    text-align: center;
-}
+/*.comprobante{*/
+/*    text-align: center;*/
+/*}*/

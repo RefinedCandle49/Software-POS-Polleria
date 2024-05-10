@@ -29,6 +29,7 @@ public class ProductoDao {
                 prod.setPrecio(rs.getDouble("precio"));
                 list.add(prod);
             }
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -52,6 +53,7 @@ public class ProductoDao {
                 prod.setPrecio(rs.getDouble("precio"));
                 list.add(prod);
             }
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -75,6 +77,7 @@ public class ProductoDao {
                 prod.setPrecio(rs.getDouble("precio"));
                 list.add(prod);
             }
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -98,6 +101,7 @@ public class ProductoDao {
                 prod.setPrecio(rs.getDouble("precio"));
                 list.add(prod);
             }
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }

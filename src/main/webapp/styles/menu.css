@@ -1,0 +1,90 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 10 may. 2024, 13:55:48
+    Author     : daniel
+*/
+body {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.categoria {
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.category-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.categoria img {
+    width: 65px;
+    height: 56px;
+}
+
+/* PRODUCTOS */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+}
+
+.product-card {
+    width: 213px;
+    height: 260px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.product-card .horizontal {
+    display: inline-block;
+}
+
+.product-card a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card img {
+    padding: 3px;
+    width: 200px;
+    height: 200px;
+}
+
+.card-body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.card-body h5 {
+    color: gray;
+    max-width: 100%;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0;
+}

@@ -59,7 +59,7 @@
                         <div class="w-100 text-center text-light">
                             <img src="${pageContext.request.contextPath}/img/user-icon.png" class="img-fluid img-css py-3" alt="..."/>
                             <br><span class="d-none d-sm-inline w-100"><%= nombreRol %></span>
-                            <span class="d-none d-sm-inline w-100" style="opacity: 0.5"><%= emailRol %></span>
+                            <br><span class="d-none d-sm-inline w-100" style="opacity: 0.5; word-break: break-all !important;"><%= emailRol %></span>
                         </div>
                         <hr>
 
@@ -131,6 +131,7 @@
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-dark" >Registrar</button>
+                                    <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-primary">Regresar</a>
                                 </div>
                             </form>
                         </div>

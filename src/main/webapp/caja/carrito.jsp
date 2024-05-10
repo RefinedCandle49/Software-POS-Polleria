@@ -20,6 +20,8 @@
     
     <div class="row pb-5">
         <c:if test="${totalPagar > 0}">
+            <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post"
+                  id="ventaForm">
             <div>
                 <div class="">
                     <div class="text-center printed">
@@ -99,8 +101,7 @@
                 
             
             </div>
-            <form action="<%=request.getContextPath()%>/controlCarrito?accion=RealizarVenta" method="post"
-                  id="ventaForm">
+            
                 
                 
                 <script>
@@ -140,7 +141,7 @@
                 <div>
                     
                     <label>Método de pago:
-                        <select class="form-control" name="metodoPago" id="cars">
+                        <select class="form-control" name="metodoPago" id="metodoPago">
                             <option id="efectivo" name="metodoPago" value="1">Efectivo</option>
                             <option id="tarjeta" name="metodoPago" value="2">Tarjeta</option>
                         </select>

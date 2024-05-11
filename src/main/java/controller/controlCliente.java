@@ -73,9 +73,7 @@ public class controlCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-
+        
         String action = request.getParameter("action");
 
         switch (action) {
@@ -85,6 +83,7 @@ public class controlCliente extends HttpServlet {
                 String nombreRegistrar = request.getParameter("nombre");
                 String apellidoRegistrar = request.getParameter("apellido");
                 String emailRegistrar = request.getParameter("email");
+                int estadoRegistrar = Integer.parseInt(request.getParameter("estado"));
 
                 // ERRORES //////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ClienteDao cliDao = new ClienteDao();
@@ -110,6 +109,7 @@ public class controlCliente extends HttpServlet {
                 cliRegistrar.setNombre(nombreRegistrar);
                 cliRegistrar.setApellido(apellidoRegistrar);
                 cliRegistrar.setEmail(emailRegistrar);
+                cliRegistrar.setEstado(estadoRegistrar);
 
                 int resultRegistrar = ClienteDao.registrarCliente(cliRegistrar);
 

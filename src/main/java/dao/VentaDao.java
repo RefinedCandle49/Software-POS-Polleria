@@ -30,7 +30,7 @@ public class VentaDao {
             ps.setString(1, venta.getIdCliente());
             ps.setInt(2, venta.getMetodoPago());
             ps.setString(3, obtenerFechaActual());
-            ps.setInt(4, 0);
+            ps.setInt(4, 1);
             ps.setDouble(5, venta.getTotal());
 
             estado = ps.executeUpdate();
@@ -71,7 +71,7 @@ public class VentaDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT vent.idVenta, cli.nombre, cli.apellido, vent.metodoPago, vent.horaVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE estado=0 OR estado=1 ORDER BY idVenta DESC;");
+                    "SELECT vent.idVenta, cli.nombre, cli.apellido, vent.metodoPago, vent.horaVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=0 OR vent.estado=1 ORDER BY idVenta DESC;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

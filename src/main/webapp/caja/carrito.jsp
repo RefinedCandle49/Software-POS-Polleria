@@ -37,7 +37,7 @@
                         <div class="col">
                             <p id="current-date"></p>
                             <p>NoCaja: 4251</p>
-                            <p><label>
+                            <p><label style="white-space: nowrap;">
                                 DNI/RUC:
                                 <input maxlength="11" type="text" id="idCliente" name="idCliente"
                                        placeholder="Ingrese ID del Cliente" onkeypress="return soloNumeros(event)"

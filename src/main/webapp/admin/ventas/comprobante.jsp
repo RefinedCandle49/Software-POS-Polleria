@@ -7,14 +7,14 @@
 <%@ page import="dao.VentaDao" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/carrito.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <title>Comprobante</title>
 </head>
 <body>
@@ -49,7 +49,7 @@
                 <h2>Pollería Pollos Locos S.A.C</h2>
                 <h3>Av. JAVIER PRADO ESTE NRO. 6210 INT. 1201 URB. RIVERA DE MONTERRICO LA MOLINA LIMA - LIMA</h3>
                 <H3>BOLETA DE VENTA ELECTRÓNICA</H3>
-                <hr>
+                <HR>
             </div>
             
             <div class="container">
@@ -76,7 +76,7 @@
                 </div>
                 
                 <div>
-                    <hr>
+                    <HR>
                     <table class="table table-bordered text-center border border-white ">
                         <thead>
                         <tr>
@@ -118,7 +118,7 @@
                 <div class="text-end">
                     <p>SubTotal: S/<%= vent.getTotal()%>
                     </p>
-                    <hr class="my-2">
+                    <HR class="my-2">
                     <p style="font-weight:700">Totala Pagar: S/<%= vent.getTotal()%>
                     </p>
                 </div>

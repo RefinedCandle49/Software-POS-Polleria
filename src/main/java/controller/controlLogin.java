@@ -34,12 +34,10 @@ public class controlLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String mensajeError = null;
-
+        
         UsuarioDao daoUsuario = new UsuarioDao();
         Usuario usuario = new Usuario();
         usuario.setEmail(email);
@@ -109,5 +107,5 @@ public class controlLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-}
+    
+            }

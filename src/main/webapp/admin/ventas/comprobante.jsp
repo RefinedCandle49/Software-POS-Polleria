@@ -103,11 +103,11 @@
                 <p class="me-3">Método de pago:
                     <%
                         int metodoPago = vent.getMetodoPago();
-                        if (metodoPago == 0) {
+                        if (metodoPago == 1) {
                     %>
                     Efectivo
                     <%
-                    } else if (metodoPago == 1) {
+                    } else if (metodoPago == 2) {
                     %>
                     Tarjeta
                     <%
@@ -124,6 +124,12 @@
                 <div class="text-center">
                     <button id="procesar-venta" onclick="print()" type="submit" class="btn btn-dark">Descargar
                         comprobante
+                    </button>
+                    
+                    <button id="regresar" class="btn btn-dark">
+                        <a class="text-white text-decoration-none" href="<%=request.getContextPath()%>/admin/ventas.jsp">
+                            Regresar
+                        </a>
                     </button>
                 </div>
             </div>

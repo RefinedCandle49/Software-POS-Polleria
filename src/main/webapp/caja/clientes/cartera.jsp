@@ -7,15 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.Usuario, dao.UsuarioDao, model.Cliente, dao.ClienteDao,java.util.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
         <title>Clientes | Pollos Locos</title>
-        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
-    <body>
+    <body class="container-fluid p-0">
         <%
                 HttpSession sesion = request.getSession(false);
             
@@ -55,58 +56,103 @@
         %>
         
         <header>
-            <div class="container mt-5">
-            <ul class="bg-dark nav justify-content-end d-flex container"> 
-                <li class=" nav-item">
-                    <span class="text-white nav-link">Bienvenido, <%= nombreRol %></span>
-                </li>
-                <li class="nav-item">
-                    <a class="text-white nav-link" href="${pageContext.request.contextPath}/logout.jsp">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </div>
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">POLLOS LOCOS</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/menu.jsp">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
+                                    <span>Menú de Productos</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                                    <span>Gestionar Clientes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/controlCarrito?accion=Carrito">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                                    <span>Ir a Carrito</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <a href="${pageContext.request.contextPath}/logout.jsp" class="d-flex link-active align-items-center justify-content-end w-100">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" /><path d="M15 12h-12l3 -3" /><path d="M6 15l-3 -3" /></svg>
+                            <span class="mx-1">Cerrar Sesión</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>    
         </header>
 
         <main>
-            <article>
-                <section>
-                    <h1 class="text-center mt-5">Panel de Clientes</h1>
+            <div class="row d-flex align-items-center justify-content-center m-0">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h1 class="fw-bold">PANEL DE CLIENTES</h1>
 
-                    <div class="col-lg-8 justify-content-end d-flex mx-auto">
-                        <button class="btn btn-dark"><a style="text-decoration: none;" class="text-white" href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp">Registrar Cliente</a></button>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp" class="link-register text-dark pb-2">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
+                            <span class="ms-1">Registrar Cliente</span>
+                        </a>
                     </div>
-                    
+
                     <c:if test="${ empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
                     </c:if>
-                    
-                    <c:if test="${not empty list}">
-                        <div clas="table-responsive-md">
-                            <table class="mt-2 table container">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th class="text-center">ID</th>
-                                    <th class="text-center">Nombres</th>
-                                    <th class="text-center">Apellidos</th>
-                                    <th class="text-center">Correo Electrónico</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${list}" var="cli">
-                                    <tr>
-                                        <td class="text-center">${cli.getIdCliente()}</td>
-                                        <td class="text-center">${cli.getNombre()}</td>
-                                        <td class="text-center">${cli.getApellido()}</td>
-                                        <td class="text-center">${cli.getEmail()}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        </div>
 
+                    <c:if test="${not empty param.registroExitoso}">
+                        <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                            ${param.registroExitoso}
+                            <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+                        </div> 
                     </c:if>
-                </section>
-            </article>
+
+                    <c:if test="${not empty list}">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="bg-dark text-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Correo Electrónico</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${list}" var="cli">
+                                        <tr>
+                                            <td>${cli.getIdCliente()}</td>
+                                            <td>${cli.getNombre()}</td>
+                                            <td>${cli.getApellido()}</td>
+                                            <td>${cli.getEmail()}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${cli.getEstado() == 0}">Inactivo</c:when>
+                                                    <c:when test="${cli.getEstado() == 1}">Activo</c:when>
+                                                    <c:otherwise>Estado Desconocido</c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </c:if>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
         </main>
 
         <script>

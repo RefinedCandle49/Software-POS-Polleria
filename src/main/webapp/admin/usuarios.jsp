@@ -7,15 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.Usuario, dao.UsuarioDao, java.util.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Usuarios | Pollos Locos</title>
         <!-- Bootstrap v5 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
-        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <script src="<%=request.getContextPath()%>/js/password.js"></script>
+        <title>Usuarios | Pollos Locos</title>
     </head>
     <body>
         <%
@@ -58,8 +58,7 @@
             let contextPath = '<%= contextPath %>';
             let nombreRol = '<%= nombreRol %>';
         </script>
-        <%
-            
+        <%  
         List<Usuario> usuario = UsuarioDao.listarUsuarios();
         request.setAttribute("list", usuario);
         %>

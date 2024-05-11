@@ -95,10 +95,10 @@
             </nav>    
         </header>
 
-        <div class="row d-flex align-items-center justify-content-center m-0" style="padding-top: 200px">
+        <main class="row d-flex align-items-center justify-content-center m-0 py-5">
             <div class="col-md-4"></div>
-            <div class="col-md-4 px-5">
-                <h1 class="text-center">REGISTRO DE CLIENTE</h1>
+            <div class="col-md-4 p-5">
+                <h1 class="fw-bold text-center">REGISTRO DE CLIENTE</h1>
 
                 <c:if test="${not empty param.mensajeError}">
                     <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
@@ -128,6 +128,8 @@
                         <label for="email" class="form-label">Email:</label>
                         <input type="text" id="email" name="email" class="form-control" maxlength="80" required>
                     </div>
+                    
+                    <input type="hidden" name="estado" value="1">
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-dark" >Registrar</button>
@@ -136,7 +138,7 @@
                 </form>
             </div>
             <div class="col-md-4"></div>
-        </div>
+        </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>

@@ -21,7 +21,7 @@ public class ClienteDao {
         List<Cliente> listaClientes = new ArrayList<Cliente>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idCliente, nombre, apellido, email FROM cliente");
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente, nombre, apellido, email, estado FROM cliente");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -30,6 +30,7 @@ public class ClienteDao {
                 cli.setNombre(rs.getString("nombre"));
                 cli.setApellido(rs.getString("apellido"));
                 cli.setEmail(rs.getString("email"));
+                cli.setEstado(rs.getInt("estado"));
                 listaClientes.add(cli);
 
             }
@@ -63,11 +64,12 @@ public class ClienteDao {
         int estado = 0;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO cliente (idCliente,nombre,apellido,email) VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO cliente (idCliente,nombre,apellido,email,estado) VALUES (?,?,?,?,?)");
             ps.setString(1, cli.getIdCliente());
             ps.setString(2, cli.getNombre());
             ps.setString(3, cli.getApellido());
             ps.setString(4, cli.getEmail());
+            ps.setInt(5, cli.getEstado());
             estado = ps.executeUpdate();
 
         } catch (Exception e) {

@@ -11,6 +11,7 @@ package model;
 public class Cliente {
     
     String idCliente, nombre, apellido, email;
+    int estado;
 
     public String getIdCliente() {
         return idCliente;
@@ -43,7 +44,12 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }

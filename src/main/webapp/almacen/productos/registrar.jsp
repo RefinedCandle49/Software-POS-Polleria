@@ -142,7 +142,7 @@
                             
                             <tr>
                                 <th>Precio:</th>
-                                <td><input type="number" min="1" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)"></td>
+                                <td><input type="number" min="1" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)"></td>
                             </tr>
                             
                             <tr>

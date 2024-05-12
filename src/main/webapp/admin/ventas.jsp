@@ -107,7 +107,7 @@
                         <h1 class="fw-bold">PANEL DE VENTAS</h1>
                         
                         <c:if test="${empty list}">
-                            <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
+                            <span>¡Hola! Parece que esta tabla está vacía en este momento.</span>
                         </c:if>
 
                         <c:if test="${not empty list}">

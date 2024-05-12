@@ -110,11 +110,11 @@
                             <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" maxlength="80" required>
+                                    <input type="email" class="form-control" id="email" name="email" minlength="20" maxlength="80" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" minlegth="5" maxlength="50" required>
+                                    <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="rol" class="form-label">Rol:</label>

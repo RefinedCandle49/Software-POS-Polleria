@@ -253,8 +253,7 @@
                 var hours = now.getHours();
                 var minutes = now.getMinutes();
                 var seconds = now.getSeconds();
-
-                // Agrega un cero delante si los segundos son menores que 10
+                
                 seconds = (seconds < 10) ? "0" + seconds : seconds;
                 minutes = (minutes < 10) ? "0" + minutes : minutes;
 
@@ -276,7 +275,7 @@
             }
 
             getCurrentDateTime();
-            // Llama a la función getCurrentDateTime cada segundo para actualizar la hora y fecha
+
             setInterval(getCurrentDateTime, 1000);
         </script>
         <script>

@@ -23,6 +23,7 @@
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/menu.css">
+        <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
         <title>Menú | Pollos Locos</title>
     </head>
     <body class="container-fluid p-0">

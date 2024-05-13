@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Venta {
 
-    public Venta(String idCliente, int metodoPago, String FechaHoraActual, int estado, double total, List<Carrito> detalleVenta) {
+    public Venta(String idCliente, int metodoPago, String fechaHoraVenta, int estado, double total, List<Carrito> detalleVenta) {
         this.idCliente = idCliente;
         this.metodoPago = metodoPago;
-        this.FechaHoraActual = FechaHoraActual;
+        this.fechaHoraVenta = fechaHoraVenta;
         this.estado = estado;
         this.total = total;
         this.detalleVenta = detalleVenta;
@@ -15,16 +15,6 @@ public class Venta {
 
     String nombre;
     String apellido;
-
-    public String getHoraVenta() {
-        return horaVenta;
-    }
-
-    public void setHoraVenta(String horaVenta) {
-        this.horaVenta = horaVenta;
-    }
-
-    String horaVenta;
 
     public String getNombre() {
         return nombre;
@@ -100,13 +90,13 @@ public class Venta {
 
     List<Carrito> detalleVenta;
 
-    String FechaHoraActual;
-
-    public String getFechaHoraActual() {
-        return FechaHoraActual;
+    public String getFechaHoraVenta() {
+        return fechaHoraVenta;
     }
 
-    public void setFechaHoraActual(String fechaHoraActual) {
-        FechaHoraActual = fechaHoraActual;
+    public void setFechaHoraVenta(String fechaHoraVenta) {
+        this.fechaHoraVenta = fechaHoraVenta;
     }
+
+    String fechaHoraVenta;
 }

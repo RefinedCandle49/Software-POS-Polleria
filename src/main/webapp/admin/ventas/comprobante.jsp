@@ -26,7 +26,7 @@
     
     Venta vent = VentaDao.obtenerVentaPorId(idVenta);
     
-    String horaFecha = vent.getHoraVenta(); // Obtener la fecha y hora de venta desde tu backend
+    String horaFecha = vent.getFechaHoraVenta(); // Obtener la fecha y hora de venta desde tu backend
 
 // Crear un objeto SimpleDateFormat para parsear la fecha y hora de venta
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -25,7 +25,7 @@
             
             String nombreRol = (String) ((Usuario) sesion.getAttribute("usuario")).getRol();
             
-            if(!"Cajero".equals(nombreRol)){    
+            if(!"Cajero".equals(nombreRol)){
         %>
         <script>
             alert("Acceso Denegado");
@@ -81,7 +81,12 @@
                                             </label></p>
                                     </div>
                                     <div class="col">
-                                        <p id="current-time"></p>
+<%--                                        <p  id="current-time"></p>--%>
+                                        <label>
+                                            Hora actual:
+                                            <input type="text" id="FechaHoraActual" name="FechaHoraActual">
+                                        </label>
+                                        
                                         <p>Tda No. : 227</p>
                                     </div>
 
@@ -156,6 +161,7 @@
                         <script>
                             // Obtener el elemento del campo nombreDisplay
                             var nombreDisplay = document.getElementById("nombreDisplay");
+                            var FechaHoraActual = document.getElementById("FechaHoraActual");
 
                             // Función para bloquear el campo de entrada
                             function bloquearCampo() {
@@ -164,6 +170,10 @@
                                     // Prevenir la acción predeterminada (la entrada de texto)
                                     event.preventDefault();
                                 });
+
+                                FechaHoraActual.addEventListener("keydown", function (event){
+                                    event.preventDefault();
+                                })
                             }
 
                             // Llamar a la función bloquearCampo cuando se carga la página
@@ -241,24 +251,34 @@
                                 var now = new Date();
                                 var hours = now.getHours();
                                 var minutes = now.getMinutes();
-                                // var seconds = now.getSeconds();
+                                var seconds = now.getSeconds();
 
                                 // Agrega un cero delante si los segundos son menores que 10
-                                // seconds = (seconds < 10) ? "0" + seconds : seconds;
+                                seconds = (seconds < 10) ? "0" + seconds : seconds;
 
                                 minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-                                var timeString = hours + ':' + minutes/* + ':' + seconds*/;
+                                var timeString = hours + ':' + minutes + ':' + seconds;
 
-                                document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
+                                // document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
 
                                 var day = now.getDate();
                                 var month = now.getMonth() + 1;
                                 var year = now.getFullYear();
-
+    
+                                month = (month < 10) ? "0" + month : month;
+                                
                                 var dateString = day + '/' + month + '/' + year;
+                                
+                                var fechaString = year + '-' + month + '-' + day;
 
                                 document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
+                                
+                                var FechaHoraActual = fechaString + ' ' + timeString;
+                                
+                                // document.getElementById("FechaHoraActual").innerHTML = fechaString + ' ' + timeString;
+
+                                document.getElementById("FechaHoraActual").value = FechaHoraActual;
                             }
 
                             // Llama a la función getCurrentDateTime cada segundo para actualizar la hora y fecha

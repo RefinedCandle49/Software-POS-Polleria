@@ -29,7 +29,7 @@ public class VentaDao {
             ps = con.prepareStatement("INSERT INTO venta (idCliente, metodoPago, horaVenta, estado, total) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, venta.getIdCliente());
             ps.setInt(2, venta.getMetodoPago());
-            ps.setString(3, obtenerFechaActual());
+            ps.setString(3, venta.getFechaHoraActual());
             ps.setInt(4, 1);
             ps.setDouble(5, venta.getTotal());
 

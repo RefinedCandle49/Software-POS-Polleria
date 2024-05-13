@@ -4,9 +4,10 @@ import java.util.List;
 
 public class Venta {
 
-    public Venta(String idCliente, int metodoPago, int estado, double total, List<Carrito> detalleVenta) {
+    public Venta(String idCliente, int metodoPago, String FechaHoraActual, int estado, double total, List<Carrito> detalleVenta) {
         this.idCliente = idCliente;
         this.metodoPago = metodoPago;
+        this.FechaHoraActual = FechaHoraActual;
         this.estado = estado;
         this.total = total;
         this.detalleVenta = detalleVenta;
@@ -99,6 +100,13 @@ public class Venta {
 
     List<Carrito> detalleVenta;
 
+    String FechaHoraActual;
 
+    public String getFechaHoraActual() {
+        return FechaHoraActual;
+    }
 
+    public void setFechaHoraActual(String fechaHoraActual) {
+        FechaHoraActual = fechaHoraActual;
+    }
 }

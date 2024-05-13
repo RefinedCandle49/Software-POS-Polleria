@@ -178,13 +178,15 @@ public class controlCarrito extends HttpServlet {
                 VentaDao dao = new VentaDao();
                 metodoPago = Integer.parseInt(request.getParameter("metodoPago"));
 
+                String FechaHoraActual = (request.getParameter("FechaHoraActual"));
+
                 idCliente = request.getParameter("idCliente");
 
                 if (idCliente == null || idCliente.trim().isEmpty()) {
                     idCliente = "00000001";
                 }
 
-                Venta venta = new Venta(idCliente, metodoPago, 1, totalPagar, listaCarrito);
+                Venta venta = new Venta(idCliente, metodoPago, FechaHoraActual, 1, totalPagar, listaCarrito);
                 int res = dao.generarVenta(venta);
                 request.getRequestDispatcher("controlCarrito?accion=ResumenVenta").forward(request, response);
                 break;

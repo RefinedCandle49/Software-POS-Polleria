@@ -96,19 +96,20 @@
             </header>
         
             <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
-                <c:if test="${empty list}">
-                    <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
-                </c:if>
-
+                
                 <c:if test="${not empty list}">
                     <h1 class="fw-bold">PANEL DE PRODUCTOS</h1>
-                    
+
                     <div class="d-flex align-items-center justify-content-end">
                         <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="link-register text-dark pb-2">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
                             <span class="ms-1">Registrar Producto</span>
                         </a>
                     </div>
+                    
+                    <c:if test="${empty list}">
+                        <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
+                    </c:if>
                             
                     <c:if test="${not empty param.registroExitoso}">
                         <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">

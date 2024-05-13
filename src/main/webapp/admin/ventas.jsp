@@ -137,7 +137,7 @@
                                                         <c:otherwise>Método Desconocido</c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td>${venta.getHoraVenta()}</td>
+                                                <td>${venta.getFechaHoraVenta()}</td>
                                                 <td>${venta.getTotal()}</td>
 
                                                 <%-- <td>

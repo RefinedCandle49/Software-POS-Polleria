@@ -36,7 +36,7 @@
     SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yyyy");
     String fechaFormateada = sdfFecha.format(fechaHoraVenta);
     
-    SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm:ss");
+    SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm");
     String horaFormateada = sdfHora.format(fechaHoraVenta);
 %>
 

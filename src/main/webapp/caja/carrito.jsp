@@ -240,14 +240,14 @@
                                 var now = new Date();
                                 var hours = now.getHours();
                                 var minutes = now.getMinutes();
-                                var seconds = now.getSeconds();
+                                // var seconds = now.getSeconds();
 
                                 // Agrega un cero delante si los segundos son menores que 10
-                                seconds = (seconds < 10) ? "0" + seconds : seconds;
+                                // seconds = (seconds < 10) ? "0" + seconds : seconds;
 
                                 minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-                                var timeString = hours + ':' + minutes + ':' + seconds;
+                                var timeString = hours + ':' + minutes/* + ':' + seconds*/;
 
                                 document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
 

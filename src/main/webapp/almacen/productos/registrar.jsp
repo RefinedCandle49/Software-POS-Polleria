@@ -148,7 +148,7 @@
                             
                             <tr>
                                 <th>Stock:</th>
-                                <td><input type="text" name="stock" class="form-control" required onkeypress="return soloNumeros(event)"></td>
+                                <td><input type="text" max="999" name="stock" class="form-control" required onkeypress="return soloNumeros(event)"></td>
                             </tr>
                             
                             <tr>

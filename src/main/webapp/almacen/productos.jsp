@@ -200,7 +200,7 @@
         function cerrarMensaje() {
             let registroExitoso = document.getElementById("registroExitoso");
             registroExitoso.style.display = "none";
-            window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp"
+            window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp"
         }
     </script>
 </body>

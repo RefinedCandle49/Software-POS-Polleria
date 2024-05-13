@@ -248,42 +248,36 @@
         <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-                            function getCurrentDateTime() {
-                                var now = new Date();
-                                var hours = now.getHours();
-                                var minutes = now.getMinutes();
-                                var seconds = now.getSeconds();
+            function getCurrentDateTime() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
 
-                                // Agrega un cero delante si los segundos son menores que 10
-                                seconds = (seconds < 10) ? "0" + seconds : seconds;
+                // Agrega un cero delante si los segundos son menores que 10
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-                                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                var timeString = hours + ':' + minutes + ':' + seconds;
 
-                                var timeString = hours + ':' + minutes + ':' + seconds;
+                var day = now.getDate();
+                var month = now.getMonth() + 1;
+                var year = now.getFullYear();
+                month = (month < 10) ? "0" + month : month;
 
-                                // document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
+                var dateString = day + '/' + month + '/' + year;
+                var fechaString = year + '-' + month + '-' + day;
 
-                                var day = now.getDate();
-                                var month = now.getMonth() + 1;
-                                var year = now.getFullYear();
-    
-                                month = (month < 10) ? "0" + month : month;
-                                
-                                var dateString = day + '/' + month + '/' + year;
-                                
-                                var fechaString = year + '-' + month + '-' + day;
+                document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
 
-                                document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
-                                
-                                var FechaHoraActual = fechaString + ' ' + timeString;
-                                
-                                // document.getElementById("FechaHoraActual").innerHTML = fechaString + ' ' + timeString;
+                var FechaHoraActual = fechaString + ' ' + timeString;
 
-                                document.getElementById("FechaHoraActual").value = FechaHoraActual;
-                            }
+                document.getElementById("FechaHoraActual").value = FechaHoraActual;
+            }
 
-                            // Llama a la función getCurrentDateTime cada segundo para actualizar la hora y fecha
-                            setInterval(getCurrentDateTime, 1000);
+            getCurrentDateTime();
+            // Llama a la función getCurrentDateTime cada segundo para actualizar la hora y fecha
+            setInterval(getCurrentDateTime, 1000);
         </script>
         <script>
             function soloNumeros(evt) {

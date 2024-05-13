@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
+        <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
         <title>Registrar Cliente | Pollos Locos</title>
     </head>
     <body class="container-fluid p-0">

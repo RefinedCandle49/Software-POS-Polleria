@@ -14,7 +14,7 @@
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
         <title>Carrito | Pollos Locos</title>
     </head>
-    <body>
+    <body id="grid">
         <%
             HttpSession sesion = request.getSession(false);
             
@@ -48,7 +48,7 @@
             return;
         }
         %>
-
+        <div></div>
         <div class="container-fluid my-4">
             <div class="row pb-5">
                 <c:if test="${totalPagar > 0}">
@@ -241,6 +241,7 @@
                 </ul>
             </div>
         </div>
+        <div></div>
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

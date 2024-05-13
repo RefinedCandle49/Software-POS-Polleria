@@ -5,10 +5,10 @@
 /*    text-align: center;*/
 /*}*/
 
-/*.grid{*/
-/*    display: grid;*/
-/*    grid-template-columns: auto auto auto;*/
-/*}*/
+#grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
 
 input{
     border: none;

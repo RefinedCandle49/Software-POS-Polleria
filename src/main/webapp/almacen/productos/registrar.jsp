@@ -184,15 +184,25 @@
 <script>
     document.querySelector('input[type="file"]').addEventListener('change', function() {
         const file = this.files[0];
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
         const maxSize = 10 * 1024 * 1024; // 10 MB en bytes
 
-        if (file && file.size > maxSize) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.'
-            });
-            this.value = ''; // Limpiar el campo de entrada
+        if (file) {
+            if (!allowedTypes.includes(file.type)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Solo se admiten archivos JPG, JPEG y PNG.'
+                });
+                this.value = ''; // Limpiar el campo de entrada
+            } else if (file.size > maxSize) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.'
+                });
+                this.value = ''; // Limpiar el campo de entrada
+            }
         }
     });
 </script>

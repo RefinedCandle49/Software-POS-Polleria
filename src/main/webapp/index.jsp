@@ -4,10 +4,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Iniciar Sesión | Pollos Locos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/index.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
+        <title>Iniciar Sesión | Pollos Locos</title>
     </head>
     <body>
         <main class="container">

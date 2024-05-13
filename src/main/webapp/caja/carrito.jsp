@@ -81,11 +81,10 @@
                                             </label></p>
                                     </div>
                                     <div class="col">
-<%--                                        <p  id="current-time"></p>--%>
-                                        <label>
-                                            Hora actual:
-                                            <input type="text" id="FechaHoraActual" name="FechaHoraActual">
-                                        </label>
+    
+                                        <input type="hidden" id="FechaHoraActual" name="FechaHoraActual">
+    
+                                        <p id="current-time"></p>
                                         
                                         <p>Tda No. : 227</p>
                                     </div>
@@ -268,6 +267,7 @@
                 var fechaString = year + '-' + month + '-' + day;
 
                 document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
+                document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
 
                 var FechaHoraActual = fechaString + ' ' + timeString;
 

@@ -9,16 +9,20 @@ $(document).ready(function () {
             success: function(data) {
                 console.log(data);
 
-                // Parsear el JSON recibido
-                var cliente = JSON.parse(data);
+                try {
+                    // Parsear el JSON recibido
+                    var cliente = JSON.parse(data);
 
-                // Mostrar los datos en el DOM
-                // $('#idClienteDisplay').html('ID Cliente: ' + cliente.idCliente);
-                $('#nombreDisplay').val(cliente.nombre + ' ' + cliente.apellido);
-                // $('#apellidoDisplay').html('Apellido: ' + cliente.apellido);
+                    // Mostrar los datos en el DOM
+                    $('#nombreDisplay').val(cliente.nombre + ' ' + cliente.apellido);
+                } catch (error) {
+                    console.error(error);
+                    $('#nombreDisplay').val('Cliente no encontrado');
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error(textStatus, errorThrown);
+                $('#nombreDisplay').val('Cliente no encontrado');
             }
         });
     });

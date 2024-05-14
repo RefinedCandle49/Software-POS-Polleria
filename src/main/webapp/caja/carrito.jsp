@@ -289,15 +289,22 @@
         </script>
 
         <script>
-            document.getElementById("procesar-venta").addEventListener("click", function () {
+            document.getElementById("procesar-venta").addEventListener("click", function (event) {
                 var form = document.getElementById("ventaForm");
-                if (form.checkValidity()) {
+                var nombreDisplay = document.getElementById("nombreDisplay").value.trim();
+
+                if (form.checkValidity() && nombreDisplay !== "Cliente no encontrado") {
                     // Mostrar SweetAlert de confirmación
                     // Simular impresión
-                    setTimeout(function () {
-                        window.print();
-                    });
+                    event.preventDefault(); // Evitar el envío del formulario
+                    window.print(); // Iniciar la impresión
+
+                    // Esperar a que se complete la impresión antes de enviar el formulario
+                    window.onafterprint = function() {
+                        form.submit(); // Enviar el formulario después de la impresión
+                    };
                 } else {
+                    event.preventDefault();
                     // Mostrar SweetAlert de error
                     Swal.fire({
                         icon: 'error',

@@ -118,7 +118,7 @@
                                             <td style="text-wrap: nowrap;" class="align-middle">S/ ${car.getPrecio()}</td>
                                             <td class="align-middle">
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
-                                                <input onkeypress="return soloNumeros(event)" type="number" min="1" step="1"
+                                                <input onkeypress="return soloNumerosCantidad(event)" type="number" min="1" step="1"
                                                        id="Cantidad" value="${car.getCantidad()}"
                                                        class="text-center">
                                             </td>
@@ -283,6 +283,18 @@
                 let charCode = (evt.which) ? evt.which : event.keyCode;
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                     return false;
+                }
+                return true;
+            }
+
+            function soloNumerosCantidad(evt) {
+                let charCode = (evt.which) ? evt.which : event.keyCode;
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    return false;
+                }
+                let input = document.getElementById('Cantidad');
+                if (input.value.length >= 3) {
+                    evt.preventDefault();
                 }
                 return true;
             }

@@ -17,6 +17,14 @@ public class Carrito {
 
     double precio;
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     public double getSubtotal() {
         return subtotal;
     }
@@ -33,6 +41,8 @@ public class Carrito {
         this.subtotal = subtotal;
         this.nombre = nombre;
     }
+
+    int stock;
 
     double subtotal;
     String nombre;

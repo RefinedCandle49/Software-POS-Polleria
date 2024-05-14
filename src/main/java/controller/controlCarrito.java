@@ -81,7 +81,7 @@ public class controlCarrito extends HttpServlet {
                 cantidad = 1;
                 int idProducto = Integer.parseInt(request.getParameter("id"));
                 p = productoDao.listarId(idProducto);
-
+                int stock = p.getStock();
                 if (listaCarrito.size() > 0) {
                     for (int i = 0; i < listaCarrito.size(); i++) {
                         if (idProducto == listaCarrito.get(i).getIdProducto()) {
@@ -111,6 +111,7 @@ public class controlCarrito extends HttpServlet {
                         car.setNombre(p.getNombre());
                         car.setPrecio(p.getPrecio());
                         car.setCantidad(cantidad);
+                        car.setStock(stock);
                         double subtotal = cantidad * p.getPrecio();
                         String subtotalString = df.format(subtotal);
                         car.setSubtotal(Double.parseDouble(subtotalString));
@@ -128,6 +129,7 @@ public class controlCarrito extends HttpServlet {
                     car.setNombre(p.getNombre());
                     car.setPrecio(p.getPrecio());
                     car.setCantidad(cantidad);
+                    car.setStock(stock);
                     double subtotal = cantidad * p.getPrecio();
 
                     String subtotalString = df.format(subtotal);

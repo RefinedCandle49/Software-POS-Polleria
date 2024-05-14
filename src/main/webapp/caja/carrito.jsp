@@ -118,7 +118,7 @@
                                             <td style="text-wrap: nowrap;" class="align-middle">S/ ${car.getPrecio()}</td>
                                             <td class="align-middle">
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
-                                                <input onkeypress="return soloNumerosCantidad(event)" type="number" min="1" step="1"
+                                                <input onkeypress="return soloNumerosCantidad(event)" type="number" max="${car.getStock()}" min="1" step="1"
                                                        id="Cantidad" value="${car.getCantidad()}"
                                                        class="text-center">
                                             </td>
@@ -299,8 +299,10 @@
                 return true;
             }
         </script>
-
+        
         <script>
+            const stockMaximo = document.getElementById("Cantidad").max;
+
             document.getElementById("procesar-venta").addEventListener("click", function (event) {
                 var form = document.getElementById("ventaForm");
                 var nombreDisplay = document.getElementById("nombreDisplay").value.trim();

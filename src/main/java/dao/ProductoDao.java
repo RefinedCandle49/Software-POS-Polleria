@@ -16,7 +16,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio, stock FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 1);
             ResultSet rs = ps.executeQuery();
 
@@ -27,6 +27,7 @@ public class ProductoDao {
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setFoto(rs.getString("foto"));
                 prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
                 list.add(prod);
             }
             con.close();
@@ -40,7 +41,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio, stock FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 2);
             ResultSet rs = ps.executeQuery();
 
@@ -51,6 +52,7 @@ public class ProductoDao {
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setFoto(rs.getString("foto"));
                 prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
                 list.add(prod);
             }
             con.close();
@@ -64,7 +66,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio, stock FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 3);
             ResultSet rs = ps.executeQuery();
 
@@ -75,6 +77,7 @@ public class ProductoDao {
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setFoto(rs.getString("foto"));
                 prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
                 list.add(prod);
             }
             con.close();
@@ -88,7 +91,7 @@ public class ProductoDao {
         List<Producto> list = new ArrayList<Producto>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, nombre, descripcion, foto, precio, stock FROM producto WHERE estado = 1 AND idCategoria = ? AND stock > 0");
             ps.setInt(1, 4);
             ResultSet rs = ps.executeQuery();
 
@@ -99,6 +102,7 @@ public class ProductoDao {
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setFoto(rs.getString("foto"));
                 prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
                 list.add(prod);
             }
             con.close();

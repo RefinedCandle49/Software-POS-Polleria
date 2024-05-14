@@ -157,14 +157,15 @@
                     <div class="category-container" id="polloContainer">
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaPollo}">
-                                <div class="product-card">
+                                <div class="product-card cont-product">
                                     <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
                                         <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>  
+                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
                                     </div>
+                                    <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
                             </c:forEach>
                         </div>
@@ -174,13 +175,14 @@
                     <div class="category-container" id="sopaContainer">    
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaSopa}">
-                                <div class="product-card card">
+                                <div class="product-card card cont-product">
                                     <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
                                         <img class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>  
+                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -191,13 +193,14 @@
                     <div class="category-container" id="bebidaContainer">
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaBebida}">
-                                <div class="product-card card">
+                                <div class="product-card card cont-product">
                                     <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
                                         <img class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>  
+                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
                                 </div>
                             </c:forEach>        
@@ -208,13 +211,14 @@
                     <div class="category-container" id="postreContainer">
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaPostre}">
-                                <div class="product-card card">
+                                <div class="product-card card cont-product">
                                     <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
                                         <img class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
                                         <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
                                 </div>
                             </c:forEach>

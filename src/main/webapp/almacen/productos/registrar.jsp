@@ -98,7 +98,7 @@
         
         <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
             <section>
-                <h1 class="text-center">Registrar Producto</h1>
+                <h1 class="text-center fw-bold">REGISTRAR PRODUCTO</h1>
                 <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data">
                     
                     <div class="container table-responsive">

@@ -296,13 +296,9 @@
                 if (form.checkValidity() && nombreDisplay !== "Cliente no encontrado") {
                     // Mostrar SweetAlert de confirmación
                     // Simular impresión
-                    event.preventDefault(); // Evitar el envío del formulario
-                    window.print(); // Iniciar la impresión
-
-                    // Esperar a que se complete la impresión antes de enviar el formulario
-                    window.onafterprint = function() {
-                        form.submit(); // Enviar el formulario después de la impresión
-                    };
+                    setTimeout(function () {
+                        window.print();
+                    });
                 } else {
                     event.preventDefault();
                     // Mostrar SweetAlert de error
@@ -314,6 +310,7 @@
                 }
             });
         </script>
+        
         <script>
             document.addEventListener('invalid', function (e) {
                 e.preventDefault();

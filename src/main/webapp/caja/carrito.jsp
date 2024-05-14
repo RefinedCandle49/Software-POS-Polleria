@@ -341,15 +341,15 @@
             const genericoBtn = document.getElementById("generico");
 
             buscarBtn.addEventListener("click", () => {
-                idClienteInput.disabled = true;
+                idClienteInput.readOnly = true;
             });
 
             genericoBtn.addEventListener("click", () => {
-                idClienteInput.disabled = true;
+                idClienteInput.readOnly = true;
             });
 
             limpiarBtn.addEventListener("click", () => {
-                idClienteInput.disabled = false;
+                idClienteInput.readOnly = false;
             });
 
             function soloNumeros(event) {

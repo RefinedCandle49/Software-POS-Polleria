@@ -112,7 +112,7 @@
 
                     <div class="mb-3">
                         <label for="idCliente" class="form-label">DNI/RUC:</label>
-                        <input type="text" id="idCliente" name="idCliente" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" required>
+                        <input type="text" id="idCliente" name="idCliente" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
                     </div>
 
                     <div class="mb-3">
@@ -127,7 +127,7 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" id="email" name="email" class="form-control" maxlength="80" required>
+                        <input type="text" id="email" name="email" class="form-control" minlength="10"  maxlength="80" required>
                     </div>
                     
                     <input type="hidden" name="estado" value="1">

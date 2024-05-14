@@ -127,7 +127,7 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" id="email" name="email" class="form-control" maxlength="80" required>
+                        <input type="text" id="email" name="email" class="form-control" minlength="10"  maxlength="80" required>
                     </div>
                     
                     <input type="hidden" name="estado" value="1">

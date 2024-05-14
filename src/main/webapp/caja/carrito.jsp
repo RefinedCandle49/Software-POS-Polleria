@@ -319,7 +319,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Por favor complete todos los campos obligatorios o revise que la cantidad no exceda el stock del producto.',
+                        text: 'Por favor complete todos los campos o revise que la cantidad no exceda el stock del producto.',
                     });
                 }
             });

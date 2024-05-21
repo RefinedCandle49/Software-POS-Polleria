@@ -182,6 +182,43 @@ public class ProductoDao {
         return listaProductos;
     }
 
+    public static List<Producto> listarProductosPagina(int start, int total) {
+        List<Producto> listaProductos = new ArrayList<Producto>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT prod.idProducto, cat.nombre as nombreCategoria, prod.nombre, prod.descripcion, prod.foto, prod.precio, prod.stock, prod.estado " +
+                            "FROM polloslocos.producto prod " +
+                            "INNER JOIN polloslocos.categoria cat ON prod.idCategoria = cat.idCategoria " +
+                            "WHERE prod.estado = 1 " +
+                            "ORDER BY prod.idProducto ASC " +
+                            "LIMIT ?, ?");
+            ps.setInt(1, start-1);
+            ps.setInt(2, total);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto prod = new Producto();
+                prod.setIdProducto(rs.getInt("idProducto"));
+                prod.setNombreCategoria(rs.getString("nombreCategoria"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setDescripcion(rs.getString("descripcion"));
+                prod.setFoto(rs.getString("foto"));
+                prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setEstado(rs.getInt("estado"));
+                listaProductos.add(prod);
+            }
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaProductos;
+    }
+
     public boolean validarProducto(String producto) {
         try {
             Connection con = getConnection();

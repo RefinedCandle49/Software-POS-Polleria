@@ -158,7 +158,7 @@
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaPollo}">
                                 <div class="product-card cont-product">
-                                    <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
+                                    <a href="#" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
                                         <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
@@ -172,15 +172,15 @@
                     </div>
 
                     <!-- PRODUCTOS SOPAS -->
-                    <div class="category-container" id="sopaContainer">    
+                    <div class="category-container" id="sopaContainer">
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaSopa}">
                                 <div class="product-card card cont-product">
-                                    <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
-                                        <img class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                    <a href="" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
-                                        <h5 class="fw-bold">${prod.getNombre()}</h5>
+                                        <h5 class="fw-bold">${prod.getNombre()}, ${prod.getIdProducto()}</h5>
                                         <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
                                         <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
@@ -194,8 +194,8 @@
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaBebida}">
                                 <div class="product-card card cont-product">
-                                    <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
-                                        <img class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                    <a href="" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
@@ -212,8 +212,8 @@
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaPostre}">
                                 <div class="product-card card cont-product">
-                                    <a href="<%=request.getContextPath()%>/controlCarrito?accion=AgregarCarrito&id=${prod.getIdProducto()}">
-                                        <img class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                    <a href="" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
@@ -231,7 +231,9 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <%--<script>
                             function alertBienvenida() {
                                 const url = new URLSearchParams(window.location.search);
                                 const alert = url.get('alert');
@@ -270,6 +272,29 @@
                                     }
                                 }
                             });
-        </script>
+        </script>--%>
+        <%--<script>
+            function agregarAlCarrito(idProducto) {
+                var urlBase = 'http://localhost:8080/POS-1.0-SNAPSHOT/';
+                var nuevaRuta = 'controlCarrito?accion=AgregarCarrito&id=' + idProducto;
+                var urlCompleta = urlBase + nuevaRuta;
+                
+                $.ajax({
+                    url: urlCompleta,
+                    type: 'GET',
+                    data: { id: idProducto },
+                    success: function(data) {
+                        // Actualizar la página con los cambios en el carrito
+                        // Por ejemplo, mostrar un mensaje de éxito o actualizar la cantidad de productos en el carrito
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error(textStatus, errorThrown);
+                        // Manejar el error, por ejemplo mostrando un mensaje al usuario
+                    }
+                });
+            }
+        </script>--%>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
     </body>
 </html>

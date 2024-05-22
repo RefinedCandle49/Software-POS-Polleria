@@ -1,4 +1,49 @@
+function agregarAlCarrito(idProducto) {
+    var URL = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    $.ajax({
+        url: URL + '/controlCarrito?accion=AgregarCarrito',
+        type: 'GET',
+        data: {id: idProducto},
+        success: function (data) {
+            // Mostrar notificación en la esquina inferior derecha
+            Toastify({
+                text: 'Producto agregado exitosamente',
+                duration: 2000, // Duración en milisegundos (2 segundos en este caso)
+                close: true,
+                gravity: 'bottom', // Cambiado a 'bottom' para ubicar en la esquina inferior
+                position: 'right', // Cambiado a 'right' para ubicar en la esquina derecha
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", // Color de fondo
+            }).showToast();
+            console.log('Producto agregado exitosamente');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus, errorThrown);
+            // Manejar el error, por ejemplo mostrando un mensaje al usuario
+            // alert('Hubo un problema al agregar el producto al carrito.');
+        }
+    });
+}
+
 $(document).ready(function () {
+
+
+
+    // function agregarAlCarrito(idProducto) {
+    //     $.ajax({
+    //         url: 'controlCarrito?accion=AgregarCarrito',
+    //         type: 'GET',
+    //         data: { id: idProducto },
+    //         success: function(data) {
+    //             // Actualizar la página con los cambios en el carrito
+    //             // Por ejemplo, mostrar un mensaje de éxito o actualizar la cantidad de productos en el carrito
+    //         },
+    //         error: function(jqXHR, textStatus, errorThrown) {
+    //             console.error(textStatus, errorThrown);
+    //             // Manejar el error, por ejemplo mostrando un mensaje al usuario
+    //         }
+    //     });
+    // }
+
 
     $('#buscar').click(function() {
         var idCliente = $('#idCliente').val();

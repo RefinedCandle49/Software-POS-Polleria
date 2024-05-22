@@ -8,11 +8,11 @@ function agregarAlCarrito(idProducto) {
             // Mostrar notificación en la esquina inferior derecha
             Toastify({
                 text: 'Producto agregado exitosamente',
-                duration: 2000, // Duración en milisegundos (2 segundos en este caso)
+                duration: 1500, // Duración en milisegundos (2 segundos en este caso)
                 close: true,
                 gravity: 'bottom', // Cambiado a 'bottom' para ubicar en la esquina inferior
                 position: 'right', // Cambiado a 'right' para ubicar en la esquina derecha
-                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", // Color de fondo
+                backgroundColor: "#40a251", // Color de fondo
             }).showToast();
             console.log('Producto agregado exitosamente');
         },

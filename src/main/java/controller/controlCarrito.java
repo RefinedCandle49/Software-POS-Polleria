@@ -188,7 +188,7 @@ public class controlCarrito extends HttpServlet {
                     idCliente = "00000001";
                 }
 
-                Venta venta = new Venta(idCliente, metodoPago, FechaHoraActual, 1, totalPagar, listaCarrito);
+                Venta venta = new Venta(idCliente, metodoPago, FechaHoraActual, 1, (totalPagar * 0.18) + totalPagar, listaCarrito);
                 int res = dao.generarVenta(venta);
                 request.getRequestDispatcher("controlCarrito?accion=ResumenVenta").forward(request, response);
                 break;

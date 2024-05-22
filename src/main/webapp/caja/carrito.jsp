@@ -208,14 +208,19 @@
                             DecimalFormat df = new DecimalFormat("#.##");
                     
                             String totalFormateado = df.format(totalPagar);
-            
+                            
+                            double IGV = Double.parseDouble(totalFormateado) * 0.18;
+                            
+                            String IGVFormateado = df.format(IGV);
+                            
+                            double totalConIgv = (Double.parseDouble(IGVFormateado) + Double.parseDouble(totalFormateado));
                     %>
 
                     <div class="text-end">
-                        <p>Subtotal: S/ <%=totalFormateado%>
-                        </p>
+                        <p>Subtotal: S/ <%=totalFormateado%></p>
+                        <p>IGV (18%): S/ <%=IGVFormateado%></p>
                         <hr class="my-2">
-                        <p style="font-weight:700">Total a pagar: S/ <%=totalFormateado%>
+                        <p style="font-weight:700">Total a pagar: S/ <%=totalConIgv%>
                         </p>
                         <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
                     </div>

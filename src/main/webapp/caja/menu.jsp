@@ -182,8 +182,8 @@
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}, ${prod.getIdProducto()}</h5>
                                         <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
-                                        <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
+                                    <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
                             </c:forEach>
                         </div>
@@ -200,8 +200,8 @@
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
                                         <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
-                                        <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
+                                    <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
                             </c:forEach>        
                         </div>
@@ -218,8 +218,8 @@
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
                                         <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
-                                        <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                     </div>
+                                    <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
                             </c:forEach>
                         </div>

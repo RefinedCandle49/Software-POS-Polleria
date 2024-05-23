@@ -275,27 +275,6 @@
                                 }
                             });
         </script>
-        <script>
-            function agregarAlCarrito(idProducto) {
-                var urlBase = 'http://localhost:8080/POS-1.0-SNAPSHOT/';
-                var nuevaRuta = 'controlCarrito?accion=AgregarCarrito&id=' + idProducto;
-                var urlCompleta = urlBase + nuevaRuta;
-                
-                $.ajax({
-                    url: urlCompleta,
-                    type: 'GET',
-                    data: { id: idProducto },
-                    success: function(data) {
-                        // Actualizar la página con los cambios en el carrito
-                        // Por ejemplo, mostrar un mensaje de éxito o actualizar la cantidad de productos en el carrito
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error(textStatus, errorThrown);
-                        // Manejar el error, por ejemplo mostrando un mensaje al usuario
-                    }
-                });
-            }
-        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
     </body>

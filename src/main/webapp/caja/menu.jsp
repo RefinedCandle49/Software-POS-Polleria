@@ -11,6 +11,7 @@
 <%@ page import="model.Producto" %>
 <%@page import="controller.controlCarrito" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -163,7 +164,8 @@
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        
+                                        <p class="card-text fw-bold">Precio: S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></p>
                                     </div>
                                     <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
@@ -181,7 +183,7 @@
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}, ${prod.getIdProducto()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        <p class="card-text fw-bold">Precio: S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></p>
                                     </div>
                                     <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
@@ -199,7 +201,7 @@
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        <p class="card-text fw-bold">Precio: S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></p>
                                     </div>
                                     <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
@@ -217,7 +219,7 @@
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
-                                        <p class="card-text fw-bold">Precio: S/ ${prod.getPrecio()}</p>
+                                        <p class="card-text fw-bold">Precio: S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></p>
                                     </div>
                                     <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>
                                 </div>
@@ -233,7 +235,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <%--<script>
+        <script>
                             function alertBienvenida() {
                                 const url = new URLSearchParams(window.location.search);
                                 const alert = url.get('alert');
@@ -272,8 +274,8 @@
                                     }
                                 }
                             });
-        </script>--%>
-        <%--<script>
+        </script>
+        <script>
             function agregarAlCarrito(idProducto) {
                 var urlBase = 'http://localhost:8080/POS-1.0-SNAPSHOT/';
                 var nuevaRuta = 'controlCarrito?accion=AgregarCarrito&id=' + idProducto;
@@ -293,7 +295,7 @@
                     }
                 });
             }
-        </script>--%>
+        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
     </body>

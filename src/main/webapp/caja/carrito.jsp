@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.Usuario, model.Cliente, dao.ClienteDao, java.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -115,14 +116,14 @@
                                         <tr>
                                             <td class="align-middle">${car.getIdProducto()}</td>
                                             <td class="align-middle producto">${car.getNombre()}</td>
-                                            <td style="text-wrap: nowrap;" class="align-middle">S/ ${car.getPrecio()}</td>
+                                            <td style="text-wrap: nowrap;" class="align-middle">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${car.getPrecio()}" /></td>
                                             <td class="align-middle">
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
                                                 <input onkeypress="return soloNumerosCantidad(event)" type="number" max="${car.getStock()}" min="1" step="1"
                                                        id="Cantidad" value="${car.getCantidad()}"
                                                        class="text-center">
                                             </td>
-                                            <td class="align-middle">S/ ${car.getSubtotal()}</td>
+                                            <td class="align-middle">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${car.getSubtotal()}" /></td>
                                             <td class="align-middle">
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
                                                 <a href="<%=request.getContextPath()%>/controlCarrito?accion=Delete&idp=${car.getIdProducto()}"
@@ -138,7 +139,10 @@
 
                         </div>
 
+<%--                    -------------------------------------------------------------------------------------------%>
+                        
 
+<%--                    -------------------------------------------------------------------------------------------%>
 
                         <script>
                             document.getElementById("limpiar").addEventListener("click", function () {
@@ -204,23 +208,25 @@
                     <%
                         if (request.getAttribute("totalPagar") != null) {
                             double totalPagar = Double.parseDouble(request.getAttribute("totalPagar").toString());
-                    
-                            DecimalFormat df = new DecimalFormat("#.##");
-                    
+                            
+                            DecimalFormat df = new DecimalFormat("#,###,##0.00");
+                            
                             String totalFormateado = df.format(totalPagar);
                             
                             double IGV = Double.parseDouble(totalFormateado) * 0.18;
                             
                             String IGVFormateado = df.format(IGV);
                             
-                            double totalConIgv = (Double.parseDouble(IGVFormateado) + Double.parseDouble(totalFormateado));
+                            String totalConIgv = String.valueOf(Double.parseDouble(IGVFormateado) + Double.parseDouble(totalFormateado));
+                            
+                            String totalConIgvFormateado = df.format(Double.parseDouble(totalConIgv));
                     %>
 
                     <div class="text-end">
                         <p>Subtotal: S/ <%=totalFormateado%></p>
                         <p>IGV (18%): S/ <%=IGVFormateado%></p>
                         <hr class="my-2">
-                        <p style="font-weight:700">Total a pagar: S/ <%=totalConIgv%>
+                        <p style="font-weight:700">Total a pagar: S/ <%=totalConIgvFormateado%>
                         </p>
                         <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
                     </div>
@@ -245,7 +251,6 @@
                 </ul>
             </div>
         </div>
-        <div></div>
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -316,7 +321,7 @@
                     // Mostrar SweetAlert de confirmación
                     // Simular impresión
                     setTimeout(function () {
-                        window.print();
+                        // window.print();
                     });
                 } else {
                     event.preventDefault();

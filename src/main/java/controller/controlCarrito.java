@@ -174,7 +174,7 @@ public class controlCarrito extends HttpServlet {
 
 
             case "RealizarVenta":
-                String idCliente;
+                String idCliente, nombreDisplay;
                 int estado, metodoPago;
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
                 VentaDao dao = new VentaDao();
@@ -183,6 +183,7 @@ public class controlCarrito extends HttpServlet {
                 String FechaHoraActual = (request.getParameter("FechaHoraActual"));
 
                 idCliente = request.getParameter("idCliente");
+                nombreDisplay = request.getParameter("nombreDisplay");
 
                 if (idCliente == null || idCliente.trim().isEmpty()) {
                     idCliente = "00000001";
@@ -190,13 +191,20 @@ public class controlCarrito extends HttpServlet {
 
                 Venta venta = new Venta(idCliente, metodoPago, FechaHoraActual, 1, (totalPagar * 0.18) + totalPagar, listaCarrito);
                 int res = dao.generarVenta(venta);
+
+                request.setAttribute("idCliente", idCliente);
+                request.setAttribute("FechaHoraActual", FechaHoraActual);
+                request.setAttribute("metodoPago", metodoPago);
+                request.setAttribute("nombreDisplay", nombreDisplay);
+                request.setAttribute("totalPagar", totalPagar);
                 request.getRequestDispatcher("controlCarrito?accion=ResumenVenta").forward(request, response);
                 break;
 
             case "ResumenVenta":
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
 //                request.getRequestDispatcher("caja/menu.jsp").forward(request, response);
-                response.sendRedirect("caja/menu.jsp");
+                request.getRequestDispatcher("caja/checkout.jsp").forward(request, response);
+//                response.sendRedirect("caja/checkout.jsp");
                 listaCarrito.clear();
                 break;
 

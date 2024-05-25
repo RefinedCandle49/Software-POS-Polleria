@@ -137,7 +137,9 @@
                                 <table class="table table-striped">
                                     <thead class="bg-dark text-light">
                                         <tr>
-                                            <th>ID</th>
+                                            <!-- th>N°</th -->
+                                            <th style="display: none">ID</th>
+                                            <th>Código</th>
                                             <th>Correo Electrónico</th>
                                             <th>Contraseña</th>
                                             <th>Rol</th>
@@ -145,9 +147,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${list}" var="user">
+                                        <c:forEach items="${list}" var="user" varStatus="status">
                                             <tr>
-                                                <td>${user.getIdUsuario()}</td>
+                                                <%-- td>${status.index + 1}</td --%>
+                                                <td style="display: none">${user.getIdUsuario()}</td>
+                                                <td>${user.getCodigo()}</td>
                                                 <td>${user.getEmail()}</td>
                                                 <td>
                                                     <input type="password" id="password_${user.getIdUsuario()}" name="password" value="${user.getPassword()}" style="background-color: transparent; border: none;" disabled>

@@ -165,8 +165,8 @@
                     </div>
 
                     <div class="text-center">
-                        <input type="submit" class="btn btn-dark" value="Registrar Producto">
-                        <a href="${pageContext.request.contextPath}/almacen/productos.jsp" class="btn btn-primary">Regresar</a>
+                        <input type="submit" class="btn btn-success" value="Registrar Producto">
+                        <a href="${pageContext.request.contextPath}/almacen/productos.jsp" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
                 

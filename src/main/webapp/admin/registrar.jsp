@@ -130,7 +130,7 @@
                                 <input type="hidden" name="estado" value="1">
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-dark" >Registrar</button>
+                                    <button type="submit" class="btn btn-succees" >Registrar Usuario</button>
                                     <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-primary">Regresar</a>
                                 </div>
                             </form>

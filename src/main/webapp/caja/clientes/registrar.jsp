@@ -137,8 +137,8 @@
                     <input type="hidden" name="estado" value="1">
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-dark" >Registrar</button>
-                        <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp" class="btn btn-primary">Regresar</a>
+                        <button type="submit" class="btn btn-success" >Registrar Cliente</button>
+                        <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp" class="btn btn-secondary">Regresar</a>
                     </div> 
                 </form>
             </div>

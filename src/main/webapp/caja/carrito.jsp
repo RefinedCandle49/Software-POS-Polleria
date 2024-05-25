@@ -95,8 +95,8 @@
 
                                 </div>
 
-                                <button type="button" class="btn btn-success" id="buscar">Buscar Cliente</button>
-                                <button type="button" class="btn btn-warning" id="limpiar">Limpiar</button>
+                                <button type="button" class="btn btn-primary" id="buscar">Buscar Cliente</button>
+                                <button type="button" class="btn btn-secondary" id="limpiar">Limpiar</button>
                                 <button type="button" class="btn btn-primary" id="generico">Genérico</button>
                             </div>
                             <HR>
@@ -124,11 +124,11 @@
                                                        class="text-center">
                                             </td>
                                             <td class="align-middle">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${car.getSubtotal()}" /></td>
-                                            <td class="align-middle">
+                                            <td class="align-middle">  
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
                                                 <a href="<%=request.getContextPath()%>/controlCarrito?accion=Delete&idp=${car.getIdProducto()}"
-                                                   id="btnDetele" class="">
-                                                    <i class="fa-solid fa-xmark fa-lg" style="color: #000000;"></i>
+                                                 id="btnDelete" class="bg-danger" style="font-size: large; border: 2px solid transparent; padding: 5px; border-radius: 3px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; width: 30px; height: 30px;">
+                                                <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -228,7 +228,7 @@
                         <hr class="my-2">
                         <p style="font-weight:700">Total a pagar: S/ <%=totalConIgvFormateado%>
                         </p>
-                        <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
+                        <%--                <a href="#" id="btnRealizarPago" class="btn btn-success text-center">Procesar venta</a>--%>
                     </div>
 
                     <% } else { %>
@@ -246,7 +246,7 @@
                 </c:if>
                 <ul class="list-unstyled">
                     <li class="text-center mt-5">
-                        <button id="regresar" class="btn btn-dark"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
+                        <button id="regresar" class="btn btn-secondary"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
                     </li>
                 </ul>
             </div>

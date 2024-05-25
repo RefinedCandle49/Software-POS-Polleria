@@ -108,11 +108,11 @@
                     </div>
                 </c:if>
                 
-                <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post">
+                <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post" onsubmit="return validarCaracteres(event)">
 
                     <div class="mb-3">
                         <label for="idCliente" class="form-label">DNI/RUC:</label>
-                        <input type="text" id="idCliente" name="idCliente" value="${param.idCliente != null ? param.idCliente : ''}" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" oninput="validarCaracteres()" required>
+                        <input type="text" id="idCliente" name="idCliente" value="${param.idCliente != null ? param.idCliente : ''}" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
                         <span id="errorLimiteDni" class="text-danger"></span>
                         <span id="errorSoloNumeros" class="text-danger"></span>
                     </div>
@@ -158,6 +158,7 @@
                 if(idCliValue.length !== 8 && idCliValue.length !== 11) {
                     mensajeVal.textContent = "El DNI/RUC solo debe tener 8 o 11 caracteres.";
                     idCli.style.border = "1px solid red";
+                    event.preventDefault();
                     return false;
                 }
                 

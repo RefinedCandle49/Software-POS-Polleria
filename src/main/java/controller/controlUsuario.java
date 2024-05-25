@@ -94,7 +94,7 @@ public class controlUsuario extends HttpServlet {
 
                 int resultRegistrar = UsuarioDao.registrarUsuario(userRegistrar);
 
-                if (resultRegistrar > 0) {
+                if (resultRegistrar > 0) {    
                     String registroExitoso = "Usuario registrado correctamente";
                     response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?registroExitoso=" + registroExitoso);
                 }
@@ -104,7 +104,7 @@ public class controlUsuario extends HttpServlet {
             return;
         }
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *

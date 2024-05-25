@@ -92,7 +92,7 @@ public class controlCliente extends HttpServlet {
                 String mensajeError = null;
 
                 if (cliDao.validarEmail(emailRegistrar)) {
-                    mensajeError = "Este correo electronico se encuentra en uso. Por favor, ingresa uno diferente.";
+                    mensajeError = "Este correo electrónico se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
                 if (cliDao.validarId(idClienteRegistrar)) {
@@ -101,7 +101,11 @@ public class controlCliente extends HttpServlet {
 
                 if (mensajeError != null) {
                     request.setAttribute("mensajeError", mensajeError);
-                    response.sendRedirect(request.getContextPath() + "/caja/clientes/registrar.jsp?mensajeError=" + mensajeError);
+                    request.setAttribute("idCliente", idClienteRegistrar);
+                    request.setAttribute("nombre", nombreRegistrar);
+                    request.setAttribute("apellido", apellidoRegistrar);
+                    request.setAttribute("email", emailRegistrar);
+                    request.getRequestDispatcher("caja/clientes/registrar.jsp").forward(request, response);
                     return;
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

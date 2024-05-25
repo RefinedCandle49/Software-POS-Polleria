@@ -12,10 +12,19 @@ public class Venta {
         this.total = total;
         this.detalleVenta = detalleVenta;
     }
-
+    
+    String codigo;
     String nombre;
     String apellido;
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
     public String getNombre() {
         return nombre;
     }

@@ -35,7 +35,7 @@ public class VentaDao {
             rs.next();
             idVenta = rs.getInt("idVenta");
             rs.close();
-
+            
             for (Carrito detalle : venta.getDetalleVenta()){
                 SQL = "INSERT INTO detalleventa (idVenta, idProducto, cantidad, subtotal) VALUES (?, ?, ?, ?)";
                 ps = con.prepareStatement(SQL);

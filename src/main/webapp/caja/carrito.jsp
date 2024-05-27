@@ -209,22 +209,28 @@
                         if (request.getAttribute("totalPagar") != null) {
                             double totalPagar = Double.parseDouble(request.getAttribute("totalPagar").toString());
                             
-                            DecimalFormat df = new DecimalFormat("#,###,##0.00");
+                            DecimalFormat df = new DecimalFormat("0.00");
+                            DecimalFormat df2 = new DecimalFormat("#,###,##0.00");
                             
                             String totalFormateado = df.format(totalPagar);
+                            
+                            String totalFormateadoView = df2.format(totalPagar);
                             
                             double IGV = Double.parseDouble(totalFormateado) * 0.18;
                             
                             String IGVFormateado = df.format(IGV);
+                            String IGVFormateadoView = df2.format(IGV);
                             
-                            String totalConIgv = String.valueOf(Double.parseDouble(IGVFormateado) + Double.parseDouble(totalFormateado));
+                            String totalConIgv = String.valueOf(IGV + Double.parseDouble(totalFormateado));
                             
-                            String totalConIgvFormateado = df.format(Double.parseDouble(totalConIgv));
+                            
+                            
+                            String totalConIgvFormateado = df2.format(Double.parseDouble(totalConIgv));
                     %>
-
+                    
                     <div class="text-end">
-                        <p>Subtotal: S/ <%=totalFormateado%></p>
-                        <p>IGV (18%): S/ <%=IGVFormateado%></p>
+                        <p>Subtotal: S/ <%=totalFormateadoView%></p>
+                        <p>IGV (18%): S/ <%=IGVFormateadoView%></p>
                         <hr class="my-2">
                         <p style="font-weight:700">Total a pagar: S/ <%=totalConIgvFormateado%>
                         </p>

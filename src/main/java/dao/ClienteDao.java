@@ -21,12 +21,13 @@ public class ClienteDao {
         List<Cliente> listaClientes = new ArrayList<Cliente>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idCliente, nombre, apellido, email, estado FROM cliente");
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente, documento, nombre, apellido, email, estado FROM cliente ORDER BY idCliente DESC");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Cliente cli = new Cliente();
-                cli.setIdCliente(rs.getString("idCliente"));
+                cli.setIdCliente(rs.getInt("idCliente"));
+                cli.setDocumento(rs.getString("documento"));
                 cli.setNombre(rs.getString("nombre"));
                 cli.setApellido(rs.getString("apellido"));
                 cli.setEmail(rs.getString("email"));
@@ -45,12 +46,12 @@ public class ClienteDao {
         Cliente cliente = null;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idCliente, nombre, apellido FROM cliente WHERE idCliente = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT documento, nombre, apellido FROM cliente WHERE documento = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 cliente = new Cliente();
-                cliente.setIdCliente(rs.getString("idCliente"));
+                cliente.setDocumento(rs.getString("documento"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setApellido(rs.getString("apellido"));
             }
@@ -64,8 +65,8 @@ public class ClienteDao {
         int estado = 0;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO cliente (idCliente,nombre,apellido,email,estado) VALUES (?,?,?,?,?)");
-            ps.setString(1, cli.getIdCliente());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO cliente (documento,nombre,apellido,email,estado) VALUES (?,?,?,?,?)");
+            ps.setString(1, cli.getDocumento());
             ps.setString(2, cli.getNombre());
             ps.setString(3, cli.getApellido());
             ps.setString(4, cli.getEmail());
@@ -78,11 +79,11 @@ public class ClienteDao {
         return estado;
     }
     
-    public boolean validarId(String idCliente) {
+    public boolean validarId(String documento) {
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM cliente WHERE idCliente=?");
-            ps.setString(1, idCliente);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM cliente WHERE documento=?");
+            ps.setString(1, documento);
             ResultSet rs = ps.executeQuery();
             return rs.next();
             

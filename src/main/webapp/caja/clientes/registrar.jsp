@@ -148,16 +148,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             function validarCaracteres() {
-                let idCli = document.getElementById("idCliente");
-                let idCliValue = idCli.value.trim();
+                let doc = document.getElementById("documento");
+                let docValue = doc.value.trim();
                 let mensajeVal = document.getElementById("errorLimiteDni");
                 
                 mensajeVal.textContent = "";
-                idCli.style.border = "1px solid #dee2e6";
+                doc.style.border = "1px solid #dee2e6";
                 
-                if(idCliValue.length !== 8 && idCliValue.length !== 11) {
+                if(docValue.length !== 8 && docValue.length !== 11) {
                     mensajeVal.textContent = "El DNI/RUC solo debe tener 8 o 11 caracteres.";
-                    idCli.style.border = "1px solid red";
+                    doc.style.border = "1px solid red";
                     event.preventDefault();
                     return false;
                 }
@@ -168,14 +168,14 @@
             function soloNumeros(evt){
                 let charCode = (evt.which) ? evt.which : event.keyCode;
                 let mensajeVal = document.getElementById("errorSoloNumeros");
-                let inputId = document.getElementById("idCliente");
+                let inputDoc = document.getElementById("documento");
                 
                 mensajeVal.textContent = "";
-                inputId.style.border = "1px solid #dee2e6";
+                inputDoc.style.border = "1px solid #dee2e6";
                 
                 if(charCode > 31 && (charCode < 48 || charCode > 57)) {
                     mensajeVal.textContent = "No se aceptan caracteres especiales o letras, solo números.";
-                    inputId.style.border = "1px solid red";
+                    inputDoc.style.border = "1px solid red";
                     return false;
                 }
                 return true;

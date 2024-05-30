@@ -116,7 +116,8 @@
                                 <table class="table table-striped">
                                     <thead class="table-dark">
                                         <tr>
-                                            <th>ID</th>
+                                            <th style="display: none">ID</th>
+                                            <th>CODIGO</th>
                                             <th>CLIENTE</th>
                                             <th>METODO DE PAGO</th>
                                             <th>HORA</th>
@@ -128,7 +129,8 @@
                                     <tbody>
                                         <c:forEach items="${list}" var="venta">
                                             <tr>
-                                                <td>${venta.getIdVenta()}</td>
+                                                <td style="display: none">${venta.getIdVenta()}</td>
+                                                <td>${venta.getCodigo()}</td>
                                                 <td>${venta.getNombre()} ${venta.getApellido()}</td>
                                                 <td>
                                                     <c:choose>

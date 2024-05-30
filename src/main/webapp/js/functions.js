@@ -58,19 +58,19 @@ $(document).ready(function () {
                     // Parsear el JSON recibido
                     var cliente = JSON.parse(data);
 
-                    // Mostrar los datos en el DOM
+                    // Mostrar los datos en el DOM  
                     $('#nombreDisplay').val(cliente.nombre + ' ' + cliente.apellido);
-                    //idcliente
+                    $('#idCliente').val(cliente.idCliente);
                 } catch (error) {
                     console.error(error);
                     $('#nombreDisplay').val('Cliente no encontrado');
-                    //idcliente
+                    $('#idCliente').val('');
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error(textStatus, errorThrown);
                 $('#nombreDisplay').val('Cliente no encontrado');
-                //idcliente
+                $('#idCliente').val('');
             }
         });
     });

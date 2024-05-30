@@ -213,7 +213,7 @@ public class controlCarrito extends HttpServlet {
                 break;
 
             case "BuscarCliente":
-                int idCliente1 = Integer.parseInt(request.getParameter("idCliente"));
+                int idCliente1 = Integer.parseInt(request.getParameter("documento")); //int idCliente1 = Integer.parseInt(request.getParameter("idCliente"));
                 Cliente cliente = ClienteDao.listarClientePorId(idCliente1);
                 response.setContentType("application/json");
                 PrintWriter out = response.getWriter();

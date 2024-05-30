@@ -156,7 +156,7 @@
                 doc.style.border = "1px solid #dee2e6";
                 
                 if(docValue.length !== 8 && docValue.length !== 11) {
-                    mensajeVal.textContent = "El DNI/RUC solo debe tener 8 o 11 caracteres.";
+                    mensajeVal.textContent = "Solo se permite el ingreso de 8 o 11 caracteres.";
                     doc.style.border = "1px solid red";
                     event.preventDefault();
                     return false;
@@ -174,7 +174,7 @@
                 inputDoc.style.border = "1px solid #dee2e6";
                 
                 if(charCode > 31 && (charCode < 48 || charCode > 57)) {
-                    mensajeVal.textContent = "No se aceptan caracteres especiales o letras, solo números.";
+                    mensajeVal.textContent = "Solo se permiten números.";
                     inputDoc.style.border = "1px solid red";
                     return false;
                 }
@@ -192,7 +192,7 @@
                 
                 if(!regex.test(key)){
                     evt.preventDefault();
-                    mensajeVal.textContent = "No se aceptan caracteres especiales o números, solo letras.";
+                    mensajeVal.textContent = "Solo se permiten letras.";
                     inputActual.style.border = "1px solid red";
                     
                     return false;

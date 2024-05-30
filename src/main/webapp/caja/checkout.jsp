@@ -46,7 +46,7 @@
                             <%= fechaFormateada %>
                         </p>
                         <p>NoCaja: 4251</p>
-                        <p>DNI/RUC: ${idCliente}
+                        <p>DNI/RUC: ${documento}
                         </p>
                         <p class="me-3">Cliente: ${nombreDisplay}
                         </p>

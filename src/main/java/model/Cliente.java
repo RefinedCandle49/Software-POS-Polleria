@@ -10,15 +10,23 @@ package model;
  */
 public class Cliente {
     
-    String idCliente, nombre, apellido, email;
-    int estado;
+    int idCliente, estado;
+    String documento, nombre, apellido, email;
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getNombre() {

@@ -70,10 +70,13 @@
                                     <div class="col">
                                         <p id="current-date"></p>
                                         <p>NoCaja: 4251</p>
+                                        
+                                        <!-- input para traer idCliente -->
+                                        
                                         <p><label style="white-space: nowrap;">
                                                 DNI/RUC:
-                                                <input maxlength="11" type="text" id="idCliente" name="idCliente"
-                                                       placeholder="Ingrese ID del Cliente" onkeypress="return soloNumeros(event)"
+                                                <input maxlength="11" type="text" id="documento" name="documento"
+                                                       placeholder="Ingrese el DNI/RUC del Cliente" onkeypress="return soloNumeros(event)"
                                                        value="00000001">
                                             </label></p>
                                         <p><label>
@@ -147,18 +150,22 @@
                         <script>
                             document.getElementById("limpiar").addEventListener("click", function () {
                                 // Limpiar el valor del input idCliente
-                                document.getElementById("idCliente").value = "";
+                                document.getElementById("documento").value = "";
 
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "";
+                                
+                                // idcliente
                             });
 
                             document.getElementById("generico").addEventListener("click", function () {
                                 // Limpiar el valor del input idCliente
-                                document.getElementById("idCliente").value = "00000001";
+                                document.getElementById("documento").value = "00000001";
 
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "CLIENTE VARIOS";
+                                
+                                // idcliente
                             });
                         </script>
                         <script>
@@ -351,21 +358,21 @@
             }, true);
         </script>
         <script>
-            const idClienteInput = document.getElementById("idCliente");
+            const documentoInput = document.getElementById("documento");
             const buscarBtn = document.getElementById("buscar");
             const limpiarBtn = document.getElementById("limpiar");
             const genericoBtn = document.getElementById("generico");
 
             buscarBtn.addEventListener("click", () => {
-                idClienteInput.readOnly = true;
+                documentoInput.readOnly = true;
             });
 
             genericoBtn.addEventListener("click", () => {
-                idClienteInput.readOnly = true;
+                documentoInput.readOnly = true;
             });
 
             limpiarBtn.addEventListener("click", () => {
-                idClienteInput.readOnly = false;
+                documentoInput.readOnly = false;
             });
 
             function soloNumeros(event) {

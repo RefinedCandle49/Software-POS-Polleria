@@ -213,8 +213,8 @@ public class controlCarrito extends HttpServlet {
                 break;
 
             case "BuscarCliente":
-                int idCliente1 = Integer.parseInt(request.getParameter("idCliente"));
-                Cliente cliente = ClienteDao.listarClientePorId(idCliente1);
+                String documento = request.getParameter("documento"); //int idCliente1 = Integer.parseInt(request.getParameter("idCliente"));
+                Cliente cliente = ClienteDao.listarClientePorId(documento);
                 response.setContentType("application/json");
                 PrintWriter out = response.getWriter();
                 out.println(new Gson().toJson(cliente));

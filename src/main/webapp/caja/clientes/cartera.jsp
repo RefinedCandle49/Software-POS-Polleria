@@ -124,7 +124,8 @@
                             <table class="table table-striped">
                                 <thead class="bg-dark text-light">
                                     <tr>
-                                        <th>ID</th>
+                                        <th style="display: none">ID</th>
+                                        <th>DNI/RUC</th>
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
                                         <th>Correo Electrónico</th>
@@ -134,7 +135,8 @@
                                 <tbody>
                                     <c:forEach items="${list}" var="cli">
                                         <tr>
-                                            <td>${cli.getIdCliente()}</td>
+                                            <td style="display: none">${cli.getIdCliente()}</td>
+                                            <td>${cli.getDocumento()}</td>
                                             <td>${cli.getNombre()}</td>
                                             <td>${cli.getApellido()}</td>
                                             <td>${cli.getEmail()}</td>

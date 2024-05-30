@@ -111,8 +111,8 @@
                 <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post" onsubmit="return validarCaracteres(event)">
 
                     <div class="mb-3">
-                        <label for="idCliente" class="form-label">DNI/RUC:</label>
-                        <input type="text" id="idCliente" name="idCliente" value="${param.idCliente != null ? param.idCliente : ''}" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
+                        <label for="documento" class="form-label">DNI/RUC:</label>
+                        <input type="text" id="documento" name="documento" value="${param.documento != null ? param.documento : ''}" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
                         <span id="errorLimiteDni" class="text-danger"></span>
                         <span id="errorSoloNumeros" class="text-danger"></span>
                     </div>

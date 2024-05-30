@@ -76,7 +76,7 @@
                                         <p><label style="white-space: nowrap;">
                                                 DNI/RUC:
                                                 <input maxlength="11" type="text" id="documento" name="documento"
-                                                       placeholder="Ingrese ID del Cliente" onkeypress="return soloNumeros(event)"
+                                                       placeholder="Ingrese el DNI/RUC del Cliente" onkeypress="return soloNumeros(event)"
                                                        value="00000001">
                                             </label></p>
                                         <p><label>

@@ -70,19 +70,30 @@
                                     <div class="col">
                                         <p id="current-date"></p>
                                         <p>NoCaja: 4251</p>
-                                        
-                                        <!-- input para traer idCliente -->
-                                        
-                                        <p><label style="white-space: nowrap;">
+
+                                        <p>
+                                            <label style="white-space: nowrap;">
                                                 DNI/RUC:
                                                 <input maxlength="11" type="text" id="documento" name="documento"
                                                        placeholder="Ingrese el DNI/RUC del Cliente" onkeypress="return soloNumeros(event)"
                                                        value="00000001">
-                                            </label></p>
-                                        <p><label>
+                                            </label>
+                                        </p>
+                                        
+                                        <p>
+                                            <label>
                                                 Cliente:
                                                 <input type="text" id="nombreDisplay" name="nombreDisplay" required>
-                                            </label></p>
+                                            </label>
+                                        </p>
+
+                                        <p>
+                                            <label>
+                                                idCliente:
+                                                <input type="text" id="idCliente" name="idCliente" required>
+                                            </label>
+                                        </p>
+                                        
                                     </div>
                                     <div class="col">
     
@@ -155,7 +166,8 @@
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "";
                                 
-                                // idcliente
+                                // Limpiar el valor del campo idCliente
+                                document.getElementById("idCliente").value = "";
                             });
 
                             document.getElementById("generico").addEventListener("click", function () {
@@ -165,7 +177,8 @@
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "CLIENTE VARIOS";
                                 
-                                // idcliente
+                                // Limpiar el valor del campo idCliente
+                                document.getElementById("idCliente").value = "1";
                             });
                         </script>
                         <script>

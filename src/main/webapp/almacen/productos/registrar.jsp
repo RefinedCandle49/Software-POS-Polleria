@@ -143,12 +143,19 @@
                             
                             <tr>
                                 <th>Precio:</th>
-                                <td><input type="number" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)"></td>
+                                <td>
+                                    <input type="number" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)">
+                                    <span id="errorSoloNumDecimales" class="text-danger"></span>
+                                </td>
                             </tr>
                             
                             <tr>
                                 <th>Stock:</th>
-                                <td><input type="text" maxlength="3" name="stock" class="form-control" required onkeypress="return soloNumeros(event)"></td>
+                                <td>
+                                    <input type="text" id="stock" maxlength="3" name="stock" class="form-control" required onkeypress="return soloNumeros(event)">
+                                    <span id="errorSoloNumeros" class="text-danger"></span>
+                                </td>
+                                
                             </tr>
                             
                             <tr>
@@ -210,7 +217,15 @@
 <script>
     function soloNumeros(evt){
         let charCode = (evt.which) ? evt.which : event.keyCode;
+        let mensajeVal = document.getElementById("errorSoloNumeros");
+        let inputStk = document.getElementById("stock");
+        
+        mensajeVal.textContent = "";
+        inputStk.style.border = "1px solid #dee2e6";
+        
         if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+            mensajeVal.textContent = "Solo se permiten números.";
+            inputStk.style.border = "1px solid red";
             return false;
         }
         return true;
@@ -219,6 +234,12 @@
 <script>
     function soloNumerosDecimales(evt){
         let charCode = (evt.which) ? evt.which : event.keyCode;
+        let mensajeVal = document.getElementById("errorSoloNumDecimales");
+        let inputPrec = document.getElementById("precio");
+        
+        mensajeVal.textContent = "";
+        inputPrec.style.border = "1px solid #dee2e6";
+        
         if ((charCode > 47 && charCode < 58) || charCode === 46) {
             let input = evt.target.value + String.fromCharCode(charCode);
             if (/^\d*\.?\d{0,2}$/.test(input)) {
@@ -227,6 +248,8 @@
                 return false;
             }
         } else {
+            mensajeVal.textContent = "Solo se permiten números y punto decimal.";
+            inputStk.style.border = "1px solid red";
             return false;
         }
     }

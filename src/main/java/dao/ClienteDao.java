@@ -42,12 +42,12 @@ public class ClienteDao {
         return listaClientes;
     }
 
-    public static Cliente listarClientePorId(int id){
+    public static Cliente listarClientePorId(String documento){
         Cliente cliente = null;
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT documento, nombre, apellido FROM cliente WHERE documento = ?");
-            ps.setInt(1, id);
+            ps.setString(1, documento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 cliente = new Cliente();

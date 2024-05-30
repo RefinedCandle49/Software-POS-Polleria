@@ -140,6 +140,13 @@
                                             <td>${cli.getNombre()}</td>
                                             <td>${cli.getApellido()}</td>
                                             <td>${cli.getEmail()}</td>
+                                            <%-- td>
+                                                <c:choose>
+                                                    <c:when test="${cli.getEmail() != null}">${cli.getEmail()}</c:when>
+                                                    <c:when test="${cli.getEmail() == null}">-</c:when>
+                                                    <c:otherwise>-</c:otherwise>
+                                                </c:choose> 
+                                            </td --%>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${cli.getEstado() == 0}">Inactivo</c:when>

@@ -46,11 +46,12 @@ public class ClienteDao {
         Cliente cliente = null;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT documento, nombre, apellido FROM cliente WHERE documento = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente, documento, nombre, apellido FROM cliente WHERE documento = ?");
             ps.setString(1, documento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("idCliente"));
                 cliente.setDocumento(rs.getString("documento"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setApellido(rs.getString("apellido"));

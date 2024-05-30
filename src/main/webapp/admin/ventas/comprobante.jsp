@@ -60,7 +60,7 @@
                             <%= fechaFormateada %>
                         </p>
                         <p>NoCaja: 4251</p>
-                        <p>DNI/RUC: <%= vent.getIdCliente()%>
+                        <p>DNI/RUC: <%= vent.getDocumento()%>
                         </p>
                         <p class="me-3">Cliente: <%= vent.getNombre()%>, <%= vent.getApellido()%>
                         </p>

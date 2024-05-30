@@ -174,20 +174,24 @@ public class controlCarrito extends HttpServlet {
 
 
             case "RealizarVenta":
-                String idCliente, nombreDisplay;
-                int estado, metodoPago;
+                String nombreDisplay;
+                int idCliente, estado, metodoPago;
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
                 VentaDao dao = new VentaDao();
                 metodoPago = Integer.parseInt(request.getParameter("metodoPago"));
 
                 String FechaHoraActual = (request.getParameter("FechaHoraActual"));
 
-                idCliente = request.getParameter("idCliente");
+                idCliente = Integer.parseInt(request.getParameter("idCliente"));
                 nombreDisplay = request.getParameter("nombreDisplay");
-
-                if (idCliente == null || idCliente.trim().isEmpty()) {
-                    idCliente = "00000001";
+                
+                if (idCliente == 0) {
+                    idCliente = 1;
                 }
+                
+                /*if (idCliente == null || idCliente.trim().isEmpty()) {
+                    idCliente = "00000001";
+                }*/
 
                 Venta venta = new Venta(idCliente, metodoPago, FechaHoraActual, 1, (totalPagar * 0.18) + totalPagar, listaCarrito);
                 int res = dao.generarVenta(venta);
@@ -203,6 +207,8 @@ public class controlCarrito extends HttpServlet {
             case "ResumenVenta":
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
 //                request.getRequestDispatcher("caja/menu.jsp").forward(request, response);
+                String documento1 = request.getParameter("documento");
+                request.setAttribute("documento", documento1);   
                 request.getRequestDispatcher("caja/checkout.jsp").forward(request, response);
 //                response.sendRedirect("caja/checkout.jsp");
                 listaCarrito.clear();
@@ -213,7 +219,7 @@ public class controlCarrito extends HttpServlet {
                 break;
 
             case "BuscarCliente":
-                String documento = request.getParameter("documento"); //int idCliente1 = Integer.parseInt(request.getParameter("idCliente"));
+                String documento = request.getParameter("documento");
                 Cliente cliente = ClienteDao.listarClientePorId(documento);
                 response.setContentType("application/json");
                 PrintWriter out = response.getWriter();

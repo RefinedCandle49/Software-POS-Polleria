@@ -139,7 +139,7 @@
                                         <tr>
                                             <!-- th>N°</th -->
                                             <th style="display: none">ID</th>
-                                            <th>Códigoooooooo</th>
+                                            <th>Código</th>
                                             <th>Correo Electrónico</th>
                                             <th>Contraseña</th>
                                             <th>Rol</th>

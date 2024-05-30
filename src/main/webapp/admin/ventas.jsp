@@ -117,10 +117,10 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th style="display: none">ID</th>
-                                            <th>CODIGO</th>
+                                            <th>CÓDIGO</th>
                                             <th>CLIENTE</th>
-                                            <th>METODO DE PAGO</th>
-                                            <th>HORA</th>
+                                            <th>MÉTODO DE PAGO</th>
+                                            <th>FECHA Y HORA</th>
                                             <th>TOTAL</th>
                                             <th></th>
                                         </tr>

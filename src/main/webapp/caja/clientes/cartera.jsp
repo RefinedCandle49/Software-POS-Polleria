@@ -126,10 +126,10 @@
                                     <tr>
                                         <th style="display: none">ID</th>
                                         <th>DNI/RUC</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Correo Electrónico</th>
-                                        <th>Estado</th>
+                                        <th>NOMBRES</th>
+                                        <th>APELLIDOS</th>
+                                        <th>CORREO ELECTRÓNICO</th>
+                                        <th>ESTADO</th>
                                     </tr>
                                 </thead>
                                 <tbody>

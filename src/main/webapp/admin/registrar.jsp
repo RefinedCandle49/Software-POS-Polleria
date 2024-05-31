@@ -100,9 +100,9 @@
                         <div>
                             <h1 class="fw-bold">REGISTRO DE USUARIO</h1>
                             
-                            <c:if test="${not empty param.mensajeError}">
+                            <c:if test="${not empty mensajeError}">
                                 <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
-                                    ${param.mensajeError}
+                                    ${mensajeError}
                                     <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                                 </div>
                             </c:if>
@@ -110,24 +110,24 @@
                             <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" required>
+                                    <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" value="${param.email != null ? param.email : ''}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" required>
+                                    <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" value="${param.password != null ? param.password : ''}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="rol" class="form-label">Rol:</label>
                                     <select class="form-select" id="rol" name="rol" required>
                                         <!-- BUSCAR MAMAMIA -->
                                         <option value="" disabled selected class="invisible">Seleccionar opción</option>
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Cajero">Cajero</option>
-                                        <option value="Almacenero">Almacenero</option>
+                                        <option value="Administrador" ${param.rol == "Administrador" ? "selected" : ""}>Administrador</option>
+                                        <option value="Cajero" ${param.rol == "Cajero" ? "selected" : ""}>Cajero</option>
+                                        <option value="Almacenero" ${param.rol == "Almacenero" ? "selected" : ""}>Almacenero</option>
                                     </select>
                                 </div>
 
-                                <input type="hidden" name="estado" value="1">
+                                <input type="hidden" name="estado" value="1" value="${param.estado != null ? param.estado : ''}">
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success" >Registrar Usuario</button>

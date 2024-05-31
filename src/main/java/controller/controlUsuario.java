@@ -76,12 +76,17 @@ public class controlUsuario extends HttpServlet {
                 String mensajeError = null;
 
                 if (userDao.validarEmail(emailRegistrar)) {
-                    mensajeError = "Este correo electronico se encuentra en uso. Por favor, ingresa uno diferente.";
+                    mensajeError = "Este correo electrónico se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
                 if (mensajeError != null) {
                     request.setAttribute("mensajeError", mensajeError);
-                    response.sendRedirect(request.getContextPath() + "/admin/registrar.jsp?mensajeError=" + mensajeError);
+                    request.setAttribute("email", emailRegistrar);
+                    request.setAttribute("password", passwordRegistrar);
+                    request.setAttribute("rol", rolRegistrar);
+                    request.setAttribute("estado", estadoRegistrar);
+                    request.getRequestDispatcher("admin/registrar.jsp").forward(request, response);
+                    //response.sendRedirect(request.getContextPath() + "/admin/registrar.jsp?mensajeError=" + mensajeError);
                     return;
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

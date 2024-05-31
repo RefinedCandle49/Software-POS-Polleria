@@ -18,6 +18,7 @@
             
             if (sesion == null || sesion.getAttribute("usuario") == null) {
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
+                System.out.println("Sin sesion");
                 return;
             }
             
@@ -102,9 +103,9 @@
                 <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data">
                     
                     <div class="container table-responsive">
-                        <c:if test="${not empty param.mensajeError}">
+                        <c:if test="${not empty mensajeError}">
                             <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
-                                    ${param.mensajeError}
+                                    ${mensajeError}
                                 <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                             </div>
                         </c:if>
@@ -115,8 +116,11 @@
                                 <td>
                                     <select name="idCategoria" class="form-select">
                                         <% for (Categoria categoria : categorias) { %>
-                                        <option value="<%= categoria.getIdCategoria() %>"><%= categoria.getNombre() %>
-                                        </option>
+                                            <option value="<%= categoria.getIdCategoria() %>" <%= (request.getAttribute("idCategoria") != null && request.getAttribute("idCategoria").toString().equals(String.valueOf(categoria.getIdCategoria()))) ? "selected" : "" %>>
+                                                <%= categoria.getNombre() %>
+                                            </option>
+                                        <%-- option value="<%= categoria.getIdCategoria() %>"><%= categoria.getNombre() %>
+                                        </option --%>
                                         <% } %>
                                     </select>
                                 </td>
@@ -126,11 +130,11 @@
                             <tbody>
                             <tr>
                                 <th>Nombre:</th>
-                                <td><input maxlength="50" type="text" name="nombre" class="form-control" required></td>
+                                <td><input maxlength="50" type="text" name="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required></td>
                             
                             <tr>
                                 <th>Descripción:</th>
-                                <td><textarea maxlength="200" name="descripcion" class="form-control" required></textarea></td>
+                                <td><textarea maxlength="200" name="descripcion" class="form-control" required>${param.descripcion != null ? param.descripcion : ''}</textarea></td>
                             </tr>
                             
                             <tr>
@@ -143,20 +147,27 @@
                             
                             <tr>
                                 <th>Precio:</th>
-                                <td><input type="number" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" required onkeypress="return soloNumerosDecimales(event)"></td>
+                                <td>
+                                    <input type="number" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" value="${param.precio != null ? param.precio : ''}" required onkeypress="return soloNumerosDecimales(event)">
+                                    <span id="errorSoloNumDecimales" class="text-danger"></span>
+                                </td>
                             </tr>
                             
                             <tr>
                                 <th>Stock:</th>
-                                <td><input type="text" maxlength="3" name="stock" class="form-control" required onkeypress="return soloNumeros(event)"></td>
+                                <td>
+                                    <input type="text" id="stock" maxlength="3" name="stock" class="form-control" value="${param.stock != null ? param.stock : ''}" required onkeypress="return soloNumeros(event)">
+                                    <span id="errorSoloNumeros" class="text-danger"></span>
+                                </td>
+                                
                             </tr>
                             
                             <tr>
                                 <th>Estado:</th>
                                 <td>
                                     <select name="estado" class="form-select">
-                                        <option value="1">Disponible</option>
-                                        <option value="0">No Disponible</option>
+                                        <option value="1" ${param.estado == 1 ? "selected" : ""}>Disponible</option>
+                                        <option value="0" ${param.estado == 0 ? "selected" : ""}>No Disponible</option>
                                     </select>
                                 </td>
                             </tr>
@@ -210,7 +221,15 @@
 <script>
     function soloNumeros(evt){
         let charCode = (evt.which) ? evt.which : event.keyCode;
+        let mensajeVal = document.getElementById("errorSoloNumeros");
+        let inputStk = document.getElementById("stock");
+        
+        mensajeVal.textContent = "";
+        inputStk.style.border = "1px solid #dee2e6";
+        
         if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+            mensajeVal.textContent = "Solo se permiten números.";
+            inputStk.style.border = "1px solid red";
             return false;
         }
         return true;
@@ -219,6 +238,12 @@
 <script>
     function soloNumerosDecimales(evt){
         let charCode = (evt.which) ? evt.which : event.keyCode;
+        let mensajeVal = document.getElementById("errorSoloNumDecimales");
+        let inputPrec = document.getElementById("precio");
+        
+        mensajeVal.textContent = "";
+        inputPrec.style.border = "1px solid #dee2e6";
+        
         if ((charCode > 47 && charCode < 58) || charCode === 46) {
             let input = evt.target.value + String.fromCharCode(charCode);
             if (/^\d*\.?\d{0,2}$/.test(input)) {
@@ -227,6 +252,8 @@
                 return false;
             }
         } else {
+            mensajeVal.textContent = "Solo se permiten números y punto decimal.";
+            inputStk.style.border = "1px solid red";
             return false;
         }
     }

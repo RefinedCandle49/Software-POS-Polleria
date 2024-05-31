@@ -249,6 +249,8 @@
             if (/^\d*\.?\d{0,2}$/.test(input)) {
                 return true;
             } else {
+                mensajeVal.textContent = "Solo se permiten dos números luego del punto decimal.";
+            inputPrec.style.border = "1px solid red";
                 return false;
             }
         } else {

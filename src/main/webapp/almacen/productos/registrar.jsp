@@ -253,7 +253,7 @@
             }
         } else {
             mensajeVal.textContent = "Solo se permiten números y punto decimal.";
-            inputStk.style.border = "1px solid red";
+            inputPrec.style.border = "1px solid red";
             return false;
         }
     }

@@ -21,11 +21,11 @@ public class controlProducto extends HttpServlet {
             case "registrar":
                 try{
 
-
                     Part filePart = request.getPart("image");
                     String fileName = filePart.getSubmittedFileName();
-                    String uploadDir = "C:/Users/valde/OneDrive - SERVICIO EDUCATIVO EMPRESARIALE S.A.C/IV Ciclo/Laboratorio de Integración IV Desarrollo y Prueba de Software/Tareas/POS/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
+                    String uploadDir = "C:/Users/daniel/Documents/GitHub/Software-POS-Polleria/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
                     File file = new File(uploadDir + fileName);
+                    
 
                     try (InputStream fileContent = filePart.getInputStream();
                          OutputStream out = new FileOutputStream(file)) {
@@ -34,10 +34,12 @@ public class controlProducto extends HttpServlet {
                         while ((read = fileContent.read(bytes)) != -1) {
                             out.write(bytes, 0, read);
                         }
+                        System.out.println("Imagen cargada");
                     }
 
                     String ruta ="http://localhost:8080/" + request.getContextPath() + "/cloud-images/" + fileName;
 //                    response.getWriter().println("Imagen subida exitosamente.");
+                        System.out.println("Imagen guardada");
 
                     int idCategoriaRegistrar = Integer.parseInt(request.getParameter("idCategoria"));
                     String nombreRegistrar = request.getParameter("nombre");
@@ -53,11 +55,21 @@ public class controlProducto extends HttpServlet {
 
                     if (productoDao.validarProducto(nombreRegistrar)) {
                         mensajeError = "Este nombre de producto se encuentra en uso. Por favor, ingresa uno diferente.";
+                        System.out.println("Nombre Repetido");
                     }
 
                     if (mensajeError != null) {
                         request.setAttribute("mensajeError", mensajeError);
-                        response.sendRedirect(request.getContextPath() + "/almacen/productos/registrar.jsp?mensajeError=" + mensajeError);
+                        request.setAttribute("idCategoria", idCategoriaRegistrar);
+                        request.setAttribute("nombre", nombreRegistrar);
+                        request.setAttribute("descripcion", descripcionRegistrar);
+                        request.setAttribute("foto", fotoRegistrar);
+                        request.setAttribute("precio", precioRegistrar);
+                        request.setAttribute("stock", stockRegistrar);
+                        request.setAttribute("estado", estadoRegistrar);
+                        System.out.println("Envio de parametros");
+                        request.getRequestDispatcher("almacen/productos/registrar.jsp").forward(request, response);
+                        System.out.println("Redireccion");
                         return;
                     }
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,8 +83,10 @@ public class controlProducto extends HttpServlet {
                     productoRegistrar.setStock(stockRegistrar);
                     productoRegistrar.setEstado(estadoRegistrar);
                     response.setContentType("text/html;charset=UTF-8");
+                    System.out.println("aquiiiiiiiiiiiiiii");
                     int resultRegistrar = ProductoDao.registrarProducto(productoRegistrar);
-
+                    System.out.println("o aquiiiiiiiiiiiiiii");
+                    
                     if (resultRegistrar > 0) {
                         String registroExitoso = "Producto registrado correctamente";
                         response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?registroExitoso=" + registroExitoso);

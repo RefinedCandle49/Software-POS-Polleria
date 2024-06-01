@@ -2,7 +2,7 @@ package model;
 
 public class Producto {
     int idProducto, idCategoria, estado, stock;
-    String nombre, descripcion, foto;
+    String codigo, nombre, descripcion, foto;
     double precio;
 
     String nombreCategoria;
@@ -19,6 +19,14 @@ public class Producto {
         return idProducto;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
     public String getFoto() {
         return foto;
     }

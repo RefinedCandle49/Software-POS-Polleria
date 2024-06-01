@@ -70,16 +70,30 @@
                                     <div class="col">
                                         <p id="current-date"></p>
                                         <p>NoCaja: 4251</p>
-                                        <p><label style="white-space: nowrap;">
+
+                                        <p>
+                                            <label style="white-space: nowrap;">
                                                 DNI/RUC:
-                                                <input maxlength="11" type="text" id="idCliente" name="idCliente"
-                                                       placeholder="Ingrese ID del Cliente" onkeypress="return soloNumeros(event)"
+                                                <input maxlength="11" type="text" id="documento" name="documento"
+                                                       placeholder="Ingrese el DNI/RUC del Cliente" onkeypress="return soloNumeros(event)"
                                                        value="00000001">
-                                            </label></p>
-                                        <p><label>
+                                            </label>
+                                        </p>
+                                        
+                                        <p>
+                                            <label>
                                                 Cliente:
                                                 <input type="text" id="nombreDisplay" name="nombreDisplay" required>
-                                            </label></p>
+                                            </label>
+                                        </p>
+
+                                        <p>
+                                            <label>
+                                                idCliente:
+                                                <input type="text" id="idCliente" name="idCliente" required>
+                                            </label>
+                                        </p>
+                                        
                                     </div>
                                     <div class="col">
     
@@ -95,8 +109,8 @@
 
                                 </div>
 
-                                <button type="button" class="btn btn-success" id="buscar">Buscar Cliente</button>
-                                <button type="button" class="btn btn-warning" id="limpiar">Limpiar</button>
+                                <button type="button" class="btn btn-primary" id="buscar">Buscar Cliente</button>
+                                <button type="button" class="btn btn-secondary" id="limpiar">Limpiar</button>
                                 <button type="button" class="btn btn-primary" id="generico">Genérico</button>
                             </div>
                             <HR>
@@ -124,11 +138,11 @@
                                                        class="text-center">
                                             </td>
                                             <td class="align-middle">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${car.getSubtotal()}" /></td>
-                                            <td class="align-middle">
+                                            <td class="align-middle">  
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
                                                 <a href="<%=request.getContextPath()%>/controlCarrito?accion=Delete&idp=${car.getIdProducto()}"
-                                                   id="btnDetele" class="">
-                                                    <i class="fa-solid fa-xmark fa-lg" style="color: #000000;"></i>
+                                                 id="btnDelete" class="bg-danger" style="font-size: large; border: 2px solid transparent; padding: 5px; border-radius: 3px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; width: 30px; height: 30px;">
+                                                <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -147,18 +161,24 @@
                         <script>
                             document.getElementById("limpiar").addEventListener("click", function () {
                                 // Limpiar el valor del input idCliente
-                                document.getElementById("idCliente").value = "";
+                                document.getElementById("documento").value = "";
 
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "";
+                                
+                                // Limpiar el valor del campo idCliente
+                                document.getElementById("idCliente").value = "";
                             });
 
                             document.getElementById("generico").addEventListener("click", function () {
                                 // Limpiar el valor del input idCliente
-                                document.getElementById("idCliente").value = "00000001";
+                                document.getElementById("documento").value = "00000001";
 
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "CLIENTE VARIOS";
+                                
+                                // Limpiar el valor del campo idCliente
+                                document.getElementById("idCliente").value = "1";
                             });
                         </script>
                         <script>
@@ -227,14 +247,14 @@
                             
                             String totalConIgvFormateado = df2.format(Double.parseDouble(totalConIgv));
                     %>
-
+                    
                     <div class="text-end">
                         <p>Subtotal: S/ <%=totalFormateadoView%></p>
                         <p>IGV (18%): S/ <%=IGVFormateadoView%></p>
                         <hr class="my-2">
                         <p style="font-weight:700">Total a pagar: S/ <%=totalConIgvFormateado%>
                         </p>
-                        <%--                <a href="#" id="btnRealizarPago" class="btn btn-warning text-center">Procesar venta</a>--%>
+                        <%--                <a href="#" id="btnRealizarPago" class="btn btn-success text-center">Procesar venta</a>--%>
                     </div>
 
                     <% } else { %>
@@ -252,7 +272,7 @@
                 </c:if>
                 <ul class="list-unstyled">
                     <li class="text-center mt-5">
-                        <button id="regresar" class="btn btn-dark"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
+                        <button id="regresar" class="btn btn-secondary"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
                     </li>
                 </ul>
             </div>
@@ -351,21 +371,21 @@
             }, true);
         </script>
         <script>
-            const idClienteInput = document.getElementById("idCliente");
+            const documentoInput = document.getElementById("documento");
             const buscarBtn = document.getElementById("buscar");
             const limpiarBtn = document.getElementById("limpiar");
             const genericoBtn = document.getElementById("generico");
 
             buscarBtn.addEventListener("click", () => {
-                idClienteInput.readOnly = true;
+                documentoInput.readOnly = true;
             });
 
             genericoBtn.addEventListener("click", () => {
-                idClienteInput.readOnly = true;
+                documentoInput.readOnly = true;
             });
 
             limpiarBtn.addEventListener("click", () => {
-                idClienteInput.readOnly = false;
+                documentoInput.readOnly = false;
             });
 
             function soloNumeros(event) {

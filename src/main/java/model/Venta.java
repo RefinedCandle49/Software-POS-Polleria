@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Venta {
 
-    public Venta(String idCliente, int metodoPago, String fechaHoraVenta, int estado, double total, List<Carrito> detalleVenta) {
+    public Venta(int idCliente, int metodoPago, String fechaHoraVenta, int estado, double total, List<Carrito> detalleVenta) {
         this.idCliente = idCliente;
         this.metodoPago = metodoPago;
         this.fechaHoraVenta = fechaHoraVenta;
@@ -12,10 +12,28 @@ public class Venta {
         this.total = total;
         this.detalleVenta = detalleVenta;
     }
-
+    
+    String codigo;
+    String documento;
     String nombre;
     String apellido;
+    
+    public String getCodigo() {
+        return codigo;
+    }
 
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -36,7 +54,7 @@ public class Venta {
     }
 
     int idVenta;
-    String idCliente;
+    int idCliente;
     int metodoPago, estado;
     double total;
 
@@ -48,11 +66,11 @@ public class Venta {
         this.idVenta = idVenta;
     }
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 

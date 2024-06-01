@@ -136,10 +136,11 @@ public class ProductoDao {
     }
 
     public static int registrarProducto(Producto prod) {
-        int estado = 0;
+        int idProducto = 0;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO producto(idCategoria, nombre, descripcion, foto, precio, stock, estado) VALUES (?, ?, ?,?,?,?,?) ");
+            String query = "INSERT INTO producto(idCategoria, nombre, descripcion, foto, precio, stock, estado) VALUES (?, ?, ?,?,?,?,?) ";
+            PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, prod.getIdCategoria());
             ps.setString(2, prod.getNombre());
             ps.setString(3, prod.getDescripcion());
@@ -147,12 +148,24 @@ public class ProductoDao {
             ps.setDouble(5, prod.getPrecio());
             ps.setInt(6, prod.getStock());
             ps.setInt(7, prod.getEstado());
-
-            estado = ps.executeUpdate();
+            ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                idProducto = rs.getInt(1);
+                
+                String codigo = "P" + String.format("%04d", idProducto);
+                
+                ps = con.prepareStatement("UPDATE producto SET codigo=? WHERE idProducto=?");
+                ps.setString(1, codigo);
+                ps.setInt(2, idProducto);
+                ps.executeUpdate();
+            }
+            
         } catch (Exception e) {
             System.out.println(e);
         }
-        return estado;
+        return idProducto;
     }
 
     public static List<Producto> listarProductos() {
@@ -160,13 +173,14 @@ public class ProductoDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT prod.idProducto, cat.nombre as nombreCategoria, prod.nombre, prod.descripcion, prod.foto, prod.precio, prod.stock, prod.estado FROM producto prod INNER JOIN categoria cat ON prod.idCategoria = cat.idCategoria WHERE prod.estado = 1 ORDER BY idProducto ASC");
+                    "SELECT prod.idProducto, cat.nombre as nombreCategoria, prod.codigo ,prod.nombre, prod.descripcion, prod.foto, prod.precio, prod.stock, prod.estado FROM producto prod INNER JOIN categoria cat ON prod.idCategoria = cat.idCategoria WHERE prod.estado = 1 ORDER BY idProducto DESC");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Producto prod = new Producto();
                 prod.setIdProducto(rs.getInt("idProducto"));
                 prod.setNombreCategoria(rs.getString("nombreCategoria"));
+                prod.setCodigo(rs.getString("codigo"));
                 prod.setNombre(rs.getString("nombre"));
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setFoto(rs.getString("foto"));

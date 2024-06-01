@@ -124,20 +124,29 @@
                             <table class="table table-striped">
                                 <thead class="bg-dark text-light">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Correo Electrónico</th>
-                                        <th>Estado</th>
+                                        <th style="display: none">ID</th>
+                                        <th>DNI/RUC</th>
+                                        <th>NOMBRES</th>
+                                        <th>APELLIDOS</th>
+                                        <th>CORREO ELECTRÓNICO</th>
+                                        <th>ESTADO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${list}" var="cli">
                                         <tr>
-                                            <td>${cli.getIdCliente()}</td>
+                                            <td style="display: none">${cli.getIdCliente()}</td>
+                                            <td>${cli.getDocumento()}</td>
                                             <td>${cli.getNombre()}</td>
                                             <td>${cli.getApellido()}</td>
                                             <td>${cli.getEmail()}</td>
+                                            <%-- td>
+                                                <c:choose>
+                                                    <c:when test="${cli.getEmail() != null}">${cli.getEmail()}</c:when>
+                                                    <c:when test="${cli.getEmail() == null}">-</c:when>
+                                                    <c:otherwise>-</c:otherwise>
+                                                </c:choose> 
+                                            </td --%>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${cli.getEstado() == 0}">Inactivo</c:when>

@@ -7,7 +7,7 @@ package model;
 public class Usuario {
 
     int idUsuario, estado;
-    String email, password, rol;
+    String codigo, email, password, rol; // Se agrego codigo
 
     public int getIdUsuario() {
         return idUsuario;
@@ -15,6 +15,14 @@ public class Usuario {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getEmail() {

@@ -81,7 +81,7 @@ public class controlCliente extends HttpServlet {
         switch (action) {
             case "registrar":
                 try {
-                String idClienteRegistrar = request.getParameter("idCliente");
+                String documentoRegistrar = request.getParameter("documento");
                 String nombreRegistrar = request.getParameter("nombre");
                 String apellidoRegistrar = request.getParameter("apellido");
                 String emailRegistrar = request.getParameter("email");
@@ -92,22 +92,26 @@ public class controlCliente extends HttpServlet {
                 String mensajeError = null;
 
                 if (cliDao.validarEmail(emailRegistrar)) {
-                    mensajeError = "Este correo electronico se encuentra en uso. Por favor, ingresa uno diferente.";
+                    mensajeError = "Este correo electrónico se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
-                if (cliDao.validarId(idClienteRegistrar)) {
+                if (cliDao.validarId(documentoRegistrar)) {
                     mensajeError = "Este DNI/RUC se encuentra en uso. Por favor, ingresa uno diferente.";
                 }
 
                 if (mensajeError != null) {
                     request.setAttribute("mensajeError", mensajeError);
-                    response.sendRedirect(request.getContextPath() + "/caja/clientes/registrar.jsp?mensajeError=" + mensajeError);
+                    request.setAttribute("documento", documentoRegistrar);
+                    request.setAttribute("nombre", nombreRegistrar);
+                    request.setAttribute("apellido", apellidoRegistrar);
+                    request.setAttribute("email", emailRegistrar);
+                    request.getRequestDispatcher("caja/clientes/registrar.jsp").forward(request, response);
                     return;
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 Cliente cliRegistrar = new Cliente();
-                cliRegistrar.setIdCliente(idClienteRegistrar);
+                cliRegistrar.setDocumento(documentoRegistrar);
                 cliRegistrar.setNombre(nombreRegistrar);
                 cliRegistrar.setApellido(apellidoRegistrar);
                 cliRegistrar.setEmail(emailRegistrar);

@@ -101,40 +101,44 @@
             <div class="col-md-4 p-5">
                 <h1 class="fw-bold text-center">REGISTRO DE CLIENTE</h1>
 
-                <c:if test="${not empty param.mensajeError}">
+                <c:if test="${not empty mensajeError}">
                     <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
-                        ${param.mensajeError}
+                        ${mensajeError}
                         <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                     </div>
                 </c:if>
                 
-                <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post">
+                <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post" onsubmit="return validarCaracteres(event)">
 
                     <div class="mb-3">
-                        <label for="idCliente" class="form-label">DNI/RUC:</label>
-                        <input type="text" id="idCliente" name="idCliente" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
+                        <label for="documento" class="form-label">DNI/RUC:</label>
+                        <input type="text" id="documento" name="documento" value="${param.documento != null ? param.documento : ''}" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
+                        <span id="errorLimiteDni" class="text-danger"></span>
+                        <span id="errorSoloNumeros" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event)" required>
+                        <input type="text" id="nombre" name="nombre" value="${param.nombre != null ? param.nombre : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" required>
+                        <span id="errorSoloLetrasNombre" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event)" required>
+                        <input type="text" id="apellido" name="apellido" value="${param.apellido != null ? param.apellido : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" required>
+                        <span id="errorSoloLetrasApellido" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" id="email" name="email" class="form-control" minlength="10"  maxlength="80" required>
+                        <input type="email" id="email" name="email" value="${param.email != null ? param.email : ''}" class="form-control" minlength="10"  maxlength="80" required>
                     </div>
                     
                     <input type="hidden" name="estado" value="1">
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-dark" >Registrar</button>
-                        <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp" class="btn btn-primary">Regresar</a>
+                        <button type="submit" class="btn btn-success" >Registrar Cliente</button>
+                        <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp" class="btn btn-secondary">Regresar</a>
                     </div> 
                 </form>
             </div>
@@ -143,27 +147,62 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
+            function validarCaracteres() {
+                let doc = document.getElementById("documento");
+                let docValue = doc.value.trim();
+                let mensajeVal = document.getElementById("errorLimiteDni");
+                
+                mensajeVal.textContent = "";
+                doc.style.border = "1px solid #dee2e6";
+                
+                if(docValue.length !== 8 && docValue.length !== 11) {
+                    mensajeVal.textContent = "Solo se permite el ingreso de 8 o 11 caracteres.";
+                    doc.style.border = "1px solid red";
+                    event.preventDefault();
+                    return false;
+                }
+                
+                return true;
+            }
+            
             function soloNumeros(evt){
                 let charCode = (evt.which) ? evt.which : event.keyCode;
+                let mensajeVal = document.getElementById("errorSoloNumeros");
+                let inputDoc = document.getElementById("documento");
+                
+                mensajeVal.textContent = "";
+                inputDoc.style.border = "1px solid #dee2e6";
+                
                 if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    mensajeVal.textContent = "Solo se permiten números.";
+                    inputDoc.style.border = "1px solid red";
                     return false;
                 }
                 return true;
             }
             
-            function soloLetras(evt){
+            function soloLetras(evt, error){
                 let regex = /^[a-zA-Z\s]*$/;
                 let key = String.fromCharCode(!evt.charCode ? evt.which : evt.charCode);
+                let mensajeVal = document.getElementById(error);
+                let inputActual = evt.target;
+                
+                mensajeVal.textContent = "";
+                inputActual.style.border = "1px solid #dee2e6";
+                
                 if(!regex.test(key)){
                     evt.preventDefault();
+                    mensajeVal.textContent = "Solo se permiten letras.";
+                    inputActual.style.border = "1px solid red";
+                    
                     return false;
                 }
             }
-            
+
             function cerrarMensaje() {
                 let mensajeError = document.getElementById("mensajeError");
                 mensajeError.style.display = "none";
-                window.location.href = "${pageContext.request.contextPath}/caja/clientes/registrar.jsp"
+                window.location.href = "${pageContext.request.contextPath}/caja/clientes/registrar.jsp";
             }
         </script>
     </body>

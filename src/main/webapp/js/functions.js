@@ -46,11 +46,11 @@ $(document).ready(function () {
 
 
     $('#buscar').click(function() {
-        var idCliente = $('#idCliente').val();
+        var documento = $('#documento').val();
         $.ajax({
             url: 'controlCarrito?accion=BuscarCliente',
             type: 'GET',
-            data: { idCliente: idCliente },
+            data: { documento: documento },
             success: function(data) {
                 console.log(data);
 
@@ -58,16 +58,19 @@ $(document).ready(function () {
                     // Parsear el JSON recibido
                     var cliente = JSON.parse(data);
 
-                    // Mostrar los datos en el DOM
+                    // Mostrar los datos en el DOM  
                     $('#nombreDisplay').val(cliente.nombre + ' ' + cliente.apellido);
+                    $('#idCliente').val(cliente.idCliente);
                 } catch (error) {
                     console.error(error);
                     $('#nombreDisplay').val('Cliente no encontrado');
+                    $('#idCliente').val('');
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error(textStatus, errorThrown);
                 $('#nombreDisplay').val('Cliente no encontrado');
+                $('#idCliente').val('');
             }
         });
     });

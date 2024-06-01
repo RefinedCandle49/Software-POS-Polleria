@@ -123,8 +123,9 @@
                         <table class="table table-bordered container" border="1">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>ID</th>
+                                    <th style="display: none">ID</th>
                                     <th>CATEGORÍA</th>
+                                    <th>CÓDIGO</th>
                                     <th>NOMBRE</th>
                                     <th>DESCRIPCIÓN</th>
                                     <th>FOTO</th>
@@ -138,13 +139,14 @@
                             <tbody>
                                 <c:forEach items="${list}" var="prod">
                                     <tr>
-                                        <td>${prod.getIdProducto()}</td>
+                                        <td style="display: none">${prod.getIdProducto()}</td>
                                         <td>${prod.getNombreCategoria()}</td>
+                                        <td>${prod.getCodigo()}</td>
                                         <td>${prod.getNombre()}</td>
                                         <td>${prod.getDescripcion()}</td>
                                         <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""
                                                  width="50"></td>
-                                        <td>${prod.getPrecio()}</td>
+                                        <td>S/. ${prod.getPrecio()}</td>
                                         <td>${prod.getStock()}</td>
                                         <td>
                                             <c:choose>

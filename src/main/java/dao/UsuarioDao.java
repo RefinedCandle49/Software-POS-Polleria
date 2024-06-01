@@ -39,12 +39,13 @@ public class UsuarioDao {
         List<Usuario> listaUsuarios = new ArrayList<Usuario>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, email, password, rol, estado FROM usuario");
+            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario ORDER BY idUsuario DESC");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Usuario user = new Usuario();
                 user.setIdUsuario(rs.getInt("idUsuario"));
+                user.setCodigo(rs.getString("codigo"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setRol(rs.getString("rol"));
@@ -57,24 +58,53 @@ public class UsuarioDao {
         }
         return listaUsuarios;
     }
-
+    
+    // Registro actualizado
     public static int registrarUsuario(Usuario usu) {
-        int estado = 0;
+        int idRegistrado = 0;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO usuario (email,password,rol,estado) VALUES (?,?,?,?)");
+            String query = "INSERT INTO usuario (email,password,rol,estado) VALUES (?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, usu.getEmail());
             ps.setString(2, usu.getPassword());
             ps.setString(3, usu.getRol());
             ps.setInt(4, usu.getEstado());
-            estado = ps.executeUpdate();
-
+            ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                idRegistrado = rs.getInt(1);
+                
+                String codigo = "U" + String.format("%04d", idRegistrado);
+                
+                ps = con.prepareStatement("UPDATE usuario SET codigo=? WHERE idUsuario=?");
+                ps.setString(1, codigo);
+                ps.setInt(2, idRegistrado);
+                ps.executeUpdate();
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return estado;
+        return idRegistrado;
     }
-
+    
+    // Actualizar registro para insertar codigo
+    /*public static int AgregarCodigo(int idUsuario, String code) {
+        int estado = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE usuario SET codigo=? WHERE idUsuario=?");
+            ps.setString(1, code);
+            ps.setInt(2, idUsuario);
+            estado = ps.executeUpdate();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return estado;
+    }*/
+    
     public boolean validarEmail(String email) {
         try {
             Connection con = getConnection();

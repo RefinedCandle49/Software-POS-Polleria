@@ -80,7 +80,7 @@ public class VentaDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=0 OR vent.estado=1 ORDER BY idVenta DESC;");
+                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 ORDER BY idVenta DESC;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -102,7 +102,50 @@ public class VentaDao {
 
         return listaVentas;
     }
+    
+    public static int anularVenta(Venta vent) {
+        int est = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE venta SET estado=? WHERE idVenta=?");
+            ps.setInt(1, vent.getEstado());
+            ps.setInt(2, vent.getIdVenta());
+            est = ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return est;
+    }
+    
+    public static List<Venta> listarVentasAnuladas() {
+        List<Venta> ventasAnuladas = new ArrayList<Venta>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=0 ORDER BY idVenta DESC;");
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setIdVenta(rs.getInt("idVenta"));
+                vent.setCodigo(rs.getString("codigo"));
+                vent.setNombre(rs.getString("nombre"));
+                vent.setApellido(rs.getString("apellido"));
+                vent.setMetodoPago(rs.getInt("metodoPago"));
+                vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
+                vent.setEstado(rs.getInt("estado"));
+                vent.setTotal(rs.getDouble("total"));
+                ventasAnuladas.add(vent);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return ventasAnuladas;
+    }
+    
     public static Venta obtenerVentaPorId(int idVenta) {
         Venta venta = null;
         try {

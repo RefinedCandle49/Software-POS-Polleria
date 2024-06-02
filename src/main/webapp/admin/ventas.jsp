@@ -107,12 +107,19 @@
                     <section>
                         <h1 class="fw-bold">PANEL DE VENTAS</h1>
                         
+                        <div class="d-flex align-items-center justify-content-end">
+                            <a href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp" class="link-register text-dark pb-2">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21v-16m2 -2h10a2 2 0 0 1 2 2v10m0 4.01v1.99l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M11 7l4 0" /><path d="M9 11l2 0" /><path d="M13 15l2 0" /><path d="M15 11l0 .01" /><path d="M3 3l18 18" /></svg>
+                                <span class="ms-1">Ventas Anuladas</span>
+                            </a>
+                        </div>
+                        
                         <c:if test="${empty list}">
                             <span>¡Hola! Parece que esta tabla está vacía en este momento.</span>
                         </c:if>
 
                         <c:if test="${not empty list}">
-                            <div class="table-responsive mt-5">
+                            <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead class="table-dark">
                                         <tr>
@@ -122,7 +129,8 @@
                                             <th>MÉTODO DE PAGO</th>
                                             <th>FECHA Y HORA</th>
                                             <th>TOTAL</th>
-                                            <th></th>
+                                            <th>MÁS DETALLES</th>
+                                            <th>ACCIONES</th>
                                         </tr>
                                     </thead>
 
@@ -142,19 +150,22 @@
                                                 <td>${venta.getFechaHoraVenta()}</td>
                                                 <td>${venta.getTotal()}</td>
 
-                                                <%-- <td>
-                                                    <form action="${pageContext.request.contextPath}/ControlPedido"
-                                                          method="post">
-                                                        <input type="hidden" name="idPedido" value="${venta.getIdVenta()}">
-                                                        <input type="hidden" name="newEstado" value="4">
-                                                          <div class="d-grid gap-2 col-12 mx-auto">
-                                                            <button class="align-middle btn btn-danger" type="submit">Cancelar
-                                                        </button>
-                                                        </div> 
-                                                    </form>
-                                                </td> --%>
+                                                
                                                 <td><a href="${pageContext.request.contextPath}/admin/ventas/comprobante.jsp?idVenta=${venta.getIdVenta()}"><i class="mt-2 fa-solid fa-eye fa-xl" style="color: #000000"></i></a></td>
-
+                                                    
+                                                <td>
+                                                    <form action="${pageContext.request.contextPath}/controlVenta" method="post" class="m-0">
+                                                        <input type="hidden" name="idVenta" value="${venta.getIdVenta()}">
+                                                        <input type="hidden" name="newEstado" value="0">
+                                                            
+                                                        <div class="">
+                                                            <button class="align-middle btn btn-danger" type="submit" style="padding: 0px 20px">
+                                                                Anular
+                                                            </button>
+                                                        </div>  
+                                                    </form>
+                                                </td>
+                                                
                                                 <%--  <td>
                                                     <a class="col-12 mx-auto align-middle btn btn-secondary" href="${pageContext.request.contextPath}/admin/detallePedido.jsp?idPedido=${venta.getIdVenta()}">
                                                        Más Detalles</a>

@@ -34,8 +34,9 @@
                 <h1>POLLOS LOCOS</h1>
                 <h2>Pollería Pollos Locos S.A.C</h2>
                 <h3>Av. JAVIER PRADO ESTE NRO. 6210 INT. 1201 URB. RIVERA DE MONTERRICO LA MOLINA LIMA - LIMA</h3>
-                <H3>BOLETA DE VENTA ELECTRÓNICA</H3>
-                <HR>
+                <h3>BOLETA DE VENTA ELECTRÓNICA</h3>
+                <h3>${res}</h3>
+                <hr>
             </div>
             
             <div class="container">
@@ -45,7 +46,6 @@
                             Fecha actual:
                             <%= fechaFormateada %>
                         </p>
-                        <p>NoCaja: 4251</p>
                         <p>DNI/RUC: ${documento}
                         </p>
                         <p class="me-3">Cliente: ${nombreDisplay}
@@ -56,8 +56,6 @@
                             Hora actual:
                             <%= horaFormateada %>
                         </p>
-                        
-                        <p>Tda No. : 227</p>
                     </div>
                 </div>
                 

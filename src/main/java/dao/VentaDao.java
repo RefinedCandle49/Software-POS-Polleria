@@ -18,9 +18,10 @@ public class VentaDao {
     PreparedStatement ps;
     ResultSet rs;
 
-    public int generarVenta(Venta venta){
-        int idVenta;
+    public String generarVenta(Venta venta){
+        int idVenta = 0;
         int estado = 0;
+        String codigo = "";
         try {
             Connection con = getConnection();
             ps = con.prepareStatement("INSERT INTO venta (idCliente, metodoPago, fechaHoraVenta, estado, total) VALUES (?, ?, ?, ?, ?)");
@@ -38,17 +39,25 @@ public class VentaDao {
             idVenta = rs.getInt("idVenta");
             rs.close();
             
+            
             // Generar codigo
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String fechaActual = sdf.format(new Date());
             
-            String codigo = "V-" + fechaActual + "-" + idVenta;
+            codigo = "V-" + fechaActual + "-" + idVenta;
             
             ps = con.prepareStatement("UPDATE venta SET codigo =? WHERE idVenta=?");
             ps.setString(1, codigo);
             ps.setInt(2, idVenta);
             estado = ps.executeUpdate();
-
+            
+            /*ps = con.prepareStatement("SELECT codigo FROM venta WHERE idVenta=?");
+            ps.setInt(1, idVenta);
+            estado = ps.executeUpdate();
+            if (rs.next()) {
+                Venta vent = new Venta();
+                vent.setCodigo(rs.getString("codigo"));
+            }*/
             
             for (Carrito detalle : venta.getDetalleVenta()){
                 SQL = "INSERT INTO detalleventa (idVenta, idProducto, cantidad, subtotal) VALUES (?, ?, ?, ?)";
@@ -72,7 +81,7 @@ public class VentaDao {
         } catch (Exception e){
             System.out.println(e);
         }
-        return estado;
+        return codigo;
     }
 
     public static List<Venta> listarVentas() {

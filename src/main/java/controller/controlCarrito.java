@@ -174,7 +174,7 @@ public class controlCarrito extends HttpServlet {
 
 
             case "RealizarVenta":
-                String nombreDisplay;
+                String nombreDisplay, codigo;
                 int idCliente, estado, metodoPago;
                 listaCarrito = (List<Carrito>) sessionCart.getAttribute("carrito");
                 VentaDao dao = new VentaDao();
@@ -183,6 +183,7 @@ public class controlCarrito extends HttpServlet {
                 String FechaHoraActual = (request.getParameter("FechaHoraActual"));
 
                 idCliente = Integer.parseInt(request.getParameter("idCliente"));
+                //codigo = request.getParameter("codigo");
                 nombreDisplay = request.getParameter("nombreDisplay");
                 
                 if (idCliente == 0) {
@@ -194,9 +195,11 @@ public class controlCarrito extends HttpServlet {
                 }*/
 
                 Venta venta = new Venta(idCliente, metodoPago, FechaHoraActual, 1, (totalPagar * 0.18) + totalPagar, listaCarrito);
-                int res = dao.generarVenta(venta);
+                String res = dao.generarVenta(venta);
+                request.setAttribute("res", res);
 
                 request.setAttribute("idCliente", idCliente);
+                
                 request.setAttribute("FechaHoraActual", FechaHoraActual);
                 request.setAttribute("metodoPago", metodoPago);
                 request.setAttribute("nombreDisplay", nombreDisplay);

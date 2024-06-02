@@ -69,7 +69,6 @@
                                 <div class="row">
                                     <div class="col">
                                         <p id="current-date"></p>
-                                        <p>NoCaja: 4251</p>
 
                                         <p>
                                             <label style="white-space: nowrap;">
@@ -89,8 +88,7 @@
 
                                         <p>
                                             <label>
-                                                idCliente:
-                                                <input type="text" id="idCliente" name="idCliente" required>
+                                                <input type="hidden" id="idCliente" name="idCliente" required>
                                             </label>
                                         </p>
                                         
@@ -101,7 +99,7 @@
     
                                         <p id="current-time"></p>
                                         
-                                        <p>Tda No. : 227</p>
+
                                     </div>
 
                                 </div>

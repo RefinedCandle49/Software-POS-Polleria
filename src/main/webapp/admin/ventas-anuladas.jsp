@@ -1,9 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%-- 
+    Document   : ventas-anuladas
+    Created on : 31 may. 2024, 20:48:11
+    Author     : daniel
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Usuario, dao.UsuarioDao, model.Venta, dao.VentaDao, java.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -12,7 +19,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
-        <title>Ventas | Pollos Locos</title>
+        <title>Ventas Anuladas | Pollos Locos</title>
     </head>
     <body>
         <%
@@ -52,12 +59,13 @@
         }
         %>
         <%
-            List<Venta> milista = VentaDao.listarVentas();
+            List<Venta> milista = VentaDao.listarVentasAnuladas();
             request.setAttribute("list", milista);
         %>
 
         <div class="container-fluid">
             <div class="row flex-nowrap">
+
                 <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                     <nav class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
                         <div class="w-100 text-center text-light">
@@ -102,18 +110,18 @@
                         </div>
                     </nav>
                 </header>
-                
+
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
                     <section>
-                        <h1 class="fw-bold">PANEL DE VENTAS</h1>
+                        <h1 class="fw-bold">PANEL DE VENTAS ANULADAS</h1>
                         
                         <div class="d-flex align-items-center justify-content-end">
-                            <a href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp" class="link-register text-dark pb-2">
-                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21v-16m2 -2h10a2 2 0 0 1 2 2v10m0 4.01v1.99l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M11 7l4 0" /><path d="M9 11l2 0" /><path d="M13 15l2 0" /><path d="M15 11l0 .01" /><path d="M3 3l18 18" /></svg>
-                                <span class="ms-1">Ventas Anuladas</span>
+                            <a href="${pageContext.request.contextPath}/admin/ventas.jsp" class="link-register text-dark pb-2">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" /></svg>
+                                <span class="ms-1">Ventas Registradas</span>
                             </a>
                         </div>
-                        
+
                         <c:if test="${empty list}">
                             <span>¡Hola! Parece que esta tabla está vacía en este momento.</span>
                         </c:if>
@@ -130,7 +138,7 @@
                                             <th>FECHA Y HORA</th>
                                             <th>TOTAL</th>
                                             <th>MÁS DETALLES</th>
-                                            <th>ACCIONES</th>
+                                            <!-- th>ACCIONES</th -->
                                         </tr>
                                     </thead>
 
@@ -150,26 +158,24 @@
                                                 <td>${venta.getFechaHoraVenta()}</td>
                                                 <td>${venta.getTotal()}</td>
 
-                                                
-                                                <td><a href="${pageContext.request.contextPath}/admin/ventas/comprobante.jsp?idVenta=${venta.getIdVenta()}"><i class="mt-2 fa-solid fa-eye fa-xl" style="color: #000000"></i></a></td>
-                                                    
+
                                                 <td>
-                                                    <form action="${pageContext.request.contextPath}/controlVenta" method="post" class="m-0">
+                                                    <a href="${pageContext.request.contextPath}/admin/ventas/comprobante.jsp?idVenta=${venta.getIdVenta()}"><i class="mt-2 fa-solid fa-eye fa-xl" style="color: #000000"></i></a>
+                                                </td>
+
+                                                <%-- td>
+                                                    <form action="${pageContext.request.contextPath}/controlVenta"
+                                                          method="post">
                                                         <input type="hidden" name="idVenta" value="${venta.getIdVenta()}">
                                                         <input type="hidden" name="newEstado" value="0">
-                                                            
-                                                        <div class="">
-                                                            <button class="align-middle btn btn-danger" type="submit" style="padding: 0px 20px">
+                                                        <div class="d-grid gap-2 col-12 mx-auto">
+                                                            <button class="align-middle btn btn-danger" type="submit">
                                                                 Anular
+
                                                             </button>
-                                                        </div>  
+                                                        </div> 
                                                     </form>
-                                                </td>
-                                                
-                                                <%--  <td>
-                                                    <a class="col-12 mx-auto align-middle btn btn-secondary" href="${pageContext.request.contextPath}/admin/detallePedido.jsp?idPedido=${venta.getIdVenta()}">
-                                                       Más Detalles</a>
-                                                </td> --%>
+                                                </td --%>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -178,6 +184,7 @@
                         </c:if>
                     </section>           
                 </main>
+
             </div>
         </div>
     </body>

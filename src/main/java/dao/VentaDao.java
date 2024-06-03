@@ -18,7 +18,7 @@ public class VentaDao {
     PreparedStatement ps;
     ResultSet rs;
 
-    public String generarVenta(Venta venta){
+    public String generarVenta(Venta venta) {
         int idVenta = 0;
         int estado = 0;
         String codigo = "";
@@ -38,19 +38,18 @@ public class VentaDao {
             rs.next();
             idVenta = rs.getInt("idVenta");
             rs.close();
-            
-            
+
             // Generar codigo
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String fechaActual = sdf.format(new Date());
-            
+
             codigo = "V-" + fechaActual + "-" + idVenta;
-            
+
             ps = con.prepareStatement("UPDATE venta SET codigo =? WHERE idVenta=?");
             ps.setString(1, codigo);
             ps.setInt(2, idVenta);
             estado = ps.executeUpdate();
-            
+
             /*ps = con.prepareStatement("SELECT codigo FROM venta WHERE idVenta=?");
             ps.setInt(1, idVenta);
             estado = ps.executeUpdate();
@@ -58,8 +57,7 @@ public class VentaDao {
                 Venta vent = new Venta();
                 vent.setCodigo(rs.getString("codigo"));
             }*/
-            
-            for (Carrito detalle : venta.getDetalleVenta()){
+            for (Carrito detalle : venta.getDetalleVenta()) {
                 SQL = "INSERT INTO detalleventa (idVenta, idProducto, cantidad, subtotal) VALUES (?, ?, ?, ?)";
                 ps = con.prepareStatement(SQL);
                 ps.setInt(1, idVenta);
@@ -77,8 +75,7 @@ public class VentaDao {
                 estado = ps.executeUpdate();
             }
 
-
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return codigo;
@@ -111,22 +108,46 @@ public class VentaDao {
 
         return listaVentas;
     }
-    
+
     public static int anularVenta(Venta vent) {
         int est = 0;
+        PreparedStatement ps = null;
+        
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE venta SET estado=? WHERE idVenta=?");
+            // Iniciar Transaccion (Todos los SQL deben ejecutarse)
+            con.setAutoCommit(false);
+            
+            // Actualizar el estado de la venta
+            ps = con.prepareStatement("UPDATE venta SET estado=? WHERE idVenta=?");
             ps.setInt(1, vent.getEstado());
             ps.setInt(2, vent.getIdVenta());
             est = ps.executeUpdate();
+
+            // Obtener los detalles de la venta
+            ps = con.prepareStatement("SELECT idProducto, cantidad FROM detalleVenta WHERE idVenta=?");
+            ps.setInt(1, vent.getIdVenta());
+            ResultSet rs = ps.executeQuery();
+            
+            // Restaurar stock
+            while (rs.next()) {
+                int idProducto = rs.getInt("idProducto");
+                int cantidad = rs.getInt("cantidad");
+                
+                PreparedStatement psUpdate = con.prepareStatement("UPDATE producto SET stock = stock + ? WHERE idProducto = ?");
+                psUpdate.setInt(1, cantidad);
+                psUpdate.setInt(2, idProducto);
+                psUpdate.executeUpdate();
+            }
+            
+            con.commit();
             
         } catch (Exception e) {
             System.out.println(e);
         }
         return est;
     }
-    
+
     public static List<Venta> listarVentasAnuladas() {
         List<Venta> ventasAnuladas = new ArrayList<Venta>();
         try {
@@ -154,7 +175,7 @@ public class VentaDao {
 
         return ventasAnuladas;
     }
-    
+
     public static Venta obtenerVentaPorId(int idVenta) {
         Venta venta = null;
         try {

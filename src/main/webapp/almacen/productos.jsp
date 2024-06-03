@@ -51,8 +51,19 @@
             let nombreRol = '<%= nombreRol %>';
         </script>
 <%
-    List<Producto> producto = ProductoDao.listarProductos();
+    String spageid=request.getParameter("page");
+    int pageid=Integer.parseInt(spageid);
+    int total=10;
+    if(pageid==1){}
+    else{
+        pageid=pageid-1;
+        pageid=pageid*total+1;
+    }
+    List<Producto> producto = ProductoDao.listarProductosPagina(pageid,total);
     request.setAttribute("list", producto);
+    
+    int totalProductos = ProductoDao.contarProductos();
+    int totalPages = (int) Math.ceil((double) totalProductos / total); // Calcula el número total de páginas
 %>
 <body>
     <div class="container-fluid">
@@ -73,7 +84,7 @@
 
                     <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item pb-4">
-                            <a href="${pageContext.request.contextPath}/almacen/productos.jsp" class="link-active align-middle px-0">
+                            <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="link-active align-middle px-0">
                                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-meat"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13.62 8.382l1.966 -1.967a2 2 0 1 1 3.414 -1.415a2 2 0 1 1 -1.413 3.414l-1.82 1.821" /><path d="M5.904 18.596c2.733 2.734 5.9 4 7.07 2.829c1.172 -1.172 -.094 -4.338 -2.828 -7.071c-2.733 -2.734 -5.9 -4 -7.07 -2.829c-1.172 1.172 .094 4.338 2.828 7.071z" /><path d="M7.5 16l1 1" /><path d="M12.975 21.425c3.905 -3.906 4.855 -9.288 2.121 -12.021c-2.733 -2.734 -8.115 -1.784 -12.02 2.121" /></svg>
                                 <span class="ms-1 d-none d-sm-inline">Tabla de Productos</span>
                             </a>
@@ -122,55 +133,60 @@
                     <div class="table-responsive-md">
                         <table class="table table-bordered container" border="1">
                             <thead class="table-dark">
-                                <tr>
-                                    <th style="display: none">ID</th>
-                                    <th>CATEGORÍA</th>
-                                    <th>CÓDIGO</th>
-                                    <th>NOMBRE</th>
-                                    <th>DESCRIPCIÓN</th>
-                                    <th>FOTO</th>
-                                    <th>PRECIO</th>
-                                    <th>STOCK</th>
-                                    <th>ESTADO</th>
-                                    <!-- th></th>
-                                    <th></th -->
-                                </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>CATEGORÍA</th>
+                                <th>NOMBRE</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>FOTO</th>
+                                <th>PRECIO</th>
+                                <th>STOCK</th>
+                                <th>ESTADO</th>
+                                <!-- th></th>
+                                <th></th -->
+                            </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${list}" var="prod">
-                                    <tr>
-                                        <td style="display: none">${prod.getIdProducto()}</td>
-                                        <td>${prod.getNombreCategoria()}</td>
-                                        <td>${prod.getCodigo()}</td>
-                                        <td>${prod.getNombre()}</td>
-                                        <td>${prod.getDescripcion()}</td>
-                                        <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""
-                                                 width="50"></td>
-                                        <td>S/. ${prod.getPrecio()}</td>
-                                        <td>${prod.getStock()}</td>
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${prod.getEstado() == 0}">Inactivo</c:when>
-                                                <c:when test="${prod.getEstado() == 1}">Activo</c:when>
-                                                <c:otherwise>Estado Desconocido</c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                        <%-- td>
-                                            <a class="btn btn-success btn-sm"
-                                            href="${pageContext.request.contextPath}/ControlProducto?action=editar&id=${prod.getIdProducto()}">Modificar</a>
-                                        </td>
-                                        <td>
-                                            <form action="${pageContext.request.contextPath}/ControlProducto" method="post">
-                                                <input type="hidden" id="idProducto" name="idProducto"
-                                                    value="${prod.getIdProducto()}">
-                                                <input type="hidden" name="action" value="eliminar">
-                                                <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
-                                            </form>
-                                        </td --%>
-                                    </tr>
-                                </c:forEach>
+                            <c:forEach items="${list}" var="prod">
+                                <tr>
+                                    <td>${prod.getIdProducto()}</td>
+                                    <td>${prod.getNombreCategoria()}</td>
+                                    <td>${prod.getNombre()}</td>
+                                    <td>${prod.getDescripcion()}</td>
+                                    <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""
+                                             width="50"></td>
+                                    <td>${prod.getPrecio()}</td>
+                                    <td>${prod.getStock()}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${prod.getEstado() == 0}">Inactivo</c:when>
+                                            <c:when test="${prod.getEstado() == 1}">Activo</c:when>
+                                            <c:otherwise>Estado Desconocido</c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <%
+                                    for(int i = 1; i <= totalPages; i++) {
+                                %>
+                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/almacen/productos.jsp?page=<%=i%>"><%=i%></a></li>
+                                <% } %>
+                                <li class="page-item">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/almacen/productos.jsp?page=<%=totalPages%>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </c:if>
             </main>
@@ -193,7 +209,7 @@
                     allowOutsideClick: false
             }).then((result) => {
                     if (result.isConfirmed) {
-                    window.location.href = contextPath + "/almacen/productos.jsp?alert=false";
+                    window.location.href = contextPath + "/almacen/productos.jsp?alert=false&page=1";
                     }
                 });
             }

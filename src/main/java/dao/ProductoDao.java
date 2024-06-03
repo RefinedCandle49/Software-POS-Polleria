@@ -135,6 +135,23 @@ public class ProductoDao {
         return p;
     }
 
+    public static int contarProductos(){
+        int totalProductos = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM producto");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalProductos = rs.getInt("total");
+            }
+            con.close();
+
+        } catch (Exception e){
+
+        }
+        return totalProductos;
+    }
+
     public static int registrarProducto(Producto prod) {
         int idProducto = 0;
         try {
@@ -201,12 +218,7 @@ public class ProductoDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT prod.idProducto, cat.nombre as nombreCategoria, prod.nombre, prod.descripcion, prod.foto, prod.precio, prod.stock, prod.estado " +
-                            "FROM polloslocos.producto prod " +
-                            "INNER JOIN polloslocos.categoria cat ON prod.idCategoria = cat.idCategoria " +
-                            "WHERE prod.estado = 1 " +
-                            "ORDER BY prod.idProducto ASC " +
-                            "LIMIT ?, ?");
+                    "SELECT prod.idProducto, cat.nombre as nombreCategoria, prod.codigo ,prod.nombre, prod.descripcion, prod.foto, prod.precio, prod.stock, prod.estado FROM producto prod INNER JOIN categoria cat ON prod.idCategoria = cat.idCategoria WHERE prod.estado = 1 ORDER BY idProducto DESC LIMIT ?, ?");
             ps.setInt(1, start-1);
             ps.setInt(2, total);
 
@@ -216,6 +228,7 @@ public class ProductoDao {
                 Producto prod = new Producto();
                 prod.setIdProducto(rs.getInt("idProducto"));
                 prod.setNombreCategoria(rs.getString("nombreCategoria"));
+                prod.setCodigo(rs.getString("codigo"));
                 prod.setNombre(rs.getString("nombre"));
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setFoto(rs.getString("foto"));

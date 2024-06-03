@@ -55,7 +55,7 @@ public class controlLogin extends HttpServlet {
             } else if ("Cajero".equals(rol)) {
                 response.sendRedirect(request.getContextPath() + "/caja/menu.jsp?alert=true");
             } else if ("Almacenero".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?alert=true");
+                response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?alert=true&page=1");
             }
             return;
             

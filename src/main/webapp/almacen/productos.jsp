@@ -219,7 +219,7 @@
         function cerrarMensaje() {
             let registroExitoso = document.getElementById("registroExitoso");
             registroExitoso.style.display = "none";
-            window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp"
+            window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp?page=1"
         }
     </script>
 </body>

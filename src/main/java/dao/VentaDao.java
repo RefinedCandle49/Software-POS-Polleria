@@ -180,13 +180,14 @@ public class VentaDao {
         Venta venta = null;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.idCliente, cli.documento, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE idVenta=?");
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, vent.idCliente, cli.documento, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE idVenta=?");
             ps.setInt(1, idVenta);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 venta = new Venta();
                 venta.setIdVenta(rs.getInt("idVenta"));
+                venta.setCodigo(rs.getString("codigo"));
                 venta.setIdCliente(rs.getInt("idCliente"));
                 venta.setDocumento(rs.getString("documento"));
                 venta.setNombre(rs.getString("nombre"));

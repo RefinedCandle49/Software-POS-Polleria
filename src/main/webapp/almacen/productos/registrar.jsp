@@ -177,7 +177,7 @@
 
                     <div class="text-center">
                         <input type="submit" class="btn btn-success" value="Registrar Producto">
-                        <a href="${pageContext.request.contextPath}/almacen/productos.jsp" class="btn btn-secondary">Regresar</a>
+                        <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
                 

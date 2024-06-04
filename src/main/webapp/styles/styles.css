@@ -73,6 +73,10 @@ hr{
     text-align: center;
 }
 
+svg {
+    margin-bottom: 2px !important;
+}
+
 @media (max-width: 600px) {
     main{
         padding: 25px 30px !important;

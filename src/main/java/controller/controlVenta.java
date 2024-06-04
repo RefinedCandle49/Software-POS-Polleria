@@ -4,23 +4,22 @@
  */
 package controller;
 
-import dao.UsuarioDao;
+import dao.VentaDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import model.Usuario;
+import model.Venta;
 
 /**
  *
  * @author daniel
  */
-@WebServlet(name = "controlLogin", urlPatterns = {"/controlLogin"})
-public class controlLogin extends HttpServlet {
+@WebServlet(name = "controlVenta", urlPatterns = {"/controlVenta"})
+public class controlVenta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,41 +32,18 @@ public class controlLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String mensajeError = null;
-        
-        UsuarioDao daoUsuario = new UsuarioDao();
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setPassword(password);
-
-        if (daoUsuario.validarUsuario(usuario)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-
-            String rol = usuario.getRol();
-            if ("Administrador".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?alert=true");
-            } else if ("Cajero".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/caja/menu.jsp?alert=true");
-            } else if ("Almacenero".equals(rol)) {
-                response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?alert=true&page=1");
-            }
-            return;
-            
-        } else if (daoUsuario.validarUsuarioInactivo(usuario)) {
-            mensajeError = "Esta cuenta no tiene acceso al sistema.";
-            request.setAttribute("mensajeError", mensajeError);
-            response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);
-            return;
-        } else {
-            mensajeError = "Parece que has ingresado credenciales incorrectas. Por favor, intenta de nuevo.";
-            request.setAttribute("mensajeError", mensajeError);
-            response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet controlVenta</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet controlVenta at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -97,7 +73,19 @@ public class controlLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int idVenta = Integer.parseInt(request.getParameter("idVenta"));
+        int newEstado = Integer.parseInt(request.getParameter("newEstado"));
+
+        Venta vent = new Venta();
+        vent.setIdVenta(idVenta);
+        vent.setEstado(newEstado);
+        
+        int result = VentaDao.anularVenta(vent);
+        
+        response.sendRedirect(request.getContextPath() + "/admin/ventas.jsp");
+
+        //processRequest(request, response);
     }
 
     /**
@@ -109,5 +97,5 @@ public class controlLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-            }
+
+}

@@ -10,9 +10,10 @@ function alertBienvenida() {
 
     if (alert === 'true') {
         Swal.fire({
-            icon: "info",
+            icon: "success",
             title: 'Bienvenido, ' + nombreRol,
             confirmButtonColor: "#212529",
+            confirmButtonText: "Aceptar",
             allowOutsideClick: false
         }).then((result) => {
             if (result.isConfirmed) {

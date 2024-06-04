@@ -59,7 +59,6 @@
                             Fecha actual:
                             <%= fechaFormateada %>
                         </p>
-                        <p>NoCaja: 4251</p>
                         <p>DNI/RUC: <%= vent.getDocumento()%>
                         </p>
                         <p class="me-3">Cliente: <%= vent.getNombre()%>, <%= vent.getApellido()%>
@@ -70,8 +69,6 @@
                             Hora actual:
                             <%= horaFormateada %>
                         </p>
-                        
-                        <p>Tda No. : 227</p>
                     </div>
                 </div>
                 

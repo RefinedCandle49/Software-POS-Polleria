@@ -139,7 +139,7 @@ public class ProductoDao {
         int totalProductos = 0;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM producto");
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM producto WHERE estado=1");
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 totalProductos = rs.getInt("total");

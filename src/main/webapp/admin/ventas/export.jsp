@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.5.1/css/pro.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.table2excel.js" type="text/javascript"></script>
   <title>Ventas por Fechas | Pollos Locos</title>
 </head>
 <body>
@@ -29,9 +31,7 @@
     <h1 class="fw-bold">PANEL DE REPORTES</h1>
     
     <div class="d-flex align-items-center justify-content-end">
-      <button class="btn btn-primary" onclick="exportTableToExcel('transactionsTable', 'SettlementTransactions')">
-        Descargar EXCEL
-      </button>
+        <button id="exportButton" class="btn btn-primary">Descargar EXCEL</button>
     </div>
     
     <c:if test="${empty list}">
@@ -40,7 +40,7 @@
     
     <c:if test="${not empty list}">
       <div class="table-responsive">
-        <table id="transactionsTable" class="table table-striped">
+        <table id="table2excel" class="table table-striped">
           <thead class="table-dark">
           <tr>
             <th>CÓDIGO</th>
@@ -73,38 +73,22 @@
     </c:if>
   </section>
 </main>
-<script>
-  function exportTableToExcel(transactionsTable, filename = ''){
-    let downloadLink;
-    const dataType = 'application/vnd.ms-excel';
-    const tableSelect = document.getElementById(transactionsTable);
-    const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    
-    // Specify file name
-    filename = filename?filename+'.xls':'excel_data.xls';
-    
-    // Create download link element
-    downloadLink = document.createElement("a");
-    
-    document.body.appendChild(downloadLink);
-    
-    if(navigator.msSaveOrOpenBlob){
-      var blob = new Blob(['\ufeff', tableHTML], {
-        type: dataType
-      });
-      navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-      // Create a link to the file
-      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-      
-      // Setting the file name
-      downloadLink.download = filename;
-      
-      //triggering the function
-      downloadLink.click();
-    }
-  }
-</script>
 
+<script>
+    $(document).ready(function() {
+        $("#exportButton").click(function() {
+            var date = new Date();
+            var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
+            var filename = "Ventas - " + formattedDate + ".xls";
+
+            $("#table2excel").table2excel({
+                exclude: ".excludeThisClass",
+                name: "Ventas",
+                filename: filename,
+                preserveColors: false // set to true if you want background colors and font colors preserved
+            });
+        });
+    });
+</script>
 </body>
 </html>

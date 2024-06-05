@@ -155,7 +155,7 @@
                                     <td>${prod.getDescripcion()}</td>
                                     <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""
                                              width="50"></td>
-                                    <td>${prod.getPrecio()}</td>
+                                    <td style="text-wrap: nowrap;">${prod.getPrecio()}</td>
                                     <td>${prod.getStock()}</td>
                                     <td>
                                         <c:choose>

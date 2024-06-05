@@ -49,6 +49,7 @@
                 <h2>Pollería Pollos Locos S.A.C</h2>
                 <h3>Av. JAVIER PRADO ESTE NRO. 6210 INT. 1201 URB. RIVERA DE MONTERRICO LA MOLINA LIMA - LIMA</h3>
                 <H3>BOLETA DE VENTA ELECTRÓNICA</H3>
+                <h3><%= vent.getCodigo() %></h3>
                 <HR>
             </div>
             

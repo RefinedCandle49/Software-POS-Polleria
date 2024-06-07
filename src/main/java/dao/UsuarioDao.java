@@ -139,4 +139,47 @@ public class UsuarioDao {
         }
         return false;
     }
+
+    public static int actualizarUsuario(Usuario usu) {
+        int est = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE usuario SET password=?, rol=? WHERE idUsuario=?");
+            //PreparedStatement ps = con.prepareStatement("UPDATE usuario SET codigo=?, email=?, password=?, rol=?, estado=? WHERE idUsuario=?");
+            //ps.setString(1, usu.getCodigo());
+            //ps.setString(2, usu.getEmail());
+            ps.setString(1, usu.getPassword());
+            ps.setString(2, usu.getRol());
+            //ps.setInt(5, usu.getEstado());
+            ps.setInt(3, usu.getIdUsuario());
+            System.out.println("Prueba");
+            est= ps.executeUpdate();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return est;
+    }
+    
+    public static Usuario obtenerUsuarioPorId(int idUsuario) {
+        Usuario usuario = null;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario WHERE idUsuario = ?");
+            ps.setInt(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setCodigo(rs.getString("codigo"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPassword(rs.getString("password"));
+                usuario.setRol(rs.getString("rol"));
+                usuario.setEstado(rs.getInt("estado"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
 }

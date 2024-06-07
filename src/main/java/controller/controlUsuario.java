@@ -45,7 +45,19 @@ public class controlUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        String action = request.getParameter("action");
+
+        switch (action) {
+            case "editar":
+                int idUsuario = Integer.parseInt(request.getParameter("id"));
+                Usuario usuario = UsuarioDao.obtenerUsuarioPorId(idUsuario);
+                request.setAttribute("usuario", usuario);
+                request.getRequestDispatcher("/admin/usuario/actualizar.jsp").forward(request, response);
+                return; }
     }
+
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -106,6 +118,37 @@ public class controlUsuario extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return;
+
+            case "actualizar":
+                try {
+                    int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    //String codigo = request.getParameter("codigo");
+                    //String email = request.getParameter("email");
+                    String password = request.getParameter("password");
+                    String rol = request.getParameter("rol");
+                    //int estado = Integer.parseInt(request.getParameter("estado"));
+                    System.out.println("Obtener Parametros");
+                    
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsuario(idUsuario);
+                    //usuario.setCodigo(codigo);
+                    //usuario.setEmail(email);
+                    usuario.setPassword(password);
+                    usuario.setRol(rol);
+                    //usuario.setEstado(estado);
+                    System.out.println("Dar Parametros");
+                    
+                    int result = UsuarioDao.actualizarUsuario(usuario);
+                    
+                    if (result > 0) {
+                        String actualizarExitoso ="Usuario actualizado correctamente";
+                        response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?actualizarExitoso=" + actualizarExitoso);
+                    }
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }    
             return;
         }
     }

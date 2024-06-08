@@ -29,6 +29,8 @@
 %>
 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
     <section>
+        <p id="desde" style="display: none">${desde}</p>
+        <p id="hasta" style="display: none;">${hasta}</p>
         <h1 class="fw-bold">PANEL DE REPORTES</h1>
         <p>Fecha inicio: ${desde} - Hasta: ${hasta}</p>
         <div class="d-flex align-items-center justify-content-end">

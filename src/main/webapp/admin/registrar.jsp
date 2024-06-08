@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
+        <script src="<%=request.getContextPath()%>/js/password.js"></script>
         <script src="<%=request.getContextPath()%>/js/validaciones.js"></script>
         <title>Registrar Usuario | Pollos Locos</title>
     </head>
@@ -112,14 +113,25 @@
                                     <label for="email" class="form-label">Email:</label>
                                     <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" value="${param.email != null ? param.email : ''}" required>
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" value="${param.password != null ? param.password : ''}" required>
+                                    
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" value="${param.password != null ? param.password : ''}" required>
+                                        <button type="button"
+                                            id="togglePassword"
+                                            onclick="mostrarPassword('password', 'togglePassword')" 
+                                            class="btn btn-outline-secondary">
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-off m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" /><path d="M3 3l18 18" /></svg>
+                                        </button>
+                                    </div>
+                                    
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="rol" class="form-label">Rol:</label>
                                     <select class="form-select" id="rol" name="rol" required>
-                                        <!-- BUSCAR MAMAMIA -->
                                         <option value="" disabled selected class="invisible">Seleccionar opción</option>
                                         <option value="Administrador" ${param.rol == "Administrador" ? "selected" : ""}>Administrador</option>
                                         <option value="Cajero" ${param.rol == "Cajero" ? "selected" : ""}>Cajero</option>
@@ -130,8 +142,8 @@
                                 <input type="hidden" name="estado" value="1" value="${param.estado != null ? param.estado : ''}">
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success" >Registrar Usuario</button>
-                                    <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-primary">Regresar</a>
+                                    <button type="submit" class="btn btn-primary" >Registrar Usuario</button>
+                                    <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-secondary">Regresar</a>
                                 </div>
                             </form>
                         </div>

@@ -47,13 +47,13 @@ hr{
     height: 130px;
 }
 
-.link-register{
+/*.btn-actions{
     text-decoration: none;
 }
 
-.link-register:hover{
-    opacity: 0.5;
-}
+.btn-actions:hover{
+    opacity: 0.7;
+}*/
 
 .button-mensaje{
     border: none;

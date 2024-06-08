@@ -98,21 +98,6 @@
                         </tbody>
                     </table>
                 </div>
-                
-                
-                <p class="me-3">Método de pago:
-                    <%
-                        int metodoPago = vent.getMetodoPago();
-                        if (metodoPago == 1) {
-                    %>
-                    Efectivo
-                    <%
-                    } else if (metodoPago == 2) {
-                    %>
-                    Tarjeta
-                    <%
-                        }
-                    %></p>
                 <div class="text-end">
                     <p>SubTotal: S/<%= vent.getTotal()%>
                     </p>

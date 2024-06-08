@@ -126,7 +126,6 @@
                                             <th style="display: none">ID</th>
                                             <th>CÓDIGO</th>
                                             <th>CLIENTE</th>
-                                            <th>MÉTODO DE PAGO</th>
                                             <th>FECHA Y HORA</th>
                                             <th>TOTAL</th>
                                             <th>MÁS DETALLES</th>
@@ -140,13 +139,6 @@
                                                 <td style="display: none">${venta.getIdVenta()}</td>
                                                 <td>${venta.getCodigo()}</td>
                                                 <td>${venta.getNombre()} ${venta.getApellido()}</td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${venta.getMetodoPago() == 1}">Efectivo</c:when>
-                                                        <c:when test="${venta.getMetodoPago() == 2}">Tarjeta</c:when>
-                                                        <c:otherwise>Método Desconocido</c:otherwise>
-                                                    </c:choose>
-                                                </td>
                                                 <td>${venta.getFechaHoraVenta()}</td>
                                                 <td>${venta.getTotal()}</td>
 

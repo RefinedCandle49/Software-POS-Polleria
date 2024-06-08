@@ -94,21 +94,6 @@
                         </tbody>
                     </table>
                 </div>
-                
-                
-                <p class="me-3">Método de pago:
-                    <%
-                        int metodoPago = (Integer) request.getAttribute("metodoPago");
-                        if (metodoPago == 1) {
-                    %>
-                    Efectivo
-                    <%
-                    } else if (metodoPago == 2) {
-                    %>
-                    Tarjeta
-                    <%
-                        }
-                    %></p>
                 <div class="text-end">
                     <p>SubTotal: S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${totalPagar}" /></p>
                     <p>IGV (18%): S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${totalPagar * 0.18}" /></p>

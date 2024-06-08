@@ -24,12 +24,11 @@ public class VentaDao {
         String codigo = "";
         try {
             Connection con = getConnection();
-            ps = con.prepareStatement("INSERT INTO venta (idCliente, metodoPago, fechaHoraVenta, estado, total) VALUES (?, ?, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO venta (idCliente, fechaHoraVenta, estado, total) VALUES (?, ?, ?, ?)");
             ps.setInt(1, venta.getIdCliente());
-            ps.setInt(2, venta.getMetodoPago());
-            ps.setString(3, venta.getFechaHoraVenta());
-            ps.setInt(4, 1);
-            ps.setDouble(5, venta.getTotal());
+            ps.setString(2, venta.getFechaHoraVenta());
+            ps.setInt(3, 1);
+            ps.setDouble(4, venta.getTotal());
 
             estado = ps.executeUpdate();
 
@@ -85,7 +84,7 @@ public class VentaDao {
         List<Venta> listaVentas = new ArrayList<Venta>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 AND DATE(fechaHoraVenta) BETWEEN ? AND ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 AND DATE(fechaHoraVenta) BETWEEN ? AND ?;");
             ps.setString(1, desde);
             ps.setString(2, hasta);
             ResultSet rs = ps.executeQuery();
@@ -96,7 +95,6 @@ public class VentaDao {
                 vent.setCodigo(rs.getString("codigo"));
                 vent.setNombre(rs.getString("nombre"));
                 vent.setApellido(rs.getString("apellido"));
-                vent.setMetodoPago(rs.getInt("metodoPago"));
                 vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
                 vent.setEstado(rs.getInt("estado"));
                 vent.setTotal(rs.getDouble("total"));
@@ -115,7 +113,7 @@ public class VentaDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 ORDER BY idVenta DESC;");
+                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 ORDER BY idVenta DESC;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -124,7 +122,6 @@ public class VentaDao {
                 vent.setCodigo(rs.getString("codigo"));
                 vent.setNombre(rs.getString("nombre"));
                 vent.setApellido(rs.getString("apellido"));
-                vent.setMetodoPago(rs.getInt("metodoPago"));
                 vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
                 vent.setEstado(rs.getInt("estado"));
                 vent.setTotal(rs.getDouble("total"));
@@ -182,7 +179,7 @@ public class VentaDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=0 ORDER BY idVenta DESC;");
+                    "SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=0 ORDER BY idVenta DESC;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -191,7 +188,6 @@ public class VentaDao {
                 vent.setCodigo(rs.getString("codigo"));
                 vent.setNombre(rs.getString("nombre"));
                 vent.setApellido(rs.getString("apellido"));
-                vent.setMetodoPago(rs.getInt("metodoPago"));
                 vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
                 vent.setEstado(rs.getInt("estado"));
                 vent.setTotal(rs.getDouble("total"));
@@ -209,7 +205,7 @@ public class VentaDao {
         Venta venta = null;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, vent.idCliente, cli.documento, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE idVenta=?");
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, vent.idCliente, cli.documento, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE idVenta=?");
             ps.setInt(1, idVenta);
             ResultSet rs = ps.executeQuery();
 
@@ -221,7 +217,6 @@ public class VentaDao {
                 venta.setDocumento(rs.getString("documento"));
                 venta.setNombre(rs.getString("nombre"));
                 venta.setApellido(rs.getString("apellido"));
-                venta.setMetodoPago(rs.getInt("metodoPago"));
                 venta.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
                 venta.setEstado(rs.getInt("estado"));
                 venta.setTotal(rs.getDouble("total"));

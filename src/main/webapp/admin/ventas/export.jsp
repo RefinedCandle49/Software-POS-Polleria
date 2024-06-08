@@ -52,7 +52,6 @@
                     <tr>
                         <th>CÓDIGO</th>
                         <th>CLIENTE</th>
-                        <th>MÉTODO DE PAGO</th>
                         <th>FECHA Y HORA</th>
                         <th>TOTAL</th>
                     </tr>
@@ -63,13 +62,6 @@
                         <tr>
                             <td>${venta.getCodigo()}</td>
                             <td>${venta.getNombre()} ${venta.getApellido()}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${venta.getMetodoPago() == 1}">Efectivo</c:when>
-                                    <c:when test="${venta.getMetodoPago() == 2}">Tarjeta</c:when>
-                                    <c:otherwise>Método Desconocido</c:otherwise>
-                                </c:choose>
-                            </td>
                             <td>${venta.getFechaHoraVenta()}</td>
                             <td>S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${venta.getTotal()}" /></td>
                         </tr>

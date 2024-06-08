@@ -4,9 +4,8 @@ import java.util.List;
 
 public class Venta {
 
-    public Venta(int idCliente, int metodoPago, String fechaHoraVenta, int estado, double total, List<Carrito> detalleVenta) {
+    public Venta(int idCliente, String fechaHoraVenta, int estado, double total, List<Carrito> detalleVenta) {
         this.idCliente = idCliente;
-        this.metodoPago = metodoPago;
         this.fechaHoraVenta = fechaHoraVenta;
         this.estado = estado;
         this.total = total;
@@ -55,7 +54,7 @@ public class Venta {
 
     int idVenta;
     int idCliente;
-    int metodoPago, estado;
+    int estado;
     double total;
 
     public int getIdVenta() {
@@ -72,14 +71,6 @@ public class Venta {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public int getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(int metodoPago) {
-        this.metodoPago = metodoPago;
     }
 
     public int getEstado() {

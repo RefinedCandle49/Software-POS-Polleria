@@ -74,7 +74,7 @@
                                             <label style="white-space: nowrap;">
                                                 DNI/RUC:
                                                 <input maxlength="11" type="text" id="documento" name="documento"
-                                                       placeholder="Ingrese el DNI/RUC del Cliente" onkeypress="return soloNumeros(event)"
+                                                       placeholder="Ingrese el DNI/RUC" onkeypress="return soloNumeros(event)"
                                                        value="00000001">
                                             </label>
                                         </p>
@@ -200,18 +200,6 @@
                             // Llamar a la función bloquearCampo cuando se carga la página
                             bloquearCampo();
                         </script>
-
-                        <div>
-
-                            <label>Método de pago:
-                                <select class="form-control" name="metodoPago" id="metodoPago">
-                                    <option id="efectivo" name="metodoPago" value="1">Efectivo</option>
-                                    <option id="tarjeta" name="metodoPago" value="2">Tarjeta</option>
-                                </select>
-                            </label>
-
-
-                        </div>
 
                         <div class="text-center">
                             <button id="procesar-venta" class="btn btn-success" type="submit">Procesar venta</button>
@@ -364,8 +352,6 @@
                 e.preventDefault();
                 // Aquí puedes agregar lógica adicional, como enfocar el campo o mostrar un mensaje personalizado
                 document.getElementById("nombreDisplay").focus();
-                document.getElementById("efectivo").focus();
-                document.getElementById("tarjeta").focus();
             }, true);
         </script>
         <script>

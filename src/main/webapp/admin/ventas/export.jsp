@@ -3,6 +3,7 @@
 <%@ page import="dao.VentaDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,12 +27,10 @@
     request.setAttribute("list", listaVentas);
 
 %>
-<h1>${desde}</h1>
-<h1>${hasta}</h1>
 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
     <section>
         <h1 class="fw-bold">PANEL DE REPORTES</h1>
-        
+        <p>Fecha inicio: ${desde} - Hasta: ${hasta}</p>
         <div class="d-flex align-items-center justify-content-end">
             <button id="exportButton" class="btn btn-primary">Descargar EXCEL</button>
             <button class="btn btn-primary" onclick="generate()">Descargar PDF</button>
@@ -44,6 +43,9 @@
         <c:if test="${not empty list}">
             <div class="table-responsive">
                 <table id="table2excel" class="table table-striped">
+                    <tr>
+                        <th style="display: none">Fecha inicio: ${desde} - Hasta: ${hasta}</th>
+                    </tr>
                     <thead class="table-dark">
                     <tr>
                         <th>CÓDIGO</th>
@@ -67,7 +69,7 @@
                                 </c:choose>
                             </td>
                             <td>${venta.getFechaHoraVenta()}</td>
-                            <td>${venta.getTotal()}</td>
+                            <td>S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${venta.getTotal()}" /></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -88,21 +90,24 @@
                 exclude: ".excludeThisClass",
                 name: "Ventas",
                 filename: filename,
-                preserveColors: false // set to true if you want background colors and font colors preserved
+                preserveColors: true,
+                // set to true if you want background colors and font colors preserved
             });
         });
     });
 </script>
 <script>
   function generate() {
+      var desde = document.getElementById("desde").textContent;
+      var hasta = document.getElementById("hasta").textContent;
       var date = new Date();
       var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
       var filename = "Ventas - " + formattedDate + ".pdf";
     var doc = new jspdf.jsPDF()
     
     // Simple html example
-    doc.autoTable({ html: '#table2excel' })
-    
+    doc.autoTable({ html: '#table2excel' });
+      doc.text("Fecha inicio: " + desde + " - " + "Hasta: " + hasta, 10, 10);
     doc.save(filename)
   }
 </script>

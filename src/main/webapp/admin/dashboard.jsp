@@ -8,11 +8,11 @@
 <h1>Ventas</h1>
 <form action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
     <label>
-        <input type="date" id="desde" name="desde" max="<%= LocalDate.now() %>">
+        <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>">
     </label>
     
     <label>
-        <input type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>">
+        <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>">
     </label>
     
     <input type="submit" value="Seleccionar">

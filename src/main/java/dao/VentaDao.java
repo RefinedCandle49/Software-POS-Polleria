@@ -81,6 +81,35 @@ public class VentaDao {
         return codigo;
     }
 
+    public static List<Venta> listarVentasPorFecha(String desde, String hasta){
+        List<Venta> listaVentas = new ArrayList<Venta>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.metodoPago, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 AND DATE(fechaHoraVenta) BETWEEN ? AND ?;");
+            ps.setString(1, desde);
+            ps.setString(2, hasta);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setIdVenta(rs.getInt("idVenta"));
+                vent.setCodigo(rs.getString("codigo"));
+                vent.setNombre(rs.getString("nombre"));
+                vent.setApellido(rs.getString("apellido"));
+                vent.setMetodoPago(rs.getInt("metodoPago"));
+                vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
+                vent.setEstado(rs.getInt("estado"));
+                vent.setTotal(rs.getDouble("total"));
+                listaVentas.add(vent);
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return listaVentas;
+    }
+
     public static List<Venta> listarVentas() {
         List<Venta> listaVentas = new ArrayList<Venta>();
         try {

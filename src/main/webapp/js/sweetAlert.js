@@ -12,7 +12,7 @@ function alertBienvenida() {
         Swal.fire({
             icon: "success",
             title: 'Bienvenido, ' + nombreRol,
-            confirmButtonColor: "#212529",
+            confirmButtonColor: "#0A5ED7",
             confirmButtonText: "Aceptar",
             allowOutsideClick: false
         }).then((result) => {

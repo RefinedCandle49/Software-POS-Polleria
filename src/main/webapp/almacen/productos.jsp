@@ -153,8 +153,18 @@
                                     <td>${prod.getNombreCategoria()}</td>
                                     <td>${prod.getNombre()}</td>
                                     <td>${prod.getDescripcion()}</td>
-                                    <td><img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" alt=""
-                                             width="50"></td>
+                                    <script>
+                                        function handleErrorImage() {
+                                            this.onerror = null;
+                                            this.src ='https://www.mediafire.com/convkey/3ebd/xkltwfdxw34xnrhzg.jpg';
+                                        }
+                                    </script>
+                                    
+                                    <td>
+                                        <img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" width="50" onerror="handleErrorImage.call(this);">
+                                    </td>
+                                    
+                                    
                                     <td style="text-wrap: nowrap;">${prod.getPrecio()}</td>
                                     <td>${prod.getStock()}</td>
                                     <td>
@@ -222,5 +232,6 @@
             window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp?page=1"
         }
     </script>
+    
 </body>
 </html>

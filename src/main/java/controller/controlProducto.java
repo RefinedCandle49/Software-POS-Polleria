@@ -20,12 +20,12 @@ public class controlProducto extends HttpServlet {
         switch (action){
             case "registrar":
                 try{
-
+                    String nombreRegistrar = request.getParameter("nombre");
                     Part filePart = request.getPart("image");
                     String fileName = filePart.getSubmittedFileName();
-                    String uploadDir = "C:/Users/valde/OneDrive - SERVICIO EDUCATIVO EMPRESARIALE S.A.C/IV Ciclo/Laboratorio de Integración IV Desarrollo y Prueba de Software/Tareas/POS/src/main/webapp/cloud-images/"; // COMPLETAR LA RUTA
-                    File file = new File(uploadDir + fileName);
-                    
+                    String uploadDir = getServletContext().getRealPath("/") + "cloud-images/";
+                    uploadDir = uploadDir.replace("\\", "/");
+                    File file = new File(uploadDir + nombreRegistrar + fileName);
 
                     try (InputStream fileContent = filePart.getInputStream();
                          OutputStream out = new FileOutputStream(file)) {
@@ -37,12 +37,10 @@ public class controlProducto extends HttpServlet {
                         System.out.println("Imagen cargada");
                     }
 
-                    String ruta ="http://localhost:8080/" + request.getContextPath() + "/cloud-images/" + fileName;
 //                    response.getWriter().println("Imagen subida exitosamente.");
                         System.out.println("Imagen guardada");
 
                     int idCategoriaRegistrar = Integer.parseInt(request.getParameter("idCategoria"));
-                    String nombreRegistrar = request.getParameter("nombre");
                     String descripcionRegistrar = request.getParameter("descripcion");
                     String fotoRegistrar = fileName;
                     double precioRegistrar = Double.parseDouble(request.getParameter("precio"));
@@ -78,7 +76,7 @@ public class controlProducto extends HttpServlet {
                     productoRegistrar.setIdCategoria(idCategoriaRegistrar);
                     productoRegistrar.setNombre(nombreRegistrar);
                     productoRegistrar.setDescripcion(descripcionRegistrar);
-                    productoRegistrar.setFoto(fotoRegistrar);
+                    productoRegistrar.setFoto(nombreRegistrar + fotoRegistrar);
                     productoRegistrar.setPrecio(precioRegistrar);
                     productoRegistrar.setStock(stockRegistrar);
                     productoRegistrar.setEstado(estadoRegistrar);

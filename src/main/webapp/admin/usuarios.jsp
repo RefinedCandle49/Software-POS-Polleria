@@ -105,7 +105,7 @@
                                 </a>
                             </li>
                             <hr />
-                            
+
                             <li class="nav-item">
                                 <a href="${pageContext.request.contextPath}/admin/usuarios.jsp"
                                    class="link-active align-middle px-0">
@@ -144,13 +144,13 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/admin/ventas.jsp"
+                                <a href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp"
                                    class="link-inactive align-middle px-0">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21v-16m2 -2h10a2 2 0 0 1 2 2v10m0 4.01v1.99l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M11 7l4 0" /><path d="M9 11l2 0" /><path d="M13 15l2 0" /><path d="M15 11l0 .01" /><path d="M3 3l18 18" /></svg>
                                     <span class="ms-1 d-none d-sm-inline">Ventas Anuladas</span>
                                 </a>
                             </li>
-                            
+
                         </ul>
                         <hr />
 
@@ -180,7 +180,7 @@
 
                         <div class="d-flex align-items-center justify-content-end">
 
-                            <a href="${pageContext.request.contextPath}/admin/registrar.jsp"
+                            <a href="${pageContext.request.contextPath}/admin/usuario/registrar.jsp"
                                class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -223,8 +223,8 @@
                         <c:if test="${not empty param.actualizarExitoso}">
                             <div id="actualizarExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
                                 ${param.actualizarExitoso}
-                                <button type="button" class="button-mensaje text-success"
-                                        onclick="cerrarMensajeActualizar()"><svg
+                                <button type="button" class="button-mensaje text-success" onclick="cerrarMensajeActualizar()">
+                                    <svg
                                         xmlns="http://www.w3.org/2000/svg" width="20"
                                         height="20" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2"
@@ -255,8 +255,7 @@
                                     <tbody>
                                         <c:forEach items="${list}" var="user" varStatus="status">
                                             <tr>
-                                                <td style="display: none">${user.getIdUsuario()}
-                                                </td>
+                                                <td style="display: none">${user.getIdUsuario()}</td>
                                                 <td>${user.getCodigo()}</td>
                                                 <td>${user.getEmail()}</td>
                                                 <td>
@@ -265,23 +264,20 @@
                                                            name="password"
                                                            value="${user.getPassword()}"
                                                            style="background-color: transparent; border: none;"
-                                                           disabled>
-                                                        <button
-                                                            onclick="mostrarPassword('password_${user.getIdUsuario()}', 'button_${user.getIdUsuario()}')"
-                                                            id="button_${user.getIdUsuario()}"
-                                                            class="btn btn-link text-decoration-none text-dark">
-                                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-off m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" /><path d="M3 3l18 18" /></svg>
-                                                        </button>
+                                                           disabled />
+                                                    <button
+                                                        onclick="mostrarPassword('password_${user.getIdUsuario()}', 'button_${user.getIdUsuario()}')"
+                                                        id="button_${user.getIdUsuario()}"
+                                                        class="btn btn-link text-decoration-none text-dark">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-off m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" /><path d="M3 3l18 18" /></svg>
+                                                    </button>
                                                 </td>
                                                 <td>${user.getRol()}</td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${user.getEstado() == 0}">
-                                                            Inactivo</c:when>
-                                                        <c:when test="${user.getEstado() == 1}">
-                                                            Activo</c:when>
-                                                        <c:otherwise>Estado Desconocido
-                                                        </c:otherwise>
+                                                        <c:when test="${user.getEstado() == 0}">Inactivo</c:when>
+                                                        <c:when test="${user.getEstado() == 1}">Activo</c:when>
+                                                        <c:otherwise>Estado Desconocido</c:otherwise>
                                                     </c:choose>
                                                 </td>
                                                 <td>
@@ -320,21 +316,17 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<%=request.getContextPath()%>/js/sweetAlert.js"></script>
         <script>
-                                                                document.addEventListener("DOMContentLoaded", function () {
-                                                                    alertBienvenida();
-                                                                });
+                                                            function cerrarMensaje() {
+                                                                let registroExitoso = document.getElementById("registroExitoso");
+                                                                registroExitoso.style.display = "none";
+                                                                window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp";
+                                                            }
 
-                                                                function cerrarMensaje() {
-                                                                    let registroExitoso = document.getElementById("registroExitoso");
-                                                                    registroExitoso.style.display = "none";
-                                                                    window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp";
-                                                                }
-
-                                                                function cerrarMensajeActualizar() {
-                                                                    let actualizarExitoso = document.getElementById("actualizarExitoso");
-                                                                    actualizarExitoso.style.display = "none";
-                                                                    window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp";
-                                                                }
+                                                            function cerrarMensajeActualizar() {
+                                                                let actualizarExitoso = document.getElementById("actualizarExitoso");
+                                                                actualizarExitoso.style.display = "none";
+                                                                window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp";
+                                                            }
         </script>
     </body>
 </html>

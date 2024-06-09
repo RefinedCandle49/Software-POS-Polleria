@@ -51,9 +51,8 @@
                             </button>
                         </div>                         
                     </div>
-
-                    <br>
-                    <div class="text-center">
+                    
+                    <div class="text-center mt-4">
                         <input class="btn btn-primary" type="submit" value="Ingresar" />
                     </div>
                 </form>
@@ -70,7 +69,9 @@
                                                 Swal.fire({
                                                     icon: 'error',
                                                     title: 'Error',
-                                                    text: 'Por favor ingresa un correo electrónico válido con el dominio @polloslocos.com'
+                                                    text: 'Por favor ingresa un correo electrónico válido con el dominio @polloslocos.com',
+                                                    confirmButtonColor: "#0A5ED7",
+                                                    confirmButtonText: "Aceptar"
                                                 });
                                             }
                                         });

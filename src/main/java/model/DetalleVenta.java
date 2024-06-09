@@ -2,7 +2,7 @@ package model;
 
 public class DetalleVenta {
     int detalleVenta, idVenta, idProducto, cantidad;
-    double totalVenta; String nombreProducto;
+    int totalVenta; String nombreProducto; //cambio de int por double
     double subTotal;
 
     public double getSubTotal() {
@@ -13,17 +13,17 @@ public class DetalleVenta {
         this.subTotal = subTotal;
     }
 
-    public DetalleVenta(int idProducto, String nombreProducto, double totalVenta) {
+    public DetalleVenta(int idProducto, String nombreProducto, int totalVenta) { //cambio de int por double
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.totalVenta = totalVenta;
     }
 
-    public double getTotalVenta() {
+    public int getTotalVenta() { //cambio de int por double
         return totalVenta;
     }
 
-    public void setTotalVenta(double totalVenta) {
+    public void setTotalVenta(int totalVenta) { //cambio de int por double
         this.totalVenta = totalVenta;
     }
 

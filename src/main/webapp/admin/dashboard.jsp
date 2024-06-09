@@ -1,6 +1,7 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="model.Usuario, dao.UsuarioDao, java.util.*" %>
+<%@page import="model.Usuario, dao.UsuarioDao, model.DetalleVenta, model.Producto, dao.ReporteDao, java.util.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +22,11 @@
             
             String emailRol=(String) ((Usuario) sesion.getAttribute("usuario")).getEmail(); 
             String nombreRol=(String) ((Usuario) sesion.getAttribute("usuario")).getRol();
+            
+            //REPORTES
+            ReporteDao reporteDao = new ReporteDao();
+            DetalleVenta productoMasVendido = reporteDao.obtenerProductoMasVendido(2024);
+            
             
             if(!"Administrador".equals(nombreRol)){
         %>
@@ -173,19 +179,47 @@
                         <h1 class="fw-bold">PANEL ADMINISTRATIVO</h1>
 
                         <section class="ventas-por-fechas">
+                            <h3 class="fw-bold">VENTAS</h3>
+
                             <form action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
                                 <label>
-                                    <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>">
+                                    <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" />
                                 </label>
 
                                 <label>
-                                    <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>">
+                                    <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" />
                                 </label>
 
-                                <input type="submit" value="Seleccionar">
+                                <input type="submit" value="Seleccionar" />
                             </form>
                         </section>
-                    </section>
+
+                        <section class="otros-reportes">
+                            <h3 class="fw-bold">OTROS REPORTES</h3>
+
+                            <div class="row justify-content-between">
+
+                                <div class="col-sm-4 my-3">
+                                    <div class="card border-0 shadow">
+                                        <div class="card-body bg-white rounded-3">
+                                            <h6 class="card-subtitle mb-3 text-muted">PRODUCTO MÁS POPULAR DEL AÑO</h6>
+                                            <%
+                                if(productoMasVendido != null) {%>
+                                            <h4 class="card-title text-center fw-bold m-0"><%= productoMasVendido.getNombreProducto() %></h4>
+                                            <p class="card-text text-center text-success fw-bold">
+                                                <span class="fs-1"><%= productoMasVendido.getTotalVenta() %></span>
+                                                <span class="fs-5">‎ ventas</span>
+                                            </p>
+                                            <% } else { %>
+                                            No se encontró ningún producto popular.
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                                        
+                            </div>
+                        </section>
+                    </section>                    
                 </main>
             </div>
         </div>

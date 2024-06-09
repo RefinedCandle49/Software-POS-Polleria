@@ -89,18 +89,18 @@ public class controlCliente extends HttpServlet {
 
                 // ERRORES //////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ClienteDao cliDao = new ClienteDao();
-                String mensajeError = null;
+                StringBuilder mensajeError = new StringBuilder();
 
                 if (cliDao.validarEmail(emailRegistrar)) {
-                    mensajeError = "Este correo electrónico se encuentra en uso. Por favor, ingresa uno diferente.";
+                    mensajeError.append("<div class=\"alert alert-danger\">Este correo electrónico se encuentra en uso. Por favor, ingresa uno diferente.</div>");
                 }
 
                 if (cliDao.validarId(documentoRegistrar)) {
-                    mensajeError = "Este DNI/RUC se encuentra en uso. Por favor, ingresa uno diferente.";
+                    mensajeError.append("<div class=\"alert alert-danger\">Este DNI/RUC se encuentra en uso. Por favor, ingresa uno diferente.</div>");
                 }
 
-                if (mensajeError != null) {
-                    request.setAttribute("mensajeError", mensajeError);
+                if (mensajeError.length() > 0) {
+                    request.setAttribute("mensajeError", mensajeError.toString());
                     request.setAttribute("documento", documentoRegistrar);
                     request.setAttribute("nombre", nombreRegistrar);
                     request.setAttribute("apellido", apellidoRegistrar);

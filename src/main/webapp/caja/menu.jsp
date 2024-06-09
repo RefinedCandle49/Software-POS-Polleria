@@ -151,7 +151,12 @@
                     </div>
                 </div>
             </div>
-
+            <script>
+                function handleErrorImage() {
+                    this.onerror = null;
+                    this.src ='https://www.mediafire.com/convkey/3ebd/xkltwfdxw34xnrhzg.jpg';
+                }
+            </script>
             <div class="col-md-10 ps-1">
                 <div class='contenedor-productos'>   
                     <!-- PRODUCTOS POLLOS -->
@@ -160,7 +165,7 @@
                             <c:forEach var="prod" items="${listaPollo}">
                                 <div class="product-card cont-product">
                                     <a href="#" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
-                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" onerror="handleErrorImage.call(this);">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
@@ -179,7 +184,7 @@
                             <c:forEach var="prod" items="${listaSopa}">
                                 <div class="product-card card cont-product">
                                     <a href="" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
-                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" onerror="handleErrorImage.call(this);">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}, ${prod.getIdProducto()}</h5>
@@ -197,7 +202,7 @@
                             <c:forEach var="prod" items="${listaBebida}">
                                 <div class="product-card card cont-product">
                                     <a href="" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
-                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" onerror="handleErrorImage.call(this);">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>
@@ -215,7 +220,7 @@
                             <c:forEach var="prod" items="${listaPostre}">
                                 <div class="product-card card cont-product">
                                     <a href="" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
-                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}">
+                                        <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" onerror="handleErrorImage.call(this);">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="fw-bold">${prod.getNombre()}</h5>

@@ -203,7 +203,7 @@
                             </c:if>
 
                         <c:if test="${not empty param.registroExitoso}">
-                            <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                            <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
                                 ${param.registroExitoso}
                                 <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()">
                                     <svg
@@ -311,10 +311,8 @@
                 </main>
             </div>
         </div>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="<%=request.getContextPath()%>/js/sweetAlert.js"></script>
         <script>
                                                             function cerrarMensaje() {
                                                                 let registroExitoso = document.getElementById("registroExitoso");

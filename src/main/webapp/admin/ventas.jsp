@@ -252,7 +252,7 @@
 
                             Swal.fire({
                                 title: "¿Desea anular esta venta?",
-                                text: "Esta acción anulará definitivamente la venta. ¿Está seguro de que desea continuar?",
+                                html: "Esta acción anulará definitivamente la venta. <br> ¿Está seguro de que desea continuar?",
                                 icon: "warning",
                                 showCancelButton: true,
                                 confirmButtonColor: "#0d6efd", //#3085d6
@@ -262,15 +262,24 @@
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     document.getElementById(formId).submit();
-                                    Swal.fire({
-                                        title: "Venta Anulada",
-                                        text: "La venta ha sido anulada exitosamente",
-                                        icon: "success"
-                                    });
                                 }
                             });
                         });
                     });
+                    
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const anularVenta = urlParams.get('anularVenta');
+                    
+                    if (anularVenta === 'true') {
+                        Swal.fire({
+                            title: 'Venta anulada correctamente',
+                            icon: 'success',
+                            confirmButtonColor: "#0d6efd",
+                            confirmButtonText: 'Aceptar'
+                        }).then(() => {
+                            window.location.href = "<%= request.getContextPath() %>/admin/ventas.jsp"
+                        });
+                    }
                 });
         </script>
     </body>

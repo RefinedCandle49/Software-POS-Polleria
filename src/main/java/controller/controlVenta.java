@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.Venta;
@@ -83,8 +84,17 @@ public class controlVenta extends HttpServlet {
         
         int result = VentaDao.anularVenta(vent);
         
-        response.sendRedirect(request.getContextPath() + "/admin/ventas.jsp");
-
+        // Mandar parametro para mostrar alerta de confirmación
+        HttpSession session = request.getSession();
+        
+        if(result > 0) {
+            response.sendRedirect(request.getContextPath() + "/admin/ventas.jsp?anularVenta=true");
+        }
+        
+        /*else {
+            response.sendRedirect(request.getContextPath() + "/admin/ventas.jsp?anularVenta=false");
+        }*/
+        
         //processRequest(request, response);
     }
 

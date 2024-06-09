@@ -32,17 +32,17 @@
         <p id="desde" style="display: none">${desde}</p>
         <p id="hasta" style="display: none;">${hasta}</p>
         <h1 class="fw-bold">PANEL DE REPORTES</h1>
-        <p>Fecha inicio: ${desde} - Hasta: ${hasta}</p>
-        <div class="d-flex align-items-center justify-content-end">
-            <button id="exportButton" class="btn btn-primary">Descargar EXCEL</button>
-            <button class="btn btn-primary" onclick="generate()">Descargar PDF</button>
-        </div>
         
         <c:if test="${empty list}">
-            <span>¡Hola! Parece que esta tabla está vacía en este momento.</span>
+            <span>No se encontraron ventas para el rango de ventas seleccionado.</span>
         </c:if>
         
         <c:if test="${not empty list}">
+            <p>Fecha inicio: ${desde} - Hasta: ${hasta}</p>
+            <div class="d-flex align-items-center justify-content-end">
+                <button id="exportButton" class="btn btn-primary">Descargar EXCEL</button>
+                <button class="btn btn-primary" onclick="generate()">Descargar PDF</button>
+            </div>
             <div class="table-responsive">
                 <table id="table2excel" class="table table-striped">
                     <tr>

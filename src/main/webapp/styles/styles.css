@@ -81,6 +81,23 @@ svg {
     margin-bottom: 2px !important;
 }
 
+.color-tabla tr:nth-child(even) td{
+    background-color: #f2f2f2;
+}
+
+.color-tabla tr:nth-child(odd) td{
+    background-color: #ffffff;
+}
+
+.callout {
+    border-bottom: 5px solid #212529;
+    padding-bottom: 15px
+}
+
+th {
+    padding: 20px 8px !important;
+}
+
 @media (max-width: 600px) {
     main{
         padding: 25px 30px !important;
@@ -89,5 +106,11 @@ svg {
     .img-css{
         width: 24px;
         height: 56px;
+    }
+}
+
+@media (min-width: 576px) {
+    .h-sm-100 {
+        height: 100%;
     }
 }

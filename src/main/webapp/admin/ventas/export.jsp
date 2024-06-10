@@ -88,9 +88,9 @@
 
         %>
 
-        <div class="container-fluid">
-            <div class="row flex-nowrap">
-                <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="container-fluid overflow-hidden">
+            <div class="row vh-100 overflow-auto">
+                <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
                     <nav
                         class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
                         <div class="w-100 text-center text-light">
@@ -206,8 +206,8 @@
                     </nav>
                 </header>
 
-                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
-                    <section>
+                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10 flex-column h-sm-100">
+                    <section class="overflow-auto">
                         <p id="desde" style="display: none"><%=desde%></p>
                         <p id="hasta" style="display: none;"><%=hasta%></p>
                         <h1 class="fw-bold">PANEL DE REPORTES</h1>

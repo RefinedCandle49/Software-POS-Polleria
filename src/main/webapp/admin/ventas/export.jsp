@@ -22,54 +22,26 @@
         <title>Ventas por Fechas | Pollos Locos</title>
     </head>
     <body>
-        <% 
-                HttpSession sesion=request.getSession(false); 
-                String contextPath=request.getContextPath(); 
-            
-                if (sesion==null || sesion.getAttribute("usuario")==null) {
-                    response.sendRedirect(request.getContextPath() + "/index.jsp" ); return; 
-                }
-            
-                String emailRol=(String) ((Usuario) sesion.getAttribute("usuario")).getEmail(); 
-                String nombreRol=(String) ((Usuario) sesion.getAttribute("usuario")).getRol();
-            
-                //REPORTES
-                ReporteDao reporteDao = new ReporteDao();
-                DetalleVenta productoMasVendido = reporteDao.obtenerProductoMasVendido(2024);
-            
-            
-                if(!"Administrador".equals(nombreRol)){
-        %>
-        <script>
-            alert("Acceso Denegado");
-            <%
-                switch (nombreRol) {
-                    case "Cajero":
-            %> window.location.href = "<%= request.getContextPath() %>/caja/menu.jsp";<%
-                    break;
-
-                    case "Almacenero":
-            %> window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp";<%
-                    break;
-
-                    default:
-            %> window.location.href = "<%= request.getContextPath() %>/index.jsp";<%
-                }
-            %>
-        </script>
-        <% 
-            return; 
-            } 
-        %>
-        <script>
-            let contextPath = '<%= contextPath %>';
-            let nombreRol = '<%= nombreRol %>';
-        </script>
+        
         <%
+            String spageid=request.getParameter("page");
+            int pageid=Integer.parseInt(spageid);
+            int total=10;
+            if(pageid==1){}
+            else{
+                pageid=pageid-1;
+                pageid=pageid*total+1;
+            }
             String desde = request.getParameter("desde");
             String hasta = request.getParameter("hasta");
+            List<Venta> listaVentasPaginacion = VentaDao.listarVentasPorFechaPaginacion(desde, hasta, pageid,total);
+            request.setAttribute("list", listaVentasPaginacion);
+            
             List<Venta> listaVentas = VentaDao.listarVentasPorFecha(desde, hasta);
-            request.setAttribute("list", listaVentas);
+            request.setAttribute("listExport", listaVentas);
+            
+            int totalProductos = VentaDao.contarVentasPorFecha(desde, hasta);
+            int totalPages = (int) Math.ceil((double) totalProductos / total); // Calcula el número total de páginas
 
         %>
 
@@ -84,17 +56,7 @@
                             <br /><span class="d-none d-sm-inline fs-4 w-100">POLLOS LOCOS</span>
                         </div>
 
-                        <div class="w-100 text-center text-light">
-                            <img src="${pageContext.request.contextPath}/img/user-icon.png"
-                                 class="img-fluid img-css py-3" alt="..." />
-                            <br /><span class="d-none d-sm-inline w-100">
-                                <%= nombreRol %>
-                            </span>
-                            <br /><span class="d-none d-sm-inline w-100"
-                                        style="opacity: 0.5; word-break: break-all !important;">
-                                <%= emailRol %>
-                            </span>
-                        </div>
+                       
                         <hr />
 
                         <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
@@ -192,8 +154,8 @@
 
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
                     <section>
-                        <p id="desde" style="display: none">${desde}</p>
-                        <p id="hasta" style="display: none;">${hasta}</p>
+                        <p id="desde" style="display: none"><%=desde%></p>
+                        <p id="hasta" style="display: none;"><%=hasta%></p>
                         <h1 class="fw-bold">PANEL DE REPORTES</h1>
 
                         <c:if test="${empty list}">
@@ -201,17 +163,38 @@
                         </c:if>
 
                         <c:if test="${not empty list}">
-                            <p>Fecha inicio: ${desde} - Hasta: ${hasta}</p>
+                            <p>Fecha inicio: <%=desde%> - Hasta: <%=hasta%></p>
                             <div class="d-flex align-items-center justify-content-end">
                                 <button id="exportButton" class="btn btn-primary mx-1">Descargar EXCEL</button>
                                 <button class="btn btn-primary mx-1" onclick="generate()">Descargar PDF</button>
                             </div>
                             
                             <div class="table-responsive my-2">
-                                <table id="table2excel" class="table table-striped">
+                                <table style="display: none" id="table2excel" class="table table-striped">
                                     <tr>
-                                        <th style="display: none">Fecha inicio: ${desde} - Hasta: ${hasta}</th>
+                                        <th style="display: none">Fecha inicio: <%=desde%> - Hasta: <%=hasta%></th>
                                     </tr>
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th>CÓDIGO</th>
+                                        <th>CLIENTE</th>
+                                        <th>FECHA Y HORA</th>
+                                        <th>TOTAL</th>
+                                    </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                    <c:forEach items="${listExport}" var="venta">
+                                        <tr>
+                                            <td>${venta.getCodigo()}</td>
+                                            <td>${venta.getNombre()} ${venta.getApellido()}</td>
+                                            <td>${venta.getFechaHoraVenta()}</td>
+                                            <td>S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${venta.getTotal()}" /></td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped">
                                     <thead class="table-dark">
                                         <tr>
                                             <th>CÓDIGO</th>
@@ -232,6 +215,25 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=1&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <%
+                                            for(int i = 1; i <= totalPages; i++) {
+                                        %>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=i%>&desde=<%=desde%>&hasta=<%=hasta%>"><%=i%></a></li>
+                                        <% } %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=totalPages%>&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </c:if>
                     </section>
@@ -264,10 +266,11 @@
                 var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
                 var filename = "Ventas - " + formattedDate + ".pdf";
                 var doc = new jspdf.jsPDF()
-
+                doc.setPage(1);
+                doc.text("Fecha inicio: " + desde + " - " + "Hasta: " + hasta, 10, 10);
+                
                 // Simple html example
                 doc.autoTable({html: '#table2excel'});
-                doc.text("Fecha inicio: " + desde + " - " + "Hasta: " + hasta, 10, 10);
                 doc.save(filename)
             }
         </script>

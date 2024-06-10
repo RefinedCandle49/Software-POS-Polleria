@@ -84,7 +84,7 @@ public class VentaDao {
         List<Venta> listaVentas = new ArrayList<Venta>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 AND DATE(fechaHoraVenta) BETWEEN ? AND ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 AND DATE(fechaHoraVenta) BETWEEN ? AND ? ORDER BY vent.idVenta ASC;");
             ps.setString(1, desde);
             ps.setString(2, hasta);
             ResultSet rs = ps.executeQuery();
@@ -106,6 +106,55 @@ public class VentaDao {
         }
 
         return listaVentas;
+    }
+
+    public static List<Venta> listarVentasPorFechaPaginacion(String desde, String hasta, int start, int total){
+        List<Venta> listaVentas = new ArrayList<Venta>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=1 AND DATE(fechaHoraVenta) BETWEEN ? AND ? ORDER BY vent.idVenta ASC LIMIT ?, ? ;");
+            ps.setString(1, desde);
+            ps.setString(2, hasta);
+            ps.setInt(3, start-1);
+            ps.setInt(4, total);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setIdVenta(rs.getInt("idVenta"));
+                vent.setCodigo(rs.getString("codigo"));
+                vent.setNombre(rs.getString("nombre"));
+                vent.setApellido(rs.getString("apellido"));
+                vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
+                vent.setEstado(rs.getInt("estado"));
+                vent.setTotal(rs.getDouble("total"));
+                listaVentas.add(vent);
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return listaVentas;
+    }
+
+    public static int contarVentasPorFecha(String desde, String hasta){
+        int totalVentas = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM venta WHERE DATE(fechaHoraVenta) BETWEEN ? AND ? AND estado = 1");
+            ps.setString(1, desde);
+            ps.setString(2, hasta);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalVentas = rs.getInt("total");
+            }
+            con.close();
+
+        } catch (Exception e){
+
+        }
+        return totalVentas;
     }
 
     public static List<Venta> listarVentas() {

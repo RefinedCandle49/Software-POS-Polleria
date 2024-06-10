@@ -26,7 +26,7 @@ public class controlDashboard extends HttpServlet {
                 request.setAttribute("desde", desde);
                 request.setAttribute("hasta", hasta);
 
-                request.getRequestDispatcher("admin/ventas/export.jsp").forward(request, response);
+                request.getRequestDispatcher("admin/ventas/export.jsp?page=1").forward(request, response);
                 break;
         }
     }

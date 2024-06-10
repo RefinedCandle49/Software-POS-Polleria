@@ -22,6 +22,49 @@
         <title>Ventas por Fechas | Pollos Locos</title>
     </head>
     <body>
+    <%
+        HttpSession sesion=request.getSession(false);
+        String contextPath=request.getContextPath();
+        
+        if (sesion==null || sesion.getAttribute("usuario")==null) {
+            response.sendRedirect(request.getContextPath() + "/index.jsp" ); return;
+        }
+        
+        String emailRol=(String) ((Usuario) sesion.getAttribute("usuario")).getEmail();
+        String nombreRol=(String) ((Usuario) sesion.getAttribute("usuario")).getRol();
+        
+        //REPORTES
+        ReporteDao reporteDao = new ReporteDao();
+        DetalleVenta productoMasVendido = reporteDao.obtenerProductoMasVendido(2024);
+        
+        
+        if(!"Administrador".equals(nombreRol)){
+    %>
+    <script>
+        alert("Acceso Denegado");
+        <%
+            switch (nombreRol) {
+                case "Cajero":
+        %> window.location.href = "<%= request.getContextPath() %>/caja/menu.jsp";<%
+                    break;
+
+                    case "Almacenero":
+            %> window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp";<%
+                    break;
+
+                    default:
+            %> window.location.href = "<%= request.getContextPath() %>/index.jsp";<%
+                }
+            %>
+    </script>
+    <%
+            return;
+        }
+    %>
+    <script>
+        let contextPath = '<%= contextPath %>';
+        let nombreRol = '<%= nombreRol %>';
+    </script>
         
         <%
             String spageid=request.getParameter("page");
@@ -55,7 +98,18 @@
                                 de Gestión</span>
                             <br /><span class="d-none d-sm-inline fs-4 w-100">POLLOS LOCOS</span>
                         </div>
-
+                        
+                        <div class="w-100 text-center text-light">
+                            <img src="${pageContext.request.contextPath}/img/user-icon.png"
+                                 class="img-fluid img-css py-3" alt="..." />
+                            <br /><span class="d-none d-sm-inline w-100">
+                                <%= nombreRol %>
+                            </span>
+                            <br /><span class="d-none d-sm-inline w-100"
+                                        style="opacity: 0.5; word-break: break-all !important;">
+                                <%= emailRol %>
+                            </span>
+                        </div>
                        
                         <hr />
 

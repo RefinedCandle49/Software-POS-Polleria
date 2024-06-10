@@ -1,3 +1,6 @@
+body{
+    background-color: #F2F4F6 !important;
+}
 main {
     display: flex;
     justify-content: center;

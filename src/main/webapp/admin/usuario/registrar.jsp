@@ -180,12 +180,12 @@
 
                             <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email:</label>
+                                    <label for="email" class="form-label fw-bold">Correo Electrónico:</label>
                                     <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" value="${param.email != null ? param.email : ''}" required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña:</label>
+                                    <label for="password" class="form-label fw-bold">Contraseña:</label>
 
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" value="${param.password != null ? param.password : ''}" required>
@@ -200,7 +200,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="rol" class="form-label">Rol:</label>
+                                    <label for="rol" class="form-label fw-bold">Rol:</label>
                                     <select class="form-select" id="rol" name="rol" required>
                                         <option value="" disabled selected class="invisible">Seleccionar opción</option>
                                         <option value="Administrador" ${param.rol == "Administrador" ? "selected" : ""}>Administrador</option>

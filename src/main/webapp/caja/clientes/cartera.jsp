@@ -102,7 +102,7 @@
                     <h1 class="fw-bold">PANEL DE CLIENTES</h1>
 
                     <div class="d-flex align-items-center justify-content-end">
-                        <a href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp" class="link-register text-dark pb-2">
+                        <a href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp" class="btn btn-primary">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
                             <span class="ms-1">Registrar Cliente</span>
                         </a>
@@ -113,14 +113,14 @@
                     </c:if>
 
                     <c:if test="${not empty param.registroExitoso}">
-                        <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                        <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
                             ${param.registroExitoso}
                             <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                         </div> 
                     </c:if>
 
                     <c:if test="${not empty list}">
-                        <div class="table-responsive">
+                        <div class="table-responsive my-2">
                             <table class="table table-striped">
                                 <thead class="bg-dark text-light">
                                     <tr>

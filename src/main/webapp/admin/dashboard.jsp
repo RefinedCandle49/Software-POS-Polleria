@@ -176,21 +176,21 @@
 
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
                     <section>
-                        <h1 class="fw-bold">PANEL ADMINISTRATIVO</h1>
+                        <h1 class="fw-bold">PANEL DE REPORTES</h1>
 
                         <section class="ventas-por-fechas">
                             <h3 class="fw-bold">VENTAS</h3>
 
                             <form action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
                                 <label>
-                                    <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" />
+                                    <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
 
                                 <label>
-                                    <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" />
+                                    <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
 
-                                <input type="submit" value="Seleccionar" />
+                                <input type="submit" class="btn btn-primary" value="Seleccionar" />
                             </form>
                         </section>
 
@@ -200,7 +200,7 @@
                             <div class="row justify-content-between">
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card border-0 shadow">
+                                    <div class="card">
                                         <div class="card-body bg-white rounded-3">
                                             <h6 class="card-subtitle mb-3 text-muted">PRODUCTO MÁS POPULAR DEL AÑO</h6>
                                             <%

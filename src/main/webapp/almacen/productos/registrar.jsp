@@ -99,7 +99,7 @@
         
         <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
             <section>
-                <h1 class="text-center fw-bold">REGISTRAR PRODUCTO</h1>
+                <h1 class="text-center fw-bold">REGISTRO DE PRODUCTO</h1>
                 <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data">
                     
                     <div class="container table-responsive">
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="text-center">
-                        <input type="submit" class="btn btn-success" value="Registrar Producto">
+                        <input type="submit" class="btn btn-primary" value="Registrar Producto">
                         <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>

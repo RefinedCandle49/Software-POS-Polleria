@@ -113,7 +113,7 @@
                     <h1 class="fw-bold">PANEL DE PRODUCTOS</h1>
 
                     <div class="d-flex align-items-center justify-content-end">
-                        <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="link-register text-dark pb-2">
+                        <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="btn btn-primary">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
                             <span class="ms-1">Registrar Producto</span>
                         </a>
@@ -124,14 +124,14 @@
                     </c:if>
                             
                     <c:if test="${not empty param.registroExitoso}">
-                        <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                        <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
                             ${param.registroExitoso}
                             <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                         </div>
                     </c:if>
                 
-                    <div class="table-responsive-md">
-                        <table class="table table-bordered container" border="1">
+                    <div class="table-responsive-md my-2">
+                        <table class="table table-striped container">
                             <thead class="table-dark">
                             <tr>
                                 <th>ID</th>

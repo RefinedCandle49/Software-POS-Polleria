@@ -173,7 +173,7 @@
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
                     <section class="d-flex align-items-center justify-content-center h-100">
                         <div>
-                            <h1 class="fw-bold">ACTUALIZAR USUARIO</h1>
+                            <h1 class="fw-bold">ACTUALIZACIÓN DE USUARIO</h1>
 
                             <form action="${pageContext.request.contextPath}/controlUsuario?action=actualizar" method="post">
 
@@ -181,28 +181,28 @@
                                 <input type="hidden" name="estado" value="${usuario.estado}"> 
 
                                 <div class="mb-3">
-                                    <label for="codigo" class="form-label">Código:</label>
+                                    <label for="codigo" class="form-label fw-bold">Código:</label>
                                     <div>
                                         <input type="text" name="codigo" class="form-control" id="codigo" value="${usuario.codigo}" disabled>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email:</label>
+                                    <label for="email" class="form-label fw-bold">Correo Electrónico:</label>
                                     <div>
                                         <input type="email" name="email" class="form-control" id="email" value="${usuario.email}" disabled>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña:</label>
+                                    <label for="password" class="form-label fw-bold">Contraseña:</label>
                                     <div>
                                         <input name="password" class="form-control" id="password" minlength="5" maxlength="50" required value="${usuario.password}">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="rol" class="form-label">Rol:</label>
+                                    <label for="rol" class="form-label fw-bold">Rol:</label>
                                     <div>
                                         <select class="form-select" id="rol" name="rol" required>
                                             <option value="" disabled>Seleccionar una opción</option>
@@ -214,7 +214,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                                     <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-secondary">Regresar</a>
                                 </div>
                             </form>

@@ -97,8 +97,8 @@
         </header>
 
         <main class="row d-flex align-items-center justify-content-center m-0 py-5">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 p-5">
+            <div class="col-md-3 col-xxl-4"></div>
+            <div class="col-md-6 col-xxl-4">
                 <h1 class="fw-bold text-center">REGISTRO DE CLIENTE</h1>
 
                 <c:if test="${not empty mensajeError}">
@@ -110,38 +110,38 @@
                 <form action="${pageContext.request.contextPath}/controlCliente?action=registrar" method="post" onsubmit="return validarCaracteres(event)">
 
                     <div class="mb-3">
-                        <label for="documento" class="form-label">DNI/RUC:</label>
+                        <label for="documento" class="form-label fw-bold">DNI/RUC:</label>
                         <input type="text" id="documento" name="documento" value="${param.documento != null ? param.documento : ''}" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" required>
                         <span id="errorLimiteDni" class="text-danger"></span>
                         <span id="errorSoloNumeros" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre:</label>
+                        <label for="nombre" class="form-label fw-bold">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" value="${param.nombre != null ? param.nombre : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" required>
                         <span id="errorSoloLetrasNombre" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido:</label>
+                        <label for="apellido" class="form-label fw-bold">Apellido:</label>
                         <input type="text" id="apellido" name="apellido" value="${param.apellido != null ? param.apellido : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" required>
                         <span id="errorSoloLetrasApellido" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
+                        <label for="email" class="form-label fw-bold">Correo Electrónico:</label>
                         <input type="email" id="email" name="email" value="${param.email != null ? param.email : ''}" class="form-control" minlength="10"  maxlength="80" required>
                     </div>
                     
                     <input type="hidden" name="estado" value="1">
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success" >Registrar Cliente</button>
+                        <button type="submit" class="btn btn-primary" >Registrar Cliente</button>
                         <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp" class="btn btn-secondary">Regresar</a>
                     </div> 
                 </form>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-3 col-xxl-4"></div>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

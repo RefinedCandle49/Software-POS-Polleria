@@ -169,7 +169,7 @@
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section class="d-flex align-items-center justify-content-center h-100">
                         <div>
-                            <h1 class="fw-bold">REGISTRO DE USUARIO</h1>
+                            <h1 class="text-center fw-bold mb-4">REGISTRO DE USUARIO</h1>
 
                             <c:if test="${not empty mensajeError}">
                                 <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
@@ -212,7 +212,7 @@
                                 <input type="hidden" name="estado" value="1" value="${param.estado != null ? param.estado : ''}">
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" >Registrar Usuario</button>
+                                    <button type="submit" class="btn btn-success" >Registrar Usuario</button>
                                     <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-secondary">Regresar</a>
                                 </div>
                             </form>
@@ -228,7 +228,7 @@
             function cerrarMensaje() {
                 let mensajeError = document.getElementById("mensajeError");
                 mensajeError.style.display = "none";
-                window.location.href = "${pageContext.request.contextPath}/admin/registrar.jsp"
+                window.location.href = "${pageContext.request.contextPath}/admin/usuario/registrar.jsp"
             }
         </script>
 

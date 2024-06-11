@@ -97,7 +97,7 @@ public class controlUsuario extends HttpServlet {
                     request.setAttribute("password", passwordRegistrar);
                     request.setAttribute("rol", rolRegistrar);
                     request.setAttribute("estado", estadoRegistrar);
-                    request.getRequestDispatcher("admin/registrar.jsp").forward(request, response);
+                    request.getRequestDispatcher("admin/usuario/registrar.jsp").forward(request, response);
                     //response.sendRedirect(request.getContextPath() + "/admin/registrar.jsp?mensajeError=" + mensajeError);
                     return;
                 }

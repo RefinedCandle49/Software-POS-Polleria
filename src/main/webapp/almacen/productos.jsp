@@ -115,7 +115,7 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="btn btn-primary">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
-                            <span class="ms-1">Registrar Producto</span>
+                            <span class="ms-1">Ir a registrar producto</span>
                         </a>
                     </div>
                     
@@ -134,7 +134,8 @@
                         <table class="table table-striped">
                             <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
+                                <th style="display: none">ID</th>
+                                <th>CÓDIGO</th>
                                 <th>CATEGORÍA</th>
                                 <th>NOMBRE</th>
                                 <th>DESCRIPCIÓN</th>
@@ -149,7 +150,8 @@
                             <tbody>
                             <c:forEach items="${list}" var="prod">
                                 <tr>
-                                    <td>${prod.getIdProducto()}</td>
+                                    <td style="display: none">${prod.getIdProducto()}</td>
+                                    <td>${prod.getCodigo()}</td>
                                     <td>${prod.getNombreCategoria()}</td>
                                     <td>${prod.getNombre()}</td>
                                     <td>${prod.getDescripcion()}</td>
@@ -169,8 +171,8 @@
                                     <td>${prod.getStock()}</td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${prod.getEstado() == 0}">Inactivo</c:when>
-                                            <c:when test="${prod.getEstado() == 1}">Activo</c:when>
+                                            <c:when test="${prod.getEstado() == 0}">No Disponible</c:when>
+                                            <c:when test="${prod.getEstado() == 1}">Disponible</c:when>
                                             <c:otherwise>Estado Desconocido</c:otherwise>
                                         </c:choose>
                                     </td>

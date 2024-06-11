@@ -214,7 +214,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
                                     <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-secondary">Regresar</a>
                                 </div>
                             </form>

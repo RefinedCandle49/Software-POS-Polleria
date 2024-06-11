@@ -193,7 +193,7 @@
                                     <path d="M19 16v6" />
                                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
                                 </svg>
-                                <span class="ms-1"> Registrar Usuario</span>
+                                <span class="ms-1"> Ir a registrar usuario</span>
                             </a>
                         </div>
 
@@ -221,7 +221,7 @@
                         </c:if>
 
                         <c:if test="${not empty param.actualizarExitoso}">
-                            <div id="actualizarExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                            <div id="actualizarExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
                                 ${param.actualizarExitoso}
                                 <button type="button" class="button-mensaje text-success" onclick="cerrarMensajeActualizar()">
                                     <svg

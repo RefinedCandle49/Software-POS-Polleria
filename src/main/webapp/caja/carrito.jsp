@@ -107,9 +107,9 @@
 
                                 </div>
 
-                                <button type="button" class="btn btn-primary" id="buscar">Buscar Cliente</button>
+                                <button type="button" class="btn btn-info text-white" id="buscar">Buscar Cliente</button>
                                 <button type="button" class="btn btn-secondary" id="limpiar">Limpiar</button>
-                                <button type="button" class="btn btn-primary" id="generico">Genérico</button>
+                                <button type="button" class="btn btn-info text-white" id="generico">Genérico</button>
                             </div>
                             <HR>
                             <table class="table table-bordered text-center border border-white">
@@ -252,15 +252,17 @@
             </div>
 
             <div class="container icon-carrito">
-                <c:if test="${totalPagar <= 0}">
-                    <i class="fa-duotone fa-cart-xmark fa-10x d-flex justify-content-center align-items-center"></i>
-                    <p class="text-center mt-5">UPS! El carrito está vacío :(</p>
-                </c:if>
-                <ul class="list-unstyled">
-                    <li class="text-center mt-5">
-                        <button id="regresar" class="btn btn-secondary"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
-                    </li>
-                </ul>
+                <div>
+                    <c:if test="${totalPagar <= 0}">
+                        <i class="fa-duotone fa-cart-xmark fa-10x d-flex justify-content-center align-items-center"></i>
+                        <p class="text-center mt-5">UPS! El carrito está vacío :(</p>
+                    </c:if>
+                    <ul class="list-unstyled">
+                        <li class="text-center mt-5">
+                            <button id="regresar" class="btn btn-secondary"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 

@@ -140,7 +140,7 @@
                             <tr>
                                 <th>Foto:</th>
                                 <td>
-                                    <input type="file" name="image" accept=".jpg, .jpeg, .png" required>
+                                    <input type="file" name="image" accept=".jpg, .jpeg, .png" required class="btn-file">
                                     <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
                                 </td>
                             </tr>
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="text-center">
-                        <input type="submit" class="btn btn-primary" value="Registrar Producto">
+                        <input type="submit" class="btn btn-success" value="Registrar Producto">
                         <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="btn btn-secondary">Regresar</a>
                     </div>
                 </form>
@@ -203,14 +203,18 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Solo se admiten archivos JPG, JPEG y PNG.'
+                    text: 'Solo se admiten archivos JPG, JPEG y PNG.',
+                    confirmButtonColor: "#0d6efd",
+                    confirmButtonText: "Aceptar"
                 });
                 this.value = ''; // Limpiar el campo de entrada
             } else if (file.size > maxSize) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.'
+                    text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.',
+                    confirmButtonColor: "#0d6efd",
+                    confirmButtonText: "Aceptar"
                 });
                 this.value = ''; // Limpiar el campo de entrada
             }

@@ -94,9 +94,9 @@ svg {
     padding-bottom: 15px
 }
 
-th {
+/*th {
     padding: 20px 8px !important;
-}
+}*/
 
 @media (max-width: 600px) {
     main{

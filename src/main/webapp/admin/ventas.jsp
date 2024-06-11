@@ -56,11 +56,10 @@
             request.setAttribute("list", milista);
         %>
 
-        <div class="container-fluid">
-            <div class="row flex-nowrap">
-                <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                    <nav
-                        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+        <div class="container-fluid overflow-hidden">
+            <div class="row vh-100 overflow-auto">
+                <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-3 col-xxl-2 px-sm-2 px-0 bg-dark sticky-top">
+                    <nav class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
                         <div class="w-100 text-center text-light">
                             <span class="d-none d-sm-inline fs-6" style="opacity: 0.5">Sistema
                                 de Gestión</span>
@@ -153,7 +152,7 @@
                         </ul>
                         <hr />
 
-                        <div class="pb-4">
+                        <div class="pb-3">
                             <a href="${pageContext.request.contextPath}/logout.jsp"
                                class="d-flex link-active align-items-center w-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -173,7 +172,7 @@
                     </nav>
                 </header>
 
-                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
+                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10 flex-column h-sm-100">
                     <section>
                         <h1 class="fw-bold">PANEL DE VENTAS</h1>
 
@@ -189,8 +188,8 @@
                         </c:if>
 
                         <c:if test="${not empty list}">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
+                            <div class="table-responsive color-tabla rounded-top my-2 callout pb-0 bg-light">
+                                <table class="table border mb-0">
                                     <thead class="table-dark">
                                         <tr>
                                             <th style="display: none">ID</th>
@@ -258,7 +257,7 @@
                                 confirmButtonColor: "#0d6efd", //#3085d6
                                 cancelButtonColor: "#dc3545", //#d33
                                 cancelButtonText: "Cancelar",
-                                confirmButtonText: "Confirmar"
+                                confirmButtonText: "Continuar"
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     document.getElementById(formId).submit();

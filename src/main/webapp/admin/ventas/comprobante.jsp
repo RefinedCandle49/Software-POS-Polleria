@@ -107,11 +107,11 @@
                 </div>
                 
                 <div class="text-center">
-                    <button id="procesar-venta" onclick="print()" type="submit" class="btn btn-dark">Descargar
+                    <button id="procesar-venta" onclick="print()" type="submit" class="btn btn-primary">Descargar
                         comprobante
                     </button>
                     
-                    <button id="regresar" class="btn btn-dark">
+                    <button id="regresar" class="btn btn-secondary">
                         <a class="text-white text-decoration-none" href="<%=request.getContextPath()%>/admin/ventas.jsp">
                             Regresar
                         </a>

@@ -15,7 +15,7 @@
     <body>
         <main class="container">
             <section class="row">
-                <h1 class="text-center">Inicia Sesión</h1>
+                <h1 class="text-center fw-bold">INICIAR SESIÓN</h1>
 
                 <div class="icon my-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -34,12 +34,12 @@
                 <form action="${pageContext.request.contextPath}/controlLogin" method="POST">
 
                     <div class="mb-3">
-                        <label class="form-label">Correo Electrónico: </label><br>
+                        <label class="form-label fw-bold">Correo Electrónico: </label><br>
                         <input maxlength="80" class="form-control" type="email" name="email" value="@polloslocos.com" placeholder="Ingresa tu correo electrónico" required/>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Contraseña: </label><br>
+                        <label class="form-label fw-bold">Contraseña: </label><br>
 
                         <div class="input-group">
                             <input maxlength="50" class="form-control" type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required/>

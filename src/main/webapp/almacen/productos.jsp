@@ -66,9 +66,9 @@
     int totalPages = (int) Math.ceil((double) totalProductos / total); // Calcula el número total de páginas
 %>
 <body>
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+    <div class="container-fluid overflow-hidden">
+        <div class="row vh-100 overflow-auto">
+            <header class="col-auto col-2 col-sm-4 col-md-3 col-xl-3 col-xxl-2 px-sm-2 px-0 bg-dark sticky-top">
                 <nav class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
                     <div class="w-100 text-center text-light">
                         <span class="d-none d-sm-inline fs-6" style="opacity: 0.5">Sistema de Gestión</span>
@@ -98,7 +98,7 @@
                         </li>
                     </ul>
                     <hr>
-                    <div class="pb-4">
+                    <div class="pb-3">
                         <a href="${pageContext.request.contextPath}/logout.jsp" class="d-flex link-active align-items-center w-100">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" /><path d="M15 12h-12l3 -3" /><path d="M6 15l-3 -3" /></svg>
                             <span class="d-none d-sm-inline mx-1">Cerrar Sesión</span>
@@ -107,15 +107,15 @@
                 </nav>
             </header>
         
-            <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10">
-                
-                <c:if test="${not empty list}">
+            <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
+                <section>
+                    <c:if test="${not empty list}">
                     <h1 class="fw-bold">PANEL DE PRODUCTOS</h1>
 
                     <div class="d-flex align-items-center justify-content-end">
                         <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="btn btn-primary">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
-                            <span class="ms-1">Registrar Producto</span>
+                            <span class="ms-1">Ir a registrar producto</span>
                         </a>
                     </div>
                     
@@ -131,10 +131,11 @@
                     </c:if>
                 
                     <div class="table-responsive-md my-2">
-                        <table class="table table-striped container">
+                        <table class="table table-striped">
                             <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
+                                <th style="display: none">ID</th>
+                                <th>CÓDIGO</th>
                                 <th>CATEGORÍA</th>
                                 <th>NOMBRE</th>
                                 <th>DESCRIPCIÓN</th>
@@ -149,7 +150,8 @@
                             <tbody>
                             <c:forEach items="${list}" var="prod">
                                 <tr>
-                                    <td>${prod.getIdProducto()}</td>
+                                    <td style="display: none">${prod.getIdProducto()}</td>
+                                    <td>${prod.getCodigo()}</td>
                                     <td>${prod.getNombreCategoria()}</td>
                                     <td>${prod.getNombre()}</td>
                                     <td>${prod.getDescripcion()}</td>
@@ -169,8 +171,8 @@
                                     <td>${prod.getStock()}</td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${prod.getEstado() == 0}">Inactivo</c:when>
-                                            <c:when test="${prod.getEstado() == 1}">Activo</c:when>
+                                            <c:when test="${prod.getEstado() == 0}">No Disponible</c:when>
+                                            <c:when test="${prod.getEstado() == 1}">Disponible</c:when>
                                             <c:otherwise>Estado Desconocido</c:otherwise>
                                         </c:choose>
                                     </td>
@@ -199,6 +201,7 @@
                         </div>
                     </div>
                 </c:if>
+                </section>
             </main>
         </div>
     </div>

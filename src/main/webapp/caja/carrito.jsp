@@ -259,7 +259,9 @@
                     </c:if>
                     <ul class="list-unstyled">
                         <li class="text-center mt-5">
-                            <button id="regresar" class="btn btn-secondary"><a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</a></button>
+                            <a style="text-decoration: none;" class="text-white" href="<%=request.getContextPath()%>/caja/menu.jsp">
+                                <button id="regresar" class="btn btn-secondary"><i class="fa-light fa-arrow-left px-2"></i>Seguir comprando</button>
+                            </a>
                         </li>
                     </ul>
                 </div>

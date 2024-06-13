@@ -332,20 +332,36 @@
             document.getElementById("procesar-venta").addEventListener("click", function (event) {
                 var form = document.getElementById("ventaForm");
                 var nombreDisplay = document.getElementById("nombreDisplay").value.trim();
-
-                if (form.checkValidity() && nombreDisplay !== "Cliente no encontrado") {
-                    // Mostrar SweetAlert de confirmación
-                    // Simular impresión
-                    setTimeout(function () {
-                        // window.print();
-                    });
-                } else {
+                var cantidadInput = document.getElementById("Cantidad");
+                var cantidad = parseInt(cantidadInput.value);
+                
+                // verificamos si los campos están vacíos o la cantidad excede el stock máximo
+                var camposCompletos = nombreDisplay !== "" && nombreDisplay !== "Cliente no encontrado";
+                var excedeStock = cantidad > stockMaximo;
+                
+                if(!camposCompletos && excedeStock) {
                     event.preventDefault();
-                    // Mostrar SweetAlert de error
+                    // Mostramos la alerta para ambos errores
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Por favor complete todos los campos o revise que la cantidad no exceda el stock del producto.',
+                        icon:'error',
+                        title:'Error',
+                        text:'Complete todos los campos y revise que la cantidad no exceda al stock del producto',
+                    });
+                } else if (!camposCompletos) {
+                    event.preventDefault();
+                    // Mostramos la alerta para cuando la cantidad exceda al stock
+                    Swal.fire({
+                        icon:'error',
+                        title:'Error',
+                        text:'Complete los campos del cliente',
+                    });
+                } else if (excedeStock) {
+                    event.preventDefault();
+                    // Mostramos la alerta para ambos errores
+                    Swal.fire({
+                        icon:'error',
+                        title:'Error',
+                        text:'Verifique que la cantidad no supere al stock',
                     });
                 }
             });

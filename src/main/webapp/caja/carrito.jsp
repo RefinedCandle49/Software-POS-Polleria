@@ -346,6 +346,9 @@
                         icon:'error',
                         title:'Error',
                         text:'Complete todos los campos y revise que la cantidad no exceda al stock del producto',
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#007BFF',
+                        allowOutsideClick: false
                     });
                 } else if (!camposCompletos) {
                     event.preventDefault();
@@ -354,6 +357,9 @@
                         icon:'error',
                         title:'Error',
                         text:'Complete los campos del cliente',
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#007BFF',
+                        allowOutsideClick: false
                     });
                 } else if (excedeStock) {
                     event.preventDefault();
@@ -362,6 +368,9 @@
                         icon:'error',
                         title:'Error',
                         text:'Verifique que la cantidad no supere al stock',
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#007BFF',
+                        allowOutsideClick: false
                     });
                 }
             });

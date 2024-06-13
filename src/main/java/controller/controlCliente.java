@@ -121,7 +121,7 @@ public class controlCliente extends HttpServlet {
 
                 if (resultRegistrar > 0) {
                     String registroExitoso = "Cliente registrado correctamente";
-                    response.sendRedirect(request.getContextPath() + "/caja/clientes/cartera.jsp?registroExitoso=" + registroExitoso);
+                    response.sendRedirect(request.getContextPath() + "/caja/clientes/cartera.jsp?registroExitoso=" + registroExitoso + "&page=1");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

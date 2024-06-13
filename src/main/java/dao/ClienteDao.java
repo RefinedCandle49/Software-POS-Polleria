@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
+import model.Producto;
+
 /**
  *
  * @author daniel
@@ -40,6 +42,54 @@ public class ClienteDao {
             e.printStackTrace();
         }
         return listaClientes;
+    }
+
+    public static List<Cliente> listarClientesPagina(int start, int total) {
+        List<Cliente> listaClientes = new ArrayList<Cliente>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT cli.idCliente, cli.documento, cli.nombre, cli.apellido, cli.email, cli.estado FROM cliente cli ORDER BY idCliente DESC LIMIT ?, ?");
+            ps.setInt(1, start-1);
+            ps.setInt(2, total);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setIdCliente(rs.getInt("idCliente"));
+                cli.setDocumento(rs.getString("documento"));
+                cli.setNombre(rs.getString("nombre"));
+                cli.setApellido(rs.getString("apellido"));
+                cli.setEmail(rs.getString("email"));
+                cli.setEstado(rs.getInt("estado"));
+                listaClientes.add(cli);
+
+            }
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaClientes;
+    }
+
+    public static int contarClientes(){
+        int totalClientes = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM cliente WHERE estado=1");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalClientes = rs.getInt("total");
+            }
+            con.close();
+
+        } catch (Exception e){
+
+        }
+        return totalClientes;
     }
 
     public static Cliente listarClientePorId(String documento){

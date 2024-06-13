@@ -50,10 +50,21 @@
         <%
             
             return;
-        }    
+        }
             
-        List<Cliente> cliente = ClienteDao.listarClientes();
-        request.setAttribute("list", cliente);
+            String spageid=request.getParameter("page");
+            int pageid=Integer.parseInt(spageid);
+            int total=17;
+            if(pageid==1){}
+            else{
+                pageid=pageid-1;
+                pageid=pageid*total+1;
+            }
+            List<Cliente> cliente = ClienteDao.listarClientesPagina(pageid,total);
+            request.setAttribute("list", cliente);
+            
+            int totalClientes = ClienteDao.contarClientes();
+            int totalPages = (int) Math.ceil((double) totalClientes / total); // Calcula el número total de páginas
         %>
         
         <header>
@@ -72,7 +83,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp">
+                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp?page=1">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
                                     <span>Gestionar Clientes</span>
                                 </a>
@@ -158,6 +169,25 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <%
+                                        for(int i = 1; i <= totalPages; i++) {
+                                    %>
+                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=<%=i%>"><%=i%></a></li>
+                                    <% } %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=<%=totalPages%>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </c:if>
                 </div>
@@ -169,7 +199,7 @@
             function cerrarMensaje() {
                 let registroExitoso = document.getElementById("registroExitoso");
                 registroExitoso.style.display = "none";
-                window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp"
+                window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1"
             }
         </script>
     </body>

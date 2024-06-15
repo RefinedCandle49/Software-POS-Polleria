@@ -59,7 +59,18 @@ public class controlCliente extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        String action = request.getParameter("action");
+        
+        switch (action) {
+            case "editar":
+                int idCliente = Integer.parseInt(request.getParameter("id"));
+                Cliente cliente = ClienteDao.obtenerClientePorId(idCliente);
+                request.setAttribute("cliente", cliente);
+                request.getRequestDispatcher("/caja/clientes/actualizar.jsp").forward(request, response);
+                return; }
+                processRequest(request, response);
     }
 
     /**
@@ -126,6 +137,60 @@ public class controlCliente extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return;
+            
+            case "actualizar":
+                try {
+                    int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+                    String documento = request.getParameter("documento");
+                    String nombre = request.getParameter("nombre");
+                    String apellido = request.getParameter("apellido");
+                    String email = request.getParameter("email");
+                    //int estado = Integer.parseInt(request.getParameter("estado"));
+                    
+                    ClienteDao cliDao = new ClienteDao();
+                    StringBuilder mensajeError = new StringBuilder();
+                    
+                    if (cliDao.validarEmailExcepto(email, idCliente)) {
+                        mensajeError.append("<div class=\"alert alert-danger\">Este correo electrónico se encuentra en uso. Por favor, ingresa uno diferente.</div>");
+                    }
+                    
+                    if (cliDao.validarIdExcepto(documento, idCliente)) {
+                        mensajeError.append("<div class=\"alert alert-danger\">Este DNI/RUC se encuentra en uso. Por favor, ingresa uno diferente.</div>");
+                    }
+                    
+                    if (mensajeError.length() > 0) {
+                        request.setAttribute("mensajeError", mensajeError.toString());
+                        request.setAttribute("idCliente", idCliente);
+                        request.setAttribute("documento", documento);
+                        request.setAttribute("nombre", nombre);
+                        request.setAttribute("apellido", apellido);
+                        request.setAttribute("email", email);
+                        request.getRequestDispatcher("caja/clientes/actualizar.jsp").forward(request, response);
+                        return;
+                    }
+                     
+                    Cliente cliente = new Cliente();
+                    cliente.setIdCliente(idCliente);
+                    cliente.setDocumento(documento);
+                    cliente.setNombre(nombre);
+                    cliente.setApellido(apellido);
+                    cliente.setEmail(email);
+                    //cliente.setEstado(estado);
+                    
+                    
+                    int result = ClienteDao.actualizarCliente(cliente);
+                    
+                    if (result > 0) {
+                        String actualizarExitoso = "Cliente actualizado correctamente";
+                        response.sendRedirect(request.getContextPath() + "/caja/clientes/cartera.jsp?actualizarExitoso=" + actualizarExitoso + "&page=1");
+                    }
+                    
+                    
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }    
             return;
         }
 

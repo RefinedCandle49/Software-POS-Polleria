@@ -179,18 +179,37 @@
 
                         <section class="ventas-por-fechas">
                             <h3 class="fw-bold">VENTAS</h3>
-
-                            <form action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
+                            
+                            <form id="formVentas" action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
                                 <label>
                                     <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
-
+                                
                                 <label>
                                     <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
-
-                                <input type="submit" class="btn btn-primary" value="Seleccionar" />
+                                
+                                <input type="button" class="btn btn-primary" value="Seleccionar" onclick="validarFechas()" />
                             </form>
+                            
+                            <script>
+                                function validarFechas() {
+                                    var desde = new Date(document.getElementById("desde").value);
+                                    var hasta = new Date(document.getElementById("hasta").value);
+
+                                    if (desde > hasta) {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            confirmButtonColor: "#0A5ED7",
+                                            confirmButtonText: "Aceptar",
+                                            text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+                                        });
+                                    } else {
+                                        document.getElementById("formVentas").submit();
+                                    }
+                                }
+                            </script>
                         </section>
 
                         <section class="otros-reportes">

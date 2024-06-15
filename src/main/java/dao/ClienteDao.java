@@ -157,5 +157,75 @@ public class ClienteDao {
         }
         return false;
     }
+    
+    public static int actualizarCliente (Cliente cli) {
+        int est = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE cliente SET documento=?, nombre=?, apellido=?, email=? WHERE idCliente=?");
+            ps.setString(1, cli.getDocumento());
+            ps.setString(2, cli.getNombre());
+            ps.setString(3, cli.getApellido());
+            ps.setString(4, cli.getEmail());
+            //ps.setInt(5, cli.getEstado());
+            ps.setInt(5, cli.getIdCliente());
+            System.out.println ("Prueba");
+            est = ps.executeUpdate();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return est;
+    }
+    
+    public static Cliente obtenerClientePorId(int idCliente) {
+        Cliente cliente = null;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente, documento, nombre, apellido, email, estado FROM cliente WHERE idCliente = ?");
+            ps.setInt(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setDocumento(rs.getString("documento"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setEstado(rs.getInt("estado"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cliente;
+    }
+    
+    public boolean validarEmailExcepto(String email, int idCliente) {
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM cliente WHERE email=? AND idCliente !=?");
+            ps.setString(1, email);
+            ps.setInt(2, idCliente);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean validarIdExcepto(String documento, int idCliente) {
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareCall("SELECT * FROM cliente WHERE documento=? AND idCliente !=?");
+            ps.setString(1, documento);
+            ps.setInt(2, idCliente);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

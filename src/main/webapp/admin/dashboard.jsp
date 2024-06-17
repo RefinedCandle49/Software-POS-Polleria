@@ -194,22 +194,38 @@
                             
                             <script>
                                 function validarFechas() {
-                                    var desde = new Date(document.getElementById("desde").value);
-                                    var hasta = new Date(document.getElementById("hasta").value);
+                                    var desde = document.getElementById("desde");
+                                    var hasta = document.getElementById("hasta");
 
-                                    if (desde > hasta) {
+                                    // Verifica si alguno de los campos está vacío
+                                    if (!desde.value ||!hasta.value) {
                                         Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error',
+                                            icon: 'warning',
+                                            title: 'Atención',
                                             confirmButtonColor: "#0A5ED7",
                                             confirmButtonText: "Aceptar",
-                                            text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+                                            text: 'Por favor, selecciona una fecha de inicio y una fecha de fin.'
                                         });
                                     } else {
-                                        document.getElementById("formVentas").submit();
+                                        var desdeDate = new Date(desde.value);
+                                        var hastaDate = new Date(hasta.value);
+
+                                        // Verifica que la fecha de inicio sea menor o igual a la fecha de fin
+                                        if (desdeDate > hastaDate) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Error',
+                                                confirmButtonColor: "#0A5ED7",
+                                                confirmButtonText: "Aceptar",
+                                                text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+                                            });
+                                        } else {
+                                            document.getElementById("formVentas").submit();
+                                        }
                                     }
                                 }
                             </script>
+                        
                         </section>
 
                         <section class="otros-reportes">

@@ -106,7 +106,7 @@
                             <hr />
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp"
+                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-inactive align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none"

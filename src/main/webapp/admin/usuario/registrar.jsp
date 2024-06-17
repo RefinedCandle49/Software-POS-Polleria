@@ -98,7 +98,7 @@
                             <hr />
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp"
+                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-active align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none"
@@ -213,7 +213,7 @@
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success" >Registrar Usuario</button>
-                                    <a href="${pageContext.request.contextPath}/admin/usuarios.jsp" class="btn btn-secondary">Regresar</a>
+                                    <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1" class="btn btn-secondary">Regresar</a>
                                 </div>
                             </form>
                         </div>

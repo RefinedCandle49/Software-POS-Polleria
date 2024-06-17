@@ -11,15 +11,78 @@ import model.Producto;
 @MultipartConfig
 @WebServlet(name = "controlProducto", value = "/controlProducto")
 public class controlProducto extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
 
-        switch (action){
+        switch (action) {
+
+            case "actualizar":
+                try {
+
+                    int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+                    int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
+                    String nombre = request.getParameter("nombre");
+                    String descripcion = request.getParameter("descripcion");
+                    double precio = Double.parseDouble(request.getParameter("precio"));
+                    int stock = Integer.parseInt(request.getParameter("stock"));
+                    System.out.println("Obtener Parametros");
+
+                    
+                    ProductoDao ProductoDao = new ProductoDao();
+                    StringBuilder mensajeError = new StringBuilder();
+                            
+                    if (ProductoDao.validarNombreExcepto(nombre, idProducto)) {
+                        mensajeError.append("Este nombre se encuentra en uso. Por favor, ingresa uno diferente.");
+                    }
+                    
+
+                    if (mensajeError.length() > 0) {
+                        request.setAttribute("mensajeError", mensajeError.toString());
+                        request.setAttribute("idProducto", idProducto);
+                        request.setAttribute("idCategoria", idCategoria);
+                        request.setAttribute("nombre", nombre);
+                        request.setAttribute("descripcion", descripcion);
+                        request.setAttribute("precio", precio);
+                        request.setAttribute("stock", stock);
+                        System.out.println("Envio de parametros");
+                        request.getRequestDispatcher("almacen/productos/actualizar.jsp").forward(request, response);
+                        System.out.println("Redireccion");
+                        return;
+                    }
+                    
+                    Producto producto = new Producto();
+                        producto.setIdProducto(idProducto);
+                        producto.setIdCategoria(idCategoria);
+                        producto.setNombre(nombre);
+                        producto.setDescripcion(descripcion);
+                        producto.setPrecio(precio);
+                        producto.setStock(stock);
+                        System.out.println("Dar Parametros");
+
+                        int resultActualizar = ProductoDao.actualizarProducto(producto);
+
+                        if (resultActualizar > 0) {
+                            String actualizarExitoso = "Producto actualizado correctamente";
+                            response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?actualizarExitoso=" + actualizarExitoso + "&page=1");
+
+                        } /*else {  // Manejo de error de actualización
+                            response.sendRedirect(request.getContextPath() + "/almacen/productos/actualizar.jsp?id=" + idProducto + "&error=ErrorActualizacion");
+
+                        }*/
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //request.setAttribute("mensajeError", "Error al actualizar el producto.");
+                    //request.getRequestDispatcher("almacen/productos/actualizar.jsp").forward(request, response);
+                }
+                return;
+
             case "registrar":
-                try{
+                try {
                     String nombreRegistrar = request.getParameter("nombre");
                     Part filePart = request.getPart("image");
                     String fileName = filePart.getSubmittedFileName();
@@ -27,8 +90,7 @@ public class controlProducto extends HttpServlet {
                     uploadDir = uploadDir.replace("\\", "/");
                     File file = new File(uploadDir + nombreRegistrar + fileName);
 
-                    try (InputStream fileContent = filePart.getInputStream();
-                         OutputStream out = new FileOutputStream(file)) {
+                    try (InputStream fileContent = filePart.getInputStream(); OutputStream out = new FileOutputStream(file)) {
                         int read;
                         byte[] bytes = new byte[1024];
                         while ((read = fileContent.read(bytes)) != -1) {
@@ -38,7 +100,7 @@ public class controlProducto extends HttpServlet {
                     }
 
 //                    response.getWriter().println("Imagen subida exitosamente.");
-                        System.out.println("Imagen guardada");
+                    System.out.println("Imagen guardada");
 
                     int idCategoriaRegistrar = Integer.parseInt(request.getParameter("idCategoria"));
                     String descripcionRegistrar = request.getParameter("descripcion");
@@ -84,7 +146,7 @@ public class controlProducto extends HttpServlet {
                     System.out.println("aquiiiiiiiiiiiiiii");
                     int resultRegistrar = ProductoDao.registrarProducto(productoRegistrar);
                     System.out.println("o aquiiiiiiiiiiiiiii");
-                    
+
                     if (resultRegistrar > 0) {
                         String registroExitoso = "Producto registrado correctamente";
                         response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?registroExitoso=" + registroExitoso + "&page=1");
@@ -92,7 +154,7 @@ public class controlProducto extends HttpServlet {
 //                        request.setAttribute("errorRegistrarProd", "Error al registrar el producto.");
 //                        request.getRequestDispatcher("/admin/register/producto.jsp").forward(request, response);
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
 //                    request.setAttribute("errorRegistrarProd", "Error al registrar el producto.");
 //                    request.getRequestDispatcher("/admin/register/producto.jsp").forward(request, response);
                 }
@@ -105,28 +167,40 @@ public class controlProducto extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String action = request.getParameter("action");
+
+        switch (action) {
+
+            case "editar":
+                int idProducto = Integer.parseInt(request.getParameter("id"));
+                Producto producto = ProductoDao.obtenerProductoPorId(idProducto);
+                request.setAttribute("producto", producto);
+                request.getRequestDispatcher("/almacen/productos/actualizar.jsp").forward(request, response);
+                return;
+        }
+        processRequest(request, response);
+
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

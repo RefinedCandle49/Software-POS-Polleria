@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import static conexion.Conexion.getConnection;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +60,50 @@ public class UsuarioDao {
         }
         return listaUsuarios;
     }
-    
-    // Registro actualizado
+    public static List<Usuario> listarUsuariosPagina(int start, int total) {
+        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario ORDER BY idUsuario DESC LIMIT ?, ?");
+            ps.setInt(1, start - 1);
+            ps.setInt(2, total);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Usuario user = new Usuario();
+                user.setIdUsuario(rs.getInt("idUsuario"));
+                user.setCodigo(rs.getString("codigo"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setRol(rs.getString("rol"));
+                user.setEstado(rs.getInt("estado"));
+                listaUsuarios.add(user);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaUsuarios;
+    }
+
+    public static int contarUsuarios() {
+        int totalUsuarios = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM usuario WHERE estado = 1");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalUsuarios = rs.getInt("total");
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalUsuarios;
+    }
+
+        // Registro actualizado
     public static int registrarUsuario(Usuario usu) {
         int idRegistrado = 0;
         try {

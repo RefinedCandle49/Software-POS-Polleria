@@ -46,15 +46,26 @@
         </script>
         <% 
             return; 
-            } 
+            }
         %>
         <script>
             let contextPath = '<%= contextPath %>';
             let nombreRol = '<%= nombreRol %>';
         </script>
-        <% 
-            List<Usuario> usuario = UsuarioDao.listarUsuarios();
+        <%
+            String spageid=request.getParameter("page");
+            int pageid=Integer.parseInt(spageid);
+            int total=17;
+            if(pageid==1){}
+            else{
+                pageid=pageid-1;
+                pageid=pageid*total+1;
+            }
+            List<Usuario> usuario = UsuarioDao.listarUsuariosPagina(pageid,total);
             request.setAttribute("list", usuario);
+            
+            int totalUsuarios = UsuarioDao.contarUsuarios();
+            int totalPages = (int) Math.ceil((double) totalUsuarios / total); // Calcula el número total de páginas
         %>
 
         <div class="container-fluid overflow-hidden">
@@ -107,7 +118,7 @@
                             <hr />
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp"
+                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-active align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none"
@@ -305,6 +316,25 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <%
+                                            for(int i = 1; i <= totalPages; i++) {
+                                        %>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=<%=i%>"><%=i%></a></li>
+                                        <% } %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=<%=totalPages%>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </c:if>
                     </section>
@@ -317,13 +347,13 @@
                                                             function cerrarMensaje() {
                                                                 let registroExitoso = document.getElementById("registroExitoso");
                                                                 registroExitoso.style.display = "none";
-                                                                window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp";
+                                                                window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp?page=1";
                                                             }
 
                                                             function cerrarMensajeActualizar() {
                                                                 let actualizarExitoso = document.getElementById("actualizarExitoso");
                                                                 actualizarExitoso.style.display = "none";
-                                                                window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp";
+                                                                window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp?page=1";
                                                             }
         </script>
     </body>

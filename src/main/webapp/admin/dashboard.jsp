@@ -106,7 +106,7 @@
                             <hr />
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp"
+                                <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-inactive align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none"
@@ -179,18 +179,53 @@
 
                         <section class="ventas-por-fechas">
                             <h3 class="fw-bold">VENTAS</h3>
-
-                            <form action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
+                            
+                            <form id="formVentas" action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
                                 <label>
                                     <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
-
+                                
                                 <label>
                                     <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
-
-                                <input type="submit" class="btn btn-primary" value="Seleccionar" />
+                                
+                                <input type="button" class="btn btn-primary" value="Seleccionar" onclick="validarFechas()" />
                             </form>
+                            
+                            <script>
+                                function validarFechas() {
+                                    var desde = document.getElementById("desde");
+                                    var hasta = document.getElementById("hasta");
+
+                                    // Verifica si alguno de los campos está vacío
+                                    if (!desde.value ||!hasta.value) {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Atención',
+                                            confirmButtonColor: "#0A5ED7",
+                                            confirmButtonText: "Aceptar",
+                                            text: 'Por favor, selecciona una fecha de inicio y una fecha de fin.'
+                                        });
+                                    } else {
+                                        var desdeDate = new Date(desde.value);
+                                        var hastaDate = new Date(hasta.value);
+
+                                        // Verifica que la fecha de inicio sea menor o igual a la fecha de fin
+                                        if (desdeDate > hastaDate) {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Error',
+                                                confirmButtonColor: "#0A5ED7",
+                                                confirmButtonText: "Aceptar",
+                                                text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+                                            });
+                                        } else {
+                                            document.getElementById("formVentas").submit();
+                                        }
+                                    }
+                                }
+                            </script>
+                        
                         </section>
 
                         <section class="otros-reportes">

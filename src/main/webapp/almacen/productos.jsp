@@ -33,7 +33,7 @@
                     break;
                     
                 case "Administrador":
-            %>window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp";<%
+            %>window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp?page=1";<%
                     break;
                     
                     default:

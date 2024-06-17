@@ -33,7 +33,7 @@
             <%
             switch(nombreRol){
                 case "Administrador":
-            %>window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp";<%
+            %>window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp?page=1";<%
                     break;
                     
                 case "Almacenero":
@@ -405,6 +405,73 @@
                 const key = event.key;
                 return /\d/.test(key);
             }
+        </script>
+        <%-- Almacenamos los datos del cliente en el sessionStorage --%>
+        <script>
+            // Limpiamos el sessionStorage (Función)
+            function limpiarSessionStorage() {
+                sessionStorage.removeItem("documento");
+                sessionStorage.removeItem("nombreDisplay");
+                sessionStorage.removeItem("idCliente");
+            }
+
+            // Guardamos los datos del cliente en el sessionStorage (Función)
+            function guardarDatosCliente() {
+                var documento = document.getElementById("documento").value;
+                var nombreDisplay = document.getElementById("nombreDisplay").value;
+                var idCliente = document.getElementById("idCliente").value;
+
+                if (documento) {
+                    sessionStorage.setItem("documento", documento);
+                }
+                if (nombreDisplay) {
+                    sessionStorage.setItem("nombreDisplay", nombreDisplay);
+                }
+                if (idCliente) {
+                    sessionStorage.setItem("idCliente", idCliente);
+                }
+            }
+
+            // Cargamos los datos del cliente desde el sessionStorage (Función)
+            function cargarDatosCliente() {
+                var documento = sessionStorage.getItem("documento");
+                var nombreDisplay = sessionStorage.getItem("nombreDisplay");
+                var idCliente = sessionStorage.getItem("idCliente");
+
+                if (documento) {
+                    document.getElementById("documento").value = documento;
+                }
+                if (nombreDisplay) {
+                    document.getElementById("nombreDisplay").value = nombreDisplay;
+                }
+                if (idCliente) {
+                    document.getElementById("idCliente").value = idCliente;
+                }
+            }
+
+            // Cargamos los datos del cliente al cargar la página
+            window.onload = function() {
+                cargarDatosCliente();
+            };
+
+            // Llamamos a guardarDatosCliente() cuando se busque o elija un cliente
+            document.getElementById("buscar").addEventListener("click", function() {
+                setTimeout(guardarDatosCliente, 100); // Delay to ensure data is loaded before saving
+            });
+
+            document.getElementById("generico").addEventListener("click", function() {
+                guardarDatosCliente();
+            });
+
+            // Limpiamos sessionStorage cuando se limpie el Formulario
+            document.getElementById("limpiar").addEventListener("click", function() {
+                limpiarSessionStorage();
+            });
+
+            // Limpiamos el sessionStorage al realizar la venta
+            document.getElementById("ventaForm").addEventListener("submit", function() {
+                limpiarSessionStorage();
+            });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

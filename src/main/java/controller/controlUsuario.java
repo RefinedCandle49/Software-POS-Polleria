@@ -113,7 +113,7 @@ public class controlUsuario extends HttpServlet {
 
                 if (resultRegistrar > 0) {    
                     String registroExitoso = "Usuario registrado correctamente";
-                    response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?registroExitoso=" + registroExitoso);
+                    response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?registroExitoso=" + registroExitoso + "&page=1");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -143,7 +143,7 @@ public class controlUsuario extends HttpServlet {
                     
                     if (result > 0) {
                         String actualizarExitoso ="Usuario actualizado correctamente";
-                        response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?actualizarExitoso=" + actualizarExitoso);
+                        response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?actualizarExitoso=" + actualizarExitoso + "&page=1");
                     }
                     
                 } catch (Exception e) {

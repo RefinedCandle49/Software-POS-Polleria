@@ -49,7 +49,7 @@ public class ClienteDao {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT cli.idCliente, cli.documento, cli.nombre, cli.apellido, cli.email, cli.estado FROM cliente cli ORDER BY idCliente DESC LIMIT ?, ?");
+                    "SELECT cli.idCliente, cli.documento, cli.nombre, cli.apellido, cli.email, cli.estado FROM cliente cli WHERE cli.estado=1 ORDER BY idCliente DESC LIMIT ?, ?");
             ps.setInt(1, start-1);
             ps.setInt(2, total);
 

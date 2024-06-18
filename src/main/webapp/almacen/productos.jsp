@@ -117,7 +117,7 @@
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
                             <span class="ms-1">Ir a registrar producto</span>
                         </a>
-                    </div>
+                    </div><br/>
                     
                     <c:if test="${empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
@@ -128,6 +128,13 @@
                             ${param.registroExitoso}
                             <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                         </div>
+                    </c:if>
+                    
+                    <c:if test="${not empty param.actualizarExitoso}">
+                        <div id="actualizarExitoso" class="alert alert-success d-flex align-items-center justify-content-between">
+                      ${param.actualizarExitoso}
+                      <button type="button" class="button-mensaje text-success" onclick="cerrarMensajeActualizar()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+                       </div>
                     </c:if>
                 
                     <div class="table-responsive-md my-2">
@@ -143,8 +150,8 @@
                                 <th>PRECIO</th>
                                 <th>STOCK</th>
                                 <th>ESTADO</th>
-                                <!-- th></th>
-                                <th></th -->
+                                <th>ACCION</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
@@ -175,6 +182,15 @@
                                             <c:when test="${prod.getEstado() == 1}">Disponible</c:when>
                                             <c:otherwise>Estado Desconocido</c:otherwise>
                                         </c:choose>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-warning" href="${pageContext.request.contextPath}/controlProducto?action=editar&id=${prod.getIdProducto()}"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                        <path d="M16 5l3 3" />
+                                        </svg> Editar
+                                        </a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -232,6 +248,11 @@
         function cerrarMensaje() {
             let registroExitoso = document.getElementById("registroExitoso");
             registroExitoso.style.display = "none";
+            window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp?page=1"
+        }
+        function cerrarMensajeActualizar() {
+            let actualizarExitoso = document.getElementById("actualizarExitoso");
+            actualizarExitoso.style.display = "none";
             window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp?page=1"
         }
     </script>

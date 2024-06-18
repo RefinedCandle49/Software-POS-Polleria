@@ -258,5 +258,69 @@ public class ProductoDao {
         }
         return false;
     }
+    
+     public static Producto obtenerProductoPorId(int idProducto) {
+        Producto producto = null;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT idProducto, idCategoria, codigo, nombre, descripcion, foto, precio, stock, estado FROM producto WHERE idProducto=?");
+            ps.setInt(1, idProducto);
+            ResultSet rs = ps.executeQuery();
 
+            if (rs.next()) {
+                producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setIdCategoria(rs.getInt("idCategoria"));
+                producto.setCodigo(rs.getString("codigo"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setFoto(rs.getString("foto"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getInt("estado"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return producto;
+    }
+ public static int actualizarProducto(Producto prod) {
+        int estado = 0;
+        try {
+            
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE producto SET idCategoria=?, nombre=?, descripcion=?,foto =?, precio=?, stock=? WHERE idProducto=?;");
+            ps.setInt(1, prod.getIdCategoria());
+            ps.setString(2, prod.getNombre());
+            ps.setString(3, prod.getDescripcion());
+            ps.setString(4, prod.getFoto());
+            ps.setDouble(5, prod.getPrecio());
+            ps.setInt(6, prod.getStock());
+            ps.setInt(7, prod.getIdProducto());
+
+            estado = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return estado;
+    }
+  
+  
+  public boolean validarNombreExcepto(String nombre, int idProducto) {
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM producto WHERE nombre=? AND idProducto !=?");
+            ps.setString(1, nombre);
+            ps.setInt(2, idProducto);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+   
 }

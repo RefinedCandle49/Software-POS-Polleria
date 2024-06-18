@@ -5,6 +5,7 @@ import java.io.*;
 import dao.ProductoDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.*;
 import model.Producto;
 
@@ -22,11 +23,30 @@ public class controlProducto extends HttpServlet {
 
             case "actualizar":
                 try {
+                    String nombreRegistrar = request.getParameter("nombre");
+                    Part filePart = request.getPart("image");
+                    String fileName = filePart.getSubmittedFileName();
+                    String uploadDir = getServletContext().getRealPath("/") + "cloud-images/";
+                    uploadDir = uploadDir.replace("\\", "/");
+                    File file = new File(uploadDir + nombreRegistrar + fileName);
+
+                    try (InputStream fileContent = filePart.getInputStream(); OutputStream out = new FileOutputStream(file)) {
+                        int read;
+                        byte[] bytes = new byte[1024];
+                        while ((read = fileContent.read(bytes)) != -1) {
+                            out.write(bytes, 0, read);
+                        }
+                        System.out.println("Imagen cargada");
+                    }
+
+//                    response.getWriter().println("Imagen subida exitosamente.");
+                    System.out.println("Imagen guardada");
 
                     int idProducto = Integer.parseInt(request.getParameter("idProducto"));
                     int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
                     String nombre = request.getParameter("nombre");
                     String descripcion = request.getParameter("descripcion");
+                    String foto = fileName;
                     double precio = Double.parseDouble(request.getParameter("precio"));
                     int stock = Integer.parseInt(request.getParameter("stock"));
                     System.out.println("Obtener Parametros");
@@ -46,6 +66,7 @@ public class controlProducto extends HttpServlet {
                         request.setAttribute("idCategoria", idCategoria);
                         request.setAttribute("nombre", nombre);
                         request.setAttribute("descripcion", descripcion);
+                        request.setAttribute("foto", foto);
                         request.setAttribute("precio", precio);
                         request.setAttribute("stock", stock);
                         System.out.println("Envio de parametros");
@@ -59,6 +80,7 @@ public class controlProducto extends HttpServlet {
                         producto.setIdCategoria(idCategoria);
                         producto.setNombre(nombre);
                         producto.setDescripcion(descripcion);
+                        producto.setFoto(nombre + foto);
                         producto.setPrecio(precio);
                         producto.setStock(stock);
                         System.out.println("Dar Parametros");

@@ -99,14 +99,14 @@
         
         <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
             <section>
-               <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post">
+               <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data"> 
                    
                    <h1 class="text-center fw-bold mb-5">ACTUALIZAR PRODUCTO</h1>
                    <div class="container">
                        
                     
                                 <input type="hidden" name="idProducto" value="${param.idProducto != null ? param.idProducto : producto.idProducto}">
-                                    <input type="hidden" name="foto" value="${producto.foto}"> 
+                                    
                                         
                                         <div class="fw-bold text-dark">
                                             
@@ -160,12 +160,19 @@
                                     </div>
                                 </div>
                                     
-                                         
+                                      <div class="mb-3 row">
+                                        <div class="col-sm-2"></div>
+                                    <label for="foto" class="col-sm-1 col-form-label">Foto:</label>
+                                    <div class="col-sm-7">                                                                                                              
+                                        <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" value="${param.foto != null ? param.foto : producto.foto}" class="btn-file">
+                                        <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
+                                    </div>
+                                </div>   
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
                                     <label for="precio" class="col-sm-1 col-form-label">Precio:</label>
                                     <div class="col-sm-7">                                                                                                              
-                                        <input type="number" name="precio" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" class="form-control" id="precio" value="${param.precio != null ? param.precio : producto.precio}" required onkeypress="return soloNumerosDecimales(event)">
+                                        <input type="number" name="precio" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" class="form-control" value="${param.precio != null ? param.precio : producto.precio}" required onkeypress="return soloNumerosDecimales(event)">
                                             <span id="errorSoloNumDecimales" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -194,7 +201,7 @@
                 </main>
             </div>
         </div>
-        <!--<script>
+        <script>
     document.querySelector('input[type="file"]').addEventListener('change', function() {
         const file = this.files[0];
         const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -218,7 +225,7 @@
             }
         }
     });
-</script>-->
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function soloNumeros(evt){

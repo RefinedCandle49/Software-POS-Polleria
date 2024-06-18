@@ -290,14 +290,14 @@ public class ProductoDao {
         try {
             
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE producto SET idCategoria=?, nombre=?, descripcion=?, precio=?, stock=? WHERE idProducto=?;");
+            PreparedStatement ps = con.prepareStatement("UPDATE producto SET idCategoria=?, nombre=?, descripcion=?,foto =?, precio=?, stock=? WHERE idProducto=?;");
             ps.setInt(1, prod.getIdCategoria());
             ps.setString(2, prod.getNombre());
             ps.setString(3, prod.getDescripcion());
-            ps.setDouble(4, prod.getPrecio());
-            ps.setInt(5, prod.getStock());
-          //  ps.setInt(6, prod.getEstado());
-            ps.setInt(6, prod.getIdProducto());
+            ps.setString(4, prod.getFoto());
+            ps.setDouble(5, prod.getPrecio());
+            ps.setInt(6, prod.getStock());
+            ps.setInt(7, prod.getIdProducto());
 
             estado = ps.executeUpdate();
         } catch (Exception e) {

@@ -88,7 +88,7 @@ public class controlVenta extends HttpServlet {
         HttpSession session = request.getSession();
         
         if(result > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/ventas.jsp?anularVenta=true");
+            response.sendRedirect(request.getContextPath() + "/admin/ventas.jsp?anularVenta=true&page=1");
         }
         
         /*else {

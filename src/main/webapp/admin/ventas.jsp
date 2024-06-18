@@ -52,8 +52,19 @@
         }
         %>
         <%
-            List<Venta> milista = VentaDao.listarVentas();
-            request.setAttribute("list", milista);
+            String spageid=request.getParameter("page");
+            int pageid=Integer.parseInt(spageid);
+            int total=17;
+            if(pageid==1){}
+            else{
+                pageid=pageid-1;
+                pageid=pageid*total+1;
+            }
+            List<Venta> venta = VentaDao.listarVentasPagina(pageid,total);
+            request.setAttribute("list", venta);
+            
+            int totalClientes = VentaDao.contarVentas();
+            int totalPages = (int) Math.ceil((double) totalClientes / total); // Calcula el número total de páginas
         %>
 
         <div class="container-fluid overflow-hidden">
@@ -124,7 +135,7 @@
                             <hr />
 
                             <li class="nav-item pb-4">
-                                <a href="${pageContext.request.contextPath}/admin/ventas.jsp"
+                                <a href="${pageContext.request.contextPath}/admin/ventas.jsp?page=1"
                                    class="link-active align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none"
@@ -230,6 +241,25 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-center">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas.jsp?page=1" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <%
+                                            for(int i = 1; i <= totalPages; i++) {
+                                        %>
+                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas.jsp?page=<%=i%>"><%=i%></a></li>
+                                        <% } %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas.jsp?page=<%=totalPages%>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </c:if>
                     </section>           
@@ -276,7 +306,7 @@
                             confirmButtonColor: "#0d6efd",
                             confirmButtonText: 'Aceptar'
                         }).then(() => {
-                            window.location.href = "<%= request.getContextPath() %>/admin/ventas.jsp"
+                            window.location.href = "<%= request.getContextPath() %>/admin/ventas.jsp?page=1"
                         });
                     }
                 });

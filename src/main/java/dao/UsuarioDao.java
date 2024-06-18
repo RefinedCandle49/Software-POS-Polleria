@@ -64,7 +64,7 @@ public class UsuarioDao {
         List<Usuario> listaUsuarios = new ArrayList<Usuario>();
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario ORDER BY idUsuario DESC LIMIT ?, ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario WHERE estado = 1 ORDER BY idUsuario DESC LIMIT ?, ?");
             ps.setInt(1, start - 1);
             ps.setInt(2, total);
 

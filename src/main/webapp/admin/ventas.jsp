@@ -54,7 +54,7 @@
         <%
             String spageid=request.getParameter("page");
             int pageid=Integer.parseInt(spageid);
-            int total=17;
+            int total=14;
             if(pageid==1){}
             else{
                 pageid=pageid-1;

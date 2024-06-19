@@ -199,6 +199,22 @@ public class VentaDao {
         return totalVentas;
     }
 
+    public static int contarVentasAnuladas() {
+        int totalVentas = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM venta WHERE estado = 0");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalVentas = rs.getInt("total");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return totalVentas;
+    }
+
     public static List<Venta> listarVentas() {
         List<Venta> listaVentas = new ArrayList<Venta>();
         try {
@@ -265,6 +281,31 @@ public class VentaDao {
         return est;
     }
 
+    public static List<Venta> listarVentasAnuladasPagina(int start, int total){
+        List<Venta> listaVentas = new ArrayList<Venta>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT vent.idVenta, vent.codigo, cli.nombre, cli.apellido, vent.fechaHoraVenta, vent.estado, vent.total FROM venta vent INNER JOIN cliente cli ON vent.idCliente = cli.idCliente WHERE vent.estado=0 ORDER BY idVenta DESC LIMIT ?, ?;");
+            ps.setInt(1, start-1);
+            ps.setInt(2, total);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setIdVenta(rs.getInt("idVenta"));
+                vent.setCodigo(rs.getString("codigo"));
+                vent.setNombre(rs.getString("nombre"));
+                vent.setApellido(rs.getString("apellido"));
+                vent.setFechaHoraVenta(rs.getString("fechaHoraVenta"));
+                vent.setEstado(rs.getInt("estado"));
+                vent.setTotal(rs.getDouble("total"));
+                listaVentas.add(vent);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return listaVentas;
+    }
     public static List<Venta> listarVentasAnuladas() {
         List<Venta> ventasAnuladas = new ArrayList<Venta>();
         try {

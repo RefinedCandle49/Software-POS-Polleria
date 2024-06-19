@@ -1,10 +1,18 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="model.Usuario, dao.UsuarioDao, model.DetalleVenta, model.Producto, dao.ReporteDao, java.util.*" %>
+<%@page import="model.Usuario, dao.UsuarioDao, model.DetalleVenta, model.Producto, model.Venta, dao.ReporteDao, java.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v6.5.1/css/pro.min.css" />
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico" />
@@ -12,6 +20,7 @@
         <title>Dashboard | Pollos Locos</title>
     </head>
     <body>
+
         <% 
             HttpSession sesion=request.getSession(false); 
             String contextPath=request.getContextPath(); 
@@ -25,7 +34,16 @@
             
             //REPORTES
             ReporteDao reporteDao = new ReporteDao();
-            DetalleVenta productoMasVendido = reporteDao.obtenerProductoMasVendido(2024);
+            DetalleVenta productoMasVendido = reporteDao.obtenerProductoMasVendido();
+
+            
+            int clientesRegistrados = reporteDao.obtenerCantidadClientesRegistrados();
+            double ingreso = reporteDao.obtenerIngresoVentas();
+            
+            List<DetalleVenta> detalleVenta = ReporteDao.obtenerProductosMasVendidosMes();
+            request.setAttribute("list", detalleVenta);
+            List<Venta> venta = ReporteDao.obtenerClienteVentasMes();
+            request.setAttribute("list_clientes", venta);
             
             
             if(!"Administrador".equals(nombreRol)){
@@ -179,26 +197,26 @@
 
                         <section class="ventas-por-fechas">
                             <h3 class="fw-bold">VENTAS</h3>
-                            
+
                             <form id="formVentas" action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
                                 <label>
                                     <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
-                                
+
                                 <label>
                                     <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
                                 </label>
-                                
+
                                 <input type="button" class="btn btn-primary" value="Seleccionar" onclick="validarFechas()" />
                             </form>
-                            
+
                             <script>
                                 function validarFechas() {
                                     var desde = document.getElementById("desde");
                                     var hasta = document.getElementById("hasta");
 
                                     // Verifica si alguno de los campos está vacío
-                                    if (!desde.value ||!hasta.value) {
+                                    if (!desde.value || !hasta.value) {
                                         Swal.fire({
                                             icon: 'warning',
                                             title: 'Atención',
@@ -225,33 +243,173 @@
                                     }
                                 }
                             </script>
-                        
+
                         </section>
 
                         <section class="otros-reportes">
                             <h3 class="fw-bold">OTROS REPORTES</h3>
 
-                            <div class="row justify-content-between">
+                            <div class="row">
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card">
-                                        <div class="card-body bg-white rounded-3">
-                                            <h6 class="card-subtitle mb-3 text-muted">PRODUCTO MÁS POPULAR DEL AÑO</h6>
-                                            <%
-                                if(productoMasVendido != null) {%>
-                                            <h4 class="card-title text-center fw-bold m-0"><%= productoMasVendido.getNombreProducto() %></h4>
-                                            <p class="card-text text-center text-success fw-bold">
-                                                <span class="fs-1"><%= productoMasVendido.getTotalVenta() %></span>
-                                                <span class="fs-5">‎ ventas</span>
-                                            </p>
-                                            <% } else { %>
-                                            No se encontró ningún producto popular.
-                                            <% } %>
+                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+
+                                                <div>
+                                                    <%
+                                if(ingreso > 0) {%>
+                                                    <p class="mb-0 text-secondary">Total Ingreso</p>
+                                                    <h4 class="my-1 text-report fw-bold">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="<%= ingreso %>" /></h4>
+                                                    <p class="mb-0 font-13">Ingreso anual de la empresa</p>
+                                                    <% } else { %>
+                                                    ¡Hola! Parece que no han habido ventas este año.
+                                                    <% } %>
+                                                </div>
+
+                                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                    <i class="fa-solid fa-sack-dollar"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                        
+
+                                <div class="col-sm-4 my-3">
+                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                        <div class="card-body card-res">
+                                            <div class="d-flex align-items-center">
+
+                                                <div>
+                                                    <%
+                                if(productoMasVendido != null) {%>
+                                                    <p class="mb-0 text-secondary">Producto Popular</p>
+                                                    <h4 class="my-1 text-report text-responsive fw-bold"><%= productoMasVendido.getNombreProducto() %></h4>
+                                                    <p class="mb-0 font-13">Producto con <%= productoMasVendido.getTotalVenta() %> ventas</p>
+                                                    <% } else { %>
+                                                    ¡Hola! Parece que no se encontró ningún producto popular.
+                                                    <% } %>
+                                                </div>
+
+                                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                    <i class="fa-solid fa-drumstick-bite"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 my-3">
+                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+
+                                                <div>
+                                                    <%
+                                if(clientesRegistrados > 0) {%>
+                                                    <p class="mb-0 text-secondary">Total clientes</p>
+                                                    <h4 class="my-1 text-report fw-bold"><%= clientesRegistrados %></h4>
+                                                    <p class="mb-0 font-13">Clientes registrados en el sistema</p>
+                                                    <% } else { %>
+                                                    ¡Hola! Parece que no hay clientes registrados.
+                                                    <% } %>
+                                                </div>
+
+                                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                    <i class="fa-solid fa-user"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                        <div class="card-body bg-white rounded-3 table-responsive">
+                                            <h6 class="card-subtitle mb-3 text-secondary">Productos más vendidos del mes</h6>
+
+                                            <c:if test="${ empty list}">
+                                                <span>¡Hola! Parece que no han habido ventas en este mes.</span>
+                                                <div class="d-flex justify-content-center align-items-center w-100 my-1">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off" style="opacity: 0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" /><path d="M16 3v4" /><path d="M8 3v1" /><path d="M4 11h7m4 0h5" /><path d="M3 3l18 18" /></svg>
+                                                </div>
+                                            </c:if>
+
+                                            <c:if test="${not empty list}">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none">ID</th>
+                                                            <th>ÍTEM</th>
+                                                            <th>SKU</th>
+                                                            <th>PRODUCTO</th>
+                                                            <th>NUM. VENTAS</th>
+                                                            <th>MES</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="${list}" var="dev" varStatus="loop">
+                                                            <tr>
+                                                                <td style="display: none">${dev.getIdProducto()}</td>
+                                                                <td>${loop.index + 1}</td>
+                                                                <td>${dev.getCodigo()}</td>
+                                                                <td>${dev.getNombreProducto()}</td>
+                                                                <td>${dev.getCantidadVendida()}</td>
+                                                                <td>${dev.getNombreMesActual()}</td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                        <div class="card-body bg-white rounded-3 table-responsive">
+                                            <h6 class="card-subtitle mb-3 text-secondary">Clientes más recurrentes del mes</h6>
+
+                                            <c:if test="${ empty list_clientes}">
+                                                <span>¡Hola! Parece que no han habido ventas en este mes.</span>
+                                                <div class="d-flex justify-content-center align-items-center w-100 my-1">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off" style="opacity: 0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" /><path d="M16 3v4" /><path d="M8 3v1" /><path d="M4 11h7m4 0h5" /><path d="M3 3l18 18" /></svg>
+                                                </div>
+                                            </c:if>
+
+                                            <c:if test="${not empty list_clientes}">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none">ID</th>
+                                                            <th>ÍTEM</th>
+                                                            <th>DOC.</th>
+                                                            <th>NOMBRE</th>
+                                                            <th>NUM. VENTAS</th>
+                                                            <th>MES</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach items="${list_clientes}" var="vt" varStatus="loop">
+                                                            <tr>
+                                                                <td style="display: none">${vt.getIdCliente()}</td>
+                                                                <td>${loop.index + 1}</td>
+                                                                <td>${vt.getDocumento()}</td>
+                                                                <td>${vt.getNombreCliente()}</td>
+                                                                <td>${vt.getCantidadVentas()}</td>
+                                                                <td>${vt.getNombreMesActual()}</td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
                         </section>
                     </section>                    
                 </main>
@@ -261,25 +419,25 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function alertBienvenida() {
-                const url = new URLSearchParams(window.location.search);
-                const alert = url.get('alert');
+                                function alertBienvenida() {
+                                    const url = new URLSearchParams(window.location.search);
+                                    const alert = url.get('alert');
 
-                if (alert === 'true') {
-                    Swal.fire({
-                        icon: "success",
-                        title: 'Bienvenido, ' + nombreRol,
-                        confirmButtonColor: "#0A5ED7",
-                        confirmButtonText: "Aceptar",
-                        allowOutsideClick: false
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = contextPath + "/admin/dashboard.jsp?alert=false";
-                        }
-                    });
-                }
-            }
-            alertBienvenida()
+                                    if (alert === 'true') {
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: 'Bienvenido, ' + nombreRol,
+                                            confirmButtonColor: "#0A5ED7",
+                                            confirmButtonText: "Aceptar",
+                                            allowOutsideClick: false
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href = contextPath + "/admin/dashboard.jsp?alert=false";
+                                            }
+                                        });
+                                    }
+                                }
+                                alertBienvenida()
         </script>
     </body>
 </html>

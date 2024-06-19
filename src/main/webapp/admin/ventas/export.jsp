@@ -33,10 +33,6 @@
         String emailRol=(String) ((Usuario) sesion.getAttribute("usuario")).getEmail();
         String nombreRol=(String) ((Usuario) sesion.getAttribute("usuario")).getRol();
         
-        //REPORTES
-        ReporteDao reporteDao = new ReporteDao();
-        DetalleVenta productoMasVendido = reporteDao.obtenerProductoMasVendido(2024);
-        
         
         if(!"Administrador".equals(nombreRol)){
     %>

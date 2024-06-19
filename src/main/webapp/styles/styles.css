@@ -81,6 +81,10 @@ svg {
     margin-bottom: 2px !important;
 }
 
+.color-tabla {
+    border-radius: 0.375rem;
+}
+
 .color-tabla tr:nth-child(even) td{
     background-color: #f2f2f2;
 }
@@ -100,17 +104,58 @@ svg {
 
 /* BORRAR EN CASO NO FUNCIONE REGISTRAR PRODUCTO */
 ::-webkit-file-upload-button {
-  font: caption;
-  -webkit-appearance: button;
-  background: #0A5ED7 !important;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 0.375rem;
+    font: caption;
+    -webkit-appearance: button;
+    background: #0A5ED7 !important;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 0.375rem;
 }
 
 .btn-file:hover{
     opacity: 0.9;
+}
+
+.text-report{
+    color: #212529;
+}
+
+.bg-gradient-ohhappiness {
+    background: #212529;
+    background: -webkit-linear-gradient(45deg, #212529, #353b40)!important;
+    background: linear-gradient(45deg, #212529, #353b40)!important;
+}
+
+.widgets-icons-2 {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ededed;
+    font-size: 27px;
+    border-radius: 10px;
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+}
+
+@media (max-width: 1366px) {
+
+    .card-res{
+        height: 116.8px;
+    }
+
+    .text-responsive{
+        font-size: 1.35rem !important;
+    }
+    
+    .widgets-icons-2 {
+        display: none;
+    }
+
 }
 /* --- */
 

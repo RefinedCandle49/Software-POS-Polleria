@@ -4,7 +4,7 @@ public class DetalleVenta {
     int detalleVenta, idVenta, idProducto, cantidad;
     int totalVenta; String nombreProducto; //cambio de int por double
     double subTotal;
-
+    
     public double getSubTotal() {
         return subTotal;
     }
@@ -86,5 +86,31 @@ public class DetalleVenta {
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
     }
+    
+    int cantidadVendida;
+    String codigo, nombreMesActual;
 
+    public int getCantidadVendida() {
+        return cantidadVendida;
+    }
+
+    public void setCantidadVendida(int cantidadVendida) {
+        this.cantidadVendida = cantidadVendida;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
+    public String getNombreMesActual() {
+        return nombreMesActual;
+    }
+
+    public void setNombreMesActual(String nombreMesActual) {
+        this.nombreMesActual = nombreMesActual;
+    }
 }

@@ -108,4 +108,32 @@ public class Venta {
     }
 
     String fechaHoraVenta;
+    
+    int cantidadVentas;
+    String nombreCliente, nombreMesActual;
+
+    public int getCantidadVentas() {
+        return cantidadVentas;
+    }
+
+    public void setCantidadVentas(int cantidadVentas) {
+        this.cantidadVentas = cantidadVentas;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getNombreMesActual() {
+        return nombreMesActual;
+    }
+
+    public void setNombreMesActual(String nombreMesActual) {
+        this.nombreMesActual = nombreMesActual;
+    }
+    
 }

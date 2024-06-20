@@ -25,28 +25,37 @@ public class controlProducto extends HttpServlet {
                 try {
                     String nombreRegistrar = request.getParameter("nombre");
                     Part filePart = request.getPart("image");
-                    String fileName = filePart.getSubmittedFileName();
-                    String uploadDir = getServletContext().getRealPath("/") + "cloud-images/";
-                    uploadDir = uploadDir.replace("\\", "/");
-                    File file = new File(uploadDir + nombreRegistrar + fileName);
+                    String foto = request.getParameter("foto");
+                    Producto producto = new Producto();
+                    producto.setFoto(foto);
+                    if (filePart != null && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().isEmpty()) {
+                        String fileName = filePart.getSubmittedFileName();
+                        String uploadDir = getServletContext().getRealPath("/") + "cloud-images/";
+                        uploadDir = uploadDir.replace("\\", "/");
+                        File file = new File(uploadDir + nombreRegistrar + fileName);
 
-                    try (InputStream fileContent = filePart.getInputStream(); OutputStream out = new FileOutputStream(file)) {
-                        int read;
-                        byte[] bytes = new byte[1024];
-                        while ((read = fileContent.read(bytes)) != -1) {
-                            out.write(bytes, 0, read);
+                        try (InputStream fileContent = filePart.getInputStream(); OutputStream out = new FileOutputStream(file)) {
+                            int read;
+                            byte[] bytes = new byte[1024];
+                            while ((read = fileContent.read(bytes)) != -1) {
+                                out.write(bytes, 0, read);
+                            }
+                            System.out.println("Imagen cargada");
                         }
-                        System.out.println("Imagen cargada");
-                    }
 
 //                    response.getWriter().println("Imagen subida exitosamente.");
-                    System.out.println("Imagen guardada");
+                        System.out.println("Imagen guardada");
+
+                        producto.setFoto(nombreRegistrar + fileName);
+                    }
+
 
                     int idProducto = Integer.parseInt(request.getParameter("idProducto"));
                     int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));
                     String nombre = request.getParameter("nombre");
                     String descripcion = request.getParameter("descripcion");
-                    String foto = fileName;
+
+
                     double precio = Double.parseDouble(request.getParameter("precio"));
                     int stock = Integer.parseInt(request.getParameter("stock"));
                     System.out.println("Obtener Parametros");
@@ -75,12 +84,12 @@ public class controlProducto extends HttpServlet {
                         return;
                     }
                     
-                    Producto producto = new Producto();
+
                         producto.setIdProducto(idProducto);
                         producto.setIdCategoria(idCategoria);
                         producto.setNombre(nombre);
                         producto.setDescripcion(descripcion);
-                        producto.setFoto(nombre + foto);
+
                         producto.setPrecio(precio);
                         producto.setStock(stock);
                         System.out.println("Dar Parametros");
@@ -145,7 +154,6 @@ public class controlProducto extends HttpServlet {
                         request.setAttribute("idCategoria", idCategoriaRegistrar);
                         request.setAttribute("nombre", nombreRegistrar);
                         request.setAttribute("descripcion", descripcionRegistrar);
-                        request.setAttribute("foto", fotoRegistrar);
                         request.setAttribute("precio", precioRegistrar);
                         request.setAttribute("stock", stockRegistrar);
                         request.setAttribute("estado", estadoRegistrar);

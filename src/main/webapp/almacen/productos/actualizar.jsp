@@ -164,7 +164,8 @@
                                         <div class="col-sm-2"></div>
                                     <label for="foto" class="col-sm-1 col-form-label">Foto:</label>
                                     <div class="col-sm-7">                                                                                                              
-                                        <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" value="${param.foto != null ? param.foto : producto.foto}" class="btn-file">
+                                        <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" class="btn-file">
+                                        <input type="hidden" name="foto" id="foto" value="${param.foto != null ? param.foto : producto.foto}">
                                         <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
                                     </div>
                                 </div>   

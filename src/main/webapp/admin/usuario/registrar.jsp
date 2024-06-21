@@ -174,7 +174,6 @@
                             <c:if test="${not empty mensajeError}">
                                 <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
                                     ${mensajeError}
-                                    <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
                                 </div>
                             </c:if>
 
@@ -224,12 +223,6 @@
 
         <script>
             DominioPorDefecto();
-
-            function cerrarMensaje() {
-                let mensajeError = document.getElementById("mensajeError");
-                mensajeError.style.display = "none";
-                window.location.href = "${pageContext.request.contextPath}/admin/usuario/registrar.jsp"
-            }
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

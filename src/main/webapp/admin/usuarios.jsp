@@ -250,9 +250,9 @@
                         </c:if>
 
                         <c:if test="${not empty list}">
-                            <div class="table-responsive color-tabla rounded-top my-2 callout pb-0 bg-light">
-                                <table class="table border mb-0">
-                                    <thead class="bg-dark text-light p-2">
+                            <div class="table-responsive bg-light color-tabla callout my-2 pb-0">
+                                <table class="table mb-0">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th style="display: none">ID</th>
                                             <th>CÓDIGO</th>
@@ -316,25 +316,26 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <%
-                                            for(int i = 1; i <= totalPages; i++) {
-                                        %>
-                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=<%=i%>"><%=i%></a></li>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <%
+                                        for(int i = 1; i <= totalPages; i++) {
+                                    %>
+                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=<%=i%>"><%=i%></a></li>
                                         <% } %>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=<%=totalPages%>" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=<%=totalPages%>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </c:if>
                     </section>

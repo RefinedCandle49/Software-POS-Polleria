@@ -111,11 +111,10 @@
                         comprobante
                     </button>
                     
-                    <button id="regresar" class="btn btn-secondary">
-                        <a class="text-white text-decoration-none" href="<%=request.getContextPath()%>/admin/ventas.jsp?page=1">
-                            Regresar
-                        </a>
-                    </button>
+                    <a class="text-white text-decoration-none" href="<%=request.getContextPath()%>/admin/ventas.jsp?page=1">
+                       <button id="regresar" class="btn btn-secondary">Regresar</button>
+                    </a>
+                    
                 </div>
             </div>
         </div>

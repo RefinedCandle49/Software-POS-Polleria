@@ -67,8 +67,8 @@
 
                     <div class="w-100 text-center text-light">
                         <img src="${pageContext.request.contextPath}/img/user-icon.png" class="img-fluid img-css py-3" alt="..."/>
-                        <br><span class="d-none d-sm-inline w-100"><%= nombreRol %></span>
-                        <span class="d-none d-sm-inline w-100" style="opacity: 0.5"><%= emailRol %></span>
+                        <br /><span class="d-none d-sm-inline w-100"><%= nombreRol %></span>
+                        <br /><span class="d-none d-sm-inline w-100" style="opacity: 0.5; word-break: break-all !important;"><%= emailRol %></span>
                     </div>
                     <hr>
 
@@ -88,7 +88,7 @@
                         </li>
                     </ul>
                     <hr>
-                    <div class="pb-4">
+                    <div class="pb-3">
                         <a href="${pageContext.request.contextPath}/logout.jsp" class="d-flex link-active align-items-center w-100">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" /><path d="M15 12h-12l3 -3" /><path d="M6 15l-3 -3" /></svg>
                             <span class="d-none d-sm-inline mx-1">Cerrar Sesión</span>

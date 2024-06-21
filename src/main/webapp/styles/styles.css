@@ -81,6 +81,10 @@ svg {
     margin-bottom: 2px !important;
 }
 
+tbody, td, tfoot, th, thead, tr {
+    border-style: none;
+}
+
 .color-tabla {
     border-radius: 0.375rem;
 }
@@ -151,7 +155,7 @@ svg {
     .text-responsive{
         font-size: 1.35rem !important;
     }
-    
+
     .widgets-icons-2 {
         display: none;
     }

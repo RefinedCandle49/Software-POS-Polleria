@@ -196,20 +196,13 @@
                     <section>
                         <h1 class="fw-bold">PANEL DE VENTAS ANULADAS</h1>
 
-                        <%-- div class="d-flex align-items-center justify-content-end">
-                            <a href="${pageContext.request.contextPath}/admin/ventas.jsp" class="link-register text-dark pb-2">
-                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /><path d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5" /></svg>
-                                <span class="ms-1">Ventas Registradas</span>
-                            </a>
-                        </div --%>
-
                         <c:if test="${empty list}">
                             <span>¡Hola! Parece que esta tabla está vacía en este momento.</span>
                         </c:if>
 
                         <c:if test="${not empty list}">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
+                            <div class="table-responsive bg-light color-tabla callout my-2 pb-0">
+                                <table class="table mb-0">
                                     <thead class="table-dark">
                                         <tr>
                                             <th style="display: none">ID</th>
@@ -218,7 +211,6 @@
                                             <th>FECHA Y HORA</th>
                                             <th>TOTAL</th>
                                             <th>MÁS DETALLES</th>
-                                            <!-- th>ACCIONES</th -->
                                         </tr>
                                     </thead>
 
@@ -230,48 +222,32 @@
                                                 <td>${venta.getNombre()} ${venta.getApellido()}</td>
                                                 <td>${venta.getFechaHoraVenta()}</td>
                                                 <td>${venta.getTotal()}</td>
-
-
                                                 <td>
                                                     <a href="${pageContext.request.contextPath}/admin/ventas/comprobante.jsp?idVenta=${venta.getIdVenta()}"><i class="mt-2 fa-solid fa-eye fa-xl" style="color: #000000"></i></a>
                                                 </td>
-
-                                                <%-- td>
-                                                    <form action="${pageContext.request.contextPath}/controlVenta"
-                                                          method="post">
-                                                        <input type="hidden" name="idVenta" value="${venta.getIdVenta()}">
-                                                        <input type="hidden" name="newEstado" value="0">
-                                                        <div class="d-grid gap-2 col-12 mx-auto">
-                                                            <button class="align-middle btn btn-danger" type="submit">
-                                                                Anular
-
-                                                            </button>
-                                                        </div> 
-                                                    </form>
-                                                </td --%>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp?page=1" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <%
-                                            for(int i = 1; i <= totalPages; i++) {
-                                        %>
-                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp?page=<%=i%>"><%=i%></a></li>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp?page=1" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <%
+                                        for(int i = 1; i <= totalPages; i++) {
+                                    %>
+                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp?page=<%=i%>"><%=i%></a></li>
                                         <% } %>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp?page=<%=totalPages%>" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas-anuladas.jsp?page=<%=totalPages%>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </c:if>
                     </section>           

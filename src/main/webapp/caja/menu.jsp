@@ -125,28 +125,28 @@
             <div class="col-md-2 pe-0">
                 <div class="">
                     <!-- CATEGORIA POLLOS -->
-                    <div class="categoria p-3" style="background-color: #CDDEE5">
-                        <img src="<%=request.getContextPath()%>/img/pollos.png" alt="Pollos" onclick="mostrarCategoria('polloContainer')">
+                    <div class="categoria p-3" style="background-color: #CDDEE5" onclick="mostrarCategoria('polloContainer')">
+                        <img src="<%=request.getContextPath()%>/img/pollos.png" alt="Pollos" >
                         <h2>Pollos</h2>
                     </div> 
 
 
 
                     <!-- CATEGORIA SOPAS -->
-                    <div class="categoria p-3" style="background-color: #F8EDEB">
-                        <img src="<%=request.getContextPath()%>/img/sopas.png" alt="Sopas" onclick="mostrarCategoria('sopaContainer')">
+                    <div class="categoria p-3" style="background-color: #F8EDEB" onclick="mostrarCategoria('sopaContainer')">
+                        <img src="<%=request.getContextPath()%>/img/sopas.png" alt="Sopas">
                         <h2>Sopas</h2>
                     </div>
 
                     <!-- CATEGORIA BEBIDAS -->
-                    <div class="categoria p-3" style="background-color: #CCBED2">
-                        <img src="<%=request.getContextPath()%>/img/bebidas.png" alt="Bebidas" onclick="mostrarCategoria('bebidaContainer')">
+                    <div class="categoria p-3" style="background-color: #CCBED2" onclick="mostrarCategoria('bebidaContainer')">
+                        <img src="<%=request.getContextPath()%>/img/bebidas.png" alt="Bebidas">
                         <h2>Bebidas</h2>
                     </div>
 
                     <!-- CATEGORIA POSTRES -->
-                    <div class="categoria p-3" style="background-color: #ECF1E6">
-                        <img src="<%=request.getContextPath()%>/img/postres.png" alt="Postres" onclick="mostrarCategoria('postreContainer')">
+                    <div class="categoria p-3" style="background-color: #ECF1E6" onclick="mostrarCategoria('postreContainer')">
+                        <img src="<%=request.getContextPath()%>/img/postres.png" alt="Postres">
                         <h2>Postres</h2>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                     <div class="category-container" id="polloContainer">
                         <div class="product-container">
                             <c:forEach var="prod" items="${listaPollo}">
-                                <div class="product-card cont-product">
+                                <div class="product-card card cont-product">
                                     <a href="#" onclick="agregarAlCarrito(${prod.getIdProducto()}); return false;">
                                         <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" onerror="handleErrorImage.call(this);">
                                     </a>

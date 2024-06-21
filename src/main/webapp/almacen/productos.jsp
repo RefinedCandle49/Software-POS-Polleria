@@ -3,6 +3,7 @@
 <%@page import="model.Usuario, dao.UsuarioDao, java.util.*" %>
 <%@ page import="model.Producto" %>
 <%@ page import="dao.ProductoDao" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -176,7 +177,7 @@
                                                 </td>
 
 
-                                                <td style="text-wrap: nowrap;">${prod.getPrecio()}</td>
+                                                <td style="text-wrap: nowrap;">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></td>
                                                 <td>${prod.getStock()}</td>
                                                 <td>
                                                     <c:choose>

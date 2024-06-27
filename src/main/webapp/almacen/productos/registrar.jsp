@@ -139,7 +139,7 @@
                             <tr>
                                 <th>Foto:</th>
                                 <td>
-                                    <input type="file" name="image" accept=".jpg, .jpeg, .png" required class="btn-file">
+                                    <input type="file" name="image" accept=".jpg, .jpeg, .png" class="btn-file">
                                     <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
                                 </td>
                             </tr>

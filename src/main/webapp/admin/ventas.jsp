@@ -183,7 +183,7 @@
                     </nav>
                 </header>
 
-                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-10 flex-column h-sm-100">
+                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
                         <h1 class="fw-bold">PANEL DE VENTAS</h1>
 

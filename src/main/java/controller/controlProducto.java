@@ -114,28 +114,33 @@ public class controlProducto extends HttpServlet {
 
             case "registrar":
                 try {
+                    Producto productoRegistrar = new Producto();
                     String nombreRegistrar = request.getParameter("nombre");
                     Part filePart = request.getPart("image");
-                    String fileName = filePart.getSubmittedFileName();
-                    String uploadDir = getServletContext().getRealPath("/") + "cloud-images/";
-                    uploadDir = uploadDir.replace("\\", "/");
-                    File file = new File(uploadDir + nombreRegistrar + fileName);
+                    productoRegistrar.setFoto("no-image.png");
+                    if (filePart != null && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().isEmpty()) {
+                        String fileName = filePart.getSubmittedFileName();
+                        String uploadDir = getServletContext().getRealPath("/") + "cloud-images/";
+                        uploadDir = uploadDir.replace("\\", "/");
+                        File file = new File(uploadDir + nombreRegistrar + fileName);
 
-                    try (InputStream fileContent = filePart.getInputStream(); OutputStream out = new FileOutputStream(file)) {
-                        int read;
-                        byte[] bytes = new byte[1024];
-                        while ((read = fileContent.read(bytes)) != -1) {
-                            out.write(bytes, 0, read);
+                        try (InputStream fileContent = filePart.getInputStream(); OutputStream out = new FileOutputStream(file)) {
+                            int read;
+                            byte[] bytes = new byte[1024];
+                            while ((read = fileContent.read(bytes)) != -1) {
+                                out.write(bytes, 0, read);
+                            }
+                            System.out.println("Imagen cargada");
                         }
-                        System.out.println("Imagen cargada");
-                    }
 
 //                    response.getWriter().println("Imagen subida exitosamente.");
-                    System.out.println("Imagen guardada");
+                        System.out.println("Imagen guardada");
+
+                        productoRegistrar.setFoto(nombreRegistrar + fileName);
+                    }
 
                     int idCategoriaRegistrar = Integer.parseInt(request.getParameter("idCategoria"));
                     String descripcionRegistrar = request.getParameter("descripcion");
-                    String fotoRegistrar = fileName;
                     double precioRegistrar = Double.parseDouble(request.getParameter("precio"));
                     int stockRegistrar = Integer.parseInt(request.getParameter("stock"));
                     int estadoRegistrar = Integer.parseInt(request.getParameter("estado"));
@@ -164,11 +169,10 @@ public class controlProducto extends HttpServlet {
                     }
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    Producto productoRegistrar = new Producto();
+
                     productoRegistrar.setIdCategoria(idCategoriaRegistrar);
                     productoRegistrar.setNombre(nombreRegistrar);
                     productoRegistrar.setDescripcion(descripcionRegistrar);
-                    productoRegistrar.setFoto(nombreRegistrar + fotoRegistrar);
                     productoRegistrar.setPrecio(precioRegistrar);
                     productoRegistrar.setStock(stockRegistrar);
                     productoRegistrar.setEstado(estadoRegistrar);

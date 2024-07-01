@@ -160,6 +160,11 @@
                     event.preventDefault();
                     return false;
                 }
+
+                if (!validarNoSoloEspacios('nombre', 'errorSoloLetrasNombre') || !validarNoSoloEspacios('apellido', 'errorSoloLetrasApellido')) {
+                event.preventDefault();
+                return false;
+                }
                 
                 return true;
             }
@@ -196,6 +201,22 @@
                     
                     return false;
                 }
+            }
+
+            function validarNoSoloEspacios(id, error) {
+                let input = document.getElementById(id);
+                let mensajeVal = document.getElementById(error);
+                let valor = input.value.trim();
+
+                mensajeVal.textContent = "";
+                input.style.border = "1px solid #dee2e6";
+
+                if(valor.length === 0) {
+                    mensajeVal.textContent = "Este campo no puede estar compuesto solo por espacios.";
+                    input.style.border = "1px solid red";
+                    return false;
+                }
+                return true;
             }
         </script>
     </body>

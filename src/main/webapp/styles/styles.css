@@ -151,6 +151,10 @@ tbody, td, tfoot, th, thead, tr {
     height: 116.8px;
 }
 
+.card-height-table{
+    height: 203.19px;
+}
+
 @media (max-width: 1366px) {
 
     .card-res{

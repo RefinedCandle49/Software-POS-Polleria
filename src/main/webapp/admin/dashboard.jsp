@@ -326,9 +326,9 @@
 
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body bg-white rounded-3 table-responsive">
-                                            <h6 class="card-subtitle mb-3 text-secondary">Productos más vendidos del mes</h6>
+                                            <h6 class="card-subtitle mb-2 text-secondary">Productos más vendidos del mes</h6>
 
                                             <c:if test="${ empty list}">
                                                 <span>¡Hola! Parece que no han habido ventas en este mes.</span>
@@ -338,14 +338,14 @@
                                             </c:if>
 
                                             <c:if test="${not empty list}">
-                                                <table class="table">
+                                                <table class="table m-0">
                                                     <thead>
                                                         <tr>
                                                             <th style="display: none">ID</th>
                                                             <th>ÍTEM</th>
                                                             <th>SKU</th>
                                                             <th>PRODUCTO</th>
-                                                            <th>NUM. VENTAS</th>
+                                                            <th>N° VENTAS</th>
                                                             <th>MES</th>
                                                         </tr>
                                                     </thead>
@@ -368,9 +368,9 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body bg-white rounded-3 table-responsive">
-                                            <h6 class="card-subtitle mb-3 text-secondary">Clientes más recurrentes del mes</h6>
+                                            <h6 class="card-subtitle mb-2 text-secondary">Clientes más recurrentes del mes</h6>
 
                                             <c:if test="${ empty list_clientes}">
                                                 <span>¡Hola! Parece que no han habido ventas en este mes.</span>
@@ -380,14 +380,14 @@
                                             </c:if>
 
                                             <c:if test="${not empty list_clientes}">
-                                                <table class="table">
+                                                <table class="table m-0">
                                                     <thead>
                                                         <tr>
                                                             <th style="display: none">ID</th>
                                                             <th>ÍTEM</th>
                                                             <th>DOC.</th>
                                                             <th>NOMBRE</th>
-                                                            <th>NUM. VENTAS</th>
+                                                            <th>N° VENTAS</th>
                                                             <th>MES</th>
                                                         </tr>
                                                     </thead>

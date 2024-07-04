@@ -290,14 +290,15 @@ public class ProductoDao {
         try {
             
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("UPDATE producto SET idCategoria=?, nombre=?, descripcion=?,foto =?, precio=?, stock=? WHERE idProducto=?;");
+            PreparedStatement ps = con.prepareStatement("UPDATE producto SET idCategoria=?, nombre=?, descripcion=?,foto =?, precio=?, stock=?, estado=? WHERE idProducto=?;");
             ps.setInt(1, prod.getIdCategoria());
             ps.setString(2, prod.getNombre());
             ps.setString(3, prod.getDescripcion());
             ps.setString(4, prod.getFoto());
             ps.setDouble(5, prod.getPrecio());
             ps.setInt(6, prod.getStock());
-            ps.setInt(7, prod.getIdProducto());
+            ps.setInt(7, prod.getEstado());
+            ps.setInt(8, prod.getIdProducto());
 
             estado = ps.executeUpdate();
         } catch (Exception e) {
@@ -322,5 +323,50 @@ public class ProductoDao {
         return false;
     }
     
-   
+ public static int contarProductoAnulados() {
+        int totalProducto = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM producto WHERE estado = 0");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalProducto = rs.getInt("total");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return totalProducto;
+    
+    
+}   
+ public static List<Producto> listarProductoAnuladosPagina(int start, int total) {
+        List<Producto> listaProducto = new ArrayList<Producto>();
+        try {
+            Connection con = getConnection();
+             
+            PreparedStatement ps = con.prepareStatement("SELECT prod.idProducto, cat.nombre as nombreCategoria,prod.codigo,prod.nombre,prod.descripcion,prod.foto,prod.precio,prod.stock,prod.estado FROM producto prod INNER JOIN categoria cat ON prod.idCategoria = cat.idCategoria WHERE prod.estado = 0 ORDER BY idProducto DESC LIMIT ?, ?");
+            ps.setInt(1, start-1);
+            ps.setInt(2, total);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto prod = new Producto();
+                prod.setIdProducto(rs.getInt("idProducto"));
+                prod.setNombreCategoria(rs.getString("nombreCategoria"));
+                prod.setCodigo(rs.getString("codigo"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setDescripcion(rs.getString("descripcion"));
+                prod.setFoto(rs.getString("foto"));
+                prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setEstado(rs.getInt("estado"));
+                listaProducto.add(prod);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return listaProducto;
+    }
+ 
 }

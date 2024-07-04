@@ -258,7 +258,7 @@
                                                 <div>
                                                     <%
                                 if(ingreso > 0) {%>
-                                                    <p class="mb-0 text-secondary">Total Ingreso</p>
+                                                    <h6 class="mb-0 text-secondary">Total Ingreso</h6>
                                                     <h4 class="my-1 text-report fw-bold">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="<%= ingreso %>" /></h4>
                                                     <p class="mb-0 font-13">Ingreso anual de la empresa</p>
                                                     <% } else { %>
@@ -282,7 +282,7 @@
                                                 <div>
                                                     <%
                                 if(productoMasVendido != null) {%>
-                                                    <p class="mb-0 text-secondary">Producto Popular</p>
+                                                    <h6 class="mb-0 text-secondary">Producto Popular</h6>
                                                     <h4 class="my-1 text-report text-responsive fw-bold"><%= productoMasVendido.getNombreProducto() %></h4>
                                                     <p class="mb-0 font-13">Producto con <%= productoMasVendido.getTotalVenta() %> ventas</p>
                                                     <% } else { %>
@@ -306,7 +306,7 @@
                                                 <div>
                                                     <%
                                 if(clientesRegistrados > 0) {%>
-                                                    <p class="mb-0 text-secondary">Total clientes</p>
+                                                    <h6 class="mb-0 text-secondary">Total clientes</h6>
                                                     <h4 class="my-1 text-report fw-bold"><%= clientesRegistrados %></h4>
                                                     <p class="mb-0 font-13">Clientes registrados en el sistema</p>
                                                     <% } else { %>

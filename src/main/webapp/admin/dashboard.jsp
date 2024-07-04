@@ -252,10 +252,9 @@
                             <div class="row">
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body">
-                                            <div class="d-flex align-items-center">
-
+                                            <div class="d-flex align-items-center h-100">
                                                 <div>
                                                     <%
                                 if(ingreso > 0) {%>
@@ -276,9 +275,9 @@
                                 </div>
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body card-res">
-                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center h-100">
 
                                                 <div>
                                                     <%
@@ -300,9 +299,9 @@
                                 </div>
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body">
-                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center h-100">
 
                                                 <div>
                                                     <%

@@ -8,6 +8,7 @@ import static conexion.Conexion.getConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
@@ -227,5 +228,90 @@ public class ClienteDao {
         }
         return false;
     }
+   public static int anularCliente(Cliente cli) {
+    int est = 0;
+    try (Connection con = getConnection();
+         PreparedStatement ps = con.prepareStatement("UPDATE cliente SET estado=? WHERE idCliente=?")) {
+        
+        con.setAutoCommit(false);
+        
+        ps.setInt(1, cli.getEstado());
+        ps.setInt(2, cli.getIdCliente());
+        
+        est = ps.executeUpdate();
+        
+        con.commit();
+    } catch (SQLException e) {
+        // Manejar la excepción SQL adecuadamente
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Manejar cualquier otra excepción
+        e.printStackTrace();
+    }
+    return est;
+}
 
+   public static int contarClienteAnulados() {
+        int totalCliente = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM cliente WHERE estado = 0");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalCliente = rs.getInt("total");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return totalCliente;
+}
+    public static List<Cliente> listarClienteAnuladosPagina(int start, int total) {
+        List<Cliente> listaCliente = new ArrayList<Cliente>();
+        try {
+            Connection con = getConnection();
+             
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente,documento,nombre,apellido,email,estado FROM cliente WHERE estado = 0 ORDER BY idCliente DESC LIMIT ?, ?");
+            ps.setInt(1, start-1);
+            ps.setInt(2, total);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Cliente cli = new Cliente();
+                cli.setIdCliente(rs.getInt("idCliente"));
+                cli.setDocumento(rs.getString("documento"));
+                cli.setNombre(rs.getString("nombre"));
+                cli.setApellido(rs.getString("apellido"));
+                cli.setEmail(rs.getString("email"));
+                cli.setEstado(rs.getInt("estado"));
+                listaCliente.add(cli);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return listaCliente;
+    }
+    
+    public static int activarCliente(Cliente cli) {
+    int est = 1;
+    try (Connection con = getConnection();
+         PreparedStatement ps = con.prepareStatement("UPDATE cliente SET estado=? WHERE idCliente=?")) {
+        
+        con.setAutoCommit(false);
+        
+        ps.setInt(1, cli.getEstado());
+        ps.setInt(2, cli.getIdCliente());
+        
+        est = ps.executeUpdate();
+        
+        con.commit();
+    } catch (SQLException e) {
+        // Manejar la excepción SQL adecuadamente
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Manejar cualquier otra excepción
+        e.printStackTrace();
+    }
+    return est;
+}
 }

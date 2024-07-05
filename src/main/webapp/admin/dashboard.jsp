@@ -252,14 +252,13 @@
                             <div class="row">
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body">
-                                            <div class="d-flex align-items-center">
-
+                                            <div class="d-flex align-items-center h-100">
                                                 <div>
                                                     <%
                                 if(ingreso > 0) {%>
-                                                    <p class="mb-0 text-secondary">Total Ingreso</p>
+                                                    <h6 class="mb-0 text-secondary">Total Ingreso</h6>
                                                     <h4 class="my-1 text-report fw-bold">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="<%= ingreso %>" /></h4>
                                                     <p class="mb-0 font-13">Ingreso anual de la empresa</p>
                                                     <% } else { %>
@@ -276,14 +275,14 @@
                                 </div>
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body card-res">
-                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center h-100">
 
                                                 <div>
                                                     <%
                                 if(productoMasVendido != null) {%>
-                                                    <p class="mb-0 text-secondary">Producto Popular</p>
+                                                    <h6 class="mb-0 text-secondary">Producto Popular</h6>
                                                     <h4 class="my-1 text-report text-responsive fw-bold"><%= productoMasVendido.getNombreProducto() %></h4>
                                                     <p class="mb-0 font-13">Producto con <%= productoMasVendido.getTotalVenta() %> ventas</p>
                                                     <% } else { %>
@@ -300,14 +299,14 @@
                                 </div>
 
                                 <div class="col-sm-4 my-3">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body">
-                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center h-100">
 
                                                 <div>
                                                     <%
                                 if(clientesRegistrados > 0) {%>
-                                                    <p class="mb-0 text-secondary">Total clientes</p>
+                                                    <h6 class="mb-0 text-secondary">Total clientes</h6>
                                                     <h4 class="my-1 text-report fw-bold"><%= clientesRegistrados %></h4>
                                                     <p class="mb-0 font-13">Clientes registrados en el sistema</p>
                                                     <% } else { %>
@@ -327,9 +326,9 @@
 
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body bg-white rounded-3 table-responsive">
-                                            <h6 class="card-subtitle mb-3 text-secondary">Productos más vendidos del mes</h6>
+                                            <h6 class="card-subtitle mb-2 text-secondary">Productos más vendidos del mes</h6>
 
                                             <c:if test="${ empty list}">
                                                 <span>¡Hola! Parece que no han habido ventas en este mes.</span>
@@ -339,14 +338,14 @@
                                             </c:if>
 
                                             <c:if test="${not empty list}">
-                                                <table class="table">
+                                                <table class="table m-0">
                                                     <thead>
                                                         <tr>
                                                             <th style="display: none">ID</th>
                                                             <th>ÍTEM</th>
                                                             <th>SKU</th>
                                                             <th>PRODUCTO</th>
-                                                            <th>NUM. VENTAS</th>
+                                                            <th>N° VENTAS</th>
                                                             <th>MES</th>
                                                         </tr>
                                                     </thead>
@@ -369,9 +368,9 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
                                         <div class="card-body bg-white rounded-3 table-responsive">
-                                            <h6 class="card-subtitle mb-3 text-secondary">Clientes más recurrentes del mes</h6>
+                                            <h6 class="card-subtitle mb-2 text-secondary">Clientes más recurrentes del mes</h6>
 
                                             <c:if test="${ empty list_clientes}">
                                                 <span>¡Hola! Parece que no han habido ventas en este mes.</span>
@@ -381,14 +380,14 @@
                                             </c:if>
 
                                             <c:if test="${not empty list_clientes}">
-                                                <table class="table">
+                                                <table class="table m-0">
                                                     <thead>
                                                         <tr>
                                                             <th style="display: none">ID</th>
                                                             <th>ÍTEM</th>
                                                             <th>DOC.</th>
                                                             <th>NOMBRE</th>
-                                                            <th>NUM. VENTAS</th>
+                                                            <th>N° VENTAS</th>
                                                             <th>MES</th>
                                                         </tr>
                                                     </thead>

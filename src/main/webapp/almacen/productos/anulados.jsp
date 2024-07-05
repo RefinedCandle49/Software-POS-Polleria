@@ -10,7 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
-        <title>Productos | Pollos Locos</title>
+        <title>Productos No Disponibles | Pollos Locos</title>
     </head>
     <%
                 HttpSession sesion = request.getSession(false);
@@ -61,11 +61,11 @@
             pageid=pageid-1;
             pageid=pageid*total+1;
         }
-        List<Producto> producto = ProductoDao.listarProductosPagina(pageid,total);
+        List<Producto> producto = ProductoDao.listarProductoAnuladosPagina(pageid,total);
         request.setAttribute("list", producto);
     
-        int totalProductos = ProductoDao.contarProductos();
-        int totalPages = (int) Math.ceil((double) totalProductos / total); // Calcula el número total de páginas
+        int totalProducto = ProductoDao.contarProductoAnulados();
+        int totalPages = (int) Math.ceil((double) totalProducto / total); // Calcula el número total de páginas
     %>
     <body>
         <div class="container-fluid overflow-hidden">
@@ -86,19 +86,19 @@
 
                         <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                             <li class="nav-item pb-4">
-                                <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="link-active align-middle px-0">
+                                <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="link-inactive align-middle px-0">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-meat"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13.62 8.382l1.966 -1.967a2 2 0 1 1 3.414 -1.415a2 2 0 1 1 -1.413 3.414l-1.82 1.821" /><path d="M5.904 18.596c2.733 2.734 5.9 4 7.07 2.829c1.172 -1.172 -.094 -4.338 -2.828 -7.071c-2.733 -2.734 -5.9 -4 -7.07 -2.829c-1.172 1.172 .094 4.338 2.828 7.071z" /><path d="M7.5 16l1 1" /><path d="M12.975 21.425c3.905 -3.906 4.855 -9.288 2.121 -12.021c-2.733 -2.734 -8.115 -1.784 -12.02 2.121" /></svg>
                                     <span class="ms-1 d-none d-sm-inline">Productos Disponibles</span>
                                 </a>
                             </li>
                             <li class="pb-4">
-                                <a href="${pageContext.request.contextPath}/almacen/productos/anulados.jsp?page=1" class="link-inactive align-middle px-0">
+                                <a href="${pageContext.request.contextPath}/almacen/productos/anulados.jsp?page=1" class="link-active align-middle px-0">
                                     <!--  <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
                                     -->  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20"  height="20"><path fill="#ffffff" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>
                                     <span class="ms-1 d-none d-sm-inline">Productos No Disponibles</span>
                                 </a>
                             </li>
-                                    
+
                             <li>
                                 <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="link-inactive align-middle px-0">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
@@ -120,25 +120,9 @@
                     <section>
 
                         <h1 class="fw-bold">PANEL DE PRODUCTOS</h1>
-
-                        <div class="d-flex align-items-center justify-content-end">
-                            <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="btn btn-primary">
-                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
-                                <span class="ms-1">Ir a registrar producto</span>
-                            </a>
-                        </div>
-
                         <c:if test="${empty list}">
                             <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
                         </c:if>
-
-                        <c:if test="${not empty param.registroExitoso}">
-                            <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
-                                ${param.registroExitoso}
-                                <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
-                            </div>
-                        </c:if>
-
                         <c:if test="${not empty param.actualizarExitoso}">
                             <div id="actualizarExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
                                 ${param.actualizarExitoso}
@@ -202,6 +186,7 @@
                                                         </svg> Editar
                                                     </a>
                                                 </td>
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -211,17 +196,17 @@
                             <div class="d-flex justify-content-center">
                                 <ul class="pagination">
                                     <li class="page-item">
-                                        <a class="page-link" href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" aria-label="Previous">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/almacen/productos/anulados.jsp?page=1" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     <%
                                         for(int i = 1; i <= totalPages; i++) {
                                     %>
-                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/almacen/productos.jsp?page=<%=i%>"><%=i%></a></li>
+                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/almacen/productos/anulados.jsp?page=<%=i%>"><%=i%></a></li>
                                         <% } %>
                                     <li class="page-item">
-                                        <a class="page-link" href="${pageContext.request.contextPath}/almacen/productos.jsp?page=<%=totalPages%>" aria-label="Next">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/almacen/productos/anulados.jsp?page=<%=totalPages%>" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -235,38 +220,5 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-                                                    function alertBienvenida() {
-                                                        const url = new URLSearchParams(window.location.search);
-                                                        const alert = url.get('alert');
-
-                                                        if (alert === 'true') {
-                                                            Swal.fire({
-                                                                icon: "success",
-                                                                title: 'Bienvenido, ' + nombreRol,
-                                                                confirmButtonColor: "#0A5ED7",
-                                                                confirmButtonText: "Aceptar",
-                                                                allowOutsideClick: false
-                                                            }).then((result) => {
-                                                                if (result.isConfirmed) {
-                                                                    window.location.href = contextPath + "/almacen/productos.jsp?alert=false&page=1";
-                                                                }
-                                                            });
-                                                        }
-                                                    }
-                                                    alertBienvenida()
-
-                                                    function cerrarMensaje() {
-                                                        let registroExitoso = document.getElementById("registroExitoso");
-                                                        registroExitoso.style.display = "none";
-                                                        window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp?page=1"
-                                                    }
-                                                    function cerrarMensajeActualizar() {
-                                                        let actualizarExitoso = document.getElementById("actualizarExitoso");
-                                                        actualizarExitoso.style.display = "none";
-                                                        window.location.href = "${pageContext.request.contextPath}/almacen/productos.jsp?page=1"
-                                                    }
-        </script>
-
     </body>
 </html>

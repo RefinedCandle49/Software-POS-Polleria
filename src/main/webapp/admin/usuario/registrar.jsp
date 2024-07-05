@@ -177,7 +177,7 @@
                                 </div>
                             </c:if>
 
-                            <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post">
+                            <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post" onsubmit="return validarFormulario()">
                                 <div class="mb-3">
                                     <label for="email" class="form-label fw-bold">Correo Electrónico:</label>
                                     <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" value="${param.email != null ? param.email : ''}" required>
@@ -195,6 +195,7 @@
                                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-off m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" /><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" /><path d="M3 3l18 18" /></svg>
                                         </button>
                                     </div>
+                                    <span id="errorPassword" class="text-danger"></span>
 
                                 </div>
 
@@ -223,6 +224,33 @@
 
         <script>
             DominioPorDefecto();
+        </script>
+
+        <script>
+            function validarEspacios(id,error) {
+                let input = document.getElementById(id);
+                let mensajeVal = document.getElementById(error);
+                let valor = input.value.trim();
+                
+                mensajeVal.textContent = "";
+                input.style.border = "1px solid #dee2e6";
+                
+                if(/\s/.test(valor) || valor.length === 0) {
+                    mensajeVal.textContent = "La contraseña no puede contener espacios";
+                    input.style.border = "1px solid red";
+                    return false;
+                }
+                return true;
+            }
+            
+            function validarFormulario() {
+                let esValido = validarEspacios('password','errorPassword');
+                if (!esValido){
+                    event.preventDefault();
+                }
+                return esValido;
+            }
+            
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

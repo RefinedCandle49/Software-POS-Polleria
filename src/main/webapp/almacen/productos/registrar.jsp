@@ -136,11 +136,17 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <th>Nombre:</th>
-                                                                            <td><input maxlength="50" type="text" name="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required></td>
+                                                                            <td>
+                                                                                <input maxlength="50" type="text" name="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
+                                                                                <span id="errorNombre" class="text-danger"></span>
+                                                                            </td>
 
                                                                             <tr>
                                                                                 <th>Descripción:</th>
-                                                                                <td><textarea maxlength="200" name="descripcion" class="form-control" required>${param.descripcion != null ? param.descripcion : ''}</textarea></td>
+                                                                                <td>
+                                                                                    <textarea maxlength="200" name="descripcion" class="form-control" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : '---'}</textarea>
+                                                                                    <span id="errorDescripcion" class="text-danger"></span>
+                                                                                </td>
                                                                             </tr>
 
                                                                             <tr>
@@ -268,6 +274,31 @@
                                                             inputPrec.style.border = "1px solid red";
                                                             return false;
                                                         }
+                                                    }
+                                                </script>
+
+                                                <script>
+                                                    function validarEspacios(evt) {
+                                                        let input = evt.target; 
+                                                        let mensajeVal;
+                                                        
+                                                        if (input.id === "nombre") {
+                                                            mensajeVal = document.getElementById("errorNombre");
+                                                        } else if (input.name === "descripcion") {
+                                                            mensajeVal = document.getElementById("errorDescripcion");
+                                                        }
+                                                        
+                                                        let valor = input.value.trim() + String.fromCharCode(evt.which ? evt.which : evt.keyCode);
+                                                        
+                                                        mensajeVal.textContent = "";
+                                                        input.style.border = "1px solid #dee2e6";
+                                                        
+                                                        if (valor.trim().length === 0) {
+                                                            mensajeVal.textContent = "El campo no puede contener solo espacios";
+                                                            input.style.border = "1px solid red";
+                                                            return false;
+                                                        }
+                                                        return true;
                                                     }
                                                 </script>
                                                 </body>

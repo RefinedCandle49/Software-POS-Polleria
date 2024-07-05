@@ -147,7 +147,8 @@
                                                                             <div class="col-sm-2"></div>
                                                                             <label for="nombre" class="col-sm-1 col-form-label">Nombre:</label>
                                                                             <div class="col-sm-7">
-                                                                                <input type="text" name="nombre" class="form-control" id="nombre" value="${param.nombre != null ? param.nombre : producto.nombre}" required>
+                                                                                <input type="text" name="nombre" class="form-control" id="nombre" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
+                                                                                <span id="errorNombre" class="text-danger"></span>
                                                                             </div>
                                                                         </div>
 
@@ -155,7 +156,8 @@
                                                                             <div class="col-sm-2"></div>
                                                                             <label for="descripcion" class="col-sm-1 col-form-label">Descripcion:</label>
                                                                             <div class="col-sm-7">
-                                                                                <textarea type="text" name="descripcion" class="form-control" id="descripcion" required>${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
+                                                                                <textarea type="text" name="descripcion" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
+                                                                                <span id="errorDescripcion" class="text-danger"></span>
                                                                             </div>
                                                                         </div>
 
@@ -278,6 +280,31 @@
                                                                                                     inputPrec.style.border = "1px solid red";
                                                                                                     return false;
                                                                                                 }
+                                                                                            }
+                                                                                        </script>
+
+                                                                                        <script>
+                                                                                            function validarEspacios(evt) {
+                                                                                                let input = evt.target; 
+                                                                                                let mensajeVal;
+                                                                                                
+                                                                                                if (input.id === "nombre") {
+                                                                                                    mensajeVal = document.getElementById("errorNombre");
+                                                                                                } else if (input.name === "descripcion") {
+                                                                                                    mensajeVal = document.getElementById("errorDescripcion");
+                                                                                                }
+                                                                                                
+                                                                                                let valor = input.value.trim() + String.fromCharCode(evt.which ? evt.which : evt.keyCode);
+                                                                                                
+                                                                                                mensajeVal.textContent = "";
+                                                                                                input.style.border = "1px solid #dee2e6";
+                                                                                                
+                                                                                                if (valor.trim().length === 0) {
+                                                                                                    mensajeVal.textContent = "El campo no puede contener solo espacios";
+                                                                                                    input.style.border = "1px solid red";
+                                                                                                    return false;
+                                                                                                }
+                                                                                                return true;
                                                                                             }
                                                                                         </script>
 

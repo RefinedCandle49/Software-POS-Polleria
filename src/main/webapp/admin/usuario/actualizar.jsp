@@ -175,7 +175,7 @@
                         <div>
                             <h1 class="fw-bold">ACTUALIZACIÓN DE USUARIO</h1>
 
-                            <form action="${pageContext.request.contextPath}/controlUsuario?action=actualizar" method="post">
+                            <form action="${pageContext.request.contextPath}/controlUsuario?action=actualizar" method="post" onsubmit="return validarFormulario()">
 
                                 <input type="hidden" name="idUsuario" value="${usuario.idUsuario}">
                                 <input type="hidden" name="estado" value="${usuario.estado}"> 
@@ -198,6 +198,7 @@
                                     <label for="password" class="form-label fw-bold">Contraseña:</label>
                                     <div>
                                         <input name="password" class="form-control" id="password" minlength="5" maxlength="50" required value="${usuario.password}">
+                                        <span id="errorPassword" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -224,6 +225,33 @@
             </div>
         </div>
 
+
+        <script>
+            function validarEspacios(id,error) {
+                let input = document.getElementById(id);
+                let mensajeVal = document.getElementById(error);
+                let valor = input.value.trim();
+                
+                mensajeVal.textContent = "";
+                input.style.border = "1px solid #dee2e6";
+                
+                if(/\s/.test(valor) || valor.length === 0) {
+                    mensajeVal.textContent = "La contraseña no puede contener espacios";
+                    input.style.border = "1px solid red";
+                    return false;
+                }
+                return true;
+            }      
+            
+            function validarFormulario() {
+                let esValido = validarEspacios('password','errorPassword');
+                if (!esValido){
+                    event.preventDefault();
+                }
+                return esValido;
+            }
+            
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>

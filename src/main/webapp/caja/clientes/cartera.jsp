@@ -280,8 +280,8 @@
                         let formId = this.getAttribute('data-form-id');
 
                         Swal.fire({
-                            title: "¿Desea anular el cliente?",
-                            html: "Esta acción anulará definitivamente el cliente. <br> ¿Está seguro de que desea continuar?",
+                            title: "¿Desea eliminar el cliente?",
+                            html: "Esta acción eliminará definitivamente el cliente. <br> ¿Está seguro de que desea continuar?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6

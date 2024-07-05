@@ -292,5 +292,26 @@ public class ClienteDao {
         return listaCliente;
     }
     
-    
+    public static int activarCliente(Cliente cli) {
+    int est = 1;
+    try (Connection con = getConnection();
+         PreparedStatement ps = con.prepareStatement("UPDATE cliente SET estado=? WHERE idCliente=?")) {
+        
+        con.setAutoCommit(false);
+        
+        ps.setInt(1, cli.getEstado());
+        ps.setInt(2, cli.getIdCliente());
+        
+        est = ps.executeUpdate();
+        
+        con.commit();
+    } catch (SQLException e) {
+        // Manejar la excepción SQL adecuadamente
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Manejar cualquier otra excepción
+        e.printStackTrace();
+    }
+    return est;
+}
 }

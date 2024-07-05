@@ -113,6 +113,28 @@ public class controlCliente extends HttpServlet {
                 }
                 return;
                 
+                case "activarCliente":
+                try {
+                    int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+                    int newEstado = Integer.parseInt(request.getParameter("newEstado"));
+                     
+                    Cliente cli = new Cliente();
+                    cli.setIdCliente(idCliente);
+                    cli.setEstado(newEstado);
+                    
+                    int result = ClienteDao.activarCliente(cli);
+                    
+                    // Mandar parametro para mostrar alerta de confirmación
+                    HttpSession session = request.getSession();
+                    
+                    if (result > 0) {
+                        response.sendRedirect(request.getContextPath() + "/caja/clientes/anulados.jsp?activarCliente=true&page=1");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return;
+                
             case "registrar":
                 try {
                 String documentoRegistrar = request.getParameter("documento");

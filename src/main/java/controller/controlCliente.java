@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.Cliente;
@@ -90,6 +91,28 @@ public class controlCliente extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
+            case "anularCliente":
+                try {
+                    int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+                    int newEstado = Integer.parseInt(request.getParameter("newEstado"));
+                     
+                    Cliente cli = new Cliente();
+                    cli.setIdCliente(idCliente);
+                    cli.setEstado(newEstado);
+                    
+                    int result = ClienteDao.anularCliente(cli);
+                    
+                    // Mandar parametro para mostrar alerta de confirmación
+                    HttpSession session = request.getSession();
+                    
+                    if (result > 0) {
+                        response.sendRedirect(request.getContextPath() + "/caja/clientes/cartera.jsp?anularCliente=true&page=1");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return;
+                
             case "registrar":
                 try {
                 String documentoRegistrar = request.getParameter("documento");

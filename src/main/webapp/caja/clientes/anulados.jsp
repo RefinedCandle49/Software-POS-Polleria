@@ -15,7 +15,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
-        <title>Clientes | Pollos Locos</title>
+        <title>Clientes No Disponibles | Pollos Locos</title>
     </head>
     <body class="container-fluid p-0">
         <%
@@ -60,11 +60,11 @@
                 pageid=pageid-1;
                 pageid=pageid*total+1;
             }
-            List<Cliente> cliente = ClienteDao.listarClientesPagina(pageid,total);
+            List<Cliente> cliente = ClienteDao.listarClienteAnuladosPagina(pageid,total);
             request.setAttribute("list", cliente);
             
-            int totalClientes = ClienteDao.contarClientes();
-            int totalPages = (int) Math.ceil((double) totalClientes / total); // Calcula el número total de páginas
+            int totalCliente = ClienteDao.contarClienteAnulados();
+            int totalPages = (int) Math.ceil((double) totalCliente / total); // Calcula el número total de páginas
         %>
 
         <header>
@@ -83,13 +83,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp?page=1">
+                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp?page=1">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
                                     <span>Gestionar Clientes</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-inactive" href="<%=request.getContextPath()%>/caja/clientes/anulados.jsp?page=1">
+                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/clientes/anulados.jsp?page=1">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="20"  height="20"><path fill="#ffffff" d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM471 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
                                     <span>Clientes Anulados</span>
                                 </a>
@@ -118,31 +118,10 @@
                 <div class="col-md-8">
                     <h1 class="fw-bold">PANEL DE CLIENTES</h1>
 
-                    <div class="d-flex align-items-center justify-content-end">
-                        <a href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp" class="btn btn-primary">
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
-                            <span class="ms-1">Ir a registrar cliente</span>
-                        </a>
-                    </div>
 
                     <c:if test="${ empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
                     </c:if>
-
-                    <c:if test="${not empty param.registroExitoso}">
-                        <div id="registroExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
-                            ${param.registroExitoso}
-                            <button type="button" class="button-mensaje text-success" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
-                        </div> 
-                    </c:if>
-
-                    <c:if test="${not empty param.actualizarExitoso}">
-                        <div id="actualizarExitoso" class="alert alert-success d-flex align-items-center justify-content-between my-2">
-                            ${param.actualizarExitoso}
-                            <button type="button" class="button-mensaje text-success" onclick="cerrarMensajeActualizar()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
-                        </div>
-                    </c:if>
-
 
                     <c:if test="${not empty list}">
                         <div class="table-responsive bg-light color-tabla callout my-2 pb-0">
@@ -166,13 +145,6 @@
                                             <td>${cli.getNombre()}</td>
                                             <td>${cli.getApellido()}</td>
                                             <td>${cli.getEmail()}</td>
-                                            <%-- td>
-                                                <c:choose>
-                                                    <c:when test="${cli.getEmail() != null}">${cli.getEmail()}</c:when>
-                                                    <c:when test="${cli.getEmail() == null}">-</c:when>
-                                                    <c:otherwise>-</c:otherwise>
-                                                </c:choose> 
-                                            </td --%>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${cli.getEstado() == 0}">Inactivo</c:when>
@@ -186,7 +158,6 @@
                                                     <c:when test="${cli.getIdCliente() == 1}"></c:when>
 
                                                     <c:otherwise>
-                                                        <div class="d-flex align-items-center">
                                                         <a class="btn btn-warning"
                                                            href="${pageContext.request.contextPath}/controlCliente?action=editar&id=${cli.getIdCliente()}">
                                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -206,22 +177,10 @@
                                                                 <path d="M16 5l3 3" />
                                                             </svg> Editar
                                                         </a>
-                                                           
-                                                <button id="btnAnular${cli.getIdCliente()}" data-form-id="formAnular${cli.getIdCliente()}" class="btn btn-danger d-flex align-items-center ms-2">
-                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                    <span class="ms-1">Eliminar</span>
-                                                </button>
-
-                                                <form id="formAnular${cli.getIdCliente()}" action="${pageContext.request.contextPath}/controlCliente?action=anularCliente&idCliente=${cli.getIdCliente()}" method="post" class="m-0">
-                                                    <input type="hidden" name="idCliente" value="${cli.getIdCliente()}" />
-                                                    <input type="hidden" name="newEstado" value="0" />
-                                                </form>
-                                                        </div>
+                                                            
                                                     </c:otherwise>
                                                 </c:choose>
-                                                
                                             </td>
-                                            
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -230,17 +189,17 @@
                         <div class="d-flex justify-content-center">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1" aria-label="Previous">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/anulados.jsp?page=1" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <%
                                     for(int i = 1; i <= totalPages; i++) {
                                 %>
-                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=<%=i%>"><%=i%></a></li>
+                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/anulados.jsp?page=<%=i%>"><%=i%></a></li>
                                     <% } %>
                                 <li class="page-item">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=<%=totalPages%>" aria-label="Next">
+                                    <a class="page-link" href="${pageContext.request.contextPath}/caja/clientes/anulados.jsp?page=<%=totalPages%>" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -251,65 +210,20 @@
                 <div class="col-md-2"></div>
             </div>
         </main>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-                                function cerrarMensaje() {
-                                    let registroExitoso = document.getElementById("registroExitoso");
-                                    registroExitoso.style.display = "none";
-                                    window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1"
-
-                                }
-
-                                function cerrarMensajeActualizar() {
-                                    let actualizarExitoso = document.getElementById("actualizarExitoso");
-                                    actualizarExitoso.style.display = "none";
-                                    window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1";
-                                }
-
-        </script>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            function cerrarMensaje() {
+                let registroExitoso = document.getElementById("registroExitoso");
+                registroExitoso.style.display = "none";
+                window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1"
 
-                let btnAnular = document.querySelectorAll('[id^="btnAnular"]');
+            }
 
-                btnAnular.forEach(function (btn) {
-                    btn.addEventListener('click', function () {
-
-                        let formId = this.getAttribute('data-form-id');
-
-                        Swal.fire({
-                            title: "¿Desea anular el cliente?",
-                            html: "Esta acción anulará definitivamente el cliente. <br> ¿Está seguro de que desea continuar?",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#0d6efd", //#3085d6
-                            cancelButtonColor: "#dc3545", //#d33
-                            cancelButtonText: "Cancelar",
-                            confirmButtonText: "Continuar"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                document.getElementById(formId).submit();
-                            }
-                        });
-                    });
-                });
-
-                const urlParams = new URLSearchParams(window.location.search);
-                const anularCliente = urlParams.get('anularCliente');
-
-                if (anularCliente === 'true') {
-                    Swal.fire({
-                        title: 'Cliente anulado correctamente',
-                        icon: 'success',
-                        confirmButtonColor: "#0d6efd",
-                        confirmButtonText: 'Aceptar'
-                    }).then(() => {
-                        window.location.href = "<%= request.getContextPath() %>/caja/clientes/cartera.jsp?page=1"
-                    });
-                }
-            });
+            function cerrarMensajeActualizar() {
+                let actualizarExitoso = document.getElementById("actualizarExitoso");
+                actualizarExitoso.style.display = "none";
+                window.location.href = "${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1";
+            }
         </script>
     </body>
 </html>

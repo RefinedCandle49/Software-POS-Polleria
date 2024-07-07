@@ -137,14 +137,14 @@
                                                                         <tr>
                                                                             <th>Nombre:</th>
                                                                             <td>
-                                                                                <input maxlength="50" type="text" name="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
+                                                                                <input maxlength="50" type="text" name="nombre" id="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
                                                                                 <span id="errorNombre" class="text-danger"></span>
                                                                             </td>
 
                                                                             <tr>
                                                                                 <th>Descripción:</th>
                                                                                 <td>
-                                                                                    <textarea maxlength="200" name="descripcion" class="form-control" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : '---'}</textarea>
+                                                                                    <textarea maxlength="200" name="descripcion" id="descripcion" class="form-control" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : '---'}</textarea>
                                                                                     <span id="errorDescripcion" class="text-danger"></span>
                                                                                 </td>
                                                                             </tr>

@@ -98,13 +98,6 @@
                                     <span class="ms-1 d-none d-sm-inline">Productos No Disponibles</span>
                                 </a>
                             </li>
-                                    
-                            <li>
-                                <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="link-inactive align-middle px-0">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></svg>
-                                    <span class="ms-1 d-none d-sm-inline">Registrar Producto</span>
-                                </a>
-                            </li>
                         </ul>
                         <hr />
                         <div class="pb-3">
@@ -152,7 +145,7 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th style="display: none">ID</th>
-                                            <th>CÓDIGO</th>
+                                            <th>SKU</th>
                                             <th>CATEGORÍA</th>
                                             <th>NOMBRE</th>
                                             <th>DESCRIPCIÓN</th>

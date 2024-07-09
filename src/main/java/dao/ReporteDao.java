@@ -124,7 +124,7 @@ public class ReporteDao {
             stmtConfig.execute();
             stmtConfig.close();
 
-            PreparedStatement ps = con.prepareStatement("SELECT vt.idCliente, cli.documento, CONCAT(cli.nombre, ' ', cli.apellido) AS nombre_cliente, COUNT(vt.idCliente) AS total_ventas, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM venta vt INNER JOIN cliente cli ON vt.idCliente = cli.idCliente WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 NOT IN (cli.idCliente = 1) GROUP BY vt.idCliente, cli.nombre ORDER BY total_ventas DESC, cli.nombre ASC LIMIT 3;");
+            PreparedStatement ps = con.prepareStatement("SELECT vt.idCliente, cli.documento, CONCAT(cli.nombre, ' ', cli.apellido) AS nombre_cliente, COUNT(vt.idCliente) AS total_ventas, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM venta vt INNER JOIN cliente cli ON vt.idCliente = cli.idCliente WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 AND cli.idCliente != 1 GROUP BY vt.idCliente, cli.nombre ORDER BY total_ventas DESC, cli.nombre ASC LIMIT 3;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

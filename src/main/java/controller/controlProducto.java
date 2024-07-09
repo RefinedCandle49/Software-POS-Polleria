@@ -99,7 +99,15 @@ public class controlProducto extends HttpServlet {
 
                         if (resultActualizar > 0) {
                             String actualizarExitoso = "Producto actualizado correctamente";
-                            response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?actualizarExitoso=" + actualizarExitoso + "&page=1");
+                            String view = request.getParameter("view");
+                            
+                            if ("productos".equals(view)) {
+                                response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?actualizarExitoso=" + actualizarExitoso + "&page=1");
+                            } else {
+                                response.sendRedirect(request.getContextPath() + "/almacen/productos/anulados.jsp?actualizarExitoso=" + actualizarExitoso + "&page=1");
+                            }
+                            
+                            
 
                         } /*else {  // Manejo de error de actualización
                             response.sendRedirect(request.getContextPath() + "/almacen/productos/actualizar.jsp?id=" + idProducto + "&error=ErrorActualizacion");

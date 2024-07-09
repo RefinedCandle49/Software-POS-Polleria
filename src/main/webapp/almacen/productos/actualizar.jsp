@@ -107,7 +107,7 @@
 
 
                                                                 <input type="hidden" name="idProducto" value="${param.idProducto != null ? param.idProducto : producto.idProducto}">
-
+                                                                    <input type="hidden" name="view" value="${param.view}"/>   
 
                                                                     <div class="fw-bold text-dark">
 

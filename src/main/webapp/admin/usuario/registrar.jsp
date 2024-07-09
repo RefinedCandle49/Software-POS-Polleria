@@ -180,7 +180,7 @@
                             <form action="${pageContext.request.contextPath}/controlUsuario?action=registrar" method="post" onsubmit="return validarFormulario()">
                                 <div class="mb-3">
                                     <label for="email" class="form-label fw-bold">Correo Electrónico:</label>
-                                    <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" value="${param.email != null ? param.email : ''}" required>
+                                    <input type="email" class="form-control" id="email" name="email" minlength="10" maxlength="80" value="${param.email != null ? param.email : '@polloslocos.com'}" required>
                                 </div>
 
                                 <div class="mb-3">
@@ -223,7 +223,23 @@
         </div>
 
         <script>
-            DominioPorDefecto();
+            /*DominioPorDefecto();*/
+
+            const form = document.querySelector('form');
+            const emailInput = document.querySelector('input[name="email"]');
+
+            form.addEventListener('submit', function (event) {
+                if (!emailInput.value.includes('@polloslocos.com')) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor ingresa un correo electrónico válido con el dominio @polloslocos.com',
+                        confirmButtonColor: "#0A5ED7",
+                        confirmButtonText: "Aceptar"
+                    });
+                }
+            });
         </script>
 
         <script>
@@ -231,10 +247,10 @@
                 let input = document.getElementById(id);
                 let mensajeVal = document.getElementById(error);
                 let valor = input.value.trim();
-                
+
                 mensajeVal.textContent = "";
                 input.style.border = "1px solid #dee2e6";
-                
+
                 if(/\s/.test(valor) || valor.length === 0) {
                     mensajeVal.textContent = "La contraseña no puede contener espacios";
                     input.style.border = "1px solid red";
@@ -242,7 +258,7 @@
                 }
                 return true;
             }
-            
+
             function validarFormulario() {
                 let esValido = validarEspacios('password','errorPassword');
                 if (!esValido){
@@ -250,7 +266,7 @@
                 }
                 return esValido;
             }
-            
+
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -39,7 +39,7 @@ public class controlLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String mensajeError = null;
-        
+
         UsuarioDao daoUsuario = new UsuarioDao();
         Usuario usuario = new Usuario();
         usuario.setEmail(email);
@@ -58,16 +58,33 @@ public class controlLogin extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?alert=true&page=1");
             }
             return;
-            
+
         } else if (daoUsuario.validarUsuarioInactivo(usuario)) {
-            mensajeError = "Esta cuenta no tiene acceso al sistema.";
-            request.setAttribute("mensajeError", mensajeError);
-            response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);
+            mensajeError = "Esta usuario no tiene acceso al sistema.";
+            
+            if (mensajeError != null) {
+                request.setAttribute("mensajeError", mensajeError);
+                request.setAttribute("email", email);
+                request.setAttribute("password", password);
+                
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            
+            /*response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);*/
             return;
+            
         } else {
             mensajeError = "Parece que has ingresado credenciales incorrectas. Por favor, intenta de nuevo.";
-            request.setAttribute("mensajeError", mensajeError);
-            response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);
+
+            if (mensajeError != null) {
+                request.setAttribute("mensajeError", mensajeError);
+                request.setAttribute("email", email);
+                request.setAttribute("password", password);
+                
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+
+            /*response.sendRedirect(request.getContextPath() + "/index.jsp?mensajeError=" + mensajeError);*/
         }
     }
 
@@ -109,5 +126,5 @@ public class controlLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-            }
+
+}

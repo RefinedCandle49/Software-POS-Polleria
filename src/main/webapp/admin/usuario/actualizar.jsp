@@ -9,6 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
+        <script src="<%=request.getContextPath()%>/js/password.js"></script>
         <title>Actualizar | Usuario</title>
     </head>
     <body>
@@ -196,11 +197,18 @@
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label fw-bold">Contraseña:</label>
-                                    <div>
-                                        <input name="password" class="form-control" id="password" minlength="5" maxlength="50" required value="${usuario.password}">
-                                        <span id="errorPassword" class="text-danger"></span>
+
+                                    <div class="input-group">
+                                        <input type="password" name="password" class="form-control" id="password" minlength="5" maxlength="50" required value="${usuario.password}">
+                                        <button type="button"
+                                                id="togglePassword"
+                                                onclick="mostrarPassword('password', 'togglePassword')" 
+                                                class="btn btn-outline-secondary">
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                                        </button>
                                     </div>
                                 </div>
+                                <span id="errorPassword" class="text-danger"></span>
 
                                 <div class="mb-3">
                                     <label for="rol" class="form-label fw-bold">Rol:</label>
@@ -227,30 +235,30 @@
 
 
         <script>
-            function validarEspacios(id,error) {
+            function validarEspacios(id, error) {
                 let input = document.getElementById(id);
                 let mensajeVal = document.getElementById(error);
                 let valor = input.value.trim();
-                
+
                 mensajeVal.textContent = "";
                 input.style.border = "1px solid #dee2e6";
-                
-                if(/\s/.test(valor) || valor.length === 0) {
+
+                if (/\s/.test(valor) || valor.length === 0) {
                     mensajeVal.textContent = "La contraseña no puede contener espacios";
                     input.style.border = "1px solid red";
                     return false;
                 }
                 return true;
-            }      
-            
+            }
+
             function validarFormulario() {
-                let esValido = validarEspacios('password','errorPassword');
-                if (!esValido){
+                let esValido = validarEspacios('password', 'errorPassword');
+                if (!esValido) {
                     event.preventDefault();
                 }
                 return esValido;
             }
-            
+
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

@@ -136,7 +136,7 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th style="display: none">ID</th>
-                                            <th>CÓDIGO</th>
+                                            <th>SKU</th>
                                             <th>CATEGORÍA</th>
                                             <th>NOMBRE</th>
                                             <th>DESCRIPCIÓN</th>

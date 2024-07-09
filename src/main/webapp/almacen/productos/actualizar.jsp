@@ -138,7 +138,7 @@
 
                                                                         <div class="mb-3 row">
                                                                             <div class="col-sm-2"></div>
-                                                                            <label for="codigo" class="col-sm-1 col-form-label">Codigo:</label>
+                                                                            <label for="codigo" class="col-sm-1 col-form-label">SKU:</label>
                                                                             <div class="col-sm-7">
                                                                                 <input type="text" name="codigo" class="form-control" id="codigo" value="${param.codigo != null ? param.codigo : producto.codigo}" readonly style="background: #e9ecef;">
                                                                             </div>

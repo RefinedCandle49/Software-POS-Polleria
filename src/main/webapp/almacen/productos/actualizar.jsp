@@ -102,7 +102,7 @@
                                                     <section>
                                                         <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data"> 
 
-                                                            <h1 class="text-center fw-bold mb-5">ACTUALIZAR PRODUCTO</h1>
+                                                            <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
                                                             <div class="container">
 
 
@@ -201,10 +201,7 @@
                                                                                         </div>
 
                                                                                         <div class="text-center">
-                                                                                            <button type="submit" class="btn btn-primary"> 
-                                                                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-exchange"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                                                                    <path d="M5 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 8v5a5 5 0 0 1 -5 5h-3l3 -3m0 6l-3 -3" /><path d="M5 16v-5a5 5 0 0 1 5 -5h3l-3 -3m0 6l3 -3" />
-                                                                                                </svg> Guardar Cambios</button>
+                                                                                            <button type="submit" class="btn btn-success">Guardar Cambios</button>
                                                                                             <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="btn btn-secondary"> <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg> Regresar</a>
                                                                                         </div>
                                                                                         </div>   

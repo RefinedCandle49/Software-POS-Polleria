@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.Usuario, dao.UsuarioDao, model.Venta, dao.VentaDao, java.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -213,7 +214,7 @@
                                                 <td>${venta.getCodigo()}</td>
                                                 <td>${venta.getNombre()} ${venta.getApellido()}</td>
                                                 <td>${venta.getFechaHoraVenta()}</td>
-                                                <td>${venta.getTotal()}</td>
+                                                <td>S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${venta.getTotal()}" /></td>
 
 
                                                 <td><a href="${pageContext.request.contextPath}/admin/ventas/comprobante.jsp?idVenta=${venta.getIdVenta()}"><i class="mt-2 fa-solid fa-eye fa-xl" style="color: #000000"></i></a></td>

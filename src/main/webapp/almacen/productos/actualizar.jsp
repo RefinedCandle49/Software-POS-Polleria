@@ -102,7 +102,7 @@
                                                     <section>
                                                         <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data"> 
 
-                                                            <h1 class="text-center fw-bold mb-5">ACTUALIZAR PRODUCTO</h1>
+                                                            <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
                                                             <div class="container">
 
 

@@ -159,7 +159,7 @@ public class controlProducto extends HttpServlet {
                     String mensajeError = null;
 
                     if (productoDao.validarProducto(nombreRegistrar)) {
-                        mensajeError = "Este nombre de producto se encuentra en uso. Por favor, ingresa uno diferente.";
+                        mensajeError = "Este nombre se encuentra en uso. Por favor, ingresa uno diferente.";
                         System.out.println("Nombre Repetido");
                     }
 

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-function DominioPorDefecto() {
+/*function DominioPorDefecto() {
     let emailVar = document.getElementById('email');
     let domain = '@polloslocos.com';
 
@@ -15,4 +15,4 @@ function DominioPorDefecto() {
         }
     });
 }
-;
+;*/

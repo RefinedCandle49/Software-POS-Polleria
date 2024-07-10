@@ -6,6 +6,7 @@
 <%@ page import="model.Venta" %>
 <%@ page import="dao.VentaDao" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -90,7 +91,7 @@
                             <tr>
                                 <td class="align-middle">${det.getIdVenta()}</td>
                                 <td class="align-middle">${det.getNombre()}</td>
-                                <td class="align-middle">${det.getSubTotal() / det.getCantidad()}</td>
+                                <td class="align-middle">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${det.getSubTotal() / det.getCantidad()}"/> </td>
                                 <td class="align-middle">${det.getCantidad()}</td>
                                 <td>S/${det.getSubTotal()}</td>
                             </tr>

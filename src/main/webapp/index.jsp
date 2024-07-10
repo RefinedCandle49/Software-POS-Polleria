@@ -24,10 +24,9 @@
                     </svg>
                 </div>
 
-                <c:if test="${not empty param.mensajeError}">
+                <c:if test="${not empty mensajeError}">
                     <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
-                        ${param.mensajeError}
-                        <button type="button" class="button-mensaje text-danger" onclick="cerrarMensaje()"><svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x m-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+                        ${mensajeError}
                     </div>
                 </c:if>
 
@@ -35,14 +34,14 @@
 
                     <div class="mb-3">
                         <label class="form-label fw-bold">Correo Electrónico: </label><br>
-                        <input maxlength="80" class="form-control" type="email" name="email" value="@polloslocos.com" placeholder="Ingresa tu correo electrónico" required/>
+                        <input maxlength="80" class="form-control" type="email" name="email" value="${param.email != null ? param.email : '@polloslocos.com'}" placeholder="Ingresa tu correo electrónico" required/>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-bold">Contraseña: </label><br>
 
                         <div class="input-group">
-                            <input maxlength="50" class="form-control" type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required/>
+                            <input maxlength="50" class="form-control" type="password" id="password" name="password" value="${param.password != null ? param.password : ''}" placeholder="Ingresa tu contraseña" required/>
                             <button type="button"
                                     id="togglePassword"
                                     onclick="mostrarPassword('password', 'togglePassword')"
@@ -51,7 +50,7 @@
                             </button>
                         </div>                         
                     </div>
-                    
+
                     <div class="text-center mt-4">
                         <input class="btn btn-primary" type="submit" value="Ingresar" />
                     </div>
@@ -75,12 +74,6 @@
                                                 });
                                             }
                                         });
-
-                                        function cerrarMensaje() {
-                                            let mensajeError = document.getElementById("mensajeError");
-                                            mensajeError.style.display = "none";
-                                            window.location.href = "${pageContext.request.contextPath}/index.jsp"
-                                        }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>

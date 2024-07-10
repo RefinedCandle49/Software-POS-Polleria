@@ -171,7 +171,7 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/controlProducto?action=editar&id=${prod.getIdProducto()}"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/controlProducto?action=editar&id=${prod.getIdProducto()}&view=anulados"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
                                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                             <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
                                                             <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
@@ -213,5 +213,12 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+                                                    function cerrarMensajeActualizar() {
+                                                        let actualizarExitoso = document.getElementById("actualizarExitoso");
+                                                        actualizarExitoso.style.display = "none";
+                                                        window.location.href = "${pageContext.request.contextPath}/almacen/productos/anulados.jsp?page=1"
+                                                    }
+        </script>
     </body>
 </html>

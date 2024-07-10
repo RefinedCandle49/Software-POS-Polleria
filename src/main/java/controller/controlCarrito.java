@@ -193,7 +193,7 @@ public class controlCarrito extends HttpServlet {
                     idCliente = "00000001";
                 }*/
 
-                Venta venta = new Venta(idCliente, FechaHoraActual, 1, (totalPagar * 0.18) + totalPagar, listaCarrito);
+                Venta venta = new Venta(idCliente, FechaHoraActual, 1, totalPagar, listaCarrito);
                 String res = dao.generarVenta(venta);
                 request.setAttribute("res", res);
 

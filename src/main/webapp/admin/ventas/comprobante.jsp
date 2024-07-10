@@ -39,6 +39,10 @@
     
     SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm:ss");
     String horaFormateada = sdfHora.format(fechaHoraVenta);
+    
+    double totalPagar = vent.getTotal();
+    double IGV = totalPagar * 0.18;
+    double totalMenosIgv = totalPagar - IGV;
 %>
 
 
@@ -100,11 +104,10 @@
                     </table>
                 </div>
                 <div class="text-end">
-                    <p>SubTotal: S/<%= vent.getTotal()%>
-                    </p>
+                    <p>SubTotal: S/<%= String.format("%.2f", totalMenosIgv) %></p>
+                    <p>IGV (18%): S/<%= String.format("%.2f", IGV) %></p>
                     <HR class="my-2">
-                    <p style="font-weight:700">Totala Pagar: S/<%= vent.getTotal()%>
-                    </p>
+                    <p style="font-weight:700">Total a Pagar: S/<%= String.format("%.2f", totalPagar) %></p>
                 </div>
                 
                 <div class="text-center">

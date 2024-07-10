@@ -78,7 +78,7 @@
                                                        value="00000001">
                                             </label>
                                         </p>
-                                        
+
                                         <p>
                                             <label>
                                                 Cliente:
@@ -91,14 +91,14 @@
                                                 <input type="hidden" id="idCliente" name="idCliente" required>
                                             </label>
                                         </p>
-                                        
+
                                     </div>
                                     <div class="col">
-    
+
                                         <input type="hidden" id="FechaHoraActual" name="FechaHoraActual">
-    
+
                                         <p id="current-time"></p>
-                                        
+
 
                                     </div>
 
@@ -139,8 +139,8 @@
                                             <td class="align-middle">  
                                                 <input type="hidden" id="id" value="${car.getIdProducto()}">
                                                 <a href="<%=request.getContextPath()%>/controlCarrito?accion=Delete&idp=${car.getIdProducto()}"
-                                                 id="btnDelete" class="bg-danger" style="font-size: large; border: 2px solid transparent; padding: 5px; border-radius: 3px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; width: 30px; height: 30px;">
-                                                <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
+                                                   id="btnDelete" class="bg-danger" style="font-size: large; border: 2px solid transparent; padding: 5px; border-radius: 3px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; width: 30px; height: 30px;">
+                                                    <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -151,10 +151,10 @@
 
                         </div>
 
-<%--                    -------------------------------------------------------------------------------------------%>
-                        
+                        <%--                    -------------------------------------------------------------------------------------------%>
 
-<%--                    -------------------------------------------------------------------------------------------%>
+
+                        <%--                    -------------------------------------------------------------------------------------------%>
 
                         <script>
                             document.getElementById("limpiar").addEventListener("click", function () {
@@ -163,7 +163,7 @@
 
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "";
-                                
+
                                 // Limpiar el valor del campo idCliente
                                 document.getElementById("idCliente").value = "";
                             });
@@ -174,7 +174,7 @@
 
                                 // Limpiar el valor del campo nombreDisplay
                                 document.getElementById("nombreDisplay").value = "CLIENTE VARIOS";
-                                
+
                                 // Limpiar el valor del campo idCliente
                                 document.getElementById("idCliente").value = "1";
                             });
@@ -192,7 +192,7 @@
                                     event.preventDefault();
                                 });
 
-                                FechaHoraActual.addEventListener("keydown", function (event){
+                                FechaHoraActual.addEventListener("keydown", function (event) {
                                     event.preventDefault();
                                 })
                             }
@@ -219,7 +219,6 @@
                             DecimalFormat df2 = new DecimalFormat("#,###,##0.00");
                             
                             String totalFormateado = df.format(totalPagar);
-                            
                             String totalFormateadoView = df2.format(totalPagar);
                             
                             double IGV = Double.parseDouble(totalFormateado) * 0.18;
@@ -227,18 +226,20 @@
                             String IGVFormateado = df.format(IGV);
                             String IGVFormateadoView = df2.format(IGV);
                             
+                            double totalMenosIgv = Double.parseDouble(totalFormateado) - IGV;
+                            String totalMenosIgvFormateado = df.format(totalMenosIgv);
+                            String totalMenosIgvFormateadoView = df2.format(totalMenosIgv);
+                            
+                            
                             String totalConIgv = String.valueOf(IGV + Double.parseDouble(totalFormateado));
-                            
-                            
-                            
-                            String totalConIgvFormateado = df2.format(Double.parseDouble(totalConIgv));
+                             String totalConIgvFormateado = df2.format(Double.parseDouble(totalConIgv));
                     %>
-                    
+
                     <div class="text-end">
-                        <p>Subtotal: S/ <%=totalFormateadoView%></p>
+                        <p>Subtotal: S/ <%=totalMenosIgvFormateadoView%></p>
                         <p>IGV (18%): S/ <%=IGVFormateadoView%></p>
                         <hr class="my-2">
-                        <p style="font-weight:700">Total a pagar: S/ <%=totalConIgvFormateado%>
+                        <p style="font-weight:700">Total a pagar: S/ <%=totalFormateadoView%> <%--<%=totalConIgvFormateado%>--%>
                         </p>
                         <%--                <a href="#" id="btnRealizarPago" class="btn btn-success text-center">Procesar venta</a>--%>
                     </div>
@@ -273,36 +274,36 @@
         <script src="<%=request.getContextPath()%>/js/functions.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function getCurrentDateTime() {
-                var now = new Date();
-                var hours = now.getHours();
-                var minutes = now.getMinutes();
-                var seconds = now.getSeconds();
-                
-                seconds = (seconds < 10) ? "0" + seconds : seconds;
-                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                            function getCurrentDateTime() {
+                                var now = new Date();
+                                var hours = now.getHours();
+                                var minutes = now.getMinutes();
+                                var seconds = now.getSeconds();
 
-                var timeString = hours + ':' + minutes + ':' + seconds;
+                                seconds = (seconds < 10) ? "0" + seconds : seconds;
+                                minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-                var day = now.getDate();
-                var month = now.getMonth() + 1;
-                var year = now.getFullYear();
-                month = (month < 10) ? "0" + month : month;
+                                var timeString = hours + ':' + minutes + ':' + seconds;
 
-                var dateString = day + '/' + month + '/' + year;
-                var fechaString = year + '-' + month + '-' + day;
+                                var day = now.getDate();
+                                var month = now.getMonth() + 1;
+                                var year = now.getFullYear();
+                                month = (month < 10) ? "0" + month : month;
 
-                document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
-                document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
+                                var dateString = day + '/' + month + '/' + year;
+                                var fechaString = year + '-' + month + '-' + day;
 
-                var FechaHoraActual = fechaString + ' ' + timeString;
+                                document.getElementById("current-date").innerHTML = "Fecha actual: " + dateString;
+                                document.getElementById("current-time").innerHTML = "Hora actual: " + timeString;
 
-                document.getElementById("FechaHoraActual").value = FechaHoraActual;
-            }
+                                var FechaHoraActual = fechaString + ' ' + timeString;
 
-            getCurrentDateTime();
+                                document.getElementById("FechaHoraActual").value = FechaHoraActual;
+                            }
 
-            setInterval(getCurrentDateTime, 1000);
+                            getCurrentDateTime();
+
+                            setInterval(getCurrentDateTime, 1000);
         </script>
         <script>
             function soloNumeros(evt) {
@@ -325,7 +326,7 @@
                 return true;
             }
         </script>
-        
+
         <script>
             const stockMaximo = document.getElementById("Cantidad").max;
 
@@ -334,18 +335,18 @@
                 var nombreDisplay = document.getElementById("nombreDisplay").value.trim();
                 var cantidadInput = document.getElementById("Cantidad");
                 var cantidad = parseInt(cantidadInput.value);
-                
+
                 // verificamos si los campos están vacíos o la cantidad excede el stock máximo
                 var camposCompletos = nombreDisplay !== "" && nombreDisplay !== "Cliente no encontrado";
                 var excedeStock = cantidad > stockMaximo;
-                
-                if(!camposCompletos && excedeStock) {
+
+                if (!camposCompletos && excedeStock) {
                     event.preventDefault();
                     // Mostramos la alerta para ambos errores
                     Swal.fire({
-                        icon:'error',
-                        title:'Error',
-                        text:'Complete todos los campos y revise que la cantidad no exceda al stock del producto',
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Complete todos los campos y revise que la cantidad no exceda al stock del producto',
                         confirmButtonText: 'Aceptar',
                         confirmButtonColor: '#007BFF',
                         allowOutsideClick: false
@@ -354,9 +355,9 @@
                     event.preventDefault();
                     // Mostramos la alerta para cuando la cantidad exceda al stock
                     Swal.fire({
-                        icon:'error',
-                        title:'Error',
-                        text:'Complete los campos del cliente',
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Complete los campos del cliente',
                         confirmButtonText: 'Aceptar',
                         confirmButtonColor: '#007BFF',
                         allowOutsideClick: false
@@ -365,9 +366,9 @@
                     event.preventDefault();
                     // Mostramos la alerta para ambos errores
                     Swal.fire({
-                        icon:'error',
-                        title:'Error',
-                        text:'Verifique que la cantidad no supere al stock',
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Verifique que la cantidad no supere al stock',
                         confirmButtonText: 'Aceptar',
                         confirmButtonColor: '#007BFF',
                         allowOutsideClick: false
@@ -375,7 +376,7 @@
                 }
             });
         </script>
-        
+
         <script>
             document.addEventListener('invalid', function (e) {
                 e.preventDefault();
@@ -450,26 +451,26 @@
             }
 
             // Cargamos los datos del cliente al cargar la página
-            window.onload = function() {
+            window.onload = function () {
                 cargarDatosCliente();
             };
 
             // Llamamos a guardarDatosCliente() cuando se busque o elija un cliente
-            document.getElementById("buscar").addEventListener("click", function() {
+            document.getElementById("buscar").addEventListener("click", function () {
                 setTimeout(guardarDatosCliente, 100); // Delay to ensure data is loaded before saving
             });
 
-            document.getElementById("generico").addEventListener("click", function() {
+            document.getElementById("generico").addEventListener("click", function () {
                 guardarDatosCliente();
             });
 
             // Limpiamos sessionStorage cuando se limpie el Formulario
-            document.getElementById("limpiar").addEventListener("click", function() {
+            document.getElementById("limpiar").addEventListener("click", function () {
                 limpiarSessionStorage();
             });
 
             // Limpiamos el sessionStorage al realizar la venta
-            document.getElementById("ventaForm").addEventListener("submit", function() {
+            document.getElementById("ventaForm").addEventListener("submit", function () {
                 limpiarSessionStorage();
             });
         </script>

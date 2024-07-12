@@ -101,27 +101,29 @@
                                         </div>
                                     </c:if>
 
-                                    <form action="${pageContext.request.contextPath}/controlCliente?action=actualizar" method="post" onsubmit="return validarCaracteres(event)">
+                                    <form action="${pageContext.request.contextPath}/controlCliente?action=actualizar" method="post" onsubmit="trimInputs(); return validarCaracteres(event)">
 
                                         <input type="hidden" name="idCliente" value="${param.idCliente != null ? param.idCliente : cliente.idCliente}">
 
                                             <div class="mb-3">
                                                 <label for="documento" class="form-label fw-bold">DNI/RUC:</label>
-                                                <input type="text" id="documento" name="documento" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" value="${param.documento != null ? param.documento : cliente.documento}" required>
+                                                <input type="text" id="documento" name="documento" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" value="${param.documento != null ? param.documento : cliente.documento}" onkeydown="return validarEspacios(event, 'errorEspacioNombre')" required>
                                                     <span id="errorLimiteDni" class="text-danger"></span>
                                                     <span id="errorSoloNumeros" class="text-danger"></span>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="nombre" class="form-label fw-bold">Nombre:</label>
-                                                <input type="text" id="nombre" name="nombre" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" value="${param.nombre != null ? param.nombre : cliente.nombre}" required>
+                                                <input type="text" id="nombre" name="nombre" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" value="${param.nombre != null ? param.nombre : cliente.nombre}" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
                                                     <span id="errorSoloLetrasNombre" class="text-danger"></span>
+                                                    <span id="errorEspacioNombre" class="text-danger"></span>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="apellido" class="form-label fw-bold">Apellido:</label>
                                                 <input type="text" id="apellido" name="apellido" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" value="${param.apellido != null ? param.apellido : cliente.apellido}" required>
                                                     <span id="errorSoloLetrasApellido" class="text-danger"></span>
+                                                    <span id="errorEspacioApellido" class="text-danger"></span>
                                             </div>
 
                                             <div class="mb-3">
@@ -156,13 +158,22 @@
                                             return false;
                                         }
 
-                                        if (!validarNoSoloEspacios('nombre', 'errorSoloLetrasNombre') || !validarNoSoloEspacios('apellido', 'errorSoloLetrasApellido')) {
-                                            event.preventDefault();
-                                            return false;
-                                            }
-
                                         return true;
                                     }
+
+                                    function trimInputs() {
+                                        let inputs = document.querySelectorAll('input[type="text"]');
+                                        inputs.forEach(input => {
+                                            input.value = input.value.trim();
+                                        });
+                                    }
+
+                                    document.querySelector("form").addEventListener("submit", function(event) {
+                                        trimInputs();
+                                        if (!validarCaracteres()) {
+                                            event.preventDefault();
+                                        }
+                                    });
 
                                     function soloNumeros(evt) {
                                         let charCode = (evt.which) ? evt.which : event.keyCode;
@@ -186,6 +197,11 @@
                                         let mensajeVal = document.getElementById(error);
                                         let inputActual = evt.target;
 
+                                        let errorEspacios = document.getElementById('errorEspacios' + inputActual.id.charAt(0).toUpperCase() + inputActual.id.slice(1));
+                                        if (errorEspacios) {
+                                            errorEspacios.textContent = "";
+                                        }
+
                                         mensajeVal.textContent = "";
                                         inputActual.style.border = "1px solid #dee2e6";
 
@@ -198,21 +214,27 @@
                                         }
                                     }
 
-                                    function validarNoSoloEspacios(id, error) {
-                                        let input = document.getElementById(id);
+                                    function validarEspacios(evt,error) {
+                                        let input = evt.target; 
                                         let mensajeVal = document.getElementById(error);
-                                        let valor = input.value.trim();
+
+                                        let errorLetras = document.getElementById('errorSoloLetras' + input.id.charAt(0).toUpperCase() + input.id.slice(1));
+                                        if (errorLetras) {
+                                            errorLetras.textContent = "";
+                                        }
+
+                                        let valor = input.value.trim() + String.fromCharCode(evt.which ? evt.which : evt.keyCode);
 
                                         mensajeVal.textContent = "";
                                         input.style.border = "1px solid #dee2e6";
 
-                                        if(valor.length === 0) {
-                                            mensajeVal.textContent = "Este campo no puede estar compuesto solo por espacios.";
-                                            input.style.border = "1px solid red";
-                                            return false;
+                                        if (valor.trim().length === 0) {
+                                              mensajeVal.textContent = "El campo no puede contener solo espacios";
+                                              input.style.border = "1px solid red";
+                                              return false;
                                         }
                                         return true;
-                                    }
+                                        }
 
                             </script>
                         </body>

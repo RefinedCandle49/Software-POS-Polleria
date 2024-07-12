@@ -100,7 +100,7 @@
                                                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                                                     <section>
                                                         <h1 class="text-center fw-bold">REGISTRO DE PRODUCTO</h1>
-                                                        <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data">
+                                                        <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()">
 
                                                             <div class="container table-responsive">
                                                                 <c:if test="${not empty mensajeError}">
@@ -293,6 +293,21 @@
                                                         }
                                                         return true;
                                                     }
+
+                                                    function trimInputs() {
+                                                    let inputs = document.querySelectorAll('input[type="text"], textarea');
+                                                    inputs.forEach(input => {
+                                                        input.value = input.value.trim();
+                                                    });
+                                                }
+
+                                                document.querySelector("form").addEventListener("submit", function(event) {
+                                                    trimInputs();
+                                                    if (!validarCaracteres()) {
+                                                        event.preventDefault();
+                                                    }
+                                                });
+
                                                 </script>
                                                 </body>
                                                 </html>

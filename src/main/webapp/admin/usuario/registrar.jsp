@@ -187,7 +187,7 @@
                                     <label for="password" class="form-label fw-bold">Contraseña:</label>
 
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" value="${param.password != null ? param.password : ''}" required>
+                                        <input type="password" class="form-control" id="password" name="password" minlength="5" maxlength="50" value="${param.password != null ? param.password : ''}" required onkeypress="return validarEspacios(event)">
                                         <button type="button"
                                                 id="togglePassword"
                                                 onclick="mostrarPassword('password', 'togglePassword')" 
@@ -243,20 +243,25 @@
         </script>
 
         <script>
-            function validarEspacios(id,error) {
-                let input = document.getElementById(id);
-                let mensajeVal = document.getElementById(error);
-                let valor = input.value.trim();
+            function validarEspacios(evt) {
+            let input = evt.target; 
+            let mensajeVal;
 
-                mensajeVal.textContent = "";
-                input.style.border = "1px solid #dee2e6";
-
-                if(/\s/.test(valor) || valor.length === 0) {
-                    mensajeVal.textContent = "La contraseña no puede contener espacios";
-                    input.style.border = "1px solid red";
-                    return false;
-                }
-                return true;
+            if (input.id === "password") {
+            mensajeVal = document.getElementById("errorPassword");
+            }
+                                                                    
+            let valor = input.value.trim() + String.fromCharCode(evt.which ? evt.which : evt.keyCode);
+                                                                    
+            mensajeVal.textContent = "";
+            input.style.border = "1px solid #dee2e6";
+                                                                    
+            if (/\s/.test(valor)) {
+            mensajeVal.textContent = "El campo no puede contener espacios";
+            input.style.border = "1px solid red";
+            return false;
+            }
+            return true;
             }
 
             function validarFormulario() {

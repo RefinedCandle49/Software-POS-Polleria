@@ -236,7 +236,7 @@
                     %>
 
                     <div class="text-end">
-                        <p>Subtotal: S/ <%=totalMenosIgvFormateadoView%></p>
+                        <p>Monto Base: S/ <%=totalMenosIgvFormateadoView%></p>
                         <p>IGV (18%): S/ <%=IGVFormateadoView%></p>
                         <hr class="my-2">
                         <p style="font-weight:700">Total a pagar: S/ <%=totalFormateadoView%> <%--<%=totalConIgvFormateado%>--%>

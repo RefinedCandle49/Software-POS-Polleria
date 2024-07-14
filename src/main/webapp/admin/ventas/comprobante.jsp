@@ -104,7 +104,7 @@
                     </table>
                 </div>
                 <div class="text-end">
-                    <p>SubTotal: S/<%= String.format("%.2f", totalMenosIgv) %></p>
+                    <p>Monto Base: S/<%= String.format("%.2f", totalMenosIgv) %></p>
                     <p>IGV (18%): S/<%= String.format("%.2f", IGV) %></p>
                     <HR class="my-2">
                     <p style="font-weight:700">Total a Pagar: S/<%= String.format("%.2f", totalPagar) %></p>

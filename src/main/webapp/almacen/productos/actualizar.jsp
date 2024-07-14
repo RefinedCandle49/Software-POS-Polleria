@@ -100,7 +100,7 @@
 
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
-                        <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data"> 
+                        <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()"> 
 
                             <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
                             <div class="container">
@@ -309,6 +309,22 @@
                 }
                 return true;
             }
+
+            function trimInputs() {
+              let inputs = document.querySelectorAll('input[type="text"], textarea');
+              inputs.forEach(input => {
+              input.value = input.value.trim();
+              });
+              }
+
+              document.querySelector("form").addEventListener("submit", function(event) {
+              trimInputs();
+              if (!validarCaracteres()) {
+              event.preventDefault();
+              }
+              });
+        
+
         </script>
 
 

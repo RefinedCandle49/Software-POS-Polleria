@@ -166,7 +166,7 @@
                                         <div class="col-sm-2"></div>
                                         <label for="foto" class="col-sm-1 col-form-label">Foto:</label>
                                         <div class="col-sm-7">                                                                                                              
-                                            <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" class="btn-file" />
+                                            <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" />
                                             <input type="hidden" name="foto" id="foto" value="${param.foto != null ? param.foto : producto.foto}" />
                                             <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
                                         </div>
@@ -212,6 +212,7 @@
                 </main>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.querySelector('input[type="file"]').addEventListener('change', function () {
                 const file = this.files[0];
@@ -223,14 +224,18 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Solo se admiten archivos JPG, JPEG y PNG.'
+                            text: 'Solo se admiten archivos JPG, JPEG y PNG.',
+                            confirmButtonColor: "#0d6efd",
+                            confirmButtonText: "Aceptar"
                         });
                         this.value = ''; // Limpiar el campo de entrada
                     } else if (file.size > maxSize) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.'
+                            text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.',
+                            confirmButtonColor: "#0d6efd",
+                            confirmButtonText: "Aceptar"
                         });
                         this.value = ''; // Limpiar el campo de entrada
                     }

@@ -22,50 +22,50 @@
         <title>Ventas por Fechas | Pollos Locos</title>
     </head>
     <body>
-    <%
-        HttpSession sesion=request.getSession(false);
-        String contextPath=request.getContextPath();
-        
-        if (sesion==null || sesion.getAttribute("usuario")==null) {
-            response.sendRedirect(request.getContextPath() + "/index.jsp" ); return;
-        }
-        
-        String emailRol=(String) ((Usuario) sesion.getAttribute("usuario")).getEmail();
-        String nombreRol=(String) ((Usuario) sesion.getAttribute("usuario")).getRol();
-        
-        
-        if(!"Administrador".equals(nombreRol)){
-    %>
-    <script>
-        alert("Acceso Denegado");
         <%
-            switch (nombreRol) {
-                case "Cajero":
-        %> window.location.href = "<%= request.getContextPath() %>/caja/menu.jsp";<%
-                    break;
-
-                    case "Almacenero":
-            %> window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp";<%
-                    break;
-
-                    default:
-            %> window.location.href = "<%= request.getContextPath() %>/index.jsp";<%
-                }
-            %>
-    </script>
-    <%
-            return;
-        }
-    %>
-    <script>
-        let contextPath = '<%= contextPath %>';
-        let nombreRol = '<%= nombreRol %>';
-    </script>
+            HttpSession sesion=request.getSession(false);
+            String contextPath=request.getContextPath();
         
+            if (sesion==null || sesion.getAttribute("usuario")==null) {
+                response.sendRedirect(request.getContextPath() + "/index.jsp" ); return;
+            }
+        
+            String emailRol=(String) ((Usuario) sesion.getAttribute("usuario")).getEmail();
+            String nombreRol=(String) ((Usuario) sesion.getAttribute("usuario")).getRol();
+        
+        
+            if(!"Administrador".equals(nombreRol)){
+        %>
+        <script>
+            alert("Acceso Denegado");
+            <%
+                switch (nombreRol) {
+                    case "Cajero":
+            %> window.location.href = "<%= request.getContextPath() %>/caja/menu.jsp";<%
+                        break;
+
+                        case "Almacenero":
+            %> window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp";<%
+                        break;
+
+                        default:
+            %> window.location.href = "<%= request.getContextPath() %>/index.jsp";<%
+                    }
+            %>
+        </script>
+        <%
+                return;
+            }
+        %>
+        <script>
+            let contextPath = '<%= contextPath %>';
+            let nombreRol = '<%= nombreRol %>';
+        </script>
+
         <%
             String spageid=request.getParameter("page");
             int pageid=Integer.parseInt(spageid);
-            int total=17;
+            int total=16;
             if(pageid==1){}
             else{
                 pageid=pageid-1;
@@ -94,7 +94,7 @@
                                 de Gestión</span>
                             <br /><span class="d-none d-sm-inline fs-4 w-100">POLLOS LOCOS</span>
                         </div>
-                        
+
                         <div class="w-100 text-center text-light">
                             <img src="${pageContext.request.contextPath}/img/user-icon.png"
                                  class="img-fluid img-css py-3" alt="..." />
@@ -106,7 +106,7 @@
                                 <%= emailRol %>
                             </span>
                         </div>
-                       
+
                         <hr />
 
                         <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
@@ -218,32 +218,34 @@
                                 <button id="exportButton" class="btn btn-primary mx-1">Descargar EXCEL</button>
                                 <button class="btn btn-primary mx-1" onclick="generate()">Descargar PDF</button>
                             </div>
-                            
+
                             <div class="table-responsive my-2">
+                                <!-- no tocar -->
                                 <table style="display: none" id="table2excel" class="table table-striped">
                                     <tr>
                                         <th style="display: none">Fecha inicio: <%=desde%> - Hasta: <%=hasta%></th>
                                     </tr>
                                     <thead class="table-dark">
-                                    <tr>
-                                        <th>CÓDIGO</th>
-                                        <th>CLIENTE</th>
-                                        <th>FECHA Y HORA</th>
-                                        <th>TOTAL</th>
-                                    </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                    <c:forEach items="${listExport}" var="venta">
                                         <tr>
-                                            <td>${venta.getCodigo()}</td>
-                                            <td>${venta.getNombre()} ${venta.getApellido()}</td>
-                                            <td>${venta.getFechaHoraVenta()}</td>
-                                            <td>S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${venta.getTotal()}" /></td>
+                                            <th>CÓDIGO</th>
+                                            <th>CLIENTE</th>
+                                            <th>FECHA Y HORA</th>
+                                            <th>TOTAL</th>
                                         </tr>
-                                    </c:forEach>
+                                    </thead>
+
+                                    <tbody>
+                                        <c:forEach items="${listExport}" var="venta">
+                                            <tr>
+                                                <td>${venta.getCodigo()}</td>
+                                                <td>${venta.getNombre()} ${venta.getApellido()}</td>
+                                                <td>${venta.getFechaHoraVenta()}</td>
+                                                <td>S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${venta.getTotal()}" /></td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
+                                <!-- no tocar -->
                                 <table class="table table-striped">
                                     <thead class="table-dark">
                                         <tr>
@@ -276,13 +278,16 @@
                                             for(int i = 1; i <= totalPages; i++) {
                                         %>
                                         <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=i%>&desde=<%=desde%>&hasta=<%=hasta%>"><%=i%></a></li>
-                                        <% } %>
+                                            <% } %>
                                         <li class="page-item">
                                             <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=totalPages%>&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>
                                     </ul>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="btn btn-secondary">Regresar</a>
                                 </div>
                             </div>
                         </c:if>
@@ -318,7 +323,7 @@
                 var doc = new jspdf.jsPDF()
                 doc.setPage(1);
                 doc.text("Fecha inicio: " + desde + " - " + "Hasta: " + hasta, 10, 10);
-                
+
                 // Simple html example
                 doc.autoTable({html: '#table2excel'});
                 doc.save(filename)

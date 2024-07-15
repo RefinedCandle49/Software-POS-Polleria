@@ -113,7 +113,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-2"></div>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-9 col-xxl-8">
                                             <c:if test="${not empty mensajeError}">
                                                 <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between fw-normal">
                                                     ${mensajeError}       
@@ -126,7 +126,7 @@
                                     <div class="mb-3 row">
 
                                         <div class="col-sm-2"></div>
-                                        <label for="categoria" class="col-sm-1 col-form-label">Categoria:</label>
+                                        <label for="categoria" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Categoria:</label>
                                         <div class="col-sm-7">
                                             <select name="idCategoria" class="form-select" required>
                                                 <option value="1" ${producto.idCategoria == 1 ? "selected" : producto.idCategoria}>Pollos</option>
@@ -139,14 +139,14 @@
 
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="codigo" class="col-sm-1 col-form-label">SKU:</label>
+                                        <label for="codigo" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">SKU:</label>
                                         <div class="col-sm-7">
                                             <input type="text" name="codigo" class="form-control" id="codigo" value="${param.codigo != null ? param.codigo : producto.codigo}" readonly style="background: #e9ecef;">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="nombre" class="col-sm-1 col-form-label">Nombre:</label>
+                                        <label for="nombre" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Nombre:</label>
                                         <div class="col-sm-7">
                                             <input type="text" name="nombre" class="form-control" id="nombre" minlength="5" maxlength="50" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
                                                 <span id="errorNombre" class="text-danger fw-normal"></span>
@@ -155,7 +155,7 @@
 
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="descripcion" class="col-sm-1 col-form-label">Descripcion:</label>
+                                        <label for="descripcion" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Descripcion:</label>
                                         <div class="col-sm-7">
                                             <textarea type="text" name="descripcion" maxlength="200" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
                                             <span id="errorDescripcion" class="text-danger fw-normal"></span>
@@ -164,7 +164,7 @@
 
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="foto" class="col-sm-1 col-form-label">Foto:</label>
+                                        <label for="foto" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Foto:</label>
                                         <div class="col-sm-7">                                                                                                              
                                             <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" />
                                             <input type="hidden" name="foto" id="foto" value="${param.foto != null ? param.foto : producto.foto}" />
@@ -173,7 +173,7 @@
                                     </div>   
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="precio" class="col-sm-1 col-form-label">Precio:</label>
+                                        <label for="precio" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Precio:</label>
                                         <div class="col-sm-7">                                                                                                              
                                             <input type="number" name="precio" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" class="form-control" value="${param.precio != null ? param.precio : producto.precio}" required onkeypress="return soloNumerosDecimales(event)">
                                                 <span id="errorSoloNumDecimales" class="text-danger fw-normal"></span>
@@ -182,7 +182,7 @@
 
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="stock" class="col-sm-1 col-form-label">Stock:</label>
+                                        <label for="stock" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Stock:</label>
                                         <div class="col-sm-7">
                                             <input type="text" maxlength="3" name="stock" class="form-control" id="stock" value="${param.stock != null ? param.stock : producto.stock}" required onkeypress="return soloNumeros(event)">
                                                 <span id="errorSoloNumeros" class="text-danger fw-normal"></span>
@@ -191,7 +191,7 @@
 
                                     <div class="mb-3 row">
                                         <div class="col-sm-2"></div>
-                                        <label for="stock" class="col-sm-1 col-form-label">Estado:</label>
+                                        <label for="stock" class="col-sm-2 col-xl-2 col-xxl-1 col-form-label">Estado:</label>
                                         <div class="col-sm-7">
                                             <select name="estado" class="form-select">
                                                 <option value="1" ${producto.estado == 1 ? "selected" : producto.estado}>Disponible</option>

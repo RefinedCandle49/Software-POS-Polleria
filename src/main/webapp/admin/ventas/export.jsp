@@ -219,7 +219,7 @@
                                 <button class="btn btn-primary mx-1" onclick="generate()">Descargar PDF</button>
                             </div>
 
-                            <div class="table-responsive my-2">
+                            <div class="table-responsive bg-light color-tabla callout my-2 pb-0">
                                 <!-- no tocar -->
                                 <table style="display: none" id="table2excel" class="table table-striped">
                                     <tr>
@@ -246,7 +246,7 @@
                                     </tbody>
                                 </table>
                                 <!-- no tocar -->
-                                <table class="table table-striped">
+                                <table class="table table mb-0">
                                     <thead class="table-dark">
                                         <tr>
                                             <th>CÓDIGO</th>
@@ -267,28 +267,28 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="d-flex justify-content-center">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=1&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <%
-                                            for(int i = 1; i <= totalPages; i++) {
-                                        %>
-                                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=i%>&desde=<%=desde%>&hasta=<%=hasta%>"><%=i%></a></li>
-                                            <% } %>
-                                        <li class="page-item">
-                                            <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=totalPages%>&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="btn btn-secondary">Regresar</a>
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=1&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <%
+                                        for(int i = 1; i <= totalPages; i++) {
+                                    %>
+                                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=i%>&desde=<%=desde%>&hasta=<%=hasta%>"><%=i%></a></li>
+                                        <% } %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}/admin/ventas/export.jsp?page=<%=totalPages%>&desde=<%=desde%>&hasta=<%=hasta%>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="btn btn-secondary">Regresar</a>
                             </div>
                         </c:if>
                     </section>

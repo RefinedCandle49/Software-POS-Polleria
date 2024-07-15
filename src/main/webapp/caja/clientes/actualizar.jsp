@@ -107,21 +107,21 @@
 
                                             <div class="mb-3">
                                                 <label for="documento" class="form-label fw-bold">DNI/RUC:</label>
-                                                <input type="text" id="documento" name="documento" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" value="${param.documento != null ? param.documento : cliente.documento}" onkeydown="return validarEspacios(event, 'errorEspacioNombre')" required>
+                                                <input type="text" id="documento" name="documento" class="form-control" minlength="8" maxlength="11" onkeypress="return soloNumeros(event)" onpaste="return false" value="${param.documento != null ? param.documento : cliente.documento}" required>
                                                     <span id="errorLimiteDni" class="text-danger"></span>
                                                     <span id="errorSoloNumeros" class="text-danger"></span>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="nombre" class="form-label fw-bold">Nombre:</label>
-                                                <input type="text" id="nombre" name="nombre" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" value="${param.nombre != null ? param.nombre : cliente.nombre}" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
+                                                <input type="text" id="nombre" name="nombre" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" value="${param.nombre != null ? param.nombre : cliente.nombre}" onkeydown="return validarEspacios(event,'errorEspacioNombre')" required>
                                                     <span id="errorSoloLetrasNombre" class="text-danger"></span>
                                                     <span id="errorEspacioNombre" class="text-danger"></span>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="apellido" class="form-label fw-bold">Apellido:</label>
-                                                <input type="text" id="apellido" name="apellido" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" value="${param.apellido != null ? param.apellido : cliente.apellido}" required>
+                                                <input type="text" id="apellido" name="apellido" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" value="${param.apellido != null ? param.apellido : cliente.apellido}" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
                                                     <span id="errorSoloLetrasApellido" class="text-danger"></span>
                                                     <span id="errorEspacioApellido" class="text-danger"></span>
                                             </div>

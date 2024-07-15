@@ -94,7 +94,7 @@ public class ReporteDao {
             stmtConfig.execute();
             stmtConfig.close();
 
-            PreparedStatement ps = con.prepareStatement("SELECT dp.idProducto, p.codigo, p.nombre AS nombre_producto, SUM(dp.cantidad) AS total_vendido, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM detalleventa dp INNER JOIN producto p ON dp.idProducto = p.idProducto INNER JOIN venta vt ON dp.idVenta = vt.idVenta WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 GROUP BY dp.idProducto, p.nombre ORDER BY total_vendido DESC, p.nombre DESC LIMIT 3;");
+            PreparedStatement ps = con.prepareStatement("SELECT dp.idProducto, p.codigo, p.nombre AS nombre_producto, SUM(dp.cantidad) AS total_vendido, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM detalleventa dp INNER JOIN producto p ON dp.idProducto = p.idProducto INNER JOIN venta vt ON dp.idVenta = vt.idVenta WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 GROUP BY dp.idProducto, p.nombre ORDER BY total_vendido DESC, p.nombre ASC LIMIT 3;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

@@ -148,7 +148,7 @@
                                         <div class="col-sm-2"></div>
                                         <label for="nombre" class="col-sm-1 col-form-label">Nombre:</label>
                                         <div class="col-sm-7">
-                                            <input type="text" name="nombre" class="form-control" id="nombre" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
+                                            <input type="text" name="nombre" class="form-control" id="nombre" minlength="5" maxlength="50" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
                                                 <span id="errorNombre" class="text-danger fw-normal"></span>
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
                                         <div class="col-sm-2"></div>
                                         <label for="descripcion" class="col-sm-1 col-form-label">Descripcion:</label>
                                         <div class="col-sm-7">
-                                            <textarea type="text" name="descripcion" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
+                                            <textarea type="text" name="descripcion" maxlength="200" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
                                             <span id="errorDescripcion" class="text-danger fw-normal"></span>
                                         </div>
                                     </div>

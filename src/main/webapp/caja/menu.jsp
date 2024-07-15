@@ -187,7 +187,7 @@
                                         <img href="" class="card-img-top" src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" onerror="handleErrorImage.call(this);">
                                     </a>
                                     <div class="card-body">
-                                        <h5 class="fw-bold">${prod.getNombre()}, ${prod.getIdProducto()}</h5>
+                                        <h5 class="fw-bold">${prod.getNombre()}</h5>
                                         <p class="card-text fw-bold">Precio: S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></p>
                                     </div>
                                     <div class="top-right fw-bold fs-5 p-1">Stock: ${prod.getStock()}</div>

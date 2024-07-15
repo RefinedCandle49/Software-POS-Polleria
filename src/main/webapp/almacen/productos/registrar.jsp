@@ -130,7 +130,7 @@
                                                                         <tr>
                                                                             <th>Nombre:</th>
                                                                             <td>
-                                                                                <input maxlength="50" type="text" name="nombre" id="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
+                                                                                <input minlength="5" maxlength="50" type="text" name="nombre" id="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
                                                                                 <span id="errorNombre" class="text-danger"></span>
                                                                             </td>
 

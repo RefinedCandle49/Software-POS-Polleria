@@ -115,7 +115,7 @@
                         comprobante
                     </button>
                     
-                    <a class="text-white text-decoration-none" href="<%=request.getContextPath()%>/admin/ventas.jsp?page=1">
+                    <a class="text-white text-decoration-none" href="javascript:history.back()">
                        <button id="regresar" class="btn btn-secondary">Regresar</button>
                     </a>
                     

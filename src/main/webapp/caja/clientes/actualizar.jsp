@@ -10,7 +10,7 @@
                         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
                         <title>Actualizar | Cliente</title>
                         </head>
-                        <body class="container-fluid p-0">
+                        <body class="d-flex flex-column vh-100">
 
                             <%
                                 HttpSession sesion = request.getSession(false);
@@ -90,9 +90,9 @@
                                 </nav>    
                             </header>
 
-                            <main class="row d-flex align-items-center justify-content-center m-0 py-5">
-                                <div class="col-md-3 col-xxl-4"></div>
-                                <div class="col-md-6 col-xxl-4">
+                            <main class="vh-100 d-flex align-items-center justify-content-center m-0 py-5">
+                                
+                                <div style="width: 610px;">
                                     <h1 class="fw-bold text-center">ACTUALIZACIÓN DE CLIENTE</h1>
 
                                     <c:if test="${not empty mensajeError}">
@@ -138,7 +138,7 @@
 
                                     </form>
                                 </div>
-                                <div class="col-md-3 col-xxl-4"></div>
+                              
                             </main>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 

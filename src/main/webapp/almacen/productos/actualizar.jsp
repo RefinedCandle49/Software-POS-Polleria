@@ -98,36 +98,28 @@
                     </nav>
                 </header>
 
-                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
+                <main>
                     <section>
-                        <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()"> 
+                        <div class="container form-center">
+                            <div class="col-12 col-md-8 col-lg-6">
+                                <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()">
 
-                            <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
-                            <div class="container">
+                                    <input type="hidden" name="idProducto" value="${param.idProducto != null ? param.idProducto : producto.idProducto}" />
+                                    <input type="hidden" name="view" value="${param.view}"/>   
 
+                                    <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
 
-                                <input type="hidden" name="idProducto" value="${param.idProducto != null ? param.idProducto : producto.idProducto}" />
-                                <input type="hidden" name="view" value="${param.view}"/>   
-
-                                <div class="fw-bold text-dark">
-
-                                    <div class="row">
-                                        <div class="col-sm-2"></div>
-                                        <div class="col-sm-8">
-                                            <c:if test="${not empty mensajeError}">
-                                                <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between fw-normal">
-                                                    ${mensajeError}       
-                                                </div>
-                                            </c:if>
-                                        </div>
-                                        <div class="col-sm-4"></div>
+                                    <div class="row mb-3 align-items-center">
+                                        <c:if test="${not empty mensajeError}">
+                                            <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between fw-normal">
+                                                ${mensajeError}       
+                                            </div>
+                                        </c:if>
                                     </div>
+                                    <div class="mb-3 row align-items-center">
 
-                                    <div class="mb-3 row">
-
-                                        <div class="col-sm-2"></div>
-                                        <label for="categoria" class="col-sm-1 col-form-label">Categoria:</label>
-                                        <div class="col-sm-7">
+                                        <label for="categoria" class="col-sm-3 col-form-label">Categoria:</label>
+                                        <div class="col-sm-9">
                                             <select name="idCategoria" class="form-select" required>
                                                 <option value="1" ${producto.idCategoria == 1 ? "selected" : producto.idCategoria}>Pollos</option>
                                                 <option value="2" ${producto.idCategoria == 2 ? "selected" : producto.idCategoria}>Sopas</option>
@@ -136,63 +128,56 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="codigo" class="col-sm-1 col-form-label">SKU:</label>
-                                        <div class="col-sm-7">
+                                    <div class="mb-3 row align-items-center">
+                                        <div class="mb-3 row"></div>
+                                        <label for="codigo" class="col-sm-3 col-form-label">SKU:</label>
+                                        <div class="col-sm-9">
                                             <input type="text" name="codigo" class="form-control" id="codigo" value="${param.codigo != null ? param.codigo : producto.codigo}" readonly style="background: #e9ecef;">
                                         </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="nombre" class="col-sm-1 col-form-label">Nombre:</label>
-                                        <div class="col-sm-7">
+                                    </div> 
+
+                                    <div class="mb-3 row align-items-center">
+                                        <label for="nombre" class="col-sm-3 col-form-label">Nombre:</label>
+                                        <div class="col-sm-9">
                                             <input type="text" name="nombre" class="form-control" id="nombre" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
                                                 <span id="errorNombre" class="text-danger fw-normal"></span>
                                         </div>
                                     </div>
-
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="descripcion" class="col-sm-1 col-form-label">Descripcion:</label>
-                                        <div class="col-sm-7">
+                                    <div class="mb-3 row align-items-center">
+                                        <label for="descripcion" class="col-sm-3 col-form-label">Descripcion:</label>
+                                        <div class="col-sm-9">
                                             <textarea type="text" name="descripcion" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
                                             <span id="errorDescripcion" class="text-danger fw-normal"></span>
                                         </div>
                                     </div>
-
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="foto" class="col-sm-1 col-form-label">Foto:</label>
-                                        <div class="col-sm-7">                                                                                                              
+                                    <div class="mb-3 row align-items-center">
+                                        <label for="foto" class="col-sm-3 col-form-label">Foto:</label>
+                                        <div class="col-sm-9">                                                                                                              
                                             <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" />
                                             <input type="hidden" name="foto" id="foto" value="${param.foto != null ? param.foto : producto.foto}" />
                                             <small class="fw-normal">Se permiten archivos JPG y PNG de hasta 10 MB.</small>
                                         </div>
-                                    </div>   
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="precio" class="col-sm-1 col-form-label">Precio:</label>
-                                        <div class="col-sm-7">                                                                                                              
+                                    </div>
+                                    
+                                    <div class="mb-3 row align-items-center">
+                                        <label for="precio" class="col-sm-3 col-form-label">Precio:</label>
+                                        <div class="col-sm-9">                                                                                                              
                                             <input type="number" name="precio" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" class="form-control" value="${param.precio != null ? param.precio : producto.precio}" required onkeypress="return soloNumerosDecimales(event)">
                                                 <span id="errorSoloNumDecimales" class="text-danger fw-normal"></span>
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="stock" class="col-sm-1 col-form-label">Stock:</label>
-                                        <div class="col-sm-7">
+                                    <div class="mb-3 row align-items-center">
+                                        <label for="stock" class="col-sm-3 col-form-label">Stock:</label>
+                                        <div class="col-sm-9">
                                             <input type="text" maxlength="3" name="stock" class="form-control" id="stock" value="${param.stock != null ? param.stock : producto.stock}" required onkeypress="return soloNumeros(event)">
                                                 <span id="errorSoloNumeros" class="text-danger fw-normal"></span>
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="stock" class="col-sm-1 col-form-label">Estado:</label>
-                                        <div class="col-sm-7">
+                                    <div class="mb-3 row align-items-center">
+                                        <label for="stock" class="col-sm-3 col-form-label">Estado:</label>
+                                        <div class="col-sm-9">
                                             <select name="estado" class="form-select">
                                                 <option value="1" ${producto.estado == 1 ? "selected" : producto.estado}>Disponible</option>
                                                 <option value="0" ${producto.estado == 0 ? "selected" : producto.estado}>No Disponible</option>
@@ -204,9 +189,15 @@
                                         <button type="submit" class="btn btn-success">Guardar Cambios</button>
                                         <a href="javascript:history.back()" class="btn btn-secondary">Regresar</a>
                                     </div>
-                                </div>   
+
+
+
+
+                                </form>
                             </div>
-                        </form>
+                        </div>
+
+
 
                     </section>
                 </main>
@@ -214,51 +205,51 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            document.querySelector('input[type="file"]').addEventListener('change', function () {
-                const file = this.files[0];
-                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                const maxSize = 10 * 1024 * 1024; // 10 MB en bytes
+                                                document.querySelector('input[type="file"]').addEventListener('change', function () {
+                                                    const file = this.files[0];
+                                                    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                                                    const maxSize = 10 * 1024 * 1024; // 10 MB en bytes
 
-                if (file) {
-                    if (!allowedTypes.includes(file.type)) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Solo se admiten archivos JPG, JPEG y PNG.',
-                            confirmButtonColor: "#0d6efd",
-                            confirmButtonText: "Aceptar"
-                        });
-                        this.value = ''; // Limpiar el campo de entrada
-                    } else if (file.size > maxSize) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.',
-                            confirmButtonColor: "#0d6efd",
-                            confirmButtonText: "Aceptar"
-                        });
-                        this.value = ''; // Limpiar el campo de entrada
-                    }
-                }
-            });
+                                                    if (file) {
+                                                        if (!allowedTypes.includes(file.type)) {
+                                                            Swal.fire({
+                                                                icon: 'error',
+                                                                title: 'Error',
+                                                                text: 'Solo se admiten archivos JPG, JPEG y PNG.',
+                                                                confirmButtonColor: "#0d6efd",
+                                                                confirmButtonText: "Aceptar"
+                                                            });
+                                                            this.value = ''; // Limpiar el campo de entrada
+                                                        } else if (file.size > maxSize) {
+                                                            Swal.fire({
+                                                                icon: 'error',
+                                                                title: 'Error',
+                                                                text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.',
+                                                                confirmButtonColor: "#0d6efd",
+                                                                confirmButtonText: "Aceptar"
+                                                            });
+                                                            this.value = ''; // Limpiar el campo de entrada
+                                                        }
+                                                    }
+                                                });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            function soloNumeros(evt) {
-                let charCode = (evt.which) ? evt.which : event.keyCode;
-                let mensajeVal = document.getElementById("errorSoloNumeros");
-                let inputStk = document.getElementById("stock");
+                                                function soloNumeros(evt) {
+                                                    let charCode = (evt.which) ? evt.which : event.keyCode;
+                                                    let mensajeVal = document.getElementById("errorSoloNumeros");
+                                                    let inputStk = document.getElementById("stock");
 
-                mensajeVal.textContent = "";
-                inputStk.style.border = "1px solid #dee2e6";
+                                                    mensajeVal.textContent = "";
+                                                    inputStk.style.border = "1px solid #dee2e6";
 
-                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                    mensajeVal.textContent = "Solo se permiten números.";
-                    inputStk.style.border = "1px solid red";
-                    return false;
-                }
-                return true;
-            }
+                                                    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                                        mensajeVal.textContent = "Solo se permiten números.";
+                                                        inputStk.style.border = "1px solid red";
+                                                        return false;
+                                                    }
+                                                    return true;
+                                                }
         </script>
         <script>
             function soloNumerosDecimales(evt) {
@@ -311,19 +302,19 @@
             }
 
             function trimInputs() {
-              let inputs = document.querySelectorAll('input[type="text"], textarea');
-              inputs.forEach(input => {
-              input.value = input.value.trim();
-              });
-              }
+                let inputs = document.querySelectorAll('input[type="text"], textarea');
+                inputs.forEach(input => {
+                    input.value = input.value.trim();
+                });
+            }
 
-              document.querySelector("form").addEventListener("submit", function(event) {
-              trimInputs();
-              if (!validarCaracteres()) {
-              event.preventDefault();
-              }
-              });
-        
+            document.querySelector("form").addEventListener("submit", function (event) {
+                trimInputs();
+                if (!validarCaracteres()) {
+                    event.preventDefault();
+                }
+            });
+
 
         </script>
 

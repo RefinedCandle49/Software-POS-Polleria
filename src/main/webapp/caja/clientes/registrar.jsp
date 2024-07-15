@@ -118,14 +118,14 @@
 
                         <div class="mb-3">
                             <label for="nombre" class="form-label fw-bold">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" value="${param.nombre != null ? param.nombre : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" onkeydown="return validarEspacios(event, 'errorEspacioNombre')" required>
+                            <input type="text" id="nombre" name="nombre" value="${param.nombre != null ? param.nombre : ''}" class="form-control" minlength="5" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" onkeydown="return validarEspacios(event, 'errorEspacioNombre')" required>
                                 <span id="errorSoloLetrasNombre" class="text-danger"></span>
                                 <span id="errorEspacioNombre" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label for="apellido" class="form-label fw-bold">Apellido:</label>
-                            <input type="text" id="apellido" name="apellido" value="${param.apellido != null ? param.apellido : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
+                            <input type="text" id="apellido" name="apellido" value="${param.apellido != null ? param.apellido : ''}" class="form-control" minlength="5" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
                                 <span id="errorSoloLetrasApellido" class="text-danger"></span>
                                 <span id="errorEspacioApellido" class="text-danger"></span>
                         </div>

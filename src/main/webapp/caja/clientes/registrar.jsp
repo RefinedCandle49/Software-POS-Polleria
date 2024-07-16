@@ -17,7 +17,7 @@
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
         <title>Registrar Cliente | Pollos Locos</title>
     </head>
-    <body class="container-fluid p-0">
+    <body class="d-flex flex-column vh-100">
         <%
             HttpSession sesion = request.getSession(false);
             
@@ -73,7 +73,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/clientes/cartera?page=1.jsp">
+                                <a class="nav-link link-active" href="<%=request.getContextPath()%>/caja/clientes/cartera.jsp?page=1">
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
                                     <span>Gestionar Clientes</span>
                                 </a>
@@ -96,9 +96,9 @@
             </nav>    
         </header>
 
-        <main class="row d-flex align-items-center justify-content-center m-0 py-5">
-            <div class="col-md-3 col-xxl-4"></div>
-            <div class="col-md-6 col-xxl-4">
+        <main class="vh-100 d-flex align-items-center justify-content-center m-0 py-5">
+            
+            <div style="width: 610px;">
                     <h1 class="fw-bold text-center">REGISTRO DE CLIENTE</h1>
 
                     <c:if test="${not empty mensajeError}">
@@ -118,14 +118,14 @@
 
                         <div class="mb-3">
                             <label for="nombre" class="form-label fw-bold">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" value="${param.nombre != null ? param.nombre : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" onkeydown="return validarEspacios(event, 'errorEspacioNombre')" required>
+                            <input type="text" id="nombre" name="nombre" value="${param.nombre != null ? param.nombre : ''}" class="form-control" minlength="5" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" onkeydown="return validarEspacios(event, 'errorEspacioNombre')" required>
                                 <span id="errorSoloLetrasNombre" class="text-danger"></span>
                                 <span id="errorEspacioNombre" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label for="apellido" class="form-label fw-bold">Apellido:</label>
-                            <input type="text" id="apellido" name="apellido" value="${param.apellido != null ? param.apellido : ''}" class="form-control" minlegth="10" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
+                            <input type="text" id="apellido" name="apellido" value="${param.apellido != null ? param.apellido : ''}" class="form-control" minlength="5" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
                                 <span id="errorSoloLetrasApellido" class="text-danger"></span>
                                 <span id="errorEspacioApellido" class="text-danger"></span>
                         </div>
@@ -143,7 +143,7 @@
                             </div> 
                     </form>
                 </div>
-            <div class="col-md-3 col-xxl-4"></div>
+            
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

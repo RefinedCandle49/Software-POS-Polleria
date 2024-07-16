@@ -161,7 +161,6 @@
                                                                             <option value="<%= categoria.getIdCategoria() %>" <%= (request.getAttribute("idCategoria") != null && request.getAttribute("idCategoria").toString().equals(String.valueOf(categoria.getIdCategoria()))) ? "selected" : "" %>>
                                                                                 <%= categoria.getNombre() %>
                                                                             </option>
-
                                                                             <% } %>
                                                                         </select>
                                                                     </div>
@@ -175,14 +174,7 @@
                                                                             <span id="errorNombre" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row form-group">
-                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
-
-                                                                    </div>
-                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
-
-                                                                    </div>
-                                                                </div>
+                                                               
                                                                 <div class="row form-group">
                                                                     <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
                                                                         <label class="fw-bold">Descripción:</label>

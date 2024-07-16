@@ -210,6 +210,9 @@
 
                         <c:if test="${empty list}">
                             <span>No se encontraron ventas para el rango de ventas seleccionado.</span>
+                            <div class="d-flex justify-content-center">
+                                <a href="${pageContext.request.contextPath}/admin/dashboard.jsp" class="btn btn-secondary">Regresar</a>
+                            </div>
                         </c:if>
 
                         <c:if test="${not empty list}">

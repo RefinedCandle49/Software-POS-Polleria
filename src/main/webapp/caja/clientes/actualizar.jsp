@@ -10,7 +10,7 @@
                         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
                         <title>Actualizar | Cliente</title>
                         </head>
-                        <body class="container-fluid p-0">
+                        <body class="d-flex flex-column vh-100">
 
                             <%
                                 HttpSession sesion = request.getSession(false);
@@ -90,9 +90,9 @@
                                 </nav>    
                             </header>
 
-                            <main class="row d-flex align-items-center justify-content-center m-0 py-5">
-                                <div class="col-md-3 col-xxl-4"></div>
-                                <div class="col-md-6 col-xxl-4">
+                            <main class="vh-100 d-flex align-items-center justify-content-center m-0 py-5">
+                                
+                                <div style="width: 610px;">
                                     <h1 class="fw-bold text-center">ACTUALIZACIÓN DE CLIENTE</h1>
 
                                     <c:if test="${not empty mensajeError}">
@@ -114,14 +114,14 @@
 
                                             <div class="mb-3">
                                                 <label for="nombre" class="form-label fw-bold">Nombre:</label>
-                                                <input type="text" id="nombre" name="nombre" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" value="${param.nombre != null ? param.nombre : cliente.nombre}" onkeydown="return validarEspacios(event,'errorEspacioNombre')" required>
+                                                <input type="text" id="nombre" name="nombre" class="form-control" minlength="5" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasNombre')" value="${param.nombre != null ? param.nombre : cliente.nombre}" onkeydown="return validarEspacios(event,'errorEspacioNombre')" required>
                                                     <span id="errorSoloLetrasNombre" class="text-danger"></span>
                                                     <span id="errorEspacioNombre" class="text-danger"></span>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="apellido" class="form-label fw-bold">Apellido:</label>
-                                                <input type="text" id="apellido" name="apellido" class="form-control" minlength="4" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" value="${param.apellido != null ? param.apellido : cliente.apellido}" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
+                                                <input type="text" id="apellido" name="apellido" class="form-control" minlength="5" maxlength="50" onkeypress="return soloLetras(event, 'errorSoloLetrasApellido')" value="${param.apellido != null ? param.apellido : cliente.apellido}" onkeydown="return validarEspacios(event,'errorEspacioApellido')" required>
                                                     <span id="errorSoloLetrasApellido" class="text-danger"></span>
                                                     <span id="errorEspacioApellido" class="text-danger"></span>
                                             </div>
@@ -138,7 +138,7 @@
 
                                     </form>
                                 </div>
-                                <div class="col-md-3 col-xxl-4"></div>
+                              
                             </main>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 

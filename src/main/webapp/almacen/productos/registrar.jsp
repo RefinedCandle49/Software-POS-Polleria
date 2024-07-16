@@ -10,6 +10,49 @@
                 <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css">
                     <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
                     <title>Registrar Producto | Pollos Locos</title>
+                    <style>
+                        .form-center {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-top: 2rem; /* Añadido para centrar verticalmente el formulario */
+                        }
+
+                        .form-group {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 1rem; /* Espacio entre cada grupo de etiqueta y campo */
+                        }
+                        .container {
+                            width: 55%;
+
+                        }
+                        @media(max-width:1200px){
+                            .container {
+                                width: 90%;
+                                .form-group {
+                                    flex-direction: column;
+                                    align-items: flex-start;
+                                }
+
+                                .form-group .col-auto {
+                                    width: 100%;
+                                }
+
+                                .form-group label,
+                                .form-group input {
+                                    width: 100%;
+                                }
+
+                                .form-group label {
+                                    margin-bottom: 0.5rem;
+                                }
+
+                            }
+                        }
+
+
+                    </style>
                     </head>
                     <body>
                         <%
@@ -50,8 +93,8 @@
                         }
                         %>
                         <script>
-            let contextPath = '<%= contextPath %>';
-            let nombreRol = '<%= nombreRol %>';
+                            let contextPath = '<%= contextPath %>';
+                            let nombreRol = '<%= nombreRol %>';
                         </script>
                         <%
                             List<Categoria> categorias = CategoriaDao.listarCategorias();
@@ -98,92 +141,107 @@
                                                 </header>
 
                                                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
-                                                    <section>
-                                                        <h1 class="text-center fw-bold">REGISTRO DE PRODUCTO</h1>
-                                                        <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()">
 
-                                                            <div class="container table-responsive">
+                                                    <section class="d-flex align-items-center justify-content-center h-100">
+                                                        <div class="container">
+                                                            <h1 class="text-center fw-bold mb-5">REGISTRO DE PRODUCTO</h1>
+                                                            <form action="${pageContext.request.contextPath}/controlProducto?action=registrar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()">
                                                                 <c:if test="${not empty mensajeError}">
                                                                     <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between">
                                                                         ${mensajeError}
                                                                     </div>
                                                                 </c:if>
-                                                                <table class="table mb-3">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Categoría:</th>
-                                                                            <td>
-                                                                                <select name="idCategoria" class="form-select">
-                                                                                    <% for (Categoria categoria : categorias) { %>
-                                                                                    <option value="<%= categoria.getIdCategoria() %>" <%= (request.getAttribute("idCategoria") != null && request.getAttribute("idCategoria").toString().equals(String.valueOf(categoria.getIdCategoria()))) ? "selected" : "" %>>
-                                                                                        <%= categoria.getNombre() %>
-                                                                                    </option>
-                                                                                    <%-- option value="<%= categoria.getIdCategoria() %>"><%= categoria.getNombre() %>
-                                                                                    </option --%>
-                                                                                    <% } %>
-                                                                                </select>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </thead>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Categoria:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <select name="idCategoria" class="form-select">
+                                                                            <% for (Categoria categoria : categorias) { %>
+                                                                            <option value="<%= categoria.getIdCategoria() %>" <%= (request.getAttribute("idCategoria") != null && request.getAttribute("idCategoria").toString().equals(String.valueOf(categoria.getIdCategoria()))) ? "selected" : "" %>>
+                                                                                <%= categoria.getNombre() %>
+                                                                            </option>
 
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>Nombre:</th>
-                                                                            <td>
-                                                                                <input maxlength="50" type="text" name="nombre" id="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
-                                                                                <span id="errorNombre" class="text-danger"></span>
-                                                                            </td>
+                                                                            <% } %>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Nombre:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <input maxlength="50" type="text" name="nombre" id="nombre" class="form-control" value="${param.nombre != null ? param.nombre : ''}" required onkeypress="return validarEspacios(event)">
+                                                                            <span id="errorNombre" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
 
-                                                                            <tr>
-                                                                                <th>Descripción:</th>
-                                                                                <td>
-                                                                                    <textarea maxlength="200" name="descripcion" id="descripcion" class="form-control" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : '---'}</textarea>
-                                                                                    <span id="errorDescripcion" class="text-danger"></span>
-                                                                                </td>
-                                                                            </tr>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
 
-                                                                            <tr>
-                                                                                <th>Foto:</th>
-                                                                                <td>
-                                                                                    <input type="file" name="image" accept=".jpg, .jpeg, .png" class="btn-file">
-                                                                                        <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
-                                                                                </td>
-                                                                            </tr>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Descripción:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <textarea maxlength="200" name="descripcion" id="descripcion" class="form-control" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : '---'}</textarea>
+                                                                        <span id="errorDescripcion" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Foto:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <input type="file" name="image" accept=".jpg, .jpeg, .png" class="btn-file">
+                                                                            <small>Se permiten archivos JPG y PNG de hasta 10 MB.</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Precio:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <input type="number" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" value="${param.precio != null ? param.precio : ''}" required onkeypress="return soloNumerosDecimales(event)">
+                                                                            <span id="errorSoloNumDecimales" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group">
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Stock:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <input type="text" id="stock" maxlength="3" name="stock" class="form-control" value="${param.stock != null ? param.stock : ''}" required onkeypress="return soloNumeros(event)">
+                                                                            <span id="errorSoloNumeros" class="text-danger"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row form-group" >
+                                                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                                        <label class="fw-bold">Estado:</label>
+                                                                    </div>
+                                                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                                        <select name="estado" class="form-select">
+                                                                            <option value="1" ${param.estado == 1 ? "selected" : ""}>Disponible</option>
+                                                                            <option value="0" ${param.estado == 0 ? "selected" : ""}>No Disponible</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                        <div class="text-center">
+                                                                        <input type="submit" class="btn btn-success" value="Registrar Producto">
+                                                                            <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="btn btn-secondary">Regresar</a>
+                                                                    </div>
+                                                            </form>
+                                                        </div>
 
-                                                                            <tr>
-                                                                                <th>Precio:</th>
-                                                                                <td>
-                                                                                    <input type="number" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" name="precio" class="form-control" value="${param.precio != null ? param.precio : ''}" required onkeypress="return soloNumerosDecimales(event)">
-                                                                                        <span id="errorSoloNumDecimales" class="text-danger"></span>
-                                                                                </td>
-                                                                            </tr>
 
-                                                                            <tr>
-                                                                                <th>Stock:</th>
-                                                                                <td>
-                                                                                    <input type="text" id="stock" maxlength="3" name="stock" class="form-control" value="${param.stock != null ? param.stock : ''}" required onkeypress="return soloNumeros(event)">
-                                                                                        <span id="errorSoloNumeros" class="text-danger"></span>
-                                                                                </td>
+                                                        </div>
 
-                                                                            </tr>
 
-                                                                            <tr>
-                                                                                <th>Estado:</th>
-                                                                                <td>
-                                                                                    <select name="estado" class="form-select">
-                                                                                        <option value="1" ${param.estado == 1 ? "selected" : ""}>Disponible</option>
-                                                                                        <option value="0" ${param.estado == 0 ? "selected" : ""}>No Disponible</option>
-                                                                                    </select>
-                                                                                </td>
-                                                                            </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <div class="text-center">
-                                                                <input type="submit" class="btn btn-success" value="Registrar Producto">
-                                                                    <a href="${pageContext.request.contextPath}/almacen/productos.jsp?page=1" class="btn btn-secondary">Regresar</a>
-                                                            </div>
                                                         </form>
 
                                                         <%--    <form action="${pageContext.request.contextPath}/UploadServlet" method="post" enctype="multipart/form-data">--%>
@@ -198,51 +256,51 @@
 
                                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                                 <script>
-                                                                                        document.querySelector('input[type="file"]').addEventListener('change', function () {
-                                                                                            const file = this.files[0];
-                                                                                            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                                                                                            const maxSize = 10 * 1024 * 1024; // 10 MB en bytes
+                                                                            document.querySelector('input[type="file"]').addEventListener('change', function () {
+                                                                                const file = this.files[0];
+                                                                                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                                                                                const maxSize = 10 * 1024 * 1024; // 10 MB en bytes
 
-                                                                                            if (file) {
-                                                                                                if (!allowedTypes.includes(file.type)) {
-                                                                                                    Swal.fire({
-                                                                                                        icon: 'error',
-                                                                                                        title: 'Error',
-                                                                                                        text: 'Solo se admiten archivos JPG, JPEG y PNG.',
-                                                                                                        confirmButtonColor: "#0d6efd",
-                                                                                                        confirmButtonText: "Aceptar"
-                                                                                                    });
-                                                                                                    this.value = ''; // Limpiar el campo de entrada
-                                                                                                } else if (file.size > maxSize) {
-                                                                                                    Swal.fire({
-                                                                                                        icon: 'error',
-                                                                                                        title: 'Error',
-                                                                                                        text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.',
-                                                                                                        confirmButtonColor: "#0d6efd",
-                                                                                                        confirmButtonText: "Aceptar"
-                                                                                                    });
-                                                                                                    this.value = ''; // Limpiar el campo de entrada
-                                                                                                }
-                                                                                            }
+                                                                                if (file) {
+                                                                                    if (!allowedTypes.includes(file.type)) {
+                                                                                        Swal.fire({
+                                                                                            icon: 'error',
+                                                                                            title: 'Error',
+                                                                                            text: 'Solo se admiten archivos JPG, JPEG y PNG.',
+                                                                                            confirmButtonColor: "#0d6efd",
+                                                                                            confirmButtonText: "Aceptar"
                                                                                         });
+                                                                                        this.value = ''; // Limpiar el campo de entrada
+                                                                                    } else if (file.size > maxSize) {
+                                                                                        Swal.fire({
+                                                                                            icon: 'error',
+                                                                                            title: 'Error',
+                                                                                            text: 'El archivo seleccionado supera el tamaño máximo permitido de 10 MB.',
+                                                                                            confirmButtonColor: "#0d6efd",
+                                                                                            confirmButtonText: "Aceptar"
+                                                                                        });
+                                                                                        this.value = ''; // Limpiar el campo de entrada
+                                                                                    }
+                                                                                }
+                                                                            });
                                                 </script>
                                                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
                                                 <script>
-                                                                                        function soloNumeros(evt) {
-                                                                                            let charCode = (evt.which) ? evt.which : event.keyCode;
-                                                                                            let mensajeVal = document.getElementById("errorSoloNumeros");
-                                                                                            let inputStk = document.getElementById("stock");
+                                                                            function soloNumeros(evt) {
+                                                                                let charCode = (evt.which) ? evt.which : event.keyCode;
+                                                                                let mensajeVal = document.getElementById("errorSoloNumeros");
+                                                                                let inputStk = document.getElementById("stock");
 
-                                                                                            mensajeVal.textContent = "";
-                                                                                            inputStk.style.border = "1px solid #dee2e6";
+                                                                                mensajeVal.textContent = "";
+                                                                                inputStk.style.border = "1px solid #dee2e6";
 
-                                                                                            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                                                                                                mensajeVal.textContent = "Solo se permiten números.";
-                                                                                                inputStk.style.border = "1px solid red";
-                                                                                                return false;
-                                                                                            }
-                                                                                            return true;
-                                                                                        }
+                                                                                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                                                                    mensajeVal.textContent = "Solo se permiten números.";
+                                                                                    inputStk.style.border = "1px solid red";
+                                                                                    return false;
+                                                                                }
+                                                                                return true;
+                                                                            }
                                                 </script>
                                                 <script>
                                                     function soloNumerosDecimales(evt) {
@@ -272,20 +330,20 @@
 
                                                 <script>
                                                     function validarEspacios(evt) {
-                                                        let input = evt.target; 
+                                                        let input = evt.target;
                                                         let mensajeVal;
-                                                        
+
                                                         if (input.id === "nombre") {
                                                             mensajeVal = document.getElementById("errorNombre");
                                                         } else if (input.name === "descripcion") {
                                                             mensajeVal = document.getElementById("errorDescripcion");
                                                         }
-                                                        
+
                                                         let valor = input.value.trim() + String.fromCharCode(evt.which ? evt.which : evt.keyCode);
-                                                        
+
                                                         mensajeVal.textContent = "";
                                                         input.style.border = "1px solid #dee2e6";
-                                                        
+
                                                         if (valor.trim().length === 0) {
                                                             mensajeVal.textContent = "El campo no puede contener solo espacios";
                                                             input.style.border = "1px solid red";
@@ -295,18 +353,18 @@
                                                     }
 
                                                     function trimInputs() {
-                                                    let inputs = document.querySelectorAll('input[type="text"], textarea');
-                                                    inputs.forEach(input => {
-                                                        input.value = input.value.trim();
-                                                    });
-                                                }
-
-                                                document.querySelector("form").addEventListener("submit", function(event) {
-                                                    trimInputs();
-                                                    if (!validarCaracteres()) {
-                                                        event.preventDefault();
+                                                        let inputs = document.querySelectorAll('input[type="text"], textarea');
+                                                        inputs.forEach(input => {
+                                                            input.value = input.value.trim();
+                                                        });
                                                     }
-                                                });
+
+                                                    document.querySelector("form").addEventListener("submit", function (event) {
+                                                        trimInputs();
+                                                        if (!validarCaracteres()) {
+                                                            event.preventDefault();
+                                                        }
+                                                    });
 
                                                 </script>
                                                 </body>

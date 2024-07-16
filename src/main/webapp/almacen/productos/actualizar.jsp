@@ -7,9 +7,52 @@
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/registrar-producto.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css"/>
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico"/>
         <title>Actualizar Producto | Pollos Locos</title>
+        <style>
+            .form-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 2rem; /* Añadido para centrar verticalmente el formulario */
+            }
+
+            .form-group {
+                 display: flex;
+    align-items: center;
+                margin-bottom: 1rem; /* Espacio entre cada grupo de etiqueta y campo */
+            }
+            .container {
+                width: 55%;
+                
+            }
+            @media(max-width:1200px){
+                .container {
+                width: 90%;
+                .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group .col-auto {
+        width: 100%;
+    }
+
+    .form-group label, 
+    .form-group input {
+        width: 100%;
+    }
+
+    .form-group label {
+        margin-bottom: 0.5rem;
+    }
+                
+            }
+            }
+
+
+        </style>
     </head>
     <body>
         <%
@@ -97,112 +140,114 @@
                             </div>
                     </nav>
                 </header>
+                <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100" >
 
-                <main>
-                    <section>
-                        <div class="container form-center">
-                            <div class="col-12 col-md-8 col-lg-6">
-                                <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()">
+                    <section class="d-flex align-items-center justify-content-center h-100">
+                        <div class="container">
+                            <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
+                            <c:if test="${not empty mensajeError}">
+                                <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between fw-normal">
+                                    ${mensajeError}       
+                                </div>
+                            </c:if>
+                            <form action="${pageContext.request.contextPath}/controlProducto?action=actualizar" method="post" enctype="multipart/form-data" onsubmit="trimInputs()">
 
-                                    <input type="hidden" name="idProducto" value="${param.idProducto != null ? param.idProducto : producto.idProducto}" />
-                                    <input type="hidden" name="view" value="${param.view}"/>   
-
-                                    <h1 class="text-center fw-bold mb-5">ACTUALIZACIÓN DE PRODUCTO</h1>
-
-                                    <div class="row mb-3 align-items-center">
-                                        <c:if test="${not empty mensajeError}">
-                                            <div id="mensajeError" class="alert alert-danger d-flex align-items-center justify-content-between fw-normal">
-                                                ${mensajeError}       
-                                            </div>
-                                        </c:if>
+                                <input type="hidden" name="idProducto" value="${param.idProducto != null ? param.idProducto : producto.idProducto}" />
+                                <input type="hidden" name="view" value="${param.view}"/> 
+                                <div class="row form-group">
+                                    <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                        <label for="categoria" class="fw-bold">Categoria:</label>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-
-                                        <label for="categoria" class="col-sm-3 col-form-label">Categoria:</label>
-                                        <div class="col-sm-9">
-                                            <select name="idCategoria" class="form-select" required>
-                                                <option value="1" ${producto.idCategoria == 1 ? "selected" : producto.idCategoria}>Pollos</option>
-                                                <option value="2" ${producto.idCategoria == 2 ? "selected" : producto.idCategoria}>Sopas</option>
-                                                <option value="3" ${producto.idCategoria == 3 ? "selected" : producto.idCategoria}>Bebidas</option>
-                                                <option value="4" ${producto.idCategoria == 4 ? "selected" : producto.idCategoria}>Postres</option>
-                                            </select>
+                                    <div class="col-auto col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                    <select name="idCategoria" class="form-select" required>
+                                        <option value="1" ${producto.idCategoria == 1 ? "selected" : producto.idCategoria}>Pollos</option>
+                                        <option value="2" ${producto.idCategoria == 2 ? "selected" : producto.idCategoria}>Sopas</option>
+                                        <option value="3" ${producto.idCategoria == 3 ? "selected" : producto.idCategoria}>Bebidas</option>
+                                        <option value="4" ${producto.idCategoria == 4 ? "selected" : producto.idCategoria}>Postres</option>
+                                    </select>
+                                </div>
+                                </div>
+                                    <div class="row form-group">
+                                        <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                            <label for="codigo" class="fw-bold">SKU:</label>
                                         </div>
-                                    </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <div class="mb-3 row"></div>
-                                        <label for="codigo" class="col-sm-3 col-form-label">SKU:</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
                                             <input type="text" name="codigo" class="form-control" id="codigo" value="${param.codigo != null ? param.codigo : producto.codigo}" readonly style="background: #e9ecef;">
                                         </div>
-                                    </div> 
-
-                                    <div class="mb-3 row align-items-center">
-                                        <label for="nombre" class="col-sm-3 col-form-label">Nombre:</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" name="nombre" class="form-control" id="nombre" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
-                                                <span id="errorNombre" class="text-danger fw-normal"></span>
+                                    </div>
+                                        <div class="row form-group">
+                                            <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                <label for="nombre" class="fw-bold">Nombre:</label>
+                                            </div>
+                                            <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                <input type="text" name="nombre" class="form-control" id="nombre" value="${param.nombre != null ? param.nombre : producto.nombre}" required onkeypress="return validarEspacios(event)">
+                                            <span id="errorNombre" class="text-danger fw-normal"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label for="descripcion" class="col-sm-3 col-form-label">Descripcion:</label>
-                                        <div class="col-sm-9">
-                                            <textarea type="text" name="descripcion" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
-                                            <span id="errorDescripcion" class="text-danger fw-normal"></span>
+                                        
+                                        <div class="row form-group">
+                                            <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                <label for="descripcion" class="fw-bold">Descripcion:</label>
+                                            </div>
+                                            <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                <textarea type="text" name="descripcion" class="form-control" id="descripcion" required onkeypress="return validarEspacios(event)">${param.descripcion != null ? param.descripcion : producto.descripcion}</textarea>
+                                        <span id="errorDescripcion" class="text-danger fw-normal"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label for="foto" class="col-sm-3 col-form-label">Foto:</label>
-                                        <div class="col-sm-9">                                                                                                              
-                                            <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" />
-                                            <input type="hidden" name="foto" id="foto" value="${param.foto != null ? param.foto : producto.foto}" />
-                                            <small class="fw-normal">Se permiten archivos JPG y PNG de hasta 10 MB.</small>
+                                            
+                                            
+                                        <div class="row form-group">
+                                            <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                <label for="foto" class="fw-bold">Foto:</label>
+                                            </div>
+                                            <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-10">
+                                                <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image" class="btn-file" />
+                                        <input type="hidden" name="foto" id="foto" value="${param.foto != null ? param.foto : producto.foto}" />
+                                        <small class="fw-normal">Se permiten archivos JPG y PNG de hasta 10 MB.</small>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="mb-3 row align-items-center">
-                                        <label for="precio" class="col-sm-3 col-form-label">Precio:</label>
-                                        <div class="col-sm-9">                                                                                                              
-                                            <input type="number" name="precio" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" class="form-control" value="${param.precio != null ? param.precio : producto.precio}" required onkeypress="return soloNumerosDecimales(event)">
-                                                <span id="errorSoloNumDecimales" class="text-danger fw-normal"></span>
+                                        
+                                        <div class="row form-group">
+                                            <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                <label for="precio" class="fw-bold">Precio:</label>
+                                            </div>
+                                            <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                <input type="number" name="precio" id="precio" min="1" max="999.99" step="any" pattern="^\d*(\.\d{0,2})?$" class="form-control" value="${param.precio != null ? param.precio : producto.precio}" required onkeypress="return soloNumerosDecimales(event)">
+                                            <span id="errorSoloNumDecimales" class="text-danger fw-normal"></span>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3 row align-items-center">
-                                        <label for="stock" class="col-sm-3 col-form-label">Stock:</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" maxlength="3" name="stock" class="form-control" id="stock" value="${param.stock != null ? param.stock : producto.stock}" required onkeypress="return soloNumeros(event)">
-                                                <span id="errorSoloNumeros" class="text-danger fw-normal"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 row align-items-center">
-                                        <label for="stock" class="col-sm-3 col-form-label">Estado:</label>
-                                        <div class="col-sm-9">
-                                            <select name="estado" class="form-select">
-                                                <option value="1" ${producto.estado == 1 ? "selected" : producto.estado}>Disponible</option>
-                                                <option value="0" ${producto.estado == 0 ? "selected" : producto.estado}>No Disponible</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                                        <a href="javascript:history.back()" class="btn btn-secondary">Regresar</a>
-                                    </div>
-
-
-
-
-                                </form>
-                            </div>
+                                
+                                            <div class="row form-group">
+                                                <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                    <label for="stock" class="fw-bold">Stock:</label>
+                                                </div>
+                                                <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                    <input type="text" maxlength="3" name="stock" class="form-control" id="stock" value="${param.stock != null ? param.stock : producto.stock}" required onkeypress="return soloNumeros(event)">
+                                            <span id="errorSoloNumeros" class="text-danger fw-normal"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-auto col-2 col-sm-4 col-md-4 col-lg-4 col-xl-3 col-xxl-2 px-sm-2 px-0">
+                                                    <label for="stock" class="fw-bold">Estado:</label>
+                                                </div>
+                                                <div class="col-auto col-10 col-sm-8 col-md-8 col-lg-8 col-xl-9 col-xxl-10">
+                                                    <select name="estado" class="form-select">
+                                            <option value="1" ${producto.estado == 1 ? "selected" : producto.estado}>Disponible</option>
+                                            <option value="0" ${producto.estado == 0 ? "selected" : producto.estado}>No Disponible</option>
+                                        </select>
+                                                </div>
+                                            </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                                    <a href="javascript:history.back()" class="btn btn-secondary">Regresar</a>
+                                </div>
+                            </form>
                         </div>
-
-
-
                     </section>
                 </main>
             </div>
         </div>
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
                                                 document.querySelector('input[type="file"]').addEventListener('change', function () {

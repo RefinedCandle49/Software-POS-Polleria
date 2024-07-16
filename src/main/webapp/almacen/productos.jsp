@@ -173,7 +173,7 @@
                                                 </script>
 
                                                 <td>
-                                                    <img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" width="50" onerror="handleErrorImage.call(this);">
+                                                    <img src="${pageContext.request.contextPath}/cloud-images/${prod.getFoto()}" width="50" height="50" onerror="handleErrorImage.call(this);">
                                                 </td>
 
 

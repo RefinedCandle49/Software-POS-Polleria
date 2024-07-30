@@ -1,6 +1,7 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.Usuario, dao.UsuarioDao, model.DetalleVenta, model.Producto, model.Venta, dao.ReporteDao, java.util.*" %>
+<%@ page import="dao.ProductoDao" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -17,6 +18,9 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico" />
         <script src="<%=request.getContextPath()%>/js/password.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jspdf.umd.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jspdf.plugin.autotable.js"></script>
+        
         <title>Dashboard | Pollos Locos</title>
     </head>
     <body>
@@ -45,6 +49,8 @@
             List<Venta> venta = ReporteDao.obtenerClienteVentasMes();
             request.setAttribute("list_clientes", venta);
             
+            List<Producto> producto2 = ProductoDao.listarProductos();
+            request.setAttribute("list2", producto2);
             
             if(!"Administrador".equals(nombreRol)){
         %>
@@ -245,7 +251,59 @@
                             </script>
 
                         </section>
+                        
+                        <section>
+                            <h3 class="fw-bold">PRODUCTOS</h3>
+                            <div class="">
+                                <button class="btn btn-primary mx-1" onclick="generatePDF()">Descargar PDF Inventario</button>
+                            </div>
+                            
+                            <table style="display: none" id="tableProducts" class="table mb-0">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th style="display: none">ID</th>
+                                    <th>CÓDIGO</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>NOMBRE</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>PRECIO</th>
+                                    <th>STOCK</th>
+                                
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${list2}" var="prod">
+                                    <tr>
+                                        <td style="display: none">${prod.getIdProducto()}</td>
+                                        <td>${prod.getCodigo()}</td>
+                                        <td>${prod.getNombreCategoria()}</td>
+                                        <td>${prod.getNombre()}</td>
+                                        <td>${prod.getDescripcion()}</td>
+                                        
+                                        
+                                        <td style="text-wrap: nowrap;">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></td>
+                                        <td>${prod.getStock()}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                            
+                            <script>
+                                function generatePDF() {
+                                    var date = new Date();
+                                    var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
+                                    var filename = "Almacen - " + formattedDate + ".pdf";
+                                    var doc = new jspdf.jsPDF()
+                                    doc.setPage(1);
+                                    doc.text("Stock productos disponibles: ", 10, 10);
 
+                                    // Simple html example
+                                    doc.autoTable({html: '#tableProducts'});
+                                    doc.save(filename)
+                                }
+                            </script>
+                        </section>
+                        
                         <section class="otros-reportes">
                             <h3 class="fw-bold">OTROS REPORTES</h3>
 

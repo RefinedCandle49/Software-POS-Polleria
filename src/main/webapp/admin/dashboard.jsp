@@ -4,7 +4,9 @@
 <%@ page import="dao.ProductoDao" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
+<%@ page import="dao.VentaDao" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -200,6 +202,67 @@
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
                         <h1 class="fw-bold">PANEL DE REPORTES</h1>
+                        
+                        <section>
+                            <%
+                                Gson gsonObj = new Gson();
+                                Map<Integer,String> meses = new HashMap<>();
+                                meses.put(1, "Enero");
+                                meses.put(2, "Febrero");
+                                meses.put(3, "Marzo");
+                                meses.put(4, "Abril");
+                                meses.put(5, "Mayo");
+                                meses.put(6, "Junio");
+                                meses.put(7, "Julio");
+                                meses.put(8, "Agosto");
+                                meses.put(9, "Septiembre");
+                                meses.put(10, "Octubre");
+                                meses.put(11, "Noviembre");
+                                meses.put(12, "Diciembre");
+                                Map<Object,Object> map = null;
+                                List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+                                
+                                List<Venta> listaVentas = VentaDao.listarVentasChart();
+                                
+                                for (Venta ventaC : listaVentas) {
+                                    map = new HashMap<>();
+                                    map.put("label", meses.get(ventaC.getMes())); // Usa el nombre del mes como etiqueta
+                                    map.put("y", ventaC.getVentas()); // Establece el número de ventas
+                                    list.add(map);
+                                }
+                                
+                                String dataPoints = gsonObj.toJson(list);
+                            %>
+                            <script type="text/javascript">
+                                window.onload = function() {
+
+                                    var now = new Date();
+                                    var year = now.getFullYear();
+
+                                    var chart = new CanvasJS.Chart("chartContainer", {
+                                        title: {
+                                            text: "Total de ventas " + year
+                                        },
+                                        axisX: {
+                                            title: "Meses"
+                                        },
+                                        axisY: {
+                                            title: "Ventas",
+                                            includeZero: true
+                                        },
+                                        data: [{
+                                            type: "column",
+                                            yValueFormatString: "# ventas",
+                                            dataPoints: <%out.print(dataPoints);%>
+                                        }]
+                                    });
+                                    chart.render();
+
+                                }
+                            </script>
+                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                            <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                        </section>
 
                         <section class="ventas-por-fechas">
                             <h3 class="fw-bold">VENTAS</h3>

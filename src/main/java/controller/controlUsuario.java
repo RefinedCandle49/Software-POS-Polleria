@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import dao.UsuarioDao;
+import jakarta.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import model.Usuario;
 
@@ -150,6 +151,50 @@ public class controlUsuario extends HttpServlet {
                     e.printStackTrace();
                 }    
             return;
+            
+            case "anularUsuario":
+                try {
+                    int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    int newEstado = Integer.parseInt(request.getParameter("newEstado"));
+                     
+                    Usuario usuarioAnular = new Usuario();
+                    usuarioAnular.setIdUsuario(idUsuario);
+                    usuarioAnular.setEstado(newEstado);
+                    
+                    int result = UsuarioDao.anularUsuario(usuarioAnular);
+                    
+                    // Mandar parametro para mostrar alerta de confirmación
+                    HttpSession session = request.getSession();
+                    
+                    if (result > 0) {
+                        response.sendRedirect(request.getContextPath() + "/admin/usuarios.jsp?anularUsuario=true&page=1");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+            case "activarUsuario":
+                try {
+                    int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                    int newEstado = Integer.parseInt(request.getParameter("newEstado"));
+                    
+                    Usuario usuarioActivar = new Usuario();
+                    usuarioActivar.setIdUsuario(idUsuario);
+                    usuarioActivar.setEstado(newEstado);
+                    
+                    int result = UsuarioDao.activarUsuario(usuarioActivar);
+                    
+                    // Mandar parametro para mostrar alerta de confirmación
+                    HttpSession session = request.getSession();
+                    
+                    if (result > 0 ) {
+                        response.sendRedirect(request.getContextPath() + "/admin/usuario/anulados.jsp?activarUsuario=true&page=1");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return;
+
         }
     }
     

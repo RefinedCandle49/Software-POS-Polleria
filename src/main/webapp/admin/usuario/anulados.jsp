@@ -209,7 +209,7 @@
 
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
-                        <h1 class="fw-bold">PANEL DE USUARIOS ANULADOS</h1>
+                        <h1 class="fw-bold">PANEL DE USUARIOS ELIMINADOS</h1>
 
                         <c:if test="${empty list}">
                             <span>¡Hola! Parece que esta tabla está vacía en este momento.</span>

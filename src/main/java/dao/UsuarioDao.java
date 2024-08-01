@@ -102,6 +102,22 @@ public class UsuarioDao {
         }
         return totalUsuarios;
     }
+    
+    public static int contarUsuariosAnulados() {
+        int totalUsuarios = 0;
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) AS total FROM usuario WHERE estado = 0");
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalUsuarios = rs.getInt("total");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return totalUsuarios;
+    }
 
         // Registro actualizado
     public static int registrarUsuario(Usuario usu) {
@@ -226,4 +242,120 @@ public class UsuarioDao {
         }
         return usuario;
     }
+    
+    public static int anularUsuario(Usuario usu) {
+        int est = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        try {
+            con = getConnection();
+            // Iniciar Transacción (Todos los SQL deben ejecutarse)
+            con.setAutoCommit(false);
+            
+            // Actualizar el estado del usuario
+            ps = con.prepareStatement("UPDATE usuario SET estado = 0 WHERE idUsuario = ?");
+            ps.setInt(1, usu.getIdUsuario());
+            est = ps.executeUpdate();
+
+            // Confirmar la transacción
+            con.commit();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.setAutoCommit(true);
+                    con.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return est;
+    }
+    
+    public static List<Usuario> listarUsuariosAnuladosPagina(int start, int total) {
+        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario WHERE estado=0 ORDER BY idUsuario DESC LIMIT ?, ?");
+            ps.setInt(1, start-1);
+            ps.setInt(2, total);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario user = new Usuario();
+                user.setIdUsuario(rs.getInt("idUsuario"));
+                user.setCodigo(rs.getString("codigo"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setRol(rs.getString("rol"));
+                user.setEstado(rs.getInt("estado"));
+                listaUsuarios.add(user);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return listaUsuarios;
+    }
+    
+    public static List<Usuario> listarUsuariosAnulados() {
+        List<Usuario> listaUsuariosAnulados = new ArrayList<Usuario>();
+    try {
+        Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement("SELECT idUsuario, codigo, email, password, rol, estado FROM usuario WHERE estado = 0 ORDER BY idUsuario DESC");
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Usuario user = new Usuario();
+            user.setIdUsuario(rs.getInt("idUsuario"));
+            user.setCodigo(rs.getString("codigo"));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+            user.setRol(rs.getString("rol"));
+            user.setEstado(rs.getInt("estado"));
+            listaUsuariosAnulados.add(user);
+        }
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return listaUsuariosAnulados;
+    }
+    
+    public static int activarUsuario(Usuario usu) {
+   int est = 1;
+   try {
+       Connection con = getConnection();
+       PreparedStatement ps = con.prepareStatement("UPDATE usuario SET estado=? WHERE idUsuario=?");
+       
+       con.setAutoCommit(false);
+       
+       ps.setInt(1, usu.getEstado());
+       ps.setInt(2, usu.getIdUsuario());
+       
+       est = ps.executeUpdate();
+       
+       con.commit();
+   } catch (SQLException e) {
+        // Manejar la excepción SQL adecuadamente
+        e.printStackTrace();
+    } catch (Exception e) {
+        // Manejar cualquier otra excepción
+        e.printStackTrace();
+    }
+    return est;
+   }
 }

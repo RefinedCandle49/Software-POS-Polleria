@@ -116,7 +116,7 @@
                             </li>
                             <hr />
 
-                            <li class="nav-item">
+                            <li class="nav-item pb-4">
                                 <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-inactive align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -131,6 +131,20 @@
                                         <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                                     </svg>
                                     <span class="ms-1 d-none d-sm-inline">Usuarios</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/admin/usuario/anulados.jsp?page=1"
+                                   class="link-inactive align-middle px-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-x">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5" />
+                                        <path d="M22 22l-5 -5" />
+                                        <path d="M17 22l5 -5" />
+                                    </svg>
+                                    <span class="ms-1 d-none d-sm-inline">Usuarios Eliminados</span>
                                 </a>
                             </li>
                             <hr />

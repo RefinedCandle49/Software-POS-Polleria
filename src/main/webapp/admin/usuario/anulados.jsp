@@ -323,7 +323,7 @@
                                                                 
                                                                 if (activarUsuario === 'true') {
                                                                     Swal.fire({
-                                                                        title: 'Usuario activado correctamente',
+                                                                        title: 'Usuario restaurado correctamente',
                                                                         icon: 'success',
                                                                         confirmButtonColor: "#0d6efd",
                                                                         confirmButtonText: 'Aceptar'

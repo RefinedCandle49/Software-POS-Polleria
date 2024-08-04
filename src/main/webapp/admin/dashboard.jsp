@@ -22,7 +22,7 @@
         <script src="<%=request.getContextPath()%>/js/password.js"></script>
         <script src="<%=request.getContextPath()%>/js/jspdf.umd.js"></script>
         <script src="<%=request.getContextPath()%>/js/jspdf.plugin.autotable.js"></script>
-        
+
         <title>Dashboard | Pollos Locos</title>
     </head>
     <body>
@@ -216,9 +216,85 @@
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
                         <h1 class="fw-bold">PANEL DE REPORTES</h1>
-                        
-                        <section>
-                            <%
+
+                        <div class="row">
+                            <div class="col-xxl-4 my-3">
+                                <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center h-100">
+                                            <div>
+                                                <%
+                                if(ingreso > 0) {%>
+                                                <h6 class="mb-0 text-secondary">Total Ingreso</h6>
+                                                <h4 class="my-1 text-report fw-bold">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="<%= ingreso %>" /></h4>
+                                                <p class="mb-0 font-13">Ingreso anual de la empresa</p>
+                                                <% } else { %>
+                                                ¡Hola! Parece que no han habido ventas este año.
+                                                <% } %>
+                                            </div>
+
+                                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                <i class="fa-solid fa-sack-dollar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 my-3">
+                                <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card-body card-res">
+                                        <div class="d-flex align-items-center h-100">
+
+                                            <div>
+                                                <%
+                                if(productoMasVendido != null) {%>
+                                                <h6 class="mb-0 text-secondary">Producto Popular</h6>
+                                                <h4 class="my-1 text-report text-responsive fw-bold"><%= productoMasVendido.getNombreProducto() %></h4>
+                                                <p class="mb-0 font-13">Producto con <%= productoMasVendido.getTotalVenta() %> ventas</p>
+                                                <% } else { %>
+                                                ¡Hola! Parece que no se encontró ningún producto popular.
+                                                <% } %>
+                                            </div>
+
+                                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                <i class="fa-solid fa-drumstick-bite"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 my-3">
+                                <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center h-100">
+
+                                            <div>
+                                                <%
+                                if(clientesRegistrados > 0) {%>
+                                                <h6 class="mb-0 text-secondary">Total clientes</h6>
+                                                <h4 class="my-1 text-report fw-bold"><%= clientesRegistrados %></h4>
+                                                <p class="mb-0 font-13">Clientes registrados en el sistema</p>
+                                                <% } else { %>
+                                                ¡Hola! Parece que no hay clientes registrados.
+                                                <% } %>
+                                            </div>
+
+                                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xxl-8 col-xl-12 my-3">
+                                <div class="card radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card-body">
+                                        <%
                                 Gson gsonObj = new Gson();
                                 Map<Integer,String> meses = new HashMap<>();
                                 meses.put(1, "Enero");
@@ -246,305 +322,234 @@
                                 }
                                 
                                 String dataPoints = gsonObj.toJson(list);
-                            %>
-                            <script type="text/javascript">
-                                window.onload = function() {
+                                        %>
+                                        <script type="text/javascript">
+                                            window.onload = function () {
 
-                                    var now = new Date();
-                                    var year = now.getFullYear();
+                                                var now = new Date();
+                                                var year = now.getFullYear();
 
-                                    var chart = new CanvasJS.Chart("chartContainer", {
-                                        title: {
-                                            text: "Total de ventas " + year
-                                        },
-                                        axisX: {
-                                            title: "Meses"
-                                        },
-                                        axisY: {
-                                            title: "Ventas",
-                                            includeZero: true
-                                        },
-                                        data: [{
-                                            type: "column",
-                                            yValueFormatString: "# ventas",
-                                            dataPoints: <%out.print(dataPoints);%>
-                                        }]
-                                    });
-                                    chart.render();
+                                                var chart = new CanvasJS.Chart("chartContainer", {
+                                                    title: {
+                                                        text: "Total de ventas " + year
+                                                    },
+                                                    axisX: {
+                                                        title: "Meses"
+                                                    },
+                                                    axisY: {
+                                                        title: "Ventas",
+                                                        includeZero: true
+                                                    },
+                                                    data: [{
+                                                            type: "column",
+                                                            yValueFormatString: "# ventas",
+                                                            dataPoints: <%out.print(dataPoints);%>
+                                                        }]
+                                                });
+                                                chart.render();
 
-                                }
-                            </script>
-                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                            <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-                        </section>
-
-                        <section class="ventas-por-fechas">
-                            <h3 class="fw-bold">VENTAS</h3>
-
-                            <form id="formVentas" action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
-                                <label>
-                                    <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
-                                </label>
-
-                                <label>
-                                    <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
-                                </label>
-
-                                <input type="button" class="btn btn-primary" value="Seleccionar" onclick="validarFechas()" />
-                            </form>
-
-                            <script>
-                                function validarFechas() {
-                                    var desde = document.getElementById("desde");
-                                    var hasta = document.getElementById("hasta");
-
-                                    // Verifica si alguno de los campos está vacío
-                                    if (!desde.value || !hasta.value) {
-                                        Swal.fire({
-                                            icon: 'warning',
-                                            title: 'Atención',
-                                            confirmButtonColor: "#0A5ED7",
-                                            confirmButtonText: "Aceptar",
-                                            text: 'Por favor, selecciona una fecha de inicio y una fecha de fin.'
-                                        });
-                                    } else {
-                                        var desdeDate = new Date(desde.value);
-                                        var hastaDate = new Date(hasta.value);
-
-                                        // Verifica que la fecha de inicio sea menor o igual a la fecha de fin
-                                        if (desdeDate > hastaDate) {
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Error',
-                                                confirmButtonColor: "#0A5ED7",
-                                                confirmButtonText: "Aceptar",
-                                                text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
-                                            });
-                                        } else {
-                                            document.getElementById("formVentas").submit();
-                                        }
-                                    }
-                                }
-                            </script>
-
-                        </section>
-                        
-                        <section>
-                            <h3 class="fw-bold">PRODUCTOS</h3>
-                            <div class="">
-                                <button class="btn btn-primary mx-1" onclick="generatePDF()">Descargar PDF Inventario</button>
-                            </div>
-                            
-                            <table style="display: none" id="tableProducts" class="table mb-0">
-                                <thead class="table-dark">
-                                <tr>
-                                    <th style="display: none">ID</th>
-                                    <th>CÓDIGO</th>
-                                    <th>CATEGORÍA</th>
-                                    <th>NOMBRE</th>
-                                    <th>DESCRIPCIÓN</th>
-                                    <th>PRECIO</th>
-                                    <th>STOCK</th>
-                                
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${list2}" var="prod">
-                                    <tr>
-                                        <td style="display: none">${prod.getIdProducto()}</td>
-                                        <td>${prod.getCodigo()}</td>
-                                        <td>${prod.getNombreCategoria()}</td>
-                                        <td>${prod.getNombre()}</td>
-                                        <td>${prod.getDescripcion()}</td>
-                                        
-                                        
-                                        <td style="text-wrap: nowrap;">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></td>
-                                        <td>${prod.getStock()}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                            
-                            <script>
-                                function generatePDF() {
-                                    var date = new Date();
-                                    var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
-                                    var filename = "Almacen - " + formattedDate + ".pdf";
-                                    var doc = new jspdf.jsPDF()
-                                    doc.setPage(1);
-                                    doc.text("Stock productos disponibles: ", 10, 10);
-
-                                    // Simple html example
-                                    doc.autoTable({html: '#tableProducts'});
-                                    doc.save(filename)
-                                }
-                            </script>
-                        </section>
-                        
-                        <section class="otros-reportes">
-                            <h3 class="fw-bold">OTROS REPORTES</h3>
-
-                            <div class="row">
-
-                                <div class="col-sm-4 my-3">
-                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center h-100">
-                                                <div>
-                                                    <%
-                                if(ingreso > 0) {%>
-                                                    <h6 class="mb-0 text-secondary">Total Ingreso</h6>
-                                                    <h4 class="my-1 text-report fw-bold">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="<%= ingreso %>" /></h4>
-                                                    <p class="mb-0 font-13">Ingreso anual de la empresa</p>
-                                                    <% } else { %>
-                                                    ¡Hola! Parece que no han habido ventas este año.
-                                                    <% } %>
-                                                </div>
-
-                                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
-                                                    <i class="fa-solid fa-sack-dollar"></i>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            }
+                                        </script>
+                                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
                                     </div>
                                 </div>
-
-                                <div class="col-sm-4 my-3">
-                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
-                                        <div class="card-body card-res">
-                                            <div class="d-flex align-items-center h-100">
-
-                                                <div>
-                                                    <%
-                                if(productoMasVendido != null) {%>
-                                                    <h6 class="mb-0 text-secondary">Producto Popular</h6>
-                                                    <h4 class="my-1 text-report text-responsive fw-bold"><%= productoMasVendido.getNombreProducto() %></h4>
-                                                    <p class="mb-0 font-13">Producto con <%= productoMasVendido.getTotalVenta() %> ventas</p>
-                                                    <% } else { %>
-                                                    ¡Hola! Parece que no se encontró ningún producto popular.
-                                                    <% } %>
-                                                </div>
-
-                                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
-                                                    <i class="fa-solid fa-drumstick-bite"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 my-3">
-                                    <div class="card card-height radius-10 border-start border-0 border-3 border-dark">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center h-100">
-
-                                                <div>
-                                                    <%
-                                if(clientesRegistrados > 0) {%>
-                                                    <h6 class="mb-0 text-secondary">Total clientes</h6>
-                                                    <h4 class="my-1 text-report fw-bold"><%= clientesRegistrados %></h4>
-                                                    <p class="mb-0 font-13">Clientes registrados en el sistema</p>
-                                                    <% } else { %>
-                                                    ¡Hola! Parece que no hay clientes registrados.
-                                                    <% } %>
-                                                </div>
-
-                                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto">
-                                                    <i class="fa-solid fa-user"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
-                                        <div class="card-body bg-white rounded-3 table-responsive">
-                                            <h6 class="card-subtitle mb-2 text-secondary">Productos más vendidos del mes</h6>
+                            <div class="col-xxl-4 col-xl-12 my-3">
+                                <div class="card radius-10 border-start border-0 border-3 border-dark cont-reports" style="height: 402px; width: 100%;">
+                                    <div class="card-body d-xxl-block d-xl-flex">
+                                        <div class="pe-xxl-0 pe-xl-3">
+                                            <h3 class="fw-bold">VENTAS</h3>
 
-                                            <c:if test="${ empty list}">
-                                                <span>¡Hola! Parece que no han habido ventas en este mes.</span>
-                                                <div class="d-flex justify-content-center align-items-center w-100 my-1">
-                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off" style="opacity: 0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" /><path d="M16 3v4" /><path d="M8 3v1" /><path d="M4 11h7m4 0h5" /><path d="M3 3l18 18" /></svg>
-                                                </div>
-                                            </c:if>
+                                            <form id="formVentas" action="<%=request.getContextPath()%>/controlDashboard?accion=buscarVentas" method="post">
+                                                <label>
+                                                    <input required type="date" id="desde" name="desde" max="<%= LocalDate.now() %>" class="btn" style="background-color: #aebac1"/>
+                                                </label>
 
-                                            <c:if test="${not empty list}">
-                                                <table class="table m-0">
-                                                    <thead>
+                                                <label>
+                                                    <input required type="date" id="hasta" name="hasta" max="<%= LocalDate.now() %>" class="btn btn-date" style="background-color: #aebac1"/>
+                                                </label>
+
+                                                <input type="button" class="btn btn-primary btn-seleccionar" value="Seleccionar" onclick="validarFechas()" />
+                                            </form>
+
+                                            <script>
+                                                function validarFechas() {
+                                                    var desde = document.getElementById("desde");
+                                                    var hasta = document.getElementById("hasta");
+
+                                                    // Verifica si alguno de los campos está vacío
+                                                    if (!desde.value || !hasta.value) {
+                                                        Swal.fire({
+                                                            icon: 'warning',
+                                                            title: 'Atención',
+                                                            confirmButtonColor: "#0A5ED7",
+                                                            confirmButtonText: "Aceptar",
+                                                            text: 'Por favor, selecciona una fecha de inicio y una fecha de fin.'
+                                                        });
+                                                    } else {
+                                                        var desdeDate = new Date(desde.value);
+                                                        var hastaDate = new Date(hasta.value);
+
+                                                        // Verifica que la fecha de inicio sea menor o igual a la fecha de fin
+                                                        if (desdeDate > hastaDate) {
+                                                            Swal.fire({
+                                                                icon: 'error',
+                                                                title: 'Error',
+                                                                confirmButtonColor: "#0A5ED7",
+                                                                confirmButtonText: "Aceptar",
+                                                                text: 'La fecha de inicio no puede ser mayor a la fecha de fin'
+                                                            });
+                                                        } else {
+                                                            document.getElementById("formVentas").submit();
+                                                        }
+                                                    }
+                                                }
+                                            </script>
+                                        </div>
+
+                                        <div class="ps-xxl-0 ps-xl-3">
+                                            <h3 class="fw-bold">PRODUCTOS</h3>
+                                            <div class="">
+                                                <button class="btn btn-primary mx-1" onclick="generatePDF()">Descargar PDF Inventario</button>
+                                            </div>
+
+                                            <table style="display: none" id="tableProducts" class="table mb-0">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th style="display: none">ID</th>
+                                                        <th>CÓDIGO</th>
+                                                        <th>CATEGORÍA</th>
+                                                        <th>NOMBRE</th>
+                                                        <th>DESCRIPCIÓN</th>
+                                                        <th>PRECIO</th>
+                                                        <th>STOCK</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${list2}" var="prod">
                                                         <tr>
-                                                            <th style="display: none">ID</th>
-                                                            <th>ÍTEM</th>
-                                                            <th>SKU</th>
-                                                            <th>PRODUCTO</th>
-                                                            <th>N° VENTAS</th>
-                                                            <th>MES</th>
+                                                            <td style="display: none">${prod.getIdProducto()}</td>
+                                                            <td>${prod.getCodigo()}</td>
+                                                            <td>${prod.getNombreCategoria()}</td>
+                                                            <td>${prod.getNombre()}</td>
+                                                            <td>${prod.getDescripcion()}</td>
+
+
+                                                            <td style="text-wrap: nowrap;">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></td>
+                                                            <td>${prod.getStock()}</td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach items="${list}" var="dev" varStatus="loop">
-                                                            <tr>
-                                                                <td style="display: none">${dev.getIdProducto()}</td>
-                                                                <td>${loop.index + 1}</td>
-                                                                <td>${dev.getCodigo()}</td>
-                                                                <td>${dev.getNombreProducto()}</td>
-                                                                <td>${dev.getCantidadVendida()}</td>
-                                                                <td>${dev.getNombreMesActual()}</td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </c:if>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+
+                                            <script>
+                                                function generatePDF() {
+                                                    var date = new Date();
+                                                    var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
+                                                    var filename = "Almacen - " + formattedDate + ".pdf";
+                                                    var doc = new jspdf.jsPDF()
+                                                    doc.setPage(1);
+                                                    doc.text("Stock productos disponibles: ", 10, 10);
+
+                                                    // Simple html example
+                                                    doc.autoTable({html: '#tableProducts'});
+                                                    doc.save(filename)
+                                                }
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="col-sm-6">
-                                    <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
-                                        <div class="card-body bg-white rounded-3 table-responsive">
-                                            <h6 class="card-subtitle mb-2 text-secondary">Clientes más recurrentes del mes</h6>
+                        <div class="row">
+                            <div class="col-xxl-6 my-3">
+                                <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card-body bg-white rounded-3 table-responsive">
+                                        <h6 class="card-subtitle mb-2 text-secondary">Productos más vendidos del mes</h6>
 
-                                            <c:if test="${ empty list_clientes}">
-                                                <span>¡Hola! Parece que no han habido ventas en este mes.</span>
-                                                <div class="d-flex justify-content-center align-items-center w-100 my-1">
-                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off" style="opacity: 0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" /><path d="M16 3v4" /><path d="M8 3v1" /><path d="M4 11h7m4 0h5" /><path d="M3 3l18 18" /></svg>
-                                                </div>
-                                            </c:if>
+                                        <c:if test="${ empty list}">
+                                            <span>¡Hola! Parece que no han habido ventas en este mes.</span>
+                                            <div class="d-flex justify-content-center align-items-center w-100 my-1">
+                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off" style="opacity: 0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" /><path d="M16 3v4" /><path d="M8 3v1" /><path d="M4 11h7m4 0h5" /><path d="M3 3l18 18" /></svg>
+                                            </div>
+                                        </c:if>
 
-                                            <c:if test="${not empty list_clientes}">
-                                                <table class="table m-0">
-                                                    <thead>
+                                        <c:if test="${not empty list}">
+                                            <table class="table m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none">ID</th>
+                                                        <th>ÍTEM</th>
+                                                        <th>SKU</th>
+                                                        <th>PRODUCTO</th>
+                                                        <th>N° VENTAS</th>
+                                                        <th>MES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${list}" var="dev" varStatus="loop">
                                                         <tr>
-                                                            <th style="display: none">ID</th>
-                                                            <th>ÍTEM</th>
-                                                            <th>DOC.</th>
-                                                            <th>NOMBRE</th>
-                                                            <th>N° VENTAS</th>
-                                                            <th>MES</th>
+                                                            <td style="display: none">${dev.getIdProducto()}</td>
+                                                            <td>${loop.index + 1}</td>
+                                                            <td>${dev.getCodigo()}</td>
+                                                            <td>${dev.getNombreProducto()}</td>
+                                                            <td>${dev.getCantidadVendida()}</td>
+                                                            <td>${dev.getNombreMesActual()}</td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach items="${list_clientes}" var="vt" varStatus="loop">
-                                                            <tr>
-                                                                <td style="display: none">${vt.getIdCliente()}</td>
-                                                                <td>${loop.index + 1}</td>
-                                                                <td>${vt.getDocumento()}</td>
-                                                                <td>${vt.getNombreCliente()}</td>
-                                                                <td>${vt.getCantidadVentas()}</td>
-                                                                <td>${vt.getNombreMesActual()}</td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </c:if>
-                                        </div>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </c:if>
                                     </div>
                                 </div>
-                            </div> 
-                        </section>
+                            </div>
+
+                            <div class="col-xxl-6 my-3">
+                                <div class="card card-height-table radius-10 border-start border-0 border-3 border-dark">
+                                    <div class="card-body bg-white rounded-3 table-responsive">
+                                        <h6 class="card-subtitle mb-2 text-secondary">Clientes más recurrentes del mes</h6>
+
+                                        <c:if test="${ empty list_clientes}">
+                                            <span>¡Hola! Parece que no han habido ventas en este mes.</span>
+                                            <div class="d-flex justify-content-center align-items-center w-100 my-1">
+                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-off" style="opacity: 0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" /><path d="M16 3v4" /><path d="M8 3v1" /><path d="M4 11h7m4 0h5" /><path d="M3 3l18 18" /></svg>
+                                            </div>
+                                        </c:if>
+
+                                        <c:if test="${not empty list_clientes}">
+                                            <table class="table m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none">ID</th>
+                                                        <th>ÍTEM</th>
+                                                        <th>DOC.</th>
+                                                        <th>NOMBRE</th>
+                                                        <th>N° VENTAS</th>
+                                                        <th>MES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${list_clientes}" var="vt" varStatus="loop">
+                                                        <tr>
+                                                            <td style="display: none">${vt.getIdCliente()}</td>
+                                                            <td>${loop.index + 1}</td>
+                                                            <td>${vt.getDocumento()}</td>
+                                                            <td>${vt.getNombreCliente()}</td>
+                                                            <td>${vt.getCantidadVentas()}</td>
+                                                            <td>${vt.getNombreMesActual()}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>                    
                 </main>
             </div>
@@ -553,25 +558,25 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-                                function alertBienvenida() {
-                                    const url = new URLSearchParams(window.location.search);
-                                    const alert = url.get('alert');
+                                                function alertBienvenida() {
+                                                    const url = new URLSearchParams(window.location.search);
+                                                    const alert = url.get('alert');
 
-                                    if (alert === 'true') {
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: 'Bienvenido, ' + nombreRol,
-                                            confirmButtonColor: "#0A5ED7",
-                                            confirmButtonText: "Aceptar",
-                                            allowOutsideClick: false
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                window.location.href = contextPath + "/admin/dashboard.jsp?alert=false";
-                                            }
-                                        });
-                                    }
-                                }
-                                alertBienvenida()
+                                                    if (alert === 'true') {
+                                                        Swal.fire({
+                                                            icon: "success",
+                                                            title: 'Bienvenido, ' + nombreRol,
+                                                            confirmButtonColor: "#0A5ED7",
+                                                            confirmButtonText: "Aceptar",
+                                                            allowOutsideClick: false
+                                                        }).then((result) => {
+                                                            if (result.isConfirmed) {
+                                                                window.location.href = contextPath + "/admin/dashboard.jsp?alert=false";
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                                alertBienvenida()
         </script>
     </body>
 </html>

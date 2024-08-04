@@ -12,7 +12,7 @@ public class Cliente {
     
     int idCliente, estado;
     String documento, nombre, apellido, email;
-
+    
     public int getIdCliente() {
         return idCliente;
     }
@@ -60,4 +60,16 @@ public class Cliente {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+    
+    /* Para prueba */
+    int clientesRegistrados;
+
+    public int getClientesRegistrados() {
+        return clientesRegistrados;
+    }
+
+    public void setClientesRegistrados(int clientesRegistrados) {
+        this.clientesRegistrados = clientesRegistrados;
+    }
+    /**/
 }

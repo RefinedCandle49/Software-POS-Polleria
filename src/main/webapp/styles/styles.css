@@ -155,7 +155,7 @@ tbody, td, tfoot, th, thead, tr {
     height: 203.19px;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 1402px) {
 
     .card-res{
         height: 116.8px;
@@ -168,8 +168,113 @@ tbody, td, tfoot, th, thead, tr {
     .widgets-icons-2 {
         display: none;
     }
+}
+
+/* MEDIA QUERYS PARA RESPONSIVE EN REPORTES */
+@media (max-width: 1879px) {
+    
+    .cont-reports {
+        background: green;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 5px;
+    }
 
 }
+
+@media (max-width: 1442px){
+    
+    .btn-date {
+        margin-top: 5px;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 1399px) {
+    .cont-reports {
+        background: red;
+        height: 130px !important;
+    }
+    
+    .btn-date {
+        margin-top: 0px;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .cont-reports {
+        background: violet;
+        height: 225px !important;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 779px) {
+    .cont-reports {
+        background: violet;
+        height: 265px !important;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 5px !important;
+    }
+}
+
+@media (max-width: 693px) {
+    
+    .btn-date {
+        margin-top: 5px;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 634px) {
+   .cont-reports {
+        background: yellow;
+        height: 300px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .cont-reports {
+        background: yellow;
+        height: 260px !important;
+    }
+    
+   .btn-date {
+        margin-top: 0px;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 510px) {
+    
+   .btn-date {
+        margin-top: 5px;
+    }
+    
+    .btn-seleccionar {
+        margin-top: 5px;
+    }
+}
+
 /* --- */
 
 @media (max-width: 600px) {
@@ -181,9 +286,14 @@ tbody, td, tfoot, th, thead, tr {
         width: 24px;
         height: 56px;
     }
+    
+    .cont-reports {
+        background: yellow;
+        height: 260px !important;
+    }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 575px) {
     .h-sm-100 {
         height: 100%;
     }

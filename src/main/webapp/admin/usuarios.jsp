@@ -117,7 +117,7 @@
                             </li>
                             <hr />
 
-                            <li class="nav-item">
+                            <li class="nav-item pb-4">
                                 <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-active align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -134,7 +134,23 @@
                                     <span class="ms-1 d-none d-sm-inline">Usuarios</span>
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/admin/usuario/anulados.jsp?page=1"
+                                   class="link-inactive align-middle px-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-x">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5" />
+                                        <path d="M22 22l-5 -5" />
+                                        <path d="M17 22l5 -5" />
+                                    </svg>
+                                    <span class="ms-1 d-none d-sm-inline">Usuarios Eliminados</span>
+                                </a>
+                            </li>       
                             <hr />
+
+
 
                             <li class="nav-item pb-4">
                                 <a href="${pageContext.request.contextPath}/admin/ventas.jsp?page=1"
@@ -311,7 +327,17 @@
                                                             <path d="M16 5l3 3" />
                                                         </svg> Editar
                                                     </a>
+
+                                                    <button id="btnAnular${user.getIdUsuario()}" data-form-id="formAnular${user.getIdUsuario()}" class="btn btn-danger">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg> Eliminar            
+                                                    </button>
+
+                                                    <form id="formAnular${user.getIdUsuario()}" action="${pageContext.request.contextPath}/controlUsuario?action=anularUsuario" method="post" class="m-0">
+                                                        <input type="hidden" name="idUsuario" value="${user.getIdUsuario()}" />
+                                                        <input type="hidden" name="newEstado" value="0" />
+                                                    </form>
                                                 </td>
+
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -357,5 +383,48 @@
                                                                 window.location.href = "${pageContext.request.contextPath}/admin/usuarios.jsp?page=1";
                                                             }
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                let btnAnular = document.querySelectorAll('[id^="btnAnular"]');
+
+                btnAnular.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+
+                        let formId = this.getAttribute('data-form-id');
+
+                        Swal.fire({
+                            title: "¿Desea eliminar este usuario?",
+                            html: "Esta acción eliminará definitivamente el usuario. <br> ¿Está seguro de que desea continuar?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#0d6efd", //#3085d6
+                            cancelButtonColor: "#dc3545", //#d33
+                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "Continuar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById(formId).submit();
+                            }
+                        });
+                    });
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const anularUsuario = urlParams.get('anularUsuario');
+
+                if (anularUsuario === 'true') {
+                    Swal.fire({
+                        title: 'Usuario eliminado correctamente',
+                        icon: 'success',
+                        confirmButtonColor: "#0d6efd",
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp?page=1"
+                    });
+                }
+            });
+        </script>                                                   
     </body>
 </html>

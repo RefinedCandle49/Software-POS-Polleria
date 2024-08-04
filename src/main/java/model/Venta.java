@@ -4,6 +4,25 @@ import java.util.List;
 
 public class Venta {
 
+    private int mes;
+    private int ventas;
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(int ventas) {
+        this.ventas = ventas;
+    }
+
     public Venta(int idCliente, String fechaHoraVenta, int estado, double total, List<Carrito> detalleVenta) {
         this.idCliente = idCliente;
         this.fechaHoraVenta = fechaHoraVenta;

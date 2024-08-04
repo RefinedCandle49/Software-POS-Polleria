@@ -1,9 +1,12 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="model.Usuario, dao.UsuarioDao, model.DetalleVenta, model.Producto, model.Venta, dao.ReporteDao, java.util.*" %>
+<%@ page import="dao.ProductoDao" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
+<%@ page import="dao.VentaDao" %>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,6 +20,9 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/styles/styles.css" />
         <link rel="icon" type="image/jpg" href="<%=request.getContextPath()%>/img/logo.ico" />
         <script src="<%=request.getContextPath()%>/js/password.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jspdf.umd.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jspdf.plugin.autotable.js"></script>
+        
         <title>Dashboard | Pollos Locos</title>
     </head>
     <body>
@@ -45,6 +51,8 @@
             List<Venta> venta = ReporteDao.obtenerClienteVentasMes();
             request.setAttribute("list_clientes", venta);
             
+            List<Producto> producto2 = ProductoDao.listarProductos();
+            request.setAttribute("list2", producto2);
             
             if(!"Administrador".equals(nombreRol)){
         %>
@@ -123,7 +131,7 @@
                             </li>
                             <hr />
 
-                            <li class="nav-item">
+                            <li class="nav-item pb-4">
                                 <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
                                    class="link-inactive align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -138,6 +146,20 @@
                                         <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                                     </svg>
                                     <span class="ms-1 d-none d-sm-inline">Usuarios</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/admin/usuario/anulados.jsp?page=1"
+                                   class="link-inactive align-middle px-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-x">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5" />
+                                        <path d="M22 22l-5 -5" />
+                                        <path d="M17 22l5 -5" />
+                                    </svg>
+                                    <span class="ms-1 d-none d-sm-inline">Usuarios Eliminados</span>
                                 </a>
                             </li>
                             <hr />
@@ -194,6 +216,67 @@
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
                         <h1 class="fw-bold">PANEL DE REPORTES</h1>
+                        
+                        <section>
+                            <%
+                                Gson gsonObj = new Gson();
+                                Map<Integer,String> meses = new HashMap<>();
+                                meses.put(1, "Enero");
+                                meses.put(2, "Febrero");
+                                meses.put(3, "Marzo");
+                                meses.put(4, "Abril");
+                                meses.put(5, "Mayo");
+                                meses.put(6, "Junio");
+                                meses.put(7, "Julio");
+                                meses.put(8, "Agosto");
+                                meses.put(9, "Septiembre");
+                                meses.put(10, "Octubre");
+                                meses.put(11, "Noviembre");
+                                meses.put(12, "Diciembre");
+                                Map<Object,Object> map = null;
+                                List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+                                
+                                List<Venta> listaVentas = VentaDao.listarVentasChart();
+                                
+                                for (Venta ventaC : listaVentas) {
+                                    map = new HashMap<>();
+                                    map.put("label", meses.get(ventaC.getMes())); // Usa el nombre del mes como etiqueta
+                                    map.put("y", ventaC.getVentas()); // Establece el número de ventas
+                                    list.add(map);
+                                }
+                                
+                                String dataPoints = gsonObj.toJson(list);
+                            %>
+                            <script type="text/javascript">
+                                window.onload = function() {
+
+                                    var now = new Date();
+                                    var year = now.getFullYear();
+
+                                    var chart = new CanvasJS.Chart("chartContainer", {
+                                        title: {
+                                            text: "Total de ventas " + year
+                                        },
+                                        axisX: {
+                                            title: "Meses"
+                                        },
+                                        axisY: {
+                                            title: "Ventas",
+                                            includeZero: true
+                                        },
+                                        data: [{
+                                            type: "column",
+                                            yValueFormatString: "# ventas",
+                                            dataPoints: <%out.print(dataPoints);%>
+                                        }]
+                                    });
+                                    chart.render();
+
+                                }
+                            </script>
+                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                            <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                        </section>
 
                         <section class="ventas-por-fechas">
                             <h3 class="fw-bold">VENTAS</h3>
@@ -245,7 +328,59 @@
                             </script>
 
                         </section>
+                        
+                        <section>
+                            <h3 class="fw-bold">PRODUCTOS</h3>
+                            <div class="">
+                                <button class="btn btn-primary mx-1" onclick="generatePDF()">Descargar PDF Inventario</button>
+                            </div>
+                            
+                            <table style="display: none" id="tableProducts" class="table mb-0">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th style="display: none">ID</th>
+                                    <th>CÓDIGO</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>NOMBRE</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>PRECIO</th>
+                                    <th>STOCK</th>
+                                
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${list2}" var="prod">
+                                    <tr>
+                                        <td style="display: none">${prod.getIdProducto()}</td>
+                                        <td>${prod.getCodigo()}</td>
+                                        <td>${prod.getNombreCategoria()}</td>
+                                        <td>${prod.getNombre()}</td>
+                                        <td>${prod.getDescripcion()}</td>
+                                        
+                                        
+                                        <td style="text-wrap: nowrap;">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></td>
+                                        <td>${prod.getStock()}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                            
+                            <script>
+                                function generatePDF() {
+                                    var date = new Date();
+                                    var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + '-' + date.getMinutes().toString().padStart(2, '0') + '-' + date.getSeconds().toString().padStart(2, '0');
+                                    var filename = "Almacen - " + formattedDate + ".pdf";
+                                    var doc = new jspdf.jsPDF()
+                                    doc.setPage(1);
+                                    doc.text("Stock productos disponibles: ", 10, 10);
 
+                                    // Simple html example
+                                    doc.autoTable({html: '#tableProducts'});
+                                    doc.save(filename)
+                                }
+                            </script>
+                        </section>
+                        
                         <section class="otros-reportes">
                             <h3 class="fw-bold">OTROS REPORTES</h3>
 

@@ -396,13 +396,13 @@
 
                         Swal.fire({
                             title: "¿Desea eliminar este usuario?",
-                            html: "Esta acción eliminará definitivamente el usuario. <br> ¿Está seguro de que desea continuar?",
+                            html: "Esta acción eliminará el usuario.",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6
                             cancelButtonColor: "#dc3545", //#d33
                             cancelButtonText: "Cancelar",
-                            confirmButtonText: "Continuar"
+                            confirmButtonText: "Confirmar"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 document.getElementById(formId).submit();

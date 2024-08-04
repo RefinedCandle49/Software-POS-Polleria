@@ -155,4 +155,15 @@ public class Venta {
         this.nombreMesActual = nombreMesActual;
     }
     
+    /* Para prueba */
+    double ingresoAnual;
+
+    public double getIngresoAnual() {
+        return ingresoAnual;
+    }
+
+    public void setIngresoAnual(double ingresoAnual) {
+        this.ingresoAnual = ingresoAnual;
+    }
+    /**/
 }

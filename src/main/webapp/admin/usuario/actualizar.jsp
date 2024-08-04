@@ -105,7 +105,7 @@
 
                             <li class="nav-item pb-4">
                                 <a href="${pageContext.request.contextPath}/admin/usuarios.jsp?page=1"
-                                   class="link-inactive align-middle px-0">
+                                   class="link-active align-middle px-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                          height="24" viewBox="0 0 24 24" fill="none"
                                          stroke="currentColor" stroke-width="2"

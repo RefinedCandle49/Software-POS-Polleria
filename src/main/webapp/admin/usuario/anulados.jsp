@@ -302,14 +302,14 @@
                                                                         let formId = this.getAttribute('data-form-id');
                                                                         
                                                                         Swal.fire({
-                                                                            title: "¿Desea activar este usuario?",
-                                                                            html: "Esta acción activará este  usuario. <br> ¿Está seguro de que desea continuar?",
+                                                                            title: "¿Desea restaurar este usuario?",
+                                                                            html: "Esta acción restaurará este  usuario.",
                                                                             icon: "warning",
                                                                             showCancelButton: true,
                                                                             confirmButtonColor: "#0d6efd", //#3085d6
                                                                             cancelButtonColor: "#dc3545", //#d33
                                                                             cancelButtonText: "Cancelar",
-                                                                            confirmButtonText: "Continuar"
+                                                                            confirmButtonText: "Confirmar"
                                                                         }).then((result) => {
                                                                             if (result.isConfirmed) {
                                                                                 document.getElementById(formId).submit();

@@ -99,13 +99,13 @@ public class usuarioTest {
 
     @Test
     public void testCambiarEstadoUsuario() throws ServletException, IOException {
-        Assertions.assertEquals(1, usu.getEstado(), "Estado inicial debe ser: 1 (activo)");
+        Assertions.assertEquals(1, usu.getEstado(), "Estado inicial debe ser: 1");
 
         usu.setEstado(0);
-        Assertions.assertEquals(0, usu.getEstado(), "Estado debe ser: 0 (inactivo)");
+        Assertions.assertEquals(0, usu.getEstado(), "Estado debe ser: 0");
 
         usu.setEstado(1);
-        Assertions.assertEquals(1, usu.getEstado(), "Estado debe ser: 1 (activo)");
+        Assertions.assertEquals(1, usu.getEstado(), "Estado debe ser: 1");
 
         System.out.println("@Test --> Cambiar Estado del Usuario (Eliminar y Restaurar)");
     }

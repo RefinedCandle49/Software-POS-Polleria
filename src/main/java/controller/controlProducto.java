@@ -56,7 +56,6 @@ public class controlProducto extends HttpServlet {
                     String descripcion = request.getParameter("descripcion");
                     double precio = Double.parseDouble(request.getParameter("precio"));
                     int stock = Integer.parseInt(request.getParameter("stock"));
-                    int estado = Integer.parseInt(request.getParameter("estado"));
                     System.out.println("Obtener Parametros");
 
                     
@@ -77,7 +76,6 @@ public class controlProducto extends HttpServlet {
                         request.setAttribute("foto", foto);
                         request.setAttribute("precio", precio);
                         request.setAttribute("stock", stock);
-                        request.setAttribute("estado", estado);
                         System.out.println("Envio de parametros");
                         request.getRequestDispatcher("almacen/productos/actualizar.jsp").forward(request, response);
                         System.out.println("Redireccion");
@@ -92,7 +90,6 @@ public class controlProducto extends HttpServlet {
 
                         producto.setPrecio(precio);
                         producto.setStock(stock);
-                        producto.setEstado(estado);
                         System.out.println("Dar Parametros");
 
                         int resultActualizar = ProductoDao.actualizarProducto(producto);

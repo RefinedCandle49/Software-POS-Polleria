@@ -194,6 +194,19 @@
                                                             <path d="M16 5l3 3" />
                                                         </svg> Editar
                                                     </a>
+                                                    <a class="btn btn-danger mx-1" id="btnDesactivar${prod.getIdProducto()}" data-form-id="formDesactivarProducto${prod.getIdProducto()}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-circle-off">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0 -16" />
+                                                            <path d="M4 4l16 16" />
+                                                          </svg>
+                                                        Desactivar      
+                                                    </a>
+                                                        <form id="formDesactivarProducto${prod.getIdProducto()}" action="${pageContext.request.contextPath}/controlProducto" method="post" class="m-0">
+                                                            <input type="hidden" name="action" value="cambiarEstado" />
+                                                            <input type="hidden" name="idProducto" value="${prod.getIdProducto()}" />
+                                                            <input type="hidden" name="newProductoEstado" value="0" />
+                                                        </form>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -228,6 +241,49 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                let btnDesactivar = document.querySelectorAll('[id^="btnDesactivar"]');
+
+                btnDesactivar.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+
+                        let formId = this.getAttribute('data-form-id');
+
+                        Swal.fire({
+                            title: "¿Desea desactivar este producto?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#0d6efd", //#3085d6
+                            cancelButtonColor: "#dc3545", //#d33
+                            cancelButtonText: "NO",
+                            confirmButtonText: "SI",
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById(formId).submit();
+                            }
+                        });
+                    });
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const cambiarEstadoProducto  = urlParams.get('cambiarEstadoProducto');
+
+                if (cambiarEstadoProducto === 'desactivado') {
+                    Swal.fire({
+                        title: 'Producto desactivado',
+                        icon: 'success',
+                        confirmButtonColor: "#0d6efd",
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    }).then(() => {
+                        window.location.href = "<%= request.getContextPath() %>/almacen/productos/anulados.jsp?page=1"
+                    });
+                }
+            });
+    </script>
         <script>
                                                     function alertBienvenida() {
                                                         const url = new URLSearchParams(window.location.search);

@@ -339,6 +339,27 @@ public class ProductoDao {
     
     
 }   
+
+public static int cambiarEstadoProducto(Producto prod) {
+     int est = 0;
+     PreparedStatement ps = null;
+     
+     try{
+         Connection con = getConnection();
+         con.setAutoCommit(false);
+         
+         ps = con.prepareStatement("UPDATE producto SET estado = ? WHERE idProducto=?");
+         ps.setInt(1, prod.getEstado());
+         ps.setInt(2, prod.getIdProducto());
+         est = ps.executeUpdate();
+         
+         con.commit();
+         
+     } catch (Exception e) {
+         System.out.print(e);
+     }
+     return est;
+ }
  public static List<Producto> listarProductoAnuladosPagina(int start, int total) {
         List<Producto> listaProducto = new ArrayList<Producto>();
         try {

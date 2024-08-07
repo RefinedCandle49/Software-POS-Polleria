@@ -200,6 +200,42 @@ public class controlProducto extends HttpServlet {
                 }
                 return;
 
+                case "cambiarEstado":
+                try {
+                    int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+                    int newProductoEstado = Integer.parseInt(request.getParameter("newProductoEstado"));
+
+                    Producto prod = new Producto();
+                    prod.setIdProducto(idProducto);
+                    prod.setEstado(newProductoEstado);
+
+                    int resultProd = ProductoDao.cambiarEstadoProducto(prod);
+
+                    if(resultProd > 0) {
+                        if(newProductoEstado == 1){
+                            response.sendRedirect(request.getContextPath() + "/almacen/productos/anulados.jsp?cambiarEstadoProducto=activado&page=1");
+                        } else if (newProductoEstado == 0){
+                            response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?cambiarEstadoProducto=desactivado&page=1");
+                        }
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/almacen/productos.jsp?cambiarEstadoProducto=error&page=1");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return;
+
+            case "editar":
+                try {
+                    int idProducto = Integer.parseInt(request.getParameter("id"));
+                    Producto producto = ProductoDao.obtenerProductoPorId(idProducto);
+                    request.setAttribute("producto", producto);
+                    request.getRequestDispatcher("/almacen/productos/actualizar.jsp").forward(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return;
+
         }
 
         response.setContentType("text/html;charset=UTF-8");
@@ -219,18 +255,7 @@ public class controlProducto extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        String action = request.getParameter("action");
-
-        switch (action) {
-
-            case "editar":
-                int idProducto = Integer.parseInt(request.getParameter("id"));
-                Producto producto = ProductoDao.obtenerProductoPorId(idProducto);
-                request.setAttribute("producto", producto);
-                request.getRequestDispatcher("/almacen/productos/actualizar.jsp").forward(request, response);
-                return;
-        }
-        processRequest(request, response);
+        
 
     }
 

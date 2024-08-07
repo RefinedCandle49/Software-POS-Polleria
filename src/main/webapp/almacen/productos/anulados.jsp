@@ -137,6 +137,7 @@
                                             <th>PRECIO</th>
                                             <th>STOCK</th>
                                             <th>ESTADO</th>
+                                            <th>ACCION</th>
 
                                         </tr>
                                     </thead>
@@ -169,7 +170,26 @@
                                                         <c:otherwise>Estado Desconocido</c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                
+                                                <td style="display: flex">
+                                                    <a class="btn btn-warning mx-1" href="${pageContext.request.contextPath}/controlProducto?action=editar&id=${prod.getIdProducto()}&view=anulados"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                            <path d="M16 5l3 3" />
+                                                        </svg> Editar
+                                                    </a>
+                                                            <a class="btn btn-primary mx-1" id="btnActivar${prod.getIdProducto()}" data-form-id="formActivarProducto${prod.getIdProducto()}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20"  height="20"><path fill="#ffffff" d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>
+                                                            Activar      
+                                                          </a>
+                                                            
+                                                         <form id="formActivarProducto${prod.getIdProducto()}" action="${pageContext.request.contextPath}/controlProducto" method="post" class="m-0">
+                                                             <input type="hidden" name="action" value="cambiarEstado" />
+                                                             <input type="hidden" name="idProducto" value="${prod.getIdProducto()}">
+                                                             <input type="hidden" name="newProductoEstado" value="1">
+                                                         </form>
+                                                            
+                                                </td>
 
                                             </tr>
                                         </c:forEach>
@@ -204,6 +224,49 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                let btnActivar = document.querySelectorAll('[id^="btnActivar"]');
+
+                btnActivar.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+
+                        let formId = this.getAttribute('data-form-id');
+
+                        Swal.fire({
+                            title: "¿Desea activar este producto?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#0d6efd", //#3085d6
+                            cancelButtonColor: "#dc3545", //#d33
+                            cancelButtonText: "NO",
+                            confirmButtonText: "SI",
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById(formId).submit();
+                            }
+                        });
+                    });
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const cambiarEstadoProducto = urlParams.get('cambiarEstadoProducto');
+
+                if (cambiarEstadoProducto === 'activado') {
+                    Swal.fire({
+                        title: 'Producto activado',
+                        icon: 'success',
+                        confirmButtonColor: "#0d6efd",
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    }).then(() => {
+                        window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp?page=1"
+                    });
+                }
+            });
+    </script>
         <script>
                                                     function cerrarMensajeActualizar() {
                                                         let actualizarExitoso = document.getElementById("actualizarExitoso");

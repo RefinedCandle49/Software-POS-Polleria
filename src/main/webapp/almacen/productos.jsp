@@ -253,12 +253,13 @@
 
                         Swal.fire({
                             title: "¿Desea desactivar este producto?",
+                            html: "Esta acción desactivará el producto del sistema",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6
                             cancelButtonColor: "#dc3545", //#d33
-                            cancelButtonText: "NO",
-                            confirmButtonText: "SI",
+                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "Confirmar",
                             allowOutsideClick: false
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -273,7 +274,7 @@
 
                 if (cambiarEstadoProducto === 'desactivado') {
                     Swal.fire({
-                        title: 'Producto desactivado',
+                        title: 'Producto desactivado correctamente',
                         icon: 'success',
                         confirmButtonColor: "#0d6efd",
                         confirmButtonText: 'Aceptar',

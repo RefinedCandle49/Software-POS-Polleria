@@ -111,13 +111,22 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <h1 class="fw-bold">PANEL DE CLIENTES</h1>
-
-                    <div class="d-flex align-items-center justify-content-end">
+                    
+                    <div class="d-flex justify-content-end">
+                    <div class="d-flex align-items-center">
                         <a href="${pageContext.request.contextPath}/caja/clientes/registrar.jsp" class="btn btn-primary">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
                             <span class="ms-1">Ir a registrar cliente</span>
                         </a>
                     </div>
+                    <div class="d-flex align-items-center ms-3">
+                        <a href="${pageContext.request.contextPath}/caja/clientes/anulados.jsp?page=1" class="btn btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20"  height="20"  viewBox="0 0 640 512 "><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill= "#ffffff" d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM471 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                            <span class="ms-1">Ir a clientes eliminados</span>
+                        </a>
+                    </div>
+                            </div>
+
 
                     <c:if test="${ empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
@@ -181,41 +190,41 @@
 
                                                     <c:otherwise>
                                                         <div class="d-flex align-items-center">
-                                                        <a class="btn btn-warning"
-                                                           href="${pageContext.request.contextPath}/controlCliente?action=editar&id=${cli.getIdCliente()}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                 width="20" height="20"
-                                                                 viewBox="0 0 24 24" fill="none"
-                                                                 stroke="currentColor"
-                                                                 stroke-width="2"
-                                                                 stroke-linecap="round"
-                                                                 stroke-linejoin="round"
-                                                                 class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
-                                                                <path stroke="none"
-                                                                      d="M0 0h24v24H0z" fill="none" />
-                                                                <path
-                                                                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-                                                                <path
-                                                                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-                                                                <path d="M16 5l3 3" />
-                                                            </svg> Editar
-                                                        </a>
-                                                           
-                                                <%-- button id="btnAnular${cli.getIdCliente()}" data-form-id="formAnular${cli.getIdCliente()}" class="btn btn-danger d-flex align-items-center ms-2">
-                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                    <span class="ms-1">Eliminar</span>
-                                                </button>
+                                                            <a class="btn btn-warning"
+                                                               href="${pageContext.request.contextPath}/controlCliente?action=editar&id=${cli.getIdCliente()}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     width="20" height="20"
+                                                                     viewBox="0 0 24 24" fill="none"
+                                                                     stroke="currentColor"
+                                                                     stroke-width="2"
+                                                                     stroke-linecap="round"
+                                                                     stroke-linejoin="round"
+                                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                                                    <path stroke="none"
+                                                                          d="M0 0h24v24H0z" fill="none" />
+                                                                    <path
+                                                                        d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                                    <path
+                                                                        d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                                    <path d="M16 5l3 3" />
+                                                                </svg> Editar
+                                                            </a>
 
-                                                <form id="formAnular${cli.getIdCliente()}" action="${pageContext.request.contextPath}/controlCliente?action=anularCliente&idCliente=${cli.getIdCliente()}" method="post" class="m-0">
-                                                    <input type="hidden" name="idCliente" value="${cli.getIdCliente()}" />
-                                                    <input type="hidden" name="newEstado" value="0" />
-                                                </form --%>
+                                                            <button id="btnAnular${cli.getIdCliente()}" data-form-id="formAnular${cli.getIdCliente()}" class="btn btn-danger d-flex align-items-center ms-2">
+                                                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                                                <span class="ms-1">Eliminar</span>
+                                                            </button>
+
+                                                            <form id="formAnular${cli.getIdCliente()}" action="${pageContext.request.contextPath}/controlCliente?action=anularCliente&idCliente=${cli.getIdCliente()}" method="post" class="m-0">
+                                                                <input type="hidden" name="idCliente" value="${cli.getIdCliente()}" />
+                                                                <input type="hidden" name="newEstado" value="0" />
+                                                            </form>
                                                         </div>
                                                     </c:otherwise>
                                                 </c:choose>
-                                                
+
                                             </td>
-                                            
+
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -275,7 +284,7 @@
 
                         Swal.fire({
                             title: "¿Desea eliminar el cliente?",
-                            html: "Esta acción eliminará definitivamente el cliente. <br> ¿Está seguro de que desea continuar?",
+                            html: "Esta acción eliminará definitivamente el cliente.",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6

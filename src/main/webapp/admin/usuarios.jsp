@@ -421,7 +421,7 @@
                         confirmButtonColor: "#0d6efd",
                         confirmButtonText: 'Aceptar'
                     }).then(() => {
-                        window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp?page=1"
+                        window.location.href = "<%= request.getContextPath() %>/admin/usuario/anulados.jsp?page=1"
                     });
                 }
             });

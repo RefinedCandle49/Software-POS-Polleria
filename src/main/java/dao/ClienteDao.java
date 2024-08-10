@@ -97,7 +97,7 @@ public class ClienteDao {
         Cliente cliente = null;
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT idCliente, documento, nombre, apellido FROM cliente WHERE documento = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT idCliente, documento, nombre, apellido FROM cliente WHERE documento = ? AND estado = 1");
             ps.setString(1, documento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){

@@ -252,8 +252,8 @@
                         let formId = this.getAttribute('data-form-id');
 
                         Swal.fire({
-                            title: "¿Desea desactivar este producto?",
-                            html: "Esta acción desactivará el producto del sistema",
+                            title: "¿Está seguro?",
+                            html: "Esta acción desactivará el producto",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6
@@ -280,7 +280,7 @@
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
                     }).then(() => {
-                        window.location.href = "<%= request.getContextPath() %>/almacen/productos/anulados.jsp?page=1"
+                        window.location.href = "<%= request.getContextPath() %>/almacen/productos.jsp?page=1"
                     });
                 }
             });

@@ -307,7 +307,11 @@
                                                         <c:otherwise>Estado Desconocido</c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td>
+                                                <c:choose>
+                                                    <c:when test="${user.getIdUsuario() == 1}"></c:when>
+                                                        
+                                                        <c:otherwise>
+                                                            <td>
                                                     <a class="btn btn-warning"
                                                        href="${pageContext.request.contextPath}/controlUsuario?action=editar&id=${user.getIdUsuario()}">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -337,6 +341,8 @@
                                                         <input type="hidden" name="newEstado" value="0" />
                                                     </form>
                                                 </td>
+                                              </c:otherwise>
+                                            </c:choose>
 
                                             </tr>
                                         </c:forEach>
@@ -395,8 +401,8 @@
                         let formId = this.getAttribute('data-form-id');
 
                         Swal.fire({
-                            title: "¿Desea eliminar este usuario?",
-                            html: "Esta acción eliminará el usuario.",
+                            title: "¿Está seguro?",
+                            html: "Esta acción eliminará al usuario.",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6
@@ -421,7 +427,7 @@
                         confirmButtonColor: "#0d6efd",
                         confirmButtonText: 'Aceptar'
                     }).then(() => {
-                        window.location.href = "<%= request.getContextPath() %>/admin/usuario/anulados.jsp?page=1"
+                        window.location.href = "<%= request.getContextPath() %>/admin/usuarios.jsp?page=1"
                     });
                 }
             });

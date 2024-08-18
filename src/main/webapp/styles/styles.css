@@ -173,10 +173,6 @@ tbody, td, tfoot, th, thead, tr {
 /* MEDIA QUERYS PARA RESPONSIVE EN REPORTES */
 @media (max-width: 1879px) {
     
-    .cont-reports {
-        background: green;
-    }
-    
     .btn-seleccionar {
         margin-top: 5px;
     }
@@ -196,7 +192,6 @@ tbody, td, tfoot, th, thead, tr {
 
 @media (max-width: 1399px) {
     .cont-reports {
-        background: red;
         height: 130px !important;
     }
     
@@ -211,7 +206,6 @@ tbody, td, tfoot, th, thead, tr {
 
 @media (max-width: 1199px) {
     .cont-reports {
-        background: violet;
         height: 225px !important;
     }
     
@@ -222,7 +216,6 @@ tbody, td, tfoot, th, thead, tr {
 
 @media (max-width: 779px) {
     .cont-reports {
-        background: violet;
         height: 265px !important;
     }
     
@@ -244,14 +237,12 @@ tbody, td, tfoot, th, thead, tr {
 
 @media (max-width: 634px) {
    .cont-reports {
-        background: yellow;
         height: 300px !important;
     }
 }
 
 @media (max-width: 575px) {
     .cont-reports {
-        background: yellow;
         height: 260px !important;
     }
     
@@ -288,7 +279,6 @@ tbody, td, tfoot, th, thead, tr {
     }
     
     .cont-reports {
-        background: yellow;
         height: 260px !important;
     }
 }

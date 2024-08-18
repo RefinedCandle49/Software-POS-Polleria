@@ -112,7 +112,7 @@
                 <main class="col-auto col-10 col-sm-8 col-md-9 col-xl-9 col-xxl-10 flex-column h-sm-100">
                     <section>
 
-                        <h1 class="fw-bold">PANEL DE PRODUCTOS</h1>
+                        <h1 class="fw-bold">PANEL DE PRODUCTOS DISPONIBLES</h1>
 
                         <div class="d-flex align-items-center justify-content-end">
                             <a href="${pageContext.request.contextPath}/almacen/productos/registrar.jsp" class="btn btn-primary">
@@ -253,7 +253,7 @@
 
                         Swal.fire({
                             title: "¿Está seguro?",
-                            html: "Esta acción desactivará el producto",
+                            html: "Esta acción desactivará al producto",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6

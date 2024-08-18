@@ -230,7 +230,7 @@
 
                         Swal.fire({
                             title: "¿Está seguro?",
-                            html: "Esta acción activará el producto",
+                            html: "Esta acción activará al producto",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6

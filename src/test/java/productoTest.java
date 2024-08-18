@@ -16,7 +16,7 @@ public class productoTest {
         prod = new Producto();
         prod.setIdProducto(1);
         prod.setEstado(1);
-        System.out.print("@BeforeAll --> Creacion de proucto");
+        System.out.print("@BeforeAll --> Creacion de producto");
     }
     @Test
     public void testIdProducto() throws ServerException,IOException{
@@ -37,10 +37,10 @@ public class productoTest {
     public void testCambiarEstadoProducto() throws ServletException,IOException {
         Assertions.assertEquals(1,prod.getEstado(), "Estado inicial debe ser 1");
         prod.setEstado(0);
-        Assertions.assertEquals(0,prod.getEstado(), "Estado inicial debe ser 0");
+        Assertions.assertEquals(0,prod.getEstado(), "Estado debe ser 0");
         
         prod.setEstado(1);
-        Assertions.assertEquals(1,prod.getEstado(), "Estado inicial debe ser 1");
+        Assertions.assertEquals(1,prod.getEstado(), "Estado debe ser 1");
         System.out.println("@Test --> Cambiar Estado del Producto (Desactivar y Activar)");
     }
     

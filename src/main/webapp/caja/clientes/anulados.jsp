@@ -112,7 +112,12 @@
                 <div class="col-md-8">
                     <h1 class="fw-bold">PANEL DE CLIENTES ELIMINADOS</h1>
                     
-                    
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1" class="btn btn-primary">
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
+                            <span class="ms-1">Ir a Clientes</span>
+                        </a>
+                    </div>
                     <c:if test="${ empty list}">
                         <span>¡Hola! Parece que esta tabla está vacía en este momento. ¡Ingresa datos para llenarla!</span>
                     </c:if>
@@ -173,7 +178,7 @@
                                                             </svg> Editar
                                                         </a>--%>
                                                         <button id="btnActivar${cli.getIdCliente()}" data-form-id="formActivar${cli.getIdCliente()}" class="btn btn-warning d-flex align-items-center ms-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20"  height="20"><path fill="#ffffff" d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20"  height="20"><path fill="black" d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg>
                                                              
                                                         </button>
 
@@ -241,8 +246,8 @@
                         let formId = this.getAttribute('data-form-id');
 
                         Swal.fire({
-                            title: "¿Desea activar el cliente?",
-                            html: "Esta acción activará al  cliente.",
+                            title: "¿Está seguro?",
+                            html: "Esta acción restaurará al cliente.",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6
@@ -267,7 +272,7 @@
                         confirmButtonColor: "#0d6efd",
                         confirmButtonText: 'Aceptar'
                     }).then(() => {
-                        window.location.href = "<%= request.getContextPath() %>/caja/clientes/anulados.jsp?page=1"
+                        window.location.href = "<%= request.getContextPath() %>/caja/clientes/cartera.jsp?page=1"
                     });
                 }
             });

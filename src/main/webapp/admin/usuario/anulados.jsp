@@ -302,8 +302,8 @@
                                                                         let formId = this.getAttribute('data-form-id');
                                                                         
                                                                         Swal.fire({
-                                                                            title: "¿Desea restaurar este usuario?",
-                                                                            html: "Esta acción restaurará este  usuario.",
+                                                                            title: "¿Está seguro?",
+                                                                            html: "Esta acción restaurará al usuario.",
                                                                             icon: "warning",
                                                                             showCancelButton: true,
                                                                             confirmButtonColor: "#0d6efd", //#3085d6

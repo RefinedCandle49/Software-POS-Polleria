@@ -289,8 +289,8 @@
                             let formId = this.getAttribute('data-form-id');
 
                             Swal.fire({
-                                title: "¿Desea anular esta venta?",
-                                html: "Esta acción anulará definitivamente la venta.",
+                                title: "¿Está seguro?",
+                                html: "Esta acción anulará definitivamente está venta.",
                                 icon: "warning",
                                 showCancelButton: true,
                                 confirmButtonColor: "#0d6efd", //#3085d6

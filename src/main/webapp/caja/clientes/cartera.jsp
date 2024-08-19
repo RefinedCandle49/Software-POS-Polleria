@@ -301,7 +301,7 @@
                             confirmButtonColor: "#0d6efd", //#3085d6
                             cancelButtonColor: "#dc3545", //#d33
                             cancelButtonText: "Cancelar",
-                            confirmButtonText: "Continuar"
+                            confirmButtonText: "Confirmar"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 document.getElementById(formId).submit();

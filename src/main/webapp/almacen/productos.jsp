@@ -163,8 +163,8 @@
                                                 <td style="display: none">${prod.getIdProducto()}</td>
                                                 <td>${prod.getCodigo()}</td>
                                                 <td>${prod.getNombreCategoria()}</td>
-                                                <td>${prod.getNombre()}</td>
-                                                <td>${prod.getDescripcion()}</td>
+                                                <td style="max-width: 200;">${prod.getNombre()}</td>
+                                                <td style="max-width: 500;">${prod.getDescripcion()}</td>
                                                 <script>
                                                     function handleErrorImage() {
                                                         this.onerror = null;
@@ -253,7 +253,7 @@
 
                         Swal.fire({
                             title: "¿Está seguro?",
-                            html: "Esta acción desactivará al producto",
+                            html: "Esta acción desactivará al producto.",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#0d6efd", //#3085d6

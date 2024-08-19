@@ -115,7 +115,7 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <a href="${pageContext.request.contextPath}/caja/clientes/cartera.jsp?page=1" class="btn btn-primary">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
-                                    <span class="ms-1">Ir a Clientes</span>
+                                    <span class="ms-1">Ir a clientes</span>
                         </a>
                     </div>
                     <c:if test="${ empty list}">
@@ -253,7 +253,7 @@
                             confirmButtonColor: "#0d6efd", //#3085d6
                             cancelButtonColor: "#dc3545", //#d33
                             cancelButtonText: "Cancelar",
-                            confirmButtonText: "Continuar"
+                            confirmButtonText: "Confirmar"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 document.getElementById(formId).submit();

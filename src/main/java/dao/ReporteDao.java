@@ -49,7 +49,7 @@ public class ReporteDao {
 
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT COUNT(idCliente) FROM cliente WHERE idCliente <> 1");
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(idCliente) FROM cliente WHERE idCliente <> 1 AND estado = 1");
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

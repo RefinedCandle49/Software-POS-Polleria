@@ -267,7 +267,7 @@
 
                 if (activarCliente === 'true') {
                     Swal.fire({
-                        title: 'Cliente activado correctamente',
+                        title: 'Cliente restaurado correctamente',
                         icon: 'success',
                         confirmButtonColor: "#0d6efd",
                         confirmButtonText: 'Aceptar'

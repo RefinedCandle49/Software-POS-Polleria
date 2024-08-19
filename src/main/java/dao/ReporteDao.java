@@ -26,7 +26,7 @@ public class ReporteDao {
 
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT dp.idProducto, p.nombre AS nombre_producto, SUM(dp.cantidad) AS total_vendido FROM detalleventa dp INNER JOIN producto p ON dp.idProducto = p.idProducto INNER JOIN venta vt ON dp.idVenta = vt.idVenta WHERE YEAR(vt.fechaHoraVenta)= YEAR(CURDATE()) AND vt.estado=1 GROUP BY dp.idProducto, p.nombre ORDER BY total_vendido DESC LIMIT 1;");
+            PreparedStatement ps = con.prepareStatement("SELECT dp.idProducto, p.nombre AS nombre_producto, SUM(dp.cantidad) AS total_vendido FROM detalleventa dp INNER JOIN producto p ON dp.idProducto = p.idProducto INNER JOIN venta vt ON dp.idVenta = vt.idVenta WHERE YEAR(vt.fechaHoraVenta)= YEAR(CURDATE()) AND vt.estado=1 AND p.estado = 1 GROUP BY dp.idProducto, p.nombre ORDER BY total_vendido DESC LIMIT 1;");
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -49,7 +49,7 @@ public class ReporteDao {
 
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT COUNT(idCliente) FROM cliente WHERE idCliente <> 1");
+            PreparedStatement ps = con.prepareStatement("SELECT COUNT(idCliente) FROM cliente WHERE idCliente <> 1 AND estado = 1");
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -94,7 +94,7 @@ public class ReporteDao {
             stmtConfig.execute();
             stmtConfig.close();
 
-            PreparedStatement ps = con.prepareStatement("SELECT dp.idProducto, p.codigo, p.nombre AS nombre_producto, SUM(dp.cantidad) AS total_vendido, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM detalleventa dp INNER JOIN producto p ON dp.idProducto = p.idProducto INNER JOIN venta vt ON dp.idVenta = vt.idVenta WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 GROUP BY dp.idProducto, p.nombre ORDER BY total_vendido DESC, p.nombre ASC LIMIT 3;");
+            PreparedStatement ps = con.prepareStatement("SELECT dp.idProducto, p.codigo, p.nombre AS nombre_producto, SUM(dp.cantidad) AS total_vendido, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM detalleventa dp INNER JOIN producto p ON dp.idProducto = p.idProducto INNER JOIN venta vt ON dp.idVenta = vt.idVenta WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 AND p.estado = 1 GROUP BY dp.idProducto, p.nombre ORDER BY total_vendido DESC, p.nombre ASC LIMIT 3;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -124,7 +124,7 @@ public class ReporteDao {
             stmtConfig.execute();
             stmtConfig.close();
 
-            PreparedStatement ps = con.prepareStatement("SELECT vt.idCliente, cli.documento, CONCAT(cli.nombre, ' ', cli.apellido) AS nombre_cliente, COUNT(vt.idCliente) AS total_ventas, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM venta vt INNER JOIN cliente cli ON vt.idCliente = cli.idCliente WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 AND cli.idCliente != 1 GROUP BY vt.idCliente, cli.nombre ORDER BY total_ventas DESC, cli.nombre ASC LIMIT 3;");
+            PreparedStatement ps = con.prepareStatement("SELECT vt.idCliente, cli.documento, CONCAT(cli.nombre, ' ', cli.apellido) AS nombre_cliente, COUNT(vt.idCliente) AS total_ventas, CONCAT(UCASE(LEFT(MONTHNAME(CURDATE()), 1)), LOWER(RIGHT(MONTHNAME(CURDATE()), LENGTH(MONTHNAME(CURDATE())) - 1))) AS mes_actual FROM venta vt INNER JOIN cliente cli ON vt.idCliente = cli.idCliente WHERE MONTH(vt.fechaHoraVenta)= MONTH(CURDATE()) AND vt.estado=1 AND cli.idCliente != 1 AND cli.estado = 1 GROUP BY vt.idCliente, cli.nombre ORDER BY total_ventas DESC, cli.nombre ASC LIMIT 3;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

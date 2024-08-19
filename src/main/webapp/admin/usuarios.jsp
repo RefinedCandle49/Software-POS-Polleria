@@ -275,7 +275,7 @@
                                             <th>CORREO ELECTRÓNICO</th>
                                             <th>CONTRASEÑA</th>
                                             <th>ROL</th>
-                                            <th>ESTADO</th>
+                                            <!-- th>ESTADO</th -->
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>
@@ -300,13 +300,13 @@
                                                     </button>
                                                 </td>
                                                 <td>${user.getRol()}</td>
-                                                <td>
+                                                <%-- td>
                                                     <c:choose>
                                                         <c:when test="${user.getEstado() == 0}">Inactivo</c:when>
                                                         <c:when test="${user.getEstado() == 1}">Activo</c:when>
                                                         <c:otherwise>Estado Desconocido</c:otherwise>
                                                     </c:choose>
-                                                </td>
+                                                </td --%>
                                                 <c:choose>
                                                     <c:when test="${user.getIdUsuario() == 1}"></c:when>
                                                         

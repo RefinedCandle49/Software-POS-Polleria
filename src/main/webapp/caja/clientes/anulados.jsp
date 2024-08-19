@@ -132,7 +132,7 @@
                                         <th>NOMBRES</th>
                                         <th>APELLIDOS</th>
                                         <th>CORREO ELECTRÓNICO</th>
-                                        <th>ESTADO</th>
+                                        <!-- th>ESTADO</th -->
                                         <th>ACCIONES</th>
                                     </tr>
                                 </thead>
@@ -144,13 +144,13 @@
                                             <td>${cli.getNombre()}</td>
                                             <td>${cli.getApellido()}</td>
                                             <td>${cli.getEmail()}</td>
-                                            <td>
+                                            <%-- td>
                                                 <c:choose>
                                                     <c:when test="${cli.getEstado() == 0}">Inactivo</c:when>
                                                     <c:when test="${cli.getEstado() == 1}">Activo</c:when>
                                                     <c:otherwise>Estado Desconocido</c:otherwise>
                                                 </c:choose>
-                                            </td>
+                                            </td --%>
 
                                             <td>
                                                 <c:choose>

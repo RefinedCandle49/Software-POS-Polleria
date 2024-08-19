@@ -136,7 +136,7 @@
                                             <th>FOTO</th>
                                             <th>PRECIO</th>
                                             <th>STOCK</th>
-                                            <th>ESTADO</th>
+                                            <!-- th>ESTADO</th -->
                                             <th>ACCION</th>
 
                                         </tr>
@@ -163,13 +163,13 @@
 
                                                 <td style="text-wrap: nowrap;">S/ <fmt:formatNumber type="number" pattern="#,###,##0.00" value="${prod.getPrecio()}" /></td>
                                                 <td>${prod.getStock()}</td>
-                                                <td>
+                                                <%-- td>
                                                     <c:choose>
                                                         <c:when test="${prod.getEstado() == 0}">No Disponible</c:when>
                                                         <c:when test="${prod.getEstado() == 1}">Disponible</c:when>
                                                         <c:otherwise>Estado Desconocido</c:otherwise>
                                                     </c:choose>
-                                                </td>
+                                                </td --%>
                                                 <td>
                                                     
                                                             <a class="btn btn-warning mx-1 text-black" id="btnActivar${prod.getIdProducto()}" data-form-id="formActivarProducto${prod.getIdProducto()}">
